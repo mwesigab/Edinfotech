@@ -378,11 +378,11 @@ class ContentController extends Controller
             $request->request->add(['update_at'=>time()]);
             $content = Content::with('user')->find($id);
 
-            /*## Notification Center
+            ## Notification Center
             if($request->mode == 'publish')
                 sendNotification(0,['[u.name]'=>$content->user->name,'[c.title]'=>$content->title],get_option('notification_template_content_publish'),'user',$content->user->id);
             if($request->mode == 'waiting')
-                sendNotification(0,['[u.name]'=>$content->user->name,'[c.title]'=>$content->title],get_option('notification_template_content_change'),'user',$content->user->id);*/
+                sendNotification(0,['[u.name]'=>$content->user->name,'[c.title]'=>$content->title],get_option('notification_template_content_change'),'user',$content->user->id);
 
 
             $content->update($request->all());
