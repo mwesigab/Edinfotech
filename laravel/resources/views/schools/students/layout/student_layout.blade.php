@@ -1,0 +1,5 @@
+@include('schools.students.layout.header',['title'=>'User Panel'])
+@include('schools.students.layout.menu')
+@yield('pages')
+@include('user.layout.modals')
+@include('view.layout.footer')
