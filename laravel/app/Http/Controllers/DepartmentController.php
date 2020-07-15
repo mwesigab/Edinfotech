@@ -16,18 +16,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $schools = School::all();
-        return view('schools.department_form',array('schools'=>$schools));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Department $department
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Department $department)
-    {
-        //
+        return view('admin.schools.department_form',array('schools'=>$schools));
     }
 
     public function add_department(Request $request)
@@ -42,15 +31,13 @@ class DepartmentController extends Controller
             'status' => 'Active'
         ];
 
-        //$newDept = Department::create($newDept);
-
         if(Department::create($newDept))
-            return redirect('/school/departments');
+            return redirect('/admin/school/departments');
     }
 
     public function view_departments(){
         $departments = Department::all();
-        return view('schools.view_departments', array('departments'=>$departments));
+        return view('admin.schools.view_departments', array('departments'=>$departments));
     }
 
     public function get_department_list(Request $request){

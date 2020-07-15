@@ -34,10 +34,6 @@
             <?php echo e(trans('main.copyright')); ?>
 
         </span>
-        <span class="copyright">
-             <?php echo e(trans('main.copyright2')); ?>
-
-        </span>
     </div>
 </div>
 <div class="modal fade" id="uploader-modal" role="dialog">

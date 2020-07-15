@@ -4,6 +4,7 @@
     - {{{ $product->title or '' }}}
 @endsection
 @section('page')
+<?php $student = unserialize(session('Student')) ?>
     <div class="container-fluid">
         <div class="row product-header">
             <div class="container">
@@ -234,8 +235,9 @@
                             {{{ trans('main.mb') }}}
                         </span>
                     </div>
+                    @if(!$student)
                     <div class="product-details-box">
-						<span class="proicon mdi mdi-headset"></span>
+                        <span class="proicon mdi mdi-headset"></span>
                         <span>
                             @if($product->support == 1)
                                 {{{ 'Vendor supports this course' }}}
@@ -244,6 +246,7 @@
                             @endif
                         </span>
                     </div>
+                    @endif
                     <div class="product-price-box">
 						<span class="proicon mdi mdi-wallet"></span>
                         @if(isset($meta['price']) && $product->price != 0)
@@ -522,7 +525,7 @@
                         </div>
                     </div>
                     <div class="product-user-box-footer">
-                        <a href="/profile/{{{ $product->user->id or '' }}}">{{{ trans('main.vendor_profile') }}}</a>
+                        <a href="/profile/{{{ $product->user->id or '' }}}">{{{ $student ? 'Head Of Department' : trans('main.vendor_profile') }}}</a>
                     </div>
 					</div>
                     <div class="h-25"></div>
@@ -691,7 +694,7 @@
                         <!-- TAB CONTENT -->
                         <div class="tab-content">
                             <div class="active tab-pane fade in blog-comment-section body-target-s" id="ctab1">
-                                @if(isset($user))
+                                @if(isset($user) || isset($student))
                                     <form method="post" action="/product/comment/store/{{{ $product->id or 0 }}}">
 
                                     <input type="hidden" name="content_id" value="{{{ $product->id }}}"/>

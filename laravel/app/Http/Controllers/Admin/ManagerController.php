@@ -36,7 +36,6 @@ class ManagerController extends Controller
     }
 
     public function storeadmin(Request $request){
-
         $duplicateUsername = User::where('username',$request->username)->first();
         $duplicateEmail = User::where('email',$request->email)->first();
         if(!empty($duplicateEmail)){

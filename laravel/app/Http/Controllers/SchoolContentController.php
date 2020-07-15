@@ -51,6 +51,14 @@ class SchoolContentController extends Controller
 
     }
 
+    public function contentForm()
+    {
+        $contentMenu = ContentCategory::with(['childs', 'filters' => function ($q) {
+            $q->with(['tags']);
+        }])->get();
+        return view('schools.content.content_form', ['menus' => $contentMenu]);
+    }
+
     public function edit_content($id)
     {
         $user = unserialize(session('Admin'));

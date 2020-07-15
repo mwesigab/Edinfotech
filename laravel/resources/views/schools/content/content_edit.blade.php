@@ -1,4 +1,4 @@
-@extends('user.layout.sendvideolayout')
+@extends('schools.content.admin_video_layout')
 @section('pages')
 
 <div class="h-30" id="scrollId"></div>

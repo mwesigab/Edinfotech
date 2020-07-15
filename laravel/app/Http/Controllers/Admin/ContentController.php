@@ -10,6 +10,7 @@ use App\Models\ContentComment;
 use App\Models\ContentMeta;
 use App\Models\ContentPart;
 use App\Models\ContentSupport;
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Input;
+use kcfinder\session;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,6 +29,9 @@ class ContentController extends Controller
 
     public function lists()
     {
+        $admin = unserialize(session('Admin'));
+        $head_dept = Department::where('dept_head_email',$admin['email'])->get()->toArray();
+
         $fdate = strtotime(Input::get('fdate'))+12600;
         $ldate = strtotime(Input::get('ldate'))+12600;
 
@@ -40,6 +45,8 @@ class ContentController extends Controller
             $w->where('mode','publish');
         });
 
+        if($head_dept)
+            $lists->where('school_id',$head_dept[0]['school_id']);
 
         if($fdate>12601)
             $lists->where('create_at','>',$fdate);
@@ -379,10 +386,10 @@ class ContentController extends Controller
             $content = Content::with('user')->find($id);
 
             ## Notification Center
-            if($request->mode == 'publish')
+            /*if($request->mode == 'publish')
                 sendNotification(0,['[u.name]'=>$content->user->name,'[c.title]'=>$content->title],get_option('notification_template_content_publish'),'user',$content->user->id);
             if($request->mode == 'waiting')
-                sendNotification(0,['[u.name]'=>$content->user->name,'[c.title]'=>$content->title],get_option('notification_template_content_change'),'user',$content->user->id);
+                sendNotification(0,['[u.name]'=>$content->user->name,'[c.title]'=>$content->title],get_option('notification_template_content_change'),'user',$content->user->id);*/
 
 
             $content->update($request->all());

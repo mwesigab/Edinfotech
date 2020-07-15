@@ -65,6 +65,17 @@
                                        placeholder="Enter School Email" name="school_email">
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="school_director"><?php echo e(trans('main.education_level')); ?></label>
+                                    <select name="education_level" class="form-control font-s" id="education_level">
+                                        <option value="1"><?php echo e(trans('main.education_level_one')); ?></option>
+                                        <option value="2"><?php echo e(trans('main.education_level_two')); ?></option>
+                                        <option value="3"><?php echo e(trans('main.education_level_three')); ?></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 pull-left">

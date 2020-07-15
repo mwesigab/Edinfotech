@@ -12,7 +12,8 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "paypal/rest-api-sdk-php": "*",
-        "unicodeveloper/laravel-paystack": "^1.0"
+        "unicodeveloper/laravel-paystack": "^1.0",
+      "ext-pdo": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

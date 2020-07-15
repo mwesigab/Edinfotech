@@ -859,13 +859,12 @@
         ajaxPostOrGetCall('/school/content/edit/meta/store/' + id,'post',$('#step-3-form-precourse').serialize());*/
         //ajaxPostOrGetCall('/school/content/edit/meta/store/' + id,'post',$('#step-4-form-meta').serialize());
         //ajaxPostOrGetCall('/school/content/edit/store/request/' + id,'post',$('#step-1-form').serialize());
-        /*$.post('/school/content/edit/meta/store/' + id, $('#step-1-form-meta').serialize());
+        $.post('/school/content/edit/meta/store/' + id, $('#step-1-form-meta').serialize());
         $.post('/school/content/edit/store/' + id, $('#step-2-form').serializeArray());
         $.post('/school/content/edit/store/' + id, $('#step-3-form').serialize());
         $.post('/school/content/edit/meta/store/' + id, $('#step-3-form-meta').serialize());
         $.post('/school/content/edit/meta/store/' + id, $('#step-3-form-precourse').serialize());
-        $.post('/school/content/edit/meta/store/' + id, $('#step-4-form-meta').serialize());
-        $.post('/school/content/edit/store/request/' + id, $('#step-1-form').serialize());*/
+        $.post('/school/content/edit/store/request/' + id, $('#step-1-form').serialize());
         $.post('/school/content/edit/meta/store/' + id, $('#step-4-form-meta').serialize());
 
         /* Notify */
@@ -1036,4 +1035,4 @@
 </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('user.layout.sendvideolayout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('schools.content.admin_video_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

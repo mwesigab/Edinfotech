@@ -114,7 +114,7 @@
                                     <?php $meta = arrayToList($content->content->metas,'option','value'); ?>
                                     <div class="col-md-3 col-sm-6 col-xs-12 pagi-content vip-content tab-con">
                                         <a href="/product/<?php echo e(isset($content->content->id) ? $content->content->id : ''); ?>" title="<?php echo e(isset($content->content->title) ? $content->content->title : ''); ?>" class="content-box pagi-content-box">
-                                            
+
                                             <div class="img-container">
                                                 <img src="<?php echo e(isset($meta['thumbnail']) ? $meta['thumbnail'] : ''); ?>"/>
                                                 <span class="off-badge vip-badge">
@@ -146,7 +146,7 @@
                             <?php if(!in_array($content['id'],$vipIds)): ?>
                                 <div class="col-md-3 col-sm-6 col-xs-12 pagi-content tab-con">
                             <a href="/product/<?php echo e(isset($content['id']) ? $content['id'] : ''); ?>" title="<?php echo e(isset($content['title']) ? $content['title'] : ''); ?>" class="content-box pagi-content-box">
-                                
+
                                 <div class="img-container">
                                     <img src="<?php echo e(isset($content['metas']['thumbnail']) ? $content['metas']['thumbnail'] : ''); ?>"/>
                                     <?php if($content['discount'] != null): ?>
@@ -209,4 +209,5 @@
     </script>
     <script type="application/javascript" src="/assets/javascripts/category-page-custom.js"></script>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('view.layout.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

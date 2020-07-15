@@ -281,4 +281,4 @@
 </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('user.layout.sendvideolayout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('schools.content.admin_video_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

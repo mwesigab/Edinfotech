@@ -1,4 +1,4 @@
-@extends('admin.newlayout.school_admin_layout')
+@extends('admin.newlayout.layout',['breadcom'=>['Departments','New']])
 @section('page')
 <div class="login-s">
     <div class="h-25"></div>
@@ -70,8 +70,6 @@
             </div>
             <div class="h-25"></div>
             <div class="card-footer text-muted">
-                It's okay, we shall not share your school details with anyone else not directly or indirectly
-                affiliated to your school.
             </div>
         </div>
     </div>

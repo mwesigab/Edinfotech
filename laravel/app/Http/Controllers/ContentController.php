@@ -28,6 +28,7 @@ use App\Models\RequestSuggestion;
 use App\Models\Sell;
 use App\Models\Transaction;
 use App\Models\Usage;
+use App\Models\Usermeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -59,10 +60,9 @@ class ContentController extends Controller
 
     ## Main Section ##
     public function main(){
-
-        $new_content = Content::with('metas','user')->where('mode','publish')->limit(10)->orderBy('id','DESC')->get();
-        $popular_content = Content::with('metas','user')->where('mode','publish')->limit(10)->orderBy('view','DESC')->get();
-        $sell_content = Content::with('metas','user')->withCount('sells')->where('mode','publish')->limit(10)->orderBy('sells_count','DESC')->get();
+        $new_content = Content::with('metas','user')->where('mode','publish')->whereNull('school_id')->limit(10)->orderBy('id','DESC')->get();
+        $popular_content = Content::with('metas','user')->where('mode','publish')->whereNull('school_id')->limit(10)->orderBy('view','DESC')->get();
+        $sell_content = Content::with('metas','user')->withCount('sells')->where('mode','publish')->whereNull('school_id')->limit(10)->orderBy('sells_count','DESC')->get();
         $vip_content = ContentVip::with('content.user')->where('mode','publish')->where('first_date','<',time())->where('last_date','>',time())->get();
         ## Get Blog Posts
         $blogPosts = Blog::where('mode','publish')->limit(get_option('main_page_blog_post_count',1))->orderBy('id','DESC')->get();## Get Blog Posts
@@ -196,6 +196,7 @@ class ContentController extends Controller
     }
     public function category($id = null)
     {
+        $user = unserialize(session('Student'));
         $order = Input::get('order');
         $price = Input::get('price');
         $course = Input::get('course');
@@ -244,6 +245,10 @@ class ContentController extends Controller
 
         if(isset($order) && $order == 'new')
             $content->orderBy('id','DESC');
+        if($user)
+            $content->where('school_id',$user['school_id'])->limit(10)->orderBy('id', 'DESC')->get();
+        if(!$user)
+            $content->whereNull('school_id');
 
         ## Set For Course
         switch ($course){
@@ -312,6 +317,7 @@ class ContentController extends Controller
             $content = $this->filters($content,$filters);
         }
 
+        //dd($content[90]['metas']);
         if($id != null)
             return view('view.category.category',['category'=>$Category,'contents'=>$content,'vip'=>$vipContent,'order'=>$order,'pricing'=>$price,'course'=>$course,'off'=>$off,'filters'=>$filters,'mostSell'=>$mostSellContent]);
         else
@@ -641,7 +647,7 @@ class ContentController extends Controller
 
         $meta = arrayToList($product->metas,'option','value');
         $parts = $product->parts->toArray();
-        $rates = getRate($product->user->toArray());
+        $rates = getRate($product->user ? $product->user->toArray():[]);
 
 
 

@@ -108,7 +108,7 @@
                                     <?php $meta = arrayToList($content->content->metas,'option','value'); ?>
                                     <div class="col-md-3 col-sm-6 col-xs-12 pagi-content vip-content tab-con">
                                         <a href="/product/{{{ $content->content->id or '' }}}" title="{{{ $content->content->title or '' }}}" class="content-box pagi-content-box">
-                                            
+
                                             <div class="img-container">
                                                 <img src="{{{ $meta['thumbnail'] or '' }}}"/>
                                                 <span class="off-badge vip-badge">
@@ -140,7 +140,7 @@
                             @if(!in_array($content['id'],$vipIds))
                                 <div class="col-md-3 col-sm-6 col-xs-12 pagi-content tab-con">
                             <a href="/product/{{{ $content['id'] or '' }}}" title="{{{ $content['title'] or '' }}}" class="content-box pagi-content-box">
-                                
+
                                 <div class="img-container">
                                     <img src="{{{ $content['metas']['thumbnail'] or '' }}}"/>
                                     @if($content['discount'] != null)

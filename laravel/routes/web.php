@@ -9,6 +9,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('profile', 'Admin\SettingController@profile');
         Route::post('profile/main/update', 'Admin\SettingController@profileMainUpdate');
         Route::post('profile/security/update', 'Admin\SettingController@profileSecurityUpdate');
+        Route::get('/schools', 'SchoolController@view_schools');
+        Route::get('/school_form', 'SchoolController@index');
+        Route::get('/school/department_form', 'DepartmentController@index');
+        Route::get('/school/departments', 'DepartmentController@view_departments');
+        Route::get('/school/student_form', 'StudentController@index');
+        Route::get('/school/students', 'StudentController@view_students');
+        Route::get('/school/student_form_edit/{student_id}', 'StudentController@student_edit');
+        Route::get('/school/student_delete/{student_id}', 'StudentController@student_delete');
 
         ########################
         #### About Section #####
@@ -629,24 +637,24 @@ Route::group(['middleware' => 'notification'], function () {
     });
 
     Route::group(['prefix' => 'school'], function () {
-        Route::get('/', 'SchoolController@index');
+        //Route::get('/', 'SchoolController@index');
         Route::post('/add_school', 'SchoolController@add_school');
         Route::post('/add_department', 'DepartmentController@add_department');
         Route::post('/add_student', 'StudentController@add_student');
-        Route::get('/department_form', 'DepartmentController@index');
+        //Route::get('/department_form', 'DepartmentController@index');
         Route::get('/student_form', 'StudentController@index');
-        Route::get('/schools', 'SchoolController@view_schools');
         Route::get('/students', 'StudentController@view_students');
-        Route::get('/departments', 'DepartmentController@view_departments');
+        //Route::get('/departments', 'DepartmentController@view_departments');
         Route::post('/get_school_list', 'SchoolController@get_school_list');
         Route::post('/get_department_list', 'DepartmentController@get_department_list');
         Route::group(['prefix'=>'student'], function(){
             Route::get('/login_form', 'StudentController@student_login_form');
             Route::post('/login', 'StudentController@student_login');
-            Route::get('/dashboard', 'StudentController@student_dashboard');
+            Route::get('/dashboard', 'ContentController@category');
             Route::get('/logout', 'StudentController@logout_student');
-            Route::get('/dashboard', 'StudentController@student_dashboard');
             Route::get('/courses', 'StudentController@student_courses');
+            Route::get('/edit', 'StudentController@student_edit');
+            Route::post('/edit/store/{student_id}', 'StudentController@student_edit_store');
             Route::get('/ticket', 'StudentController@student_ticket');
             Route::get('/article', 'StudentController@student_article');
             Route::post('/pay', 'RaveController@initialize')->name('pay');
@@ -655,6 +663,7 @@ Route::group(['middleware' => 'notification'], function () {
         });
         Route::group(['prefix'=> 'content'],function (){
            Route::get('/','SchoolContentController@content_list');
+           Route::get('form','SchoolContentController@contentForm');
            Route::post('new','SchoolContentController@new_content');
            Route::get('edit/{content_id}','SchoolContentController@edit_content');
            Route::post('edit/store/{id}', 'SchoolContentController@contentEditStore');

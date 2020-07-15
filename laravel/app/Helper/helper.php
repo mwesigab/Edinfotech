@@ -60,11 +60,14 @@ function set_option($option,$value,$mode = 'normal'){
 }
 
 function currency(){
-    return get_option('currency','USD');
+    return get_option('currency','UGX');
 }
 
 function currencySign(){
     switch (get_option('currency')){
+        case 'UGX':
+            return 'UGX';
+            break;
         case 'USD':
             return '$';
             break;
@@ -247,7 +250,6 @@ function currencySign(){
             return '$';
     }
 
-    return '$';
 }
 
 function get_user_meta($user_id,$meta_key,$default = null){
@@ -607,7 +609,7 @@ function toTimestamp($date){
 
 function price($content_id,$category_id,$p){
     $price['price'] = $p;
-    $price['price_txt'] = $p.currencySign();
+    $price['price_txt'] = currencySign()." ".$p;
     $percent = 0;
     if($p == 0 || !isset($p) || $p == '') {
         $price['price_txt'] = 'free';
@@ -617,21 +619,21 @@ function price($content_id,$category_id,$p){
     if(isset($contentDiscount)){
         $percent = $contentDiscount->off;
         $price['price'] = $p - (($contentDiscount->off/100)*$p);
-        $price['price_txt'] = $price['price'].currencySign();
+        $price['price_txt'] = currencySign()." ".$price['price'];
     }
     ## Category Content
     $categoryDiscount = \App\Models\DiscountContent::where('type','category')->where('off_id',$category_id)->where('first_date','<',time())->where('last_date','>',time())->where('mode','publish')->orderBy('id','DESC')->first();
     if(isset($categoryDiscount) && is_array($categoryDiscount) && count($categoryDiscount)>0){
         $percent = $categoryDiscount->off;
         $price['price'] = $p - (($categoryDiscount->off/100)*$p);
-        $price['price_txt'] = $price['price'].currencySign();
+        $price['price_txt'] = currencySign()." ".$price['price'];
     }
     ## All Content
     $allDiscount = \App\Models\DiscountContent::where('type','all')->where('first_date','<',time())->where('last_date','>',time())->where('mode','publish')->orderBy('id','DESC')->first();
     if(isset($allDiscount) && count($allDiscount)>0){
         $percent = $allDiscount->off;
         $price['price'] = $p - (($allDiscount->off/100)*$p);
-        $price['price_txt'] = $price['price'].currencySign();
+        $price['price_txt'] = currencySign()." ".$price['price'];
     }
     ## User Group
     global $user;
@@ -640,7 +642,7 @@ function price($content_id,$category_id,$p){
         if($userGroup){
             $percent += $userGroup->off;
             $price['price'] = $p - (($percent/100)*$p);
-            $price['price_txt'] = $price['price'].currencySign();
+            $price['price_txt'] = currencySign()." ".$price['price'];
         }
     }
     ## No Discount
@@ -649,7 +651,7 @@ function price($content_id,$category_id,$p){
 
 function pricePay($content_id,$category_id,$p){
     $price['price'] = $p;
-    $price['price_txt'] = $p.currencySign();
+    $price['price_txt'] = currencySign()." ".$p;
     $percent = 0;
     if($p == 0 || !isset($p) || $p == '') {
         $price['price_txt'] = 'free';
@@ -659,21 +661,21 @@ function pricePay($content_id,$category_id,$p){
     if(isset($contentDiscount) && count($contentDiscount)>0){
         $percent = $contentDiscount->off;
         $price['price'] = $p - (($contentDiscount->off/100)*$p);
-        $price['price_txt'] = $price['price'].currencySign();
+        $price['price_txt'] = currencySign()." ".$price['price'];
     }
     ## Category Content
     $categoryDiscount = \App\Models\DiscountContent::where('type','category')->where('off_id',$category_id)->where('first_date','<',time())->where('last_date','>',time())->where('mode','publish')->orderBy('id','DESC')->first();
     if(isset($categoryDiscount) && count($categoryDiscount)>0){
         $percent = $categoryDiscount->off;
         $price['price'] = $p - (($categoryDiscount->off/100)*$p);
-        $price['price_txt'] = $price['price'].currencySign();
+        $price['price_txt'] = currencySign()." ".$price['price'];
     }
     ## All Content
     $allDiscount = \App\Models\DiscountContent::where('type','all')->where('first_date','<',time())->where('last_date','>',time())->where('mode','publish')->orderBy('id','DESC')->first();
     if(isset($allDiscount) && count($allDiscount)>0){
         $percent = $allDiscount->off;
         $price['price'] = $p - (($allDiscount->off/100)*$p);
-        $price['price_txt'] = $price['price'].currencySign();
+        $price['price_txt'] = currencySign()." ".$price['price'];
     }
     ## User Group
     global $user;
@@ -682,7 +684,7 @@ function pricePay($content_id,$category_id,$p){
         if($userGroup){
             $percent += $userGroup->off;
             $price['price'] = $p - (($percent/100)*$p);
-            $price['price_txt'] = $price['price'].currencySign();
+            $price['price_txt'] = currencySign()." ".$price['price'];
         }
     }
     ## Gift && Off
@@ -691,12 +693,12 @@ function pricePay($content_id,$category_id,$p){
         if($gift->type == 'gift')
         {
             $price['price'] = $price['price'] - $gift->off;
-            $price['price_txt'] = $price['price'].currencySign();
+            $price['price_txt'] = currencySign()." ".$price['price'];
         }
         else
         {
             $price['price'] = $price['price'] - intval(($gift->off/100) * $price['price']);
-            $price['price_txt'] = $price['price'].currencySign();
+            $price['price_txt'] = currencySign()." ".$price['price'];
         }
         session()->forget('gift');
     }

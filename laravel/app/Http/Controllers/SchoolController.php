@@ -18,7 +18,7 @@ class SchoolController extends Controller
     public function index()
     {
 
-        return view('schools.school_form');
+        return view('admin.schools.school_form');
     }
 
     public function add_school(Request $request)
@@ -32,14 +32,16 @@ class SchoolController extends Controller
             'head_teacher_phone' => $request->head_teacher_phone,
             'school_email' => $request->school_email,
             'status' => "Active",
+            'education_level' => $request->education_level,
         ];
-        $newSchool = School::create($newSchool);
+        School::create($newSchool);
+        return $this->view_schools();
     }
 
     public function view_schools()
     {
         $schools = School::all();
-        return view('schools.view_schools',array('schools'=>$schools));
+        return view('admin.schools.school_list',array('schools'=>$schools));
     }
 
     public function get_school_list(Request $request){

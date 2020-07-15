@@ -5,6 +5,7 @@
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('page'); ?>
+<?php $student = unserialize(session('Student')) ?>
     <div class="container-fluid">
         <div class="row product-header">
             <div class="container">
@@ -237,8 +238,9 @@
 
                         </span>
                     </div>
+                    <?php if(!$student): ?>
                     <div class="product-details-box">
-						<span class="proicon mdi mdi-headset"></span>
+                        <span class="proicon mdi mdi-headset"></span>
                         <span>
                             <?php if($product->support == 1): ?>
                                 <?php echo e('Vendor supports this course'); ?>
@@ -249,6 +251,7 @@
                             <?php endif; ?>
                         </span>
                     </div>
+                    <?php endif; ?>
                     <div class="product-price-box">
 						<span class="proicon mdi mdi-wallet"></span>
                         <?php if(isset($meta['price']) && $product->price != 0): ?>
@@ -531,7 +534,7 @@
                         </div>
                     </div>
                     <div class="product-user-box-footer">
-                        <a href="/profile/<?php echo e(isset($product->user->id) ? $product->user->id : ''); ?>"><?php echo e(trans('main.vendor_profile')); ?></a>
+                        <a href="/profile/<?php echo e(isset($product->user->id) ? $product->user->id : ''); ?>"><?php echo e($student ? 'Head Of Department' : trans('main.vendor_profile')); ?></a>
                     </div>
 					</div>
                     <div class="h-25"></div>
@@ -701,7 +704,7 @@
                         <!-- TAB CONTENT -->
                         <div class="tab-content">
                             <div class="active tab-pane fade in blog-comment-section body-target-s" id="ctab1">
-                                <?php if(isset($user)): ?>
+                                <?php if(isset($user) || isset($student)): ?>
                                     <form method="post" action="/product/comment/store/<?php echo e(isset($product->id) ? $product->id : 0); ?>">
 
                                     <input type="hidden" name="content_id" value="<?php echo e($product->id); ?>"/>

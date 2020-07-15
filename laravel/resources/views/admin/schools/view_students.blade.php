@@ -1,4 +1,4 @@
-@extends('admin.newlayout.school_admin_layout',['breadcom'=>['Users','Rating','Admin Panel']])
+@extends('admin.newlayout.layout',['breadcom'=>['Students','List']])
 @include('admin.layout.modals')
 @section('title')
 Students List
@@ -21,6 +21,8 @@ Students List
                     <th class="text-center">{{{ trans('admin.student_gender') }}}</th>
                     <th class="text-center">{{{ trans('admin.student_class') }}}</th>
                     <th class="text-center">{{{ trans('admin.student_stream') }}}</th>
+                    <th class="text-center">{{{ trans('admin.student_username') }}}</th>
+                    <th class="text-center">{{{ trans('admin.student_password') }}}</th>
                     <th class="text-center">{{{ trans('admin.reg_date') }}}</th>
                     <th class="text-center">{{{ trans('admin.badges_tab_courses_count') }}}</th>
                     <th class="text-center">{{{ trans('admin.th_status') }}}</th>
@@ -30,11 +32,12 @@ Students List
                 <tbody>
                 @foreach($students as $student)
                 <tr>
-                    <th class="text-center"><a target="_blank" href="/profile/{{{ $student->id }}}">{{{ $student->student_name
-                            }}}</a></th>
+                    <th class="text-center">{{{ $student->student_name}}}</th>
                     <th class="text-center">{{{ $student->gender }}}</th>
                     <th class="text-center">{{{ $student->class }}}</th>
                     <th class="text-center">{{{ $student->stream }}}</th>
+                    <th class="text-center">{{{ $student->username }}}</th>
+                    <th class="text-center">{{{ $student->password }}}</th>
                     <th class="text-center">{{{ $student->created_at }}}</th>
                     <th class="text-center"><a href="/admin/content/user/{{{ $student->id }}}">{{{ $student->contents_count or
                             0 }}}</a></th>
@@ -48,12 +51,11 @@ Students List
                         @endif
                     </th>
                     <th class="text-center">
-                        <a href="/admin/user/item/{{{ $student->id }}}" title="Edit"><i class="fa fa-edit"
+                        <a href="/admin/school/student_form_edit/{{{ $student->id }}}" title="Edit"><i class="fa fa-edit"
                                                                                        aria-hidden="true"></i></a>
-                        <a href="/admin/user/userlogin/{{{ $student->id }}}" title="Login as user" target="_blank"><i
-                                    class="fa fa-user" aria-hidden="true"></i></a>
-                        <a href="#" data-href="/admin/user/delete/{{{ $student->id }}}" title="Delete" data-toggle="modal"
-                           data-target="#confirm-delete" class="c-r"><i class="fa fa-times" aria-hidden="true"></i></a>
+                       <!-- <a href="/school/student/login_form/{{{ $student->id }}}" title="Login as student" target="_blank"><i
+                                    class="fa fa-user" aria-hidden="true"></i></a>-->
+                        <a href="#" data-href="/admin/school/student_delete/{{{ $student->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                     </th>
                 </tr>
                 @endforeach

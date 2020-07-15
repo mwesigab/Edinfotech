@@ -715,5 +715,7 @@ return [
     'dept_head_phone' => 'Head Of Department\'s Name',
     'dept_head_email' => 'Head Of Department\'s Email',
     'dept_head_address' => 'Head Of Department\'s Address',
+    'student_password' => 'Password',
+    'student_username' => 'Username',
 
 ];

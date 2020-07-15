@@ -48,6 +48,12 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="inputReadOnly"><?php echo e(trans('admin.password')); ?></label>
+                                <div class="col-md-6">
+                                    <input type="text" value="<?php echo e(decrypt($user->password)); ?>"  id="inputReadOnly" class="form-control text-left" dir="ltr" readonly="readonly">
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label"><?php echo e(trans('admin.th_status')); ?></label>

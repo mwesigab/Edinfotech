@@ -31,7 +31,8 @@ class userController extends Controller
     public function dologin(Request $request){
         $username = $request->username;
         $password = $request->password;
-        $admin = User::where('username',$username)->where('admin','1')->orWhere('admin','2')->where('mode','active')->first();
+
+        $admin = User::where('username',$username)->where('admin','1')->orWhere('username',$username)->where('admin',2)->where('mode','active')->first();
         if($admin && $de = decrypt($admin->password) == $password){
             $request->session()->put('Admin',serialize($admin->toArray()));
             $user = User::find($admin->id);
@@ -41,7 +42,7 @@ class userController extends Controller
             if($admin->admin==1){
                 return redirect('/admin/report/user');
             }else if($admin->admin==2){
-                return redirect('/school/students');
+                return redirect('/admin/school/students');
             }
         }else{
             $request->session()->flash('Error','notfonud');

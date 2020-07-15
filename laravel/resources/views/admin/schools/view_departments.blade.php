@@ -1,4 +1,4 @@
-@extends('admin.newlayout.school_admin_layout',['breadcom'=>['Users','Rating','Admin Panel']])
+@extends('admin.newlayout.layout',['breadcom'=>['Departments','List']])
 @include('admin.layout.modals')
 @section('title')
 Departments List
