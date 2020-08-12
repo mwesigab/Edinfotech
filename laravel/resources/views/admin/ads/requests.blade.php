@@ -20,10 +20,10 @@
                 <tbody>
                     @foreach($lists as $list)
                         <tr>
-                            <td class="text-center">{{{ $list->plan->title or 0 }}}</td>
-                            <td class="text-center">{{{ $list->description or '' }}}</td>
-                            <td class="text-center">{{{ $list->user->username or 'Deleted User' }}}</td>
-                            <td class="text-center">{{{ $list->content->title or '' }}}</td>
+                            <td class="text-center">{{{ $list->plan->title ?? 0 }}}</td>
+                            <td class="text-center">{{{ $list->description ?? '' }}}</td>
+                            <td class="text-center">{{{ $list->user->username ?? 'Deleted User' }}}</td>
+                            <td class="text-center">{{{ $list->content->title ?? '' }}}</td>
                             <td class="text-center">
                                 @if($list->mode == 'pending')
                                     <b class="color-red-i">{{{ trans('admin.waiting_payment') }}}</b>

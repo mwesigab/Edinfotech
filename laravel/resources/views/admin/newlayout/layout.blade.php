@@ -38,6 +38,7 @@
     <!-- /END GA --></head>
 
 <body>
+<?php $admin = unserialize(session('Admin'))?>
 <div id="app">
     <div class="main-wrapper main-wrapper-1">
         <div class="navbar-bg"></div>
@@ -51,7 +52,7 @@
             <ul class="navbar-nav navbar-right">
                 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                         <img alt="image" src="/assets/admin/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                        <div class="d-sm-none d-lg-inline-block">Hi, {!! $Admin['username'] or '' !!}</div></a>
+                        <div class="d-sm-none d-lg-inline-block">Hi, {!! $Admin['username'] ?? '' !!}</div></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="/admin/profile" class="dropdown-item has-icon">
                             <i class="fas fa-user"></i> {!! trans('admin.profile') !!}
@@ -127,11 +128,15 @@
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-video"></i> <span>{{{  trans('admin.courses') }}}</span></a>
                         <ul class="dropdown-menu">
                             <li><a class="nav-link" href="/admin/content/list">{{{  trans('admin.list') }}}</a></li>
+                            @if($admin['admin']==2)
+                            <li><a class="nav-link" href="/school/content/form">{{{  trans('main.upload_course') }}}</a></li>
+                            @else
                             <li><a class="nav-link @if(isset($alert['content_waiting']) && $alert['content_waiting'] > 0) beep beep-sidebar @endif" href="/admin/content/waiting">{{{  trans('admin.pending_courses') }}}</a></li>
                             <li><a class="nav-link @if(isset($alert['content_draft']) && $alert['content_draft'] > 0) beep beep-sidebar @endif" href="/admin/content/draft">{{{  trans('admin.unpublished_courses') }}}</a></li>
                             <li><a class="nav-link" href="/admin/content/comment">{{{  trans('admin.corse_comments') }}}</a></li>
                             <li><a class="nav-link" href="/admin/content/support">{{{  trans('admin.support_tickets') }}}</a></li>
                             <li><a class="nav-link" href="/admin/content/category">{{{  trans('admin.categories') }}}</a></li>
+                            @endif
                         </ul>
                     </li>@endif
                     @if(checkAccess('request'))<li class="dropdown" id="request">
@@ -162,14 +167,15 @@
                     @if(checkAccess('school'))<li class="dropdown" id="school">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-eye"></i> <span>{{{  trans('admin.schools') }}}</span></a>
                         <ul class="dropdown-menu">
-                            <li><a class="nav-link" href="/school/schools">{{{  trans('admin.school_list') }}}</a></li>
-                            <li><a class="nav-link" href="/school">{{{  trans('admin.new_school') }}}</a></li>
-                            <li><a class="nav-link" href="/school/students">{{{  trans('admin.student_list') }}}</a></li>
-                            <li><a class="nav-link" href="/school/student_form">{{{  trans('admin.new_student') }}}</a></li>
-                            <li><a class="nav-link" href="/school/departments">{{{  trans('admin.department_list') }}}</a></li>
-                            <li><a class="nav-link" href="/school/department_form">{{{  trans('admin.new_sch_department') }}}</a></li>
-                            <li><a class="nav-link" href="/user/content/new">{{{  trans('main.upload_course') }}}</a></li>
-                        </ul>
+                            @if($admin['admin']==1)
+                            <li><a class="nav-link" href="/admin/school/list">{{{  trans('admin.school_list') }}}</a></li>
+                            <li><a class="nav-link" href="/admin/school/form">{{{  trans('admin.new_school') }}}</a></li>
+                            <li><a class="nav-link" href="/admin/school/departments">{{{  trans('admin.department_list') }}}</a></li>
+                            <li><a class="nav-link" href="/admin/school/department_form">{{{  trans('admin.new_sch_department') }}}</a></li>
+                            @endif
+                            <li><a class="nav-link" href="/admin/school/students">{{{  trans('admin.student_list') }}}</a></li>
+                            <li><a class="nav-link" href="/admin/school/students_upload">{{{  trans('admin.student_upload') }}}</a></li>
+                            <li><a class="nav-link" href="/admin/school/student_form">{{{  trans('admin.new_student') }}}</a></li>
                         </ul>
                     </li>@endif
 
@@ -236,7 +242,7 @@
                     <li>
                         <a href="/admin/about" class="nav-link"><i class="fas fa-info"></i> <span>{{{  trans('admin.about') }}}</span></a>
                     </li>
-                    
+
                     <li>
                         <a href="/admin/logout" class="nav-link"><i class="fas fa-sign-out-alt"></i> <span>{{{  trans('admin.exit') }}}</span></a>
                     </li>
@@ -250,7 +256,7 @@
                     @if(isset($breadcom) && count($breadcom))
                         <div class="section-header-breadcrumb">
                             @foreach($breadcom as $bread)
-                                <div class="breadcrumb-item">{!! $bread or '' !!}</div>
+                                <div class="breadcrumb-item">{!! $bread ?? '' !!}</div>
                             @endforeach
                         </div>
                     @endif

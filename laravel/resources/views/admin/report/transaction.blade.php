@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="input-group">
-                                <input type="date" id="fsdate" value="{!! $_GET['fsdate'] or '' !!}" class="text-center form-control" name="fsdate" placeholder="Start Date">
+                                <input type="date" id="fsdate" value="{!! $_GET['fsdate'] ?? '' !!}" class="text-center form-control" name="fsdate" placeholder="Start Date">
                                 <input type="hidden" id="fdate" name="fdate">
                                 <span class="input-group-append fdatebtn" id="fdatebtn">
                                     <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
@@ -20,7 +20,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="input-group">
-                                <input type="date" id="lsdate" value="{!! $_GET['lsdate'] or '' !!}" class="text-center form-control" name="lsdate" placeholder="End Date">
+                                <input type="date" id="lsdate" value="{!! $_GET['lsdate'] ?? '' !!}" class="text-center form-control" name="lsdate" placeholder="End Date">
                                 <input type="hidden" id="ldate" name="ldate">
                                 <span class="input-group-append ldatebtn" id="ldatebtn">
                                     <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
@@ -40,10 +40,10 @@
                     <span>{{{  trans('admin.till') }}}</span>
                     <span class="f-w-b">{{{ date('d F Y : H:i',$last->create_at) }}}</span>
                     <span></span>{{{  trans('admin.total_transactions_amount') }}}</span>
-                    <span class="f-w-b">{{{ $allPrice or 0 }}}</span>
+                    <span class="f-w-b">{{{ $allPrice ?? 0 }}}</span>
                     <span>{{{  trans('admin.cur_dollar') }}}</span>
                     <span>{{{  trans('admin.and_business_income_is') }}}</span>
-                    <span class="f-w-b">{{{ $siteIncome or 0 }}}</span>
+                    <span class="f-w-b">{{{ $siteIncome ?? 0 }}}</span>
                     <span>{{{  trans('admin.cur_dollar') }}}</span>
                 </div>
             @endif
@@ -76,11 +76,11 @@
                     @if(!empty($lists))
                         @foreach($lists as $item)
                             <tr>
-                                <th class="text-center"><a href="/profile/{{{ $item->buyer->id or 0 }}}" target="_blank">{{{ $item->buyer->name or '' }}}</a></th>
-                                <th class="text-center"><a href="/profile/{{{ $item->user->id or 0 }}}" target="_blank">{{{ $item->user->name or '' }}}</a></th>
-                                <th class="text-center"><a href="/product/{{{ $item->content->id or 0 }}}" target="_blank">{{{ $item->content->title or '' }}}</a></th>
-                                <th class="text-center">{{{ $item->price or 0 }}}<br>{{{  trans('admin.cur_dollar') }}}</th>
-                                <th class="text-center">{{{ $item->income or 0 }}}<br>{{{  trans('admin.cur_dollar') }}}</th>
+                                <th class="text-center"><a href="/profile/{{{ $item->buyer->id ?? 0 }}}" target="_blank">{{{ $item->buyer->name ?? '' }}}</a></th>
+                                <th class="text-center"><a href="/profile/{{{ $item->user->id ?? 0 }}}" target="_blank">{{{ $item->user->name ?? '' }}}</a></th>
+                                <th class="text-center"><a href="/product/{{{ $item->content->id ?? 0 }}}" target="_blank">{{{ $item->content->title ?? '' }}}</a></th>
+                                <th class="text-center">{{{ $item->price ?? 0 }}}<br>{{{  trans('admin.cur_dollar') }}}</th>
+                                <th class="text-center">{{{ $item->income ?? 0 }}}<br>{{{  trans('admin.cur_dollar') }}}</th>
                                 <td class="text-center" width="150">{{{ date('d F Y : H:i',$item->create_at) }}}</td>
                                 <td class="text-center">
                                     @if($item->mode == 'deliver')

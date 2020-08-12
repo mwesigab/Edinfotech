@@ -10,8 +10,8 @@
                 <div class="row">
                     <div class="col-md-5">
                         <div class="input-group">
-                            <input type="date" id="fsdate" value="{!! $_GET['fsdate'] or '' !!}" class="text-center form-control" name="fsdate" placeholder="Start Date">
-                            <input type="hidden" id="fdate" name="fdate" value="{!! $_GET['fdate'] or '' !!}">
+                            <input type="date" id="fsdate" value="{!! $_GET['fsdate'] ?? '' !!}" class="text-center form-control" name="fsdate" placeholder="Start Date">
+                            <input type="hidden" id="fdate" name="fdate" value="{!! $_GET['fdate'] ?? '' !!}">
                             <span class="input-group-append fdatebtn" id="fdatebtn">
                                 <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </span>
@@ -19,8 +19,8 @@
                     </div>
                     <div class="col-md-5">
                         <div class="input-group">
-                            <input type="date" id="lsdate" value="{!! $_GET['lsdate'] or '' !!}" class="text-center form-control" name="lsdate" placeholder="End Date">
-                            <input type="hidden" id="ldate" name="ldate" value="{!! $_GET['ldate'] or '' !!}">
+                            <input type="date" id="lsdate" value="{!! $_GET['lsdate'] ?? '' !!}" class="text-center form-control" name="lsdate" placeholder="End Date">
+                            <input type="hidden" id="ldate" name="ldate" value="{!! $_GET['ldate'] ?? '' !!}">
                             <span class="input-group-append ldatebtn" id="ldatebtn">
                                 <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </span>
@@ -41,9 +41,9 @@
                     <span>{{{ trans('admin.till') }}}</span>
                     <span class="f-w-b">{{{ date('d F Y / H:i',$first->create_at) }}}</span>
                     <span>{{{ trans('admin.your_business_income_is') }}}</span>
-                    <span class="f-w-b" dir="ltr">{{{ $alladd or 0 }}}</span>
+                    <span class="f-w-b" dir="ltr">{{{ $alladd ?? 0 }}}</span>
                     <span>{{{ trans('admin.cur_dollar') }}} {{{ trans('admin.and_total_cost_is') }}}</span>
-                    <span class="f-w-b color-red-i" dir="ltr">{{{ $allminus or 0 }}}</span>
+                    <span class="f-w-b color-red-i" dir="ltr">{{{ $allminus ?? 0 }}}</span>
                     <span>{{{ trans('admin.cur_dollar') }}}.</span>
                     <span>{{{ trans('admin.business_net_profit') }}}</span>
                     <b class="color-blue" dir="ltr">{{{ $alladd-$allminus }}}</b>
@@ -82,19 +82,19 @@
                             </td>
                             <td class="text-center">
                                 @if($item->type == 'add')
-                                    <span class="f-w-b color-green">{{{ $item->price or 0 }}}+</span>
+                                    <span class="f-w-b color-green">{{{ $item->price ?? 0 }}}+</span>
                                 @else
-                                    <span class="color-red-i f-w-b">{{{ $item->price or 0 }}}-</span>
+                                    <span class="color-red-i f-w-b">{{{ $item->price ?? 0 }}}-</span>
                                 @endif
                             </td>
                             <td class="text-center">
                                 @if($item->mode == 'auto')
                                     <span>{{{ trans('admin.automatic') }}}</span>
                                 @elseif($item->mode == 'user')
-                                    <span><a href="/admin/user/item/{{{ $item->exporter->id or 0 }}}">{{{ $item->exporter->name or '' }}}</a></span>
+                                    <span><a href="/admin/user/item/{{{ $item->exporter->id ?? 0 }}}">{{{ $item->exporter->name ?? '' }}}</a></span>
                                 @endif
                             </td>
-                            <td class="text-center">{{{ $item->description or '' }}}</td>
+                            <td class="text-center">{{{ $item->description ?? '' }}}</td>
                             <td class="text-center">
                                     <a href="/admin/balance/print/{{{ $item->id }}}" target="_blank" title="Print Document" ><i class="fa fa-print" aria-hidden="true"></i></a>
                             </td>

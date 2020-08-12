@@ -11,13 +11,13 @@
                 <div class="link"><h2>{{{ trans('main.submit_future_course') }}}</h2><i class="mdi mdi-chevron-down"></i></div>
                 <ul class="submenu" @if(isset($record->id)) style="display: block;" @endif>
                     <div class="h-10"></div>
-                    <form method="post" @if(isset($record->id)) action="/user/video/record/edit/store/{{{ $record->id or 0 }}}" @else action="/user/video/record/store" @endif class="form form-horizontal">
+                    <form method="post" @if(isset($record->id)) action="/user/video/record/edit/store/{{{ $record->id ?? 0 }}}" @else action="/user/video/record/store" @endif class="form form-horizontal">
 
                         <div class="h-10"></div>
                         <div class="form-group">
                             <label class="control-label col-md-1 tab-con">{{{ trans('main.title') }}}</label>
                             <div class="col-md-5 tab-con">
-                                <input type="text" name="title" value="{{{ $record->title or '' }}}" class="form-control">
+                                <input type="text" name="title" value="{{{ $record->title ?? '' }}}" class="form-control">
                             </div>
                             <label class="control-label col-md-1 tab-con">{{{ trans('main.category') }}}</label>
                             <div class="col-md-5 tab-con">
@@ -25,13 +25,13 @@
                                     <option value="0">{{{ trans('main.select_category') }}}</option>
                                     @foreach($menus as $menu)
                                         @if($menu->parent_id == 0)
-                                            <optgroup label="{{{ $menu->title or '' }}}">
+                                            <optgroup label="{{{ $menu->title ?? '' }}}">
                                                 @if(count($menu->childs)>0)
                                                     @foreach($menu->childs as $sub)
-                                                        <option value="{{{ $sub->id or '' }}}" @if(isset($record->category_id) && $sub->id == $record->category_id) selected @endif>{{{ $sub->title or '' }}}</option>
+                                                        <option value="{{{ $sub->id ?? '' }}}" @if(isset($record->category_id) && $sub->id == $record->category_id) selected @endif>{{{ $sub->title or '' }}}</option>
                                                     @endforeach
                                                 @else
-                                                    <option value="{{{ $menu->id or '' }}}" @if(isset($record->category_id) && $menu->id == $record->category_id) selected @endif>{{{ $menu->title or '' }}}</option>
+                                                    <option value="{{{ $menu->id ?? '' }}}" @if(isset($record->category_id) && $menu->id == $record->category_id) selected @endif>{{{ $menu->title ?? '' }}}</option>
                                                 @endif
                                             </optgroup>
                                         @endif
@@ -45,7 +45,7 @@
                                 <select name="off_id" class="form-control font-s">
                                     <option value="0" @if(isset($record->content_id) && $record->content_id == 0) selected @endif>{{{ trans('main.recording') }}}</option>
                                     @foreach($userContent as $uc)
-                                        <option value="{{{ $uc->id or 0 }}}" @if(isset($record->content_id) && $record->content_id == $uc->id) selected @endif>{{{ $uc->title or '' }}}</option>
+                                        <option value="{{{ $uc->id ?? 0 }}}" @if(isset($record->content_id) && $record->content_id == $uc->id) selected @endif>{{{ $uc->title ?? '' }}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -53,7 +53,7 @@
                             <div class="col-md-5 tab-con">
                                 <div class="input-group">
                                     <span class="input-group-addon view-selected img-icon-s" data-toggle="modal" data-target="#ImageModal" data-whatever="image" ><span class="formicon mdi mdi-eye"></span></span>
-                                    <input type="text" name="image" dir="ltr" value="{{{ $record->image or '' }}}" class="form-control">
+                                    <input type="text" name="image" dir="ltr" value="{{{ $record->image ?? '' }}}" class="form-control">
                                     <span class="input-group-addon click-for-upload img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-1 tab-con">{{{ trans('main.description') }}}</label>
                             <div class="col-md-5 tab-con">
-                                <textarea class="form-control" name="description">{{{ $record->description or '' }}}</textarea>
+                                <textarea class="form-control" name="description">{{{ $record->description ?? '' }}}</textarea>
                             </div>
                             <label class="control-label col-md-1 tab-con"></label>
                             <div class="col-md-5 tab-con">
@@ -103,11 +103,11 @@
                             <tbody>
                             @foreach($lists as $item)
                                 <tr class="text-center">
-                                    <td class="cell-ta">{{{ $item->title or '' }}}</td>
-                                    <td class="text-center"><a href="{{{ $item->image or '' }}}" target="_blank">{{{ trans('main.view') }}}</a></td>
-                                    <td class="text-center">{{{ $item->fans_count or '' }}}</td>
-                                    <td class="text-center">{{{ $item->content->title or 'Future Course (Recording)' }}}</td>
-                                    <td class="text-center">{{{ $item->category->title or '' }}}</td>
+                                    <td class="cell-ta">{{{ $item->title ?? '' }}}</td>
+                                    <td class="text-center"><a href="{{{ $item->image ?? '' }}}" target="_blank">{{{ trans('main.view') }}}</a></td>
+                                    <td class="text-center">{{{ $item->fans_count ?? '' }}}</td>
+                                    <td class="text-center">{{{ $item->content->title ?? 'Future Course (Recording)' }}}</td>
+                                    <td class="text-center">{{{ $item->category->title ?? '' }}}</td>
                                     <td class="text-center">{{{ date('d F Y H:i',$item->create_at)  }}}</td>
                                     <td>
                                         @if($item->mode == "publish")
@@ -119,8 +119,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a class="gray-s" href="/user/video/record/edit/{{{ $item->id or 0 }}}" title="Edit"><span class="crticon mdi mdi-lead-pencil"></span></a>
-                                        <a class="gray-s" href="/user/video/record/delete/{{{ $item->id or 0 }}}" onclick="return confirm('Are you sure to delete item?');" title="Delete"><span class="crticon mdi mdi-delete-forever"></span></a>
+                                        <a class="gray-s" href="/user/video/record/edit/{{{ $item->id ?? 0 }}}" title="Edit"><span class="crticon mdi mdi-lead-pencil"></span></a>
+                                        <a class="gray-s" href="/user/video/record/delete/{{{ $item->id ?? 0 }}}" onclick="return confirm('Are you sure to delete item?');" title="Delete"><span class="crticon mdi mdi-delete-forever"></span></a>
                                     </td>
                                 </tr>
                             @endforeach

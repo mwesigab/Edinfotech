@@ -1,6 +1,6 @@
 @extends('view.layout.layout')
 @section('title')
-    {{{ $setting['site']['site_title'] or '' }}}
+    {{{ $setting['site']['site_title'] ?? '' }}}
     {{{ trans('main.articles') }}} -
 @endsection
 
@@ -31,7 +31,7 @@
                         <div class="body">
                             <ul>
                                 @foreach($category as $cat)
-                                    <li><input type="checkbox" name="category" id="category{{{ $cat->id or '' }}}" value="{{{ $cat->id or '' }}}" @if(isset($cats) && in_array($cat->id,$cats)) checked @endif/><label for="category{{{ $cat->id or '' }}}"><span></span>{{{ $cat->title or '' }}}</label></li>
+                                    <li><input type="checkbox" name="category" id="category{{{ $cat->id ?? '' }}}" value="{{{ $cat->id ?? '' }}}" @if(isset($cats) && in_array($cat->id,$cats)) checked @endif/><label for="category{{{ $cat->id ?? '' }}}"><span></span>{{{ $cat->title ?? '' }}}</label></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -47,10 +47,10 @@
                                                 <div class="day">{{{ date('d',$post->create_at) }}}</div>
                                                 <div class="month">{{{ date('F',$post->create_at) }}}</div>
                                             </div>
-                                            <img src="{{{ $post->image or '' }}}">
+                                            <img src="{{{ $post->image ?? '' }}}">
                                         </div>
                                         <div class="post-content">
-                                            <h1 class="title"><a href="/article/item/{{{ $post->id }}}"><h3>{{{ $post->title or '' }}}</h3></a></h1>
+                                            <h1 class="title"><a href="/article/item/{{{ $post->id }}}"><h3>{{{ $post->title ?? '' }}}</h3></a></h1>
                                             <p class="description">
                                                 {{{  mb_strimwidth(strip_tags($post->pre_text),0,250,'...') }}}
                                             </p>
@@ -70,15 +70,15 @@
 @section('script')
     <script>
         $(function() {
-            pagination('.blog-section',{{{ $setting['site']['article_post_count'] or 6 }}},0);
+            pagination('.blog-section',{{{ $setting['site']['article_post_count'] ?? 6 }}},0);
         $('.pagi').pagination({
             items: {!! count($posts) !!},
-            itemsOnPage:{{{ $setting['site']['article_post_count'] or 6 }}},
+            itemsOnPage:{{{ $setting['site']['article_post_count'] ?? 6 }}},
             cssStyle: 'light-theme',
             prevText: 'Pre.',
             nextText:'Next',
             onPageClick:function(pageNumber, event) {
-            pagination('.blog-section',{{{ $setting['site']['article_post_count'] or 6 }}},pageNumber-1);
+            pagination('.blog-section',{{{ $setting['site']['article_post_count'] ?? 6 }}},pageNumber-1);
         }
         });
         });

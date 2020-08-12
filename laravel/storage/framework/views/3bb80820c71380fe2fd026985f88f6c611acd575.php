@@ -94,3 +94,4 @@
     </div>
 </div>
 
+<?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/admin/newlayout/modals.blade.php ENDPATH**/ ?>

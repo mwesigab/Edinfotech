@@ -10,7 +10,7 @@
                 <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
             </div>
 
-            <h2 class="panel-title">{{{ trans('admin.list') }}} {{{ $category->title or 'Users' }}}</h2>
+            <h2 class="panel-title">{{{ trans('admin.list') }}} {{{ $category->title ?? 'Users' }}}</h2>
         </header>
         <div class="panel-body">
             <table class="table table-bordered table-striped mb-none" id="datatable-details">
@@ -30,8 +30,8 @@
                 <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <th class="text-center">{{{ $user->username or '' }}}</th>
-                            <th class="text-center">{{{ $user->name or '' }}}</th>
+                            <th class="text-center">{{{ $user->username ?? '' }}}</th>
+                            <th class="text-center">{{{ $user->name ?? '' }}}</th>
                             <th class="text-center">{{{ date('d F Y / H:i',$user->create_at) }}}</th>
                             <th class="text-center"><a href="/admin/content/user/{{{ $user->id }}}">{{{ count($user->contents) }}}</a></th>
                             <th class="text-center"><a href="/admin/sell/buyer/{{{ $user->id }}}">{{{ count($user->buys) }}}</a></th>

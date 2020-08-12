@@ -26,12 +26,12 @@
                 <tbody>
                 @foreach($lists as $item)
                     <tr>
-                        <td class="cell-ta"><a href="/product/{{{ $item->content->id or 0 }}}" class="color-in" target="_blank">{{{ $item->content->title or '' }}}</a></td>
-                        <td class="cell-ta"><a href="/profile/{{{ $item->buyer->id or 0 }}}" class="color-in" target="_blank">{{{ $item->buyer->name or $item->buyer->username }}}</a></td>
-                        <td class="cell-ta" title="{{{ $item->buyer->address or '' }}}">
+                        <td class="cell-ta"><a href="/product/{{{ $item->content->id ?? 0 }}}" class="color-in" target="_blank">{{{ $item->content->title ?? '' }}}</a></td>
+                        <td class="cell-ta"><a href="/profile/{{{ $item->buyer->id ?? 0 }}}" class="color-in" target="_blank">{{{ $item->buyer->name ?? $item->buyer->username }}}</a></td>
+                        <td class="cell-ta" title="{{{ $item->buyer->address ?? '' }}}">
                             @if($item->type == 'post')
-                                <span class="img-icon-s" data-toggle="modal" data-target="#address{{{ $item->id or 0 }}}">{{{ trans('main.view') }}}</span>
-                                <div class="modal fade" id="address{{{ $item->id or 0 }}}">
+                                <span class="img-icon-s" data-toggle="modal" data-target="#address{{{ $item->id ?? 0 }}}">{{{ trans('main.view') }}}</span>
+                                <div class="modal fade" id="address{{{ $item->id ?? 0 }}}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -69,12 +69,12 @@
                         <td>
                             @if($item->type == 'post')
                                 <form method="post" action="/user/balance/sell/post/setPostalCode">
-                                    <input type="hidden" name="sell_id" value="{{{ $item->id or 0 }}}">
-                                    <input type="text" class="form-control text-center" name="post_code" value="{{{ $item->post_code or '' }}}">
+                                    <input type="hidden" name="sell_id" value="{{{ $item->id ?? 0 }}}">
+                                    <input type="text" class="form-control text-center" name="post_code" value="{{{ $item->post_code ?? '' }}}">
                             @endif
                         </td>
                         <td class="text-center" width="150">{{{ date('d F Y | H:i',$item->create_at) }}}</td>
-                        <td class="text-center">{{{ currencySign() }}}{{{ $item->transaction->income or 0 }}}</td>
+                        <td class="text-center">{{{ currencySign() }}}{{{ $item->transaction->income ?? 0 }}}</td>
                         <td class="text-center">
                             @if($item->post_feedback == null)
                                 <b>{{{ trans('main.waiting') }}}</b>

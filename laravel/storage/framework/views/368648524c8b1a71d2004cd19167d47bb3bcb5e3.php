@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title'); ?>
     <?php echo e(trans('admin.users_report_page_title')); ?>
 
@@ -12,7 +13,7 @@
                             <div class="summary">
                                 <h4 class="title"><?php echo e(trans('admin.total_users')); ?></h4>
                                 <div class="info">
-                                    <strong class="amount"><?php echo e(isset($userCount) ? $userCount : 0); ?></strong>
+                                    <strong class="amount"><?php echo e($userCount ?? 0); ?></strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -31,7 +32,7 @@
                             <div class="summary">
                                 <h4 class="title"><?php echo e(trans('admin.total_employees')); ?></h4>
                                 <div class="info">
-                                    <strong class="amount"><?php echo e(isset($adminCount) ? $adminCount : 0); ?></strong>
+                                    <strong class="amount"><?php echo e($adminCount ?? 0); ?></strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -50,7 +51,7 @@
                             <div class="summary">
                                 <h4 class="title"><?php echo e(trans('admin.total_customers')); ?></h4>
                                 <div class="info">
-                                    <strong class="amount"><?php echo e(isset($buyerCount) ? $buyerCount : 0); ?></strong>
+                                    <strong class="amount"><?php echo e($buyerCount ?? 0); ?></strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -69,7 +70,7 @@
                         <div class="summary">
                             <h4 class="title"><?php echo e(trans('admin.total_sellers')); ?></h4>
                             <div class="info">
-                                <strong class="amount"><?php echo e(isset($sellerCount) ? $sellerCount : 0); ?></strong>
+                                <strong class="amount"><?php echo e($sellerCount ?? 0); ?></strong>
                             </div>
                         </div>
                         <div class="summary-footer">
@@ -128,4 +129,4 @@
     </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('admin.newlayout.layout',['breadcom'=>['Report','Users']], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('admin.newlayout.layout',['breadcom'=>['Report','Users']], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/admin/report/user.blade.php ENDPATH**/ ?>

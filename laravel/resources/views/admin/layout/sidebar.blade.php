@@ -43,7 +43,7 @@
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <span>{{{  trans('admin.users') }}}</span>
                             @if(isset($alert['seller_apply']) && $alert['seller_apply']>0)
-                                <span class="pull-left label label-primary">{{{ $alert['seller_apply'] or 0 }}}</span>
+                                <span class="pull-left label label-primary">{{{ $alert['seller_apply'] ?? 0 }}}</span>
                             @endif
                         </a>
                         <ul class="nav nav-children">
@@ -66,7 +66,7 @@
                                 <a href="/admin/user/seller">
                                     <span>{{{  trans('admin.identity_verification') }}}</span>
                                     @if(isset($alert['seller_apply']) && $alert['seller_apply']>0)
-                                        <span class="pull-left label label-primary">{{{ $alert['seller_apply'] or 0 }}}</span>
+                                        <span class="pull-left label label-primary">{{{ $alert['seller_apply'] ?? 0 }}}</span>
                                     @endif
                                 </a>
                             </li>
@@ -77,7 +77,7 @@
                             <i class="fa fa-eye" aria-hidden="true"></i>
                             <span>{{{  trans('admin.channels') }}}</span>
                             @if($alert['channel_request']>0)
-                                <span class="pull-left label label-primary">{{{ $alert['channel_request'] or 0 }}}</span>
+                                <span class="pull-left label label-primary">{{{ $alert['channel_request'] ?? 0 }}}</span>
                             @endif
                         </a>
                         <ul class="nav nav-children">
@@ -90,7 +90,7 @@
                                 <a href="/admin/channel/request">
                                     <span>{{{  trans('admin.verification_requests') }}}</span>
                                     @if($alert['channel_request']>0)
-                                        <span class="pull-left label label-primary">{{{ $alert['channel_request'] or 0 }}}</span>
+                                        <span class="pull-left label label-primary">{{{ $alert['channel_request'] ?? 0 }}}</span>
                                     @endif
                                 </a>
                             </li>
@@ -101,7 +101,7 @@
                             <i class="fa fa-video-camera" aria-hidden="true"></i>
                             <span>{{{  trans('admin.courses') }}}</span>
                             @if(isset($alert['content_waiting']) && $alert['content_waiting']>0)
-                                <span class="pull-left label label-primary">{{{ $alert['content_waiting'] or 0 }}}</span>
+                                <span class="pull-left label label-primary">{{{ $alert['content_waiting'] ?? 0 }}}</span>
                             @endif
                         </a>
                         <ul class="nav nav-children">
@@ -114,7 +114,7 @@
                                 <a href="/admin/content/waiting">
                                     <span>{{{  trans('admin.pending_courses') }}}</span>
                                     @if(isset($alert['content_waiting']) && $alert['content_waiting']>0)
-                                        <span class="pull-left label label-primary">{{{ $alert['content_waiting'] or 0 }}}</span>
+                                        <span class="pull-left label label-primary">{{{ $alert['content_waiting'] ?? 0 }}}</span>
                                     @endif
                                 </a>
                             </li>
@@ -145,7 +145,7 @@
                             <i class="fa fa-line-chart" aria-hidden="true"></i>
                             <span>{{{  trans('admin.financial') }}}</span>
                             @if(isset($alert['withdraw']) && $alert['withdraw']>0)
-                                <span class="pull-left label label-primary">{{{ $alert['withdraw'] or 0 }}}</span>
+                                <span class="pull-left label label-primary">{{{ $alert['withdraw'] ?? 0 }}}</span>
                             @endif
                         </a>
                         <ul class="nav nav-children">
@@ -158,7 +158,7 @@
                                 <a href="/admin/balance/withdraw">
                                     <span>{{{  trans('admin.withdrawal_list') }}}</span>
                                     @if(isset($alert['withdraw']) && $alert['withdraw']>0)
-                                        <span class="pull-left label label-primary">{{{ $alert['withdraw'] or 0 }}}</span>
+                                        <span class="pull-left label label-primary">{{{ $alert['withdraw'] ?? 0 }}}</span>
                                     @endif
                                 </a>
                             </li>
@@ -271,7 +271,7 @@
                             <i class="fa fa-wordpress" aria-hidden="true"></i>
                             <span>{{{  trans('admin.blog_articles') }}}</span>
                             @if($alert['article_request']>0)
-                                <span class="pull-left label label-primary">{{{ $alert['article_request'] or 0 }}}</span>
+                                <span class="pull-left label label-primary">{{{ $alert['article_request'] ?? 0 }}}</span>
                             @endif
                         </a>
                         <ul class="nav nav-children">
@@ -299,7 +299,7 @@
                                 <a href="/admin/blog/article">
                                     <span>{{{  trans('admin.articles') }}}</span>
                                     @if($alert['article_request']>0)
-                                        <span class="pull-left label label-primary">{{{ $alert['article_request'] or 0 }}}</span>
+                                        <span class="pull-left label label-primary">{{{ $alert['article_request'] ?? 0 }}}</span>
                                     @endif
                                 </a>
                             </li>

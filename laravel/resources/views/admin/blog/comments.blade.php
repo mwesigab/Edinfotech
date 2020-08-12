@@ -22,7 +22,7 @@
 
                         <tr>
                             <td>{!! $item->comment !!}</td>
-                            <td class="text-center"><a target="_blank" href="javascript:void(0);">{{{ $item->user->name or '' }}}</a></td>
+                            <td class="text-center"><a target="_blank" href="javascript:void(0);">{{{ $item->user->name ?? '' }}}</a></td>
                             <td class="text-center">
                                 @if($item->mode == 'publish')
                                     <b class="c-g">{{{ trans('admin.published') }}}</b>
@@ -31,7 +31,7 @@
                                 @endif
                             </td>
                             <td class="text-center">{!! date('d F Y / H:i',$item->create_at) !!}</td>
-                            <td class="text-center"><a href="/admin/blog/post/edit/{{{ $item->post->id or '' }}}">{{{ $item->post->title or '' }}}</a></td>
+                            <td class="text-center"><a href="/admin/blog/post/edit/{{{ $item->post->id ?? '' }}}">{{{ $item->post->title ?? '' }}}</a></td>
                             <td class="text-center">
                                 <a href="/admin/blog/comment/reply/{{{ $item->id }}}" title="Reply"><i class="fa fa-reply" aria-hidden="true"></i></a>
                                 <a href="/admin/blog/comment/edit/{{{ $item->id }}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>

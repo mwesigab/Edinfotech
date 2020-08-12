@@ -27,7 +27,7 @@
                     <div class="box marz">
                         <div class="container-2">
                             <form>
-                                <input type="search" id="search" name="q" value="{{{ $_GET['q'] or '' }}}" placeholder="Search in coming soon courses" />
+                                <input type="search" id="search" name="q" value="{{{ $_GET['q'] ?? '' }}}" placeholder="Search in coming soon courses" />
                                 <span class="icon"><i class="homeicon mdi mdi-magnify"></i></span>
                             </form>
                         </div>
@@ -49,17 +49,17 @@
                         @foreach($setting['category'] as $mainCategory)
                             <li>
                                 @if(count($mainCategory->childs)>0)
-                                    <div class="link">{{{$mainCategory->title or ''}}}<i class="mdi mdi-chevron-down"></i></div>
+                                    <div class="link">{{{$mainCategory->title ?? ''}}}<i class="mdi mdi-chevron-down"></i></div>
                                         <ul class="submenu">
                                             @foreach($mainCategory->childs as $child)
-                                                <li><input name="category" type="checkbox" id="cat{{{ $child->id or '' }}}" value="{{{ $child->id or '' }}}" class="category-item" @if(isset($_GET['cat']) && in_array($child->id,$_GET['cat'])) checked @endif><label for="cat{{{ $child->id or '' }}}"><span></span>{{{ $child->title or '' }}}</label></li>
+                                                <li><input name="category" type="checkbox" id="cat{{{ $child->id ?? '' }}}" value="{{{ $child->id ?? '' }}}" class="category-item" @if(isset($_GET['cat']) && in_array($child->id,$_GET['cat'])) checked @endif><label for="cat{{{ $child->id ?? '' }}}"><span></span>{{{ $child->title ?? '' }}}</label></li>
                                             @endforeach
                                         </ul>
                                     </li>
                                 @else
-                                    <div class="link">{{{$mainCategory->title or ''}}}<i class="mdi mdi-chevron-down"></i></div>
+                                    <div class="link">{{{$mainCategory->title ?? ''}}}<i class="mdi mdi-chevron-down"></i></div>
                                     <ul class="submenu">
-                                        <li><input name="category" type="checkbox" id="cat{{{ $mainCategory->id or '' }}}" value="{{{ $mainCategory->id or '' }}}" class="category-item" @if(isset($_GET['cat']) && in_array($mainCategory->id,$_GET['cat'])) checked @endif><label for="cat{{{ $mainCategory->id or '' }}}"><span></span>{{{ $mainCategory->title or '' }}}</label></li>
+                                        <li><input name="category" type="checkbox" id="cat{{{ $mainCategory->id ?? '' }}}" value="{{{ $mainCategory->id ?? '' }}}" class="category-item" @if(isset($_GET['cat']) && in_array($mainCategory->id,$_GET['cat'])) checked @endif><label for="cat{{{ $mainCategory->id ?? '' }}}"><span></span>{{{ $mainCategory->title ?? '' }}}</label></li>
                                     </ul>
                                 @endif
                             </li>
@@ -75,27 +75,27 @@
                             @foreach($list as $content)
                                 <div class="col-md-4 col-sm-6 col-xs-12 pagi-content tab-con">
                                     @if($content->content_id != null)
-                                        <a href="/product/{{{ $content->content_id or 'javascript:void(0);' }}}" title="{{{ $content->title or '' }}}" class="content-box pagi-content-box">
+                                        <a href="/product/{{{ $content->content_id ?? 'javascript:void(0);' }}}" title="{{{ $content->title ?? '' }}}" class="content-box pagi-content-box">
                                     @else
-                                        <a href="javascript:void(0);" title="{{{ $content->title or '' }}}" class="content-box pagi-content-box">
+                                        <a href="javascript:void(0);" title="{{{ $content->title ?? '' }}}" class="content-box pagi-content-box">
                                     @endif
                                         <div class="img-container text-center center-block">
-                                            <img src="{{{ $content->image or '' }}}"/>
+                                            <img src="{{{ $content->image ?? '' }}}"/>
                                         </div>
 										<h3>{!! str_limit($content->title,30,'...') !!}</h3>
                                         <div class="footer">
                                             @if($content->content_id == null)
-                                                <span class="pull-right mod-r" data-toggle="modal" data-target="#dModal{{{ $content->id or 0 }}}"><b>{{{ trans('main.description') }}}</b></span>
+                                                <span class="pull-right mod-r" data-toggle="modal" data-target="#dModal{{{ $content->id ?? 0 }}}"><b>{{{ trans('main.description') }}}</b></span>
                                             @else
                                                 <span class="pull-right mod-r"><b class="green-s">{{{ trans('main.published') }}}</b></span>
                                             @endif
                                             @if($content->mode == 'publish')
                                                 @if(count($content->fans)==1)
 													<span class="boxicon mdi mdi-heart pull-left"></span>
-                                                    <span class="pull-left request-unfollow-icon" title="Unfollow" onclick="window.location.href ='/record/unfollow/{{{ $content->id or 0 }}}'">{{{ $content->fans_count or 0 }}}{{{ trans('main.followers') }}}</span>
+                                                    <span class="pull-left request-unfollow-icon" title="Unfollow" onclick="window.location.href ='/record/unfollow/{{{ $content->id ?? 0 }}}'">{{{ $content->fans_count ?? 0 }}}{{{ trans('main.followers') }}}</span>
                                                 @else
 													<span class="boxicon mdi mdi-heart-outline pull-left"></span>
-                                                    <span class="pull-left request-follow-icon" title="Follow" onclick="window.location.href ='/record/follow/{{{ $content->id or 0 }}}'">{{{ $content->fans_count or 0 }}}{{{ trans('main.followers') }}}</span>
+                                                    <span class="pull-left request-follow-icon" title="Follow" onclick="window.location.href ='/record/follow/{{{ $content->id ?? 0 }}}'">{{{ $content->fans_count ?? 0 }}}{{{ trans('main.followers') }}}</span>
                                                 @endif
                                             @elseif($content->content_id != null)
 												<span class="boxicon mdi mdi-check-bold pull-left"></span>
@@ -103,7 +103,7 @@
                                             @endif
                                         </div>
                                     </a>
-                                    <div id="dModal{{{ $content->id or 0 }}}" class="modal fade"  role="dialog">
+                                    <div id="dModal{{{ $content->id ?? 0 }}}" class="modal fade"  role="dialog">
                                                     <div class="modal-dialog">
 
                                                         <!-- Modal content-->
@@ -113,7 +113,7 @@
                                                                 <h4 class="modal-title">{{{ trans('main.extra_info') }}}</h4>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <p>{{{ $content->description or 'Description not found.' }}}</p>
+                                                                <p>{{{ $content->description ?? 'Description not found.' }}}</p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-custom pull-left" data-dismiss="modal">{{{ trans('main.close') }}}</button>
@@ -138,15 +138,15 @@
 @section('script')
     <script>
         $(function() {
-            pagination('.body-target',@if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] or 6 }}} @endif,0);
+            pagination('.body-target',@if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] ?? 6 }}} @endif,0);
             $('.pagi').pagination({
                 items: {!! count($list) !!},
-                itemsOnPage: @if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] or 6 }}} @endif,
+                itemsOnPage: @if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] ?? 6 }}} @endif,
                 cssStyle: 'light-theme',
                 prevText: 'Pre.',
         		nextText:'Next',
                 onPageClick:function(pageNumber, event) {
-                    pagination('.body-target',@if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] or 6 }}} @endif,pageNumber-1);
+                    pagination('.body-target',@if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] ?? 6 }}} @endif,pageNumber-1);
                 }
             });
         });

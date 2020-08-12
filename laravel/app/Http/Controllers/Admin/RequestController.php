@@ -6,15 +6,20 @@ use App\Models\Record;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Requests;
-use Illuminate\Support\Facades\Input;
 use App\Models\User;
 use App\Models\ContentCategory;
 
 class RequestController extends Controller
 {
+    protected $request;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
+
     public function lists(){
-        $fdate = strtotime(Input::get('fsdate'));
-        $ldate = strtotime(Input::get('lsdate'));
+        $fdate = strtotime($this->request->get('fsdate'));
+        $ldate = strtotime($this->request->get('lsdate'));
 
         $category = ContentCategory::all();
 
@@ -24,8 +29,8 @@ class RequestController extends Controller
             $lists->where('create_at','>',$fdate);
         if($ldate>12601)
             $lists->where('create_at','<',$ldate);
-        if(Input::get('cat')!==null)
-            $lists->where('category_id',Input::get('cat'));
+        if($this->request->get('cat')!==null)
+            $lists->where('category_id',$this->request->get('cat'));
 
         $lists = $lists->get();
 
@@ -60,8 +65,8 @@ class RequestController extends Controller
 
     ## RECORD SECTION
     public function recordList(){
-        $fdate = strtotime(Input::get('fsdate'));
-        $ldate = strtotime(Input::get('lsdate'));
+        $fdate = strtotime($this->request->get('fsdate'));
+        $ldate = strtotime($this->request->get('lsdate'));
 
         $category = ContentCategory::all();
 
@@ -71,8 +76,8 @@ class RequestController extends Controller
             $lists->where('create_at','>',$fdate);
         if($ldate>12601)
             $lists->where('create_at','<',$ldate);
-        if(Input::get('cat')!==null)
-            $lists->where('category_id',Input::get('cat'));
+        if($this->request->get('cat')!==null)
+            $lists->where('category_id',$this->request->get('cat'));
 
         $lists = $lists->get();
 

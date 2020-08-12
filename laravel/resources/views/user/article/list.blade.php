@@ -28,7 +28,7 @@
                                 @foreach($lists as $item)
                                     <tr>
                                         <td class="cell-ta">{{{ $item->title }}}</td>
-                                        <td class="text-center">{{{ $item->category->title or '' }}}</td>
+                                        <td class="text-center">{{{ $item->category->title ?? '' }}}</td>
                                         <td class="text-center" width="150">{{{ date('d F Y | H:i',$item->create_at) }}}</td>
                                         <td class="text-center">
                                             @if($item->mode == 'publish')

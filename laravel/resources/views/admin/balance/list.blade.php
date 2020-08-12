@@ -34,20 +34,20 @@
                             </td>
                             <td class="text-center">
                                 @if($item->type == 'add')
-                                    <span class="f-w-b color-green">{{{ $item->price or 0 }}}+</span>
+                                    <span class="f-w-b color-green">{{{ $item->price ?? 0 }}}+</span>
                                 @else
-                                    <span class="color-red-i f-w-b">{{{ $item->price or 0 }}}-</span>
+                                    <span class="color-red-i f-w-b">{{{ $item->price ?? 0 }}}-</span>
                                 @endif
                             </td>
                             <td class="text-center">
                                 @if($item->mode == 'auto')
                                     <span>{{{ trans('admin.automatic') }}}</span>
                                 @elseif($item->mode == 'user')
-                                    <span><a href="/admin/user/item/{{{ $item->exporter->id or 0 }}}" title="{{{ $item->exporter->name or '' }}}">{{{ $item->exporter->username or '' }}}</a></span>
+                                    <span><a href="/admin/user/item/{{{ $item->exporter->id ?? 0 }}}" title="{{{ $item->exporter->name ?? '' }}}">{{{ $item->exporter->username ?? '' }}}</a></span>
                                 @endif
                             </td>
-                            <td class="text-center"><a href="/admin/user/edit/{{{ $item->user->id or '' }}}" title="{{{ $item->user->name or '' }}}">{{{ $item->user->username or 'Fund' }}}</a></td>
-                            <td class="text-center">{{{ $item->description or '' }}}</td>
+                            <td class="text-center"><a href="/admin/user/edit/{{{ $item->user->id ?? '' }}}" title="{{{ $item->user->name ?? '' }}}">{{{ $item->user->username ?? 'Fund' }}}</a></td>
+                            <td class="text-center">{{{ $item->description ?? '' }}}</td>
                             <td class="text-center">
                                 <a href="/admin/balance/print/{{{ $item->id }}}" target="_blank" title="Print Document" ><i class="fa fa-print" aria-hidden="true"></i></a>
                             </td>

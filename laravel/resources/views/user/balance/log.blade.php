@@ -26,10 +26,10 @@
                     <tbody>
                             @foreach($lists as $item)
                                 <tr>
-                                    <td class="text-center">{{{ $item->id or 0 }}}</td>
-                                    <td class="cell-ta">{{{ $item->title or '' }}}</td>
-                                    <td class="cell-ta">{{{ $item->description or '' }}}</td>
-                                    <td class="text-center"><b @if($item->type =='add') class="green-s" @else class="red-s" @endif>{{{ $item->price or '' }}}</b></td>
+                                    <td class="text-center">{{{ $item->id ?? 0 }}}</td>
+                                    <td class="cell-ta">{{{ $item->title ?? '' }}}</td>
+                                    <td class="cell-ta">{{{ $item->description ?? '' }}}</td>
+                                    <td class="text-center"><b @if($item->type =='add') class="green-s" @else class="red-s" @endif>{{{ $item->price ?? '' }}}</b></td>
                                     <td class="text-center">
                                         @if($item->type =='add')
                                             <b class="green-s">{{{ trans('main.addiction') }}}</b>
@@ -41,7 +41,7 @@
                                         @if($item->mode == 'auto')
                                             <span>{{{ trans('main.automatic') }}}</span>
                                         @else
-                                            <span>{{{ $item->exporter->name or $item->exporter->username }}}</span>
+                                            <span>{{{ $item->exporter->name ?? $item->exporter->username }}}</span>
                                         @endif
                                     </td>
                                     <td class="text-center" width="150">{{{ date('d F Y | H:i',$item->create_at) }}}</td>

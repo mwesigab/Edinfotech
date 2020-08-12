@@ -17,7 +17,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <textarea class="summernote" name="request_term" >{!! $_setting['request_term'] or '' !!}</textarea>
+                                    <textarea class="summernote" name="request_term" >{!! $_setting['request_term'] ?? '' !!}</textarea>
                                 </div>
                             </div>
 
@@ -33,7 +33,7 @@
                         <form method="post" action="/admin/setting/store" class="form-horizontal form-bordered">
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <textarea class="summernote" name="content_terms" required>{{{ $_setting['content_terms'] or '' }}}</textarea>
+                                    <textarea class="summernote" name="content_terms" required>{{{ $_setting['content_terms'] ?? '' }}}</textarea>
                                 </div>
                             </div>
                             <div class="form-group">

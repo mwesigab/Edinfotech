@@ -10,8 +10,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="date" id="fsdate" class="text-center form-control" value="{{{ $_GET['fsdate'] or '' }}}"  name="fsdate" placeholder="Start Date">
-                            <input type="hidden" id="fdate" name="fdate" value="{{{ $_GET['fdate'] or '' }}}">
+                            <input type="date" id="fsdate" class="text-center form-control" value="{{{ $_GET['fsdate'] ?? '' }}}"  name="fsdate" placeholder="Start Date">
+                            <input type="hidden" id="fdate" name="fdate" value="{{{ $_GET['fdate'] ?? '' }}}">
                             <span class="input-group-append fdatebtn" id="fdatebtn">
                                 <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </span>
@@ -19,8 +19,8 @@
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="date" id="lsdate" class="text-center form-control" name="lsdate" value="{{{ $_GET['lsdate'] or '' }}}" placeholder="End Date">
-                            <input type="hidden" id="ldate" name="ldate" value="{{{ $_GET['ldate'] or '' }}}">
+                            <input type="date" id="lsdate" class="text-center form-control" name="lsdate" value="{{{ $_GET['lsdate'] ?? '' }}}" placeholder="End Date">
+                            <input type="hidden" id="ldate" name="ldate" value="{{{ $_GET['ldate'] ?? '' }}}">
                             <span class="input-group-append ldatebtn" id="ldatebtn">
                                 <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </span>
@@ -31,7 +31,7 @@
                             <select name="user" data-plugin-selectTwo class="form-control populate">
                                 <option value="">{{{ trans('admin.all_vendors') }}}</option>
                                 @foreach($users as $user)
-                                    <option value="{{{ $user->id or 0 }}}" @if(isset($_GET['user']) && $_GET['user']==$user->id) selected @endif>{{{ $user->name or $user->username }}}</option>
+                                    <option value="{{{ $user->id ?? 0 }}}" @if(isset($_GET['user']) && $_GET['user']==$user->id) selected @endif>{{{ $user->name ?? $user->username }}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -41,7 +41,7 @@
                             <select name="buyer" data-plugin-selectTwo class="form-control populate">
                                 <option value="">{{{ trans('admin.all_customers') }}}</option>
                                 @foreach($users as $user)
-                                    <option value="{{{ $user->id or 0 }}}" @if(isset($_GET['buyer']) && $_GET['buyer']==$user->id) selected @endif>{{{ $user->name or $user->username }}}</option>
+                                    <option value="{{{ $user->id ?? 0 }}}" @if(isset($_GET['buyer']) && $_GET['buyer']==$user->id) selected @endif>{{{ $user->name ?? $user->username }}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -52,7 +52,7 @@
                             <select name="content" data-plugin-selectTwo class="form-control populate">
                                 <option value="">{{{ trans('admin.all_courses') }}}</option>
                                 @foreach($contents as $content)
-                                    <option value="{{{ $content->id or 0 }}}" @if(isset($_GET['content']) && $_GET['content']==$content->id) selected @endif>{{{ $content->title or '' }}}</option>
+                                    <option value="{{{ $content->id ?? 0 }}}" @if(isset($_GET['content']) && $_GET['content']==$content->id) selected @endif>{{{ $content->title ?? '' }}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -98,16 +98,16 @@
                 <tbody>
                     @foreach($lists as $item)
                         <tr>
-                            <td><a href="/product/{{{ $item->content->id or 0 }}}">{{{ $item->content->title or '' }}}</a></td>
-                            <td class="text-center" title="{{{ $item->user->name or '' }}}"><a href="/profile/{{{ $item->user->id or 0 }}}">{{{ $item->user->username or '' }}}</a></td>
-                            <td class="text-center" title="{{{ $item->buyer->name or '' }}}"><a href="/profile/{{{ $item->buyer->id or 0 }}}">{{{ $item->buyer->username or '' }}}</a></td>
-                            <td class="text-center">{{{ $item->transaction->price or 0 }}} {{{ trans('admin.cur_dollar') }}}</td>
+                            <td><a href="/product/{{{ $item->content->id ?? 0 }}}">{{{ $item->content->title ?? '' }}}</a></td>
+                            <td class="text-center" title="{{{ $item->user->name ?? '' }}}"><a href="/profile/{{{ $item->user->id ?? 0 }}}">{{{ $item->user->username ?? '' }}}</a></td>
+                            <td class="text-center" title="{{{ $item->buyer->name ?? '' }}}"><a href="/profile/{{{ $item->buyer->id ?? 0 }}}">{{{ $item->buyer->username ?? '' }}}</a></td>
+                            <td class="text-center">{{{ $item->transaction->price ?? 0 }}} {{{ trans('admin.cur_dollar') }}}</td>
                             <td class="text-center">{{{ date('d F Y : H:i',$item->create_at) }}}</td>
                             <td class="text-center">
                                 @if($item->type == 'download')
                                     <b class="c-g">{{{ trans('admin.download') }}}</b>
                                 @else
-                                    <b class="c-b" title="Shipping Tracing Code {{{ $item->post_code or '' }}}">{{{ trans('admin.postal') }}}</b>
+                                    <b class="c-b" title="Shipping Tracing Code {{{ $item->post_code ?? '' }}}">{{{ trans('admin.postal') }}}</b>
                                 @endif
                             </td>
                             <td class="text-center">

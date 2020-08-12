@@ -10,8 +10,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="date" value="{!! $_GET['fsdate'] or '' !!}" id="fsdate" class="text-center form-control" name="fsdate" placeholder="Start Date">
-                            <input type="hidden" id="fdate" name="fdate" value="{!! $_GET['fdate'] or '' !!}">
+                            <input type="date" value="{!! $_GET['fsdate'] ?? '' !!}" id="fsdate" class="text-center form-control" name="fsdate" placeholder="Start Date">
+                            <input type="hidden" id="fdate" name="fdate" value="{!! $_GET['fdate'] ?? '' !!}">
                             <span class="input-group-append fdatebtn" id="fdatebtn">
                                 <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </span>
@@ -19,8 +19,8 @@
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="date" value="{!! $_GET['lsdate'] or '' !!}" id="lsdate" class="text-center form-control" name="lsdate" placeholder="End Date">
-                            <input type="hidden" id="ldate" name="ldate" value="{!! $_GET['ldate'] or '' !!}">
+                            <input type="date" value="{!! $_GET['lsdate'] ?? '' !!}" id="lsdate" class="text-center form-control" name="lsdate" placeholder="End Date">
+                            <input type="hidden" id="ldate" name="ldate" value="{!! $_GET['ldate'] ?? '' !!}">
                             <span class="input-group-append fdatebtn" id="fdatebtn">
                                 <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </span>
@@ -31,7 +31,7 @@
                             <select name="user" data-plugin-selectTwo class="form-control populate" >
                                 <option value="">{{{ trans('admin.all_users') }}}</option>
                                 @foreach($users as $user)
-                                    <option value="{{{ $user->id or 0 }}}" @if(isset($_GET['user']) && $_GET['user']==$user->id) selected @endif>{{{ $user->name or $user->username }}}</option>
+                                    <option value="{{{ $user->id ?? 0 }}}" @if(isset($_GET['user']) && $_GET['user']==$user->id) selected @endif>{{{ $user->name ?? $user->username }}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -41,7 +41,7 @@
                             <select name="cat" data-plugin-selectTwo class="form-control populate" >
                                 <option value="">{{{ trans('admin.all_categories') }}}</option>
                                 @foreach($category as $cat)
-                                    <option value="{{{ $cat->id or 0 }}}" @if(isset($_GET['cat']) && $_GET['cat']==$cat->id) selected @endif>{{{ $cat->title or '' }}}</option>
+                                    <option value="{{{ $cat->id ?? 0 }}}" @if(isset($_GET['cat']) && $_GET['cat']==$cat->id) selected @endif>{{{ $cat->title ?? '' }}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -49,12 +49,12 @@
                     <div class="col-xs-12 h-15" ></div>
                     <div class="col-md-1">
                         <div class="form-group">
-                            <input type="text" class="form-control text-center" name="id" value="{!! $_GET['id'] or '' !!}" placeholder="Item Code">
+                            <input type="text" class="form-control text-center" name="id" value="{!! $_GET['id'] ?? '' !!}" placeholder="Item Code">
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <input type="text" class="form-control text-center" name="title" value="{!! $_GET['title'] or '' !!}" placeholder="Course Title">
+                            <input type="text" class="form-control text-center" name="title" value="{!! $_GET['title'] ?? '' !!}" placeholder="Course Title">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -105,15 +105,15 @@
                     @foreach($lists as $item)
                         <?php $meta = arrayToList($item->metas,'option','value'); ?>
                         <tr>
-                            <td><a href="/product/{{{ $item->id or 0 }}}" target="_blank">{{{ $item->title  or ''}}}</a></td>
+                            <td><a href="/product/{{{ $item->id ?? 0 }}}" target="_blank">{{{ $item->title  ?? ''}}}</a></td>
                             <td class="text-center" width="150">{{{ date('d F Y / H:i',$item->create_at) }}}</td>
-                            <td class="text-center" title="{{{ $item->user->username or '' }}}"><a href="/admin/user/item/{{{ $item->user->id or '' }}}">{{{ $item->user->name or '' }}}</a></td>
-                            <td class="text-center">{{{ $item->sells_count or '0' }}}</td>
-                            <td class="text-center">{{{ $item->partsactive_count or '0' }}}</td>
+                            <td class="text-center" title="{{{ $item->user->username ?? '' }}}"><a href="/admin/user/item/{{{ $item->user->id ?? '' }}}">{{{ $item->user->name ?? '' }}}</a></td>
+                            <td class="text-center">{{{ $item->sells_count ?? '0' }}}</td>
+                            <td class="text-center">{{{ $item->partsactive_count ?? '0' }}}</td>
                             <td class="text-center">{{{ $item->transactions->sum('price') }}}<br>{{{ trans('admin.cur_dollar') }}}</td>
-                            <td class="text-center">{{{ $item->view or '0' }}}</td>
-                            <td class="text-center">{{{ $meta['price'] or 'Free' }}}</td>
-                            <td class="text-center">{{{ $item->category->title or '' }}}</td>
+                            <td class="text-center">{{{ $item->view ?? '0' }}}</td>
+                            <td class="text-center">{{{ $meta['price'] ?? 'Free' }}}</td>
+                            <td class="text-center">{{{ $item->category->title ?? '' }}}</td>
                             <td class="text-center">
                                 @if($item->private==1)
                                     <b class="c-g">{{{ trans('admin.exclusive') }}}</b>
@@ -132,8 +132,8 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="/admin/notification/new?recipent_type=userone&uid={{{ $item->user->id or 0 }}}" title="Send notification to user"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
-                                <a href="/admin/ticket/new?uid={{{ $item->user->id or 0 }}}&title=Course {{{ $item->title or '' }}}" title="Send support ticket to user"><i class="fa fa-life-ring" aria-hidden="true"></i></a>
+                                <a href="/admin/notification/new?recipent_type=userone&uid={{{ $item->user->id ?? 0 }}}" title="Send notification to user"><i class="fa fa-bell-o" aria-hidden="true"></i></a>
+                                <a href="/admin/ticket/new?uid={{{ $item->user->id ?? 0 }}}&title=Course {{{ $item->title ?? '' }}}" title="Send support ticket to user"><i class="fa fa-life-ring" aria-hidden="true"></i></a>
                                 <a href="/admin/content/edit/{{{ $item->id }}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 <a href="#" data-href="/admin/content/delete/{{{ $item->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </td>

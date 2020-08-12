@@ -1,14 +1,15 @@
 @extends('view.layout.layout')
 @section('title')
-    {{{ $setting['site']['site_title'] or '' }}}
-    - {{{ $product->title or '' }}}
+    {{{ $setting['site']['site_title'] ?? '' }}}
+    - {{{ $product->title ?? '' }}}
 @endsection
 @section('page')
+<?php $student = unserialize(session('Student')) ?>
     <div class="container-fluid">
         <div class="row product-header">
             <div class="container">
                 <div class="col-xs-12 col-md-8 tab-con">
-                    <h2>{{{ $product->title or '' }}}</h2>
+                    <h2>{{{ $product->title ?? '' }}}</h2>
                 </div>
                 <div class="col-xs-12 col-md-4 text-left">
                     <div class="raty-product-section">
@@ -34,7 +35,7 @@
                     <div class="col-md-2 col-xs-12 tab-con">
                         <div class="row">
                             <span class="off-btn">
-                                <label>%{{{ $product->discount->off or 0 }}}</label>
+                                <label>%{{{ $product->discount->off ?? 0 }}}</label>
                                 <label>{{{ trans('main.discount') }}}</label>
                             </span>
                         </div>
@@ -127,7 +128,7 @@
                     <div class="col-md-2 col-xs-12">
                         <div class="row">
                             <span class="off-btn">
-                                <label>%{{{ $product->category->discount->off or 0 }}}</label>
+                                <label>%{{{ $product->category->discount->off ?? 0 }}}</label>
                                 <label>{{{ trans('main.discount') }}}</label>
                             </span>
                         </div>
@@ -212,7 +213,7 @@
             <div class="container">
                 <div class="col-md-4 col-xs-12 course_details">
                     <div class="product-details-box">
-                        <span class="proicon mdi mdi-apps"></span><span class="pn-category">{{{ $product->category->title or '' }}}</span>
+                        <span class="proicon mdi mdi-apps"></span><span class="pn-category">{{{ $product->category->title ?? '' }}}</span>
                     </div>
                     @php $Duration = 0; @endphp
                     @foreach($parts as $part)
@@ -230,12 +231,13 @@
                             @foreach($parts as $part)
                                 @php $MB = $MB + $part['size']; @endphp
                             @endforeach
-                            {{{ $MB or '0' }}}
+                            {{{ $MB ?? '0' }}}
                             {{{ trans('main.mb') }}}
                         </span>
                     </div>
+                    @if(!$student)
                     <div class="product-details-box">
-						<span class="proicon mdi mdi-headset"></span>
+                        <span class="proicon mdi mdi-headset"></span>
                         <span>
                             @if($product->support == 1)
                                 {{{ 'Vendor supports this course' }}}
@@ -244,6 +246,7 @@
                             @endif
                         </span>
                     </div>
+                    @endif
                     <div class="product-price-box">
 						<span class="proicon mdi mdi-wallet"></span>
                         @if(isset($meta['price']) && $product->price != 0)
@@ -256,8 +259,8 @@
                     <div class="product-buy-selection">
                         <form>
                             @if(isset($user) && $product->user_id == $user['id'])
-                                <a class="btn btn-orange product-btn-buy sbox3" id="buy-btn" href="/user/content/edit/{{{ $product->id or 0 }}}">{{{ trans('main.edit_course') }}}</a>
-                                <a class="btn btn-blue product-btn-buy sbox3" id="buy-btn" href="/user/content/part/list/{{{ $product->id or 0 }}}">{{{ trans('main.add_video') }}}</a>
+                                <a class="btn btn-orange product-btn-buy sbox3" id="buy-btn" href="/user/content/edit/{{{ $product->id ?? 0 }}}">{{{ trans('main.edit_course') }}}</a>
+                                <a class="btn btn-blue product-btn-buy sbox3" id="buy-btn" href="/user/content/part/list/{{{ $product->id ?? 0 }}}">{{{ trans('main.add_video') }}}</a>
                             @else
                             @if(!$buy)
                                     @if($product->price != 0)
@@ -310,7 +313,7 @@
                                 <div class="radio">
                                     <input type="radio" class="buy-mode" id="mode-1" value="credit" name="buyMode">
                                     &nbsp;
-                                    <label class="radio-label" for="mode-1">{{{ trans('main.account_charge') }}}&nbsp;<b id="credit-remain-modal">({{{ currencySign() }}}{{{ $user['credit'] or 0 }}})</b></label>
+                                    <label class="radio-label" for="mode-1">{{{ trans('main.account_charge') }}}&nbsp;<b id="credit-remain-modal">({{{ currencySign() }}}{{{ $user['credit'] ?? 0 }}})</b></label>
                                 </div>
                                 @if(get_option('gateway_paypal') == 1)
                                     <div class="radio">
@@ -353,7 +356,7 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td class="text-center">{{{ $meta['price'] or 0 }}}</td>
+                                            <td class="text-center">{{{ $meta['price'] ?? 0 }}}</td>
                                             @if(isset($meta['price']) && $meta['price']>0 && price($product->id,$product->category->id,$meta['price'])>0)
                                                 <td class="text-center">{{{ round((($meta['price']-price($product->id,$product->category->id,$meta['price'])['price'])*100)/$meta['price']) }}}</td>
                                             @endif
@@ -375,7 +378,7 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td class="text-center">{{{ $meta['post_price'] or 0 }}}</td>
+                                            <td class="text-center">{{{ $meta['post_price'] ?? 0 }}}</td>
                                             @if(isset($meta['post_price']) && $meta['post_price']>0)
                                                 <td class="text-center">{{{ round((($meta['post_price']-price($product->id,$product->category->id,$meta['post_price'])['price'])*100)/$meta['post_price']) }}}</td>
                                                 <td class="text-center">۰</td>
@@ -404,17 +407,17 @@
                                             </div>
                                             <label class="control-label col-md-1 tab-con">{{{ trans('main.city') }}}</label>
                                             <div class="col-md-5 tab-con">
-                                                <input type="text" name="city" value="{{{ $userMeta['city'] or '' }}}" class="form-control">
+                                                <input type="text" name="city" value="{{{ $userMeta['city'] ?? '' }}}" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-1 tab-con">{{{ trans('main.address') }}}</label>
                                             <div class="col-md-5 tab-con">
-                                                <textarea name="address" rows="4" class="form-control">{{{ $userMeta['address'] or '' }}}</textarea>
+                                                <textarea name="address" rows="4" class="form-control">{{{ $userMeta['address'] ?? '' }}}</textarea>
                                             </div>
                                             <label class="control-label col-md-1 tab-con">{{{ trans('main.zip_code') }}}</label>
                                             <div class="col-md-5 tab-con">
-                                                <input type="text" name="postalcode" value="{{{ $userMeta['postalcode'] or '' }}}" class="form-control text-center">
+                                                <input type="text" name="postalcode" value="{{{ $userMeta['postalcode'] ?? '' }}}" class="form-control text-center">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -443,9 +446,9 @@
                                 @if(isset($user))
                                     <div id="modal-user-category">
                                         <span>{{{ trans('main.you_are_in') }}}</span>
-                                        <b>{{{ $user['category']['title'] or '' }}}</b>
+                                        <b>{{{ $user['category']['title'] ?? '' }}}</b>
                                         <span>{{{ trans('main.group_and') }}}</span>
-                                        <b>{{{ $user['category']['off'] or 0 }}}٪</b>
+                                        <b>{{{ $user['category']['off'] ?? 0 }}}٪</b>
                                         <span> {{{ trans('main.extra_discount') }}}</span>
                                     </div>
                                 @endif
@@ -454,10 +457,10 @@
                                 <div class="modal-body">
                                     <h6 style="font-weight:bold;">You Can Subscribe..... Select Items</h6>
                                     <div class="h-10"></div>
-                                    @if($product->price_3 > 0)<a href="/product/subscribe/{!! $product->id !!}/3/credit" p-id="{!! $product->id !!}" s-type="3" class="btn-subscribe btn btn-custom">3 month : {!! currencySign() !!}{!! $product->price_3 or '' !!}</a>@endif
-                                    @if($product->price_6 > 0)<a href="/product/subscribe/{!! $product->id !!}/6/credit" p-id="{!! $product->id !!}" s-type="6" class="btn-subscribe btn btn-custom">6 month : {!! currencySign() !!}{!! $product->price_6 or '' !!}</a>@endif
-                                    @if($product->price_9 > 0)<a href="/product/subscribe/{!! $product->id !!}/9/credit" p-id="{!! $product->id !!}" s-type="9" class="btn-subscribe btn btn-custom">9 month : {!! currencySign() !!}{!! $product->price_9 or '' !!}</a>@endif
-                                    @if($product->price_12 > 0)<a href="/product/subscribe/{!! $product->id !!}/12/credit" p-id="{!! $product->id !!}" s-type="12" class="btn-subscribe btn btn-custom">12 month : {!! currencySign() !!}{!! $product->price_12 or '' !!}</a>@endif
+                                    @if($product->price_3 > 0)<a href="/product/subscribe/{!! $product->id !!}/3/credit" p-id="{!! $product->id !!}" s-type="3" class="btn-subscribe btn btn-custom">3 month : {!! currencySign() !!}{!! $product->price_3 ?? '' !!}</a>@endif
+                                    @if($product->price_6 > 0)<a href="/product/subscribe/{!! $product->id !!}/6/credit" p-id="{!! $product->id !!}" s-type="6" class="btn-subscribe btn btn-custom">6 month : {!! currencySign() !!}{!! $product->price_6 ?? '' !!}</a>@endif
+                                    @if($product->price_9 > 0)<a href="/product/subscribe/{!! $product->id !!}/9/credit" p-id="{!! $product->id !!}" s-type="9" class="btn-subscribe btn btn-custom">9 month : {!! currencySign() !!}{!! $product->price_9 ?? '' !!}</a>@endif
+                                    @if($product->price_12 > 0)<a href="/product/subscribe/{!! $product->id !!}/12/credit" p-id="{!! $product->id !!}" s-type="12" class="btn-subscribe btn btn-custom">12 month : {!! currencySign() !!}{!! $product->price_12 ?? '' !!}</a>@endif
                                 </div>
                             @endif
                             <div class="modal-footer">
@@ -472,7 +475,7 @@
                 </div>
                 <div class="col-md-8 col-xs-12 video-details">
                     <video id="myDiv" controls>
-                        <source src="{{{ $partVideo or $meta['video'] }}}" type="video/mp4"/>
+                        <source src="{{{ $partVideo ?? $meta['video'] }}}" type="video/mp4"/>
                     </video>
                     <div class="video-details-section">
                         @if(count($product->favorite)>0)
@@ -489,10 +492,10 @@
                             </a>
                             <a href="javascript:void(0);" class="course-id-s" title="Course Id.">
                                 <span class="playericon mdi mdi-library-video"></span>
-                                vt-{{{ $product->id or 0 }}}
+                                vt-{{{ $product->id ?? 0 }}}
                             </a>
                             <a class="pull-left views-s" title="Views" href="javascript:void(0)">
-                                <span >{{{ $product->view or '0' }}}</span>
+                                <span >{{{ $product->view ?? '0' }}}</span>
                                 <span class="playericon mdi mdi-eye"></span>
                             </a>
                     </div>
@@ -508,21 +511,21 @@
 					<div class="col-md-12">
                     <div class="product-user-box">
                         <?php $userM = arrayToList($product->user->usermetas,'option','value'); ?>
-                        <img class="img-box" src="{{{ $userM['avatar'] or get_option('default_user_avatar','') }}}" class="img-responsive"/>
+                        <img class="img-box" src="{{{ $userM['avatar'] ?? get_option('default_user_avatar','') }}}" class="img-responsive"/>
                         	<h3>
-							<a href="/profile/{{{ $product->user->id or '' }}}"><span>{{{ $product->user->name or '' }}}</span></a>
+							<a href="/profile/{{{ $product->user->id ?? '' }}}"><span>{{{ $product->user->name ?? '' }}}</span></a>
 							</h3>
                         <div class="user-description-box">
-                            {{{ $userM['short_biography'] or '' }}}
+                            {{{ $userM['short_biography'] ?? '' }}}
                         </div>
                         <div class="text-center">
                             @foreach(getRateById($product->user->id) as $rate)
-                                <img class="img-icon img-icon-s" src="{{{ $rate['image'] or '' }}}" title="{{{ $rate['description'] or '' }}} ({{{ $rate['title'] or '' }}})"/>
+                                <img class="img-icon img-icon-s" src="{{{ $rate['image'] ?? '' }}}" title="{{{ $rate['description'] ?? '' }}} ({{{ $rate['title'] ?? '' }}})"/>
                             @endforeach
                         </div>
                     </div>
                     <div class="product-user-box-footer">
-                        <a href="/profile/{{{ $product->user->id or '' }}}">{{{ trans('main.vendor_profile') }}}</a>
+                        <a href="/profile/{{{ $product->user->id ?? '' }}}">{{{ $student ? 'Head Of Department' : trans('main.vendor_profile') }}}</a>
                     </div>
 					</div>
                     <div class="h-25"></div>
@@ -530,7 +533,7 @@
                         @if(isset($ads))
                             @foreach($ads as $ad)
                                 @if($ad->position == 'product-page')
-                                    <a href="{{{ $ad->url or '#' }}}"><img src="{{{ $ad->image or '' }}}" class="{{{ $ad->size or '' }}}" id="ppage-s"></a>
+                                    <a href="{{{ $ad->url ?? '#' }}}"><img src="{{{ $ad->image ?? '' }}}" class="{{{ $ad->size ?? '' }}}" id="ppage-s"></a>
                                 @endif
                             @endforeach
                         @endif
@@ -551,7 +554,7 @@
                                     @foreach($parts as $part)
                                         <li>
                                             <div class="part-links">
-                                                <a href="/product/part/{{{ $product->id or 0 }}}/{{{ $part['id'] }}}">
+                                                <a href="/product/part/{{{ $product->id ?? 0 }}}/{{{ $part['id'] }}}">
                                                     <div class="col-md-1 hidden-xs tab-con">
                                                         @if($buy || $part['free'] == 1)
                                                             <span class="playicon mdi mdi-play-circle"></span>
@@ -560,12 +563,12 @@
                                                         @endif
                                                     </div>
                                                     <div class="@if($product->download == 1) col-md-4 @else col-md-5 @endif col-xs-10 tab-con">
-                                                        <label>{{{ $part['title'] or '' }}}</label>
+                                                        <label>{{{ $part['title'] ?? '' }}}</label>
                                                     </div>
                                                 </a>
                                         <div class="col-md-2 tab-con">
-                                            <span class="btn btn-gray btn-description hidden-xs" data-toggle="modal" href="#description-{{{ $part['id'] or 0 }}}">{{{ trans('main.description') }}}</span>
-                                            <div class="modal fade" id="description-{{{ $part['id'] or 0 }}}">
+                                            <span class="btn btn-gray btn-description hidden-xs" data-toggle="modal" href="#description-{{{ $part['id'] ?? 0 }}}">{{{ trans('main.description') }}}</span>
+                                            <div class="modal fade" id="description-{{{ $part['id'] ?? 0 }}}">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -576,7 +579,7 @@
                                                             <h4 class="modal-title">{{{ trans('main.description') }}}</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            {!! $part['description'] or '' !!}
+                                                            {!! $part['description'] ?? '' !!}
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-custom pull-left" data-dismiss="modal">{{{ trans('main.close') }}}</button>
@@ -586,14 +589,14 @@
                                             </div><!-- /.modal -->
                                         </div>
                                         <div class="col-md-2 text-center hidden-xs tab-con">
-                                            <span>{{{ $part['size'] or '0' }}} {{{ trans('main.mb') }}}</span>
+                                            <span>{{{ $part['size'] ?? '0' }}} {{{ trans('main.mb') }}}</span>
                                         </div>
                                         <div class="col-md-2 hidden-xs tab-con">
-                                            <span>{{{ $part['duration'] or 0 }}} {{{ trans('main.minute') }}}</span>
+                                            <span>{{{ $part['duration'] ?? 0 }}} {{{ trans('main.minute') }}}</span>
                                         </div>
                                         @if($product->download == 1)
                                             <div class="col-md-1 col-xs-2 tab-con">
-                                                <span class="download-part" data-href="/video/download/{{{ $part['id'] or '0' }}}"><span class="mdi mdi-arrow-down-bold"></span></span>
+                                                <span class="download-part" data-href="/video/download/{{{ $part['id'] ?? '0' }}}"><span class="mdi mdi-arrow-down-bold"></span></span>
                                             </div>
                                         @endif
                                         </div>
@@ -608,21 +611,21 @@
                                                 <label>{{{ trans('main.documents') }}}</label>
                                             </div>
                                             <div class="col-md-1 text-center">
-                                                <span class="download-part" data-href="{{{ $meta['document'] or '' }}}"><span class="mdi mdi-arrow-down-bold"></span></span>
+                                                <span class="download-part" data-href="{{{ $meta['document'] ?? '' }}}"><span class="mdi mdi-arrow-down-bold"></span></span>
                                             </div>
                                         </li>
                                     @endif
                                 </ul>
                             </div>
                             <div class="tab-pane fade" id="tab2">
-                                <span>{!! $product->content or '' !!}</span>
+                                <span>{!! $product->content ?? '' !!}</span>
                             </div>
                             <div class="tab-pane fade in tab-body" id="tab3">
                                 @foreach($precourse as $pc)
                                     <?php $pmeta = arrayToList($pc->metas,'option','value'); ?>
                                     <div class="col-md-4 col-xs-12 tab-con">
-                                        <a href="/product/{{{ $pc->id or '' }}}" title="{{{ $pc->title or '' }}}" class="content-box content-box-r">
-											<img src="{{{ $pmeta['thumbnail'] or '' }}}"/>
+                                        <a href="/product/{{{ $pc->id ?? '' }}}" title="{{{ $pc->title ?? '' }}}" class="content-box content-box-r">
+											<img src="{{{ $pmeta['thumbnail'] ?? '' }}}"/>
                                             <h3>{!! str_limit($pc->title,25,'...') !!}</h3>
                                             <div class="footer">
 												<span class="boxicon mdi mdi-wallet pull-left"></span>
@@ -646,8 +649,8 @@
                                 @foreach($related as $rel)
                                     <?php $rmeta = arrayToList($rel->metas,'option','value'); ?>
                                     <div class="col-md-4 col-xs-12 tab-con">
-                                        <a href="/product/{{{ $rel->id or '' }}}" title="{{{ $rel->title or '' }}}" class="content-box content-box-r">
-                                            <img src="{{{ $rmeta['thumbnail'] or '' }}}"/>
+                                        <a href="/product/{{{ $rel->id ?? '' }}}" title="{{{ $rel->title ?? '' }}}" class="content-box content-box-r">
+                                            <img src="{{{ $rmeta['thumbnail'] ?? '' }}}"/>
 											<h3>{!! str_limit($rel->title,25,'...') !!}</h3>
                                             <div class="footer">
 												<span class="boxicon mdi mdi-wallet pull-left"></span>
@@ -662,8 +665,8 @@
                                     @if($puc->id != $product->id)
                                     <?php $umeta = arrayToList($puc->metas,'option','value'); ?>
                                     <div class="col-md-4 col-xs-12 tab-con">
-                                        <a href="/product/{{{ $puc->id or '' }}}" title="{{{ $puc->title or '' }}}" class="content-box content-box-r">
-                                            <img src="{{{ $umeta['thumbnail'] or '' }}}"/>
+                                        <a href="/product/{{{ $puc->id ?? '' }}}" title="{{{ $puc->title ?? '' }}}" class="content-box content-box-r">
+                                            <img src="{{{ $umeta['thumbnail'] ?? '' }}}"/>
 											<h3>{!! str_limit($puc->title,25,'...') !!}</h3>
                                             <div class="footer">
 												<span class="boxicon mdi mdi-wallet pull-left"></span>
@@ -679,10 +682,10 @@
                     <div class="h-20" id="blog-comment-scroll"></div>
                     <div class="user-tabs">
                         <ul class="nav nav-tabs back-green" role="tablist">
-                            <li class="active"><a href="#ctab1" role="tab" data-toggle="tab">{{{ trans('main.comments') }}}&nbsp;({{{ $product->comments_count or 0 }}})</a></li>
+                            <li class="active"><a href="#ctab1" role="tab" data-toggle="tab">{{{ trans('main.comments') }}}&nbsp;({{{ $product->comments_count ?? 0 }}})</a></li>
                             @if($product->support == 1)
                             @if($product->supports->sum('rate')!=null && $product->supports->sum('rate')>0 && $product->supports!=null && count($product->supports)>0)
-                                <li><a href="#ctab2" role="tab" data-toggle="tab">Support &nbsp;(Rating: {{{ $product->support_rate or 0 }}})</a></li>
+                                <li><a href="#ctab2" role="tab" data-toggle="tab">Support &nbsp;(Rating: {{{ $product->support_rate ?? 0 }}})</a></li>
                             @else
                                 <li><a href="#ctab2" role="tab" data-toggle="tab">{{{ trans('main.support') }}}</a></li>
                             @endif
@@ -691,8 +694,8 @@
                         <!-- TAB CONTENT -->
                         <div class="tab-content">
                             <div class="active tab-pane fade in blog-comment-section body-target-s" id="ctab1">
-                                @if(isset($user))
-                                    <form method="post" action="/product/comment/store/{{{ $product->id or 0 }}}">
+                                @if(isset($user) || isset($student))
+                                    <form method="post" action="/product/comment/store/{{{ $product->id ?? 0 }}}">
 
                                     <input type="hidden" name="content_id" value="{{{ $product->id }}}"/>
                                     <input type="hidden" name="parent" value="0" />
@@ -716,21 +719,21 @@
                                         @if($comment->parent == 0)
                                             <?php $usermeta = arrayToList($comment->user->usermetas,'option','value'); ?>
                                             <li class="user-metas">
-                                                <img src="{{{ $usermeta['avatar'] or '/assets/images/user.png' }}}" alt=""/>
-                                                <a href="/profile/{{{ $comment->user_id or '' }}}">{{{ $comment->name or '' }}} @if($comment->user->buys_count>0) <b class="green-s">({{{ trans('main.student') }}})</b> @elseif($comment->user->contents_count>0) <b class="blue-s">({{{ trans('main.vendor') }}})</b> @else  <b class="gray-s">({{{ trans('main.user') }}})</b> @endif</a>
+                                                <img src="{{{ $usermeta['avatar'] ?? '/assets/images/user.png' }}}" alt=""/>
+                                                <a href="/profile/{{{ $comment->user_id ?? '' }}}">{{{ $comment->name ?? '' }}} @if($comment->user->buys_count>0) <b class="green-s">({{{ trans('main.student') }}})</b> @elseif($comment->user->contents_count>0) <b class="blue-s">({{{ trans('main.vendor') }}})</b> @else  <b class="gray-s">({{{ trans('main.user') }}})</b> @endif</a>
                                                 <label class="pull-left">{{{ date('d F Y | H:i',$comment->create_at) }}}</label>
-                                                <span>{!! $comment->comment or '' !!}</span>
-                                                @if($buy || (isset($user) && $product->user_id == $user['id']))<span><a href="javascript:void(0);" answer-id="{{{ $comment->id }}}" answer-title="{{{ $comment->name or '' }}}" class="pull-left answer-btn">{{{ trans('main.reply') }}}</a> </span>@endif
+                                                <span>{!! $comment->comment ?? '' !!}</span>
+                                                @if($buy || (isset($user) && $product->user_id == $user['id']))<span><a href="javascript:void(0);" answer-id="{{{ $comment->id }}}" answer-title="{{{ $comment->name ?? '' }}}" class="pull-left answer-btn">{{{ trans('main.reply') }}}</a> </span>@endif
                                             </li>
                                                 @if(count($comment->childs)>0)
                                                     <ul class="col-md-11 col-md-offset-1 answer-comment">
                                                         @foreach($comment->childs as $child)
                                                             <?php $cusermeta = arrayToList($child->user->usermetas,'option','value'); ?>
                                                             <li>
-                                                                <img src="{{{ $cusermeta['avatar'] or '/assets/images/user.png' }}}" alt=""/>
-                                                                <a href="/profile/{{{ $child->user_id or '' }}}">{{{ $child->name or '' }}} @if($child->user->buys_count>0) <b class="green-s">({{{ trans('main.customer') }}})</b> @elseif($child->user->contents_count>0) <b class="blue-s">({{{ trans('main.vendor') }}})</b> @else <b class="gray-s">({{{ trans('main.user') }}})</b> @endif</a>
+                                                                <img src="{{{ $cusermeta['avatar'] ?? '/assets/images/user.png' }}}" alt=""/>
+                                                                <a href="/profile/{{{ $child->user_id ?? '' }}}">{{{ $child->name ?? '' }}} @if($child->user->buys_count>0) <b class="green-s">({{{ trans('main.customer') }}})</b> @elseif($child->user->contents_count>0) <b class="blue-s">({{{ trans('main.vendor') }}})</b> @else <b class="gray-s">({{{ trans('main.user') }}})</b> @endif</a>
                                                                 <label class="pull-left">{{{ date('d F Y | H:i',$child->create_at) }}}</label>
-                                                                <span>{!! $child->comment or '' !!}</span>
+                                                                <span>{!! $child->comment ?? '' !!}</span>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -758,7 +761,7 @@
                                     @elseif(isset($user) && $product->user_id == $user['id'])
                                         <div class="col-xs-12 text-center support-lock">
                                             <span>{{{ trans('main.support_address') }}}</span>
-                                            <a href="/user/ticket/support?openid={{{ $product->id or 0 }}}">{{{ trans('main.panel_support') }}}</a>
+                                            <a href="/user/ticket/support?openid={{{ $product->id ?? 0 }}}">{{{ trans('main.panel_support') }}}</a>
                                             <span>{{{ trans('main.support_students') }}}</span>
                                             <br>
                                             <span class="mdi mdi-lock"></span
@@ -776,24 +779,24 @@
                                             @if($support->supporter_id != $support->user_id)
                                                 <?php $senderMeta = arrayToList($support->sender->usermetas,'option','value'); ?>
                                                 <li class="user-metas">
-                                                    <img src="{{{ $senderMeta['avatar'] or '/assets/images/user.png' }}}" alt=""/>
-                                                    <a href="/profile/{{{ $support->user_id or '' }}}">{{{ $support->name or '' }}}</a>
+                                                    <img src="{{{ $senderMeta['avatar'] ?? '/assets/images/user.png' }}}" alt=""/>
+                                                    <a href="/profile/{{{ $support->user_id ?? '' }}}">{{{ $support->name ?? '' }}}</a>
                                                     <label class="pull-left">
                                                         {{{ date('d F Y | H:i',$support->create_at) }}}
                                                     </label>
-                                                    <span>{!! $support->comment or '' !!}</span>
+                                                    <span>{!! $support->comment ?? '' !!}</span>
                                                 </li>
                                             @else
                                                 <?php $senderMeta = arrayToList($support->supporter->usermetas,'option','value'); ?>
                                                 <li class="user-metas">
-                                                    <img src="{{{ $senderMeta['avatar'] or '/assets/images/user.png' }}}" alt=""/>
-                                                    <a href="/profile/{{{ $support->user_id or '' }}}">{{{ $support->name or '' }}}</a>
+                                                    <img src="{{{ $senderMeta['avatar'] ?? '/assets/images/user.png' }}}" alt=""/>
+                                                    <a href="/profile/{{{ $support->user_id ?? '' }}}">{{{ $support->name ?? '' }}}</a>
                                                     <label class="pull-left text-center">
                                                         {{{ date('d F Y | H:i',$support->create_at) }}}
                                                         <br>
-                                                        <div class="userraty urating" data-score="{{{ $support->rate or 0 }}}" data-id="{{{ $support->id or 0 }}}"></div>
+                                                        <div class="userraty urating" data-score="{{{ $support->rate ?? 0 }}}" data-id="{{{ $support->id ?? 0 }}}"></div>
                                                     </label>
-                                                    <span>{!! $support->comment or '' !!}</span>
+                                                    <span>{!! $support->comment ?? '' !!}</span>
                                                 </li>
                                             @endif
                                         @endif
@@ -819,7 +822,7 @@
         $(function () {
             fluidPlayer("myDiv",{
                 layoutControls: {
-                    posterImage: '{!! $meta['cover'] or '' !!}',
+                    posterImage: '{!! $meta['cover'] ?? '' !!}',
                     logo: {
                         imageUrl: '{!! get_option('video_watermark','') !!}', // Default null
                         position: 'top right', // Default 'top left'

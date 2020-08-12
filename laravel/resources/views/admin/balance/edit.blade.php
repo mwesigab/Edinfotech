@@ -15,12 +15,12 @@
         </header>
         <div class="card-body">
 
-            <form action="/admin/balance/edit/store/{{{ $item->id or 0 }}}" class="form-horizontal form-bordered" method="post">
+            <form action="/admin/balance/edit/store/{{{ $item->id ?? 0 }}}" class="form-horizontal form-bordered" method="post">
 
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                     <div class="col-md-8">
-                        <input type="text" name="title" value="{{{ $item->title or '' }}}" class="form-control" required>
+                        <input type="text" name="title" value="{{{ $item->title ?? '' }}}" class="form-control" required>
                     </div>
                 </div>
 
@@ -28,7 +28,7 @@
                     <label class="col-md-3 control-label">{{{ trans('admin.amount') }}}</label>
                     <div class="col-md-8">
                         <div class="input-group">
-                            <input type="text" name="price" value="{{{ $item->price or 0 }}}" class="form-control text-center numtostr">
+                            <input type="text" name="price" value="{{{ $item->price ?? 0 }}}" class="form-control text-center numtostr">
                             <span class="input-group-addon click-for-upload cursor-pointer">{!! num2str($item->price) !!} {{{ trans('admin.cur_dollar') }}}</span>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         <select name="user_id" data-plugin-selectTwo class="form-control populate">
                             <option value="">{{{ trans('main.no_user') }}}</option>
                             @foreach($users as $user)
-                                <option value="{{{ $user->id or 0 }}}" @if($item->user_id==$user->id) selected @endif>{{{ $user->name or $user->username }}}</option>
+                                <option value="{{{ $user->id ?? 0 }}}" @if($item->user_id==$user->id) selected @endif>{{{ $user->name ?? $user->username }}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -73,7 +73,7 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="inputDefault">{{{ trans('main.description') }}}</label>
                     <div class="col-md-8">
-                        <textarea class="form-control" name="description" rows="6">{{{ $item->description or '' }}}</textarea>
+                        <textarea class="form-control" name="description" rows="6">{{{ $item->description ?? '' }}}</textarea>
                     </div>
                 </div>
 

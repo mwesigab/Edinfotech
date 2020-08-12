@@ -26,8 +26,9 @@ use Unicodeveloper\Paystack\Facades\Paystack;
 class SellController extends Controller
 {
 
-    public function __construct()
+    public function __construct(Request $request)
     {
+        $this->request = $request;
         $paypal_conf = \Config::get('paypal');
         $this->_api_context = new ApiContext(new OAuthTokenCredential(
                 $paypal_conf['client_id'],
@@ -40,8 +41,8 @@ class SellController extends Controller
         global $user;
         $sellList = Sell::with(['buyer','content.metas','transaction','rate'])->where('user_id',$user['id'])->orderBy('id','DESC');
         $count = $sellList->count();
-        if(Input::get('p')!=null)
-            $sellList->skip(Input::get('p')*20);
+        if($this->request->get('p')!=null)
+            $sellList->skip($this->request->get('p')*20);
         $sellList->take(20);
 
         ## Update Notifications
@@ -55,8 +56,8 @@ class SellController extends Controller
             $q->where('post_code',null)->orwhere('post_code','')->orWhere('post_confirm','')->orWhere('post_confirm',null);
         })->get();
         $count = $sellList->count();
-        if(Input::get('p')!=null)
-            $sellList->skip(Input::get('p')*20);
+        if($this->request->get('p')!=null)
+            $sellList->skip($this->request->get('p')*20);
         $sellList->take(20);
 
         return view('user.sell.post',['lists'=>$sellList,'count'=>$count]);
@@ -65,8 +66,8 @@ class SellController extends Controller
         global $user;
         $logs = Balance::with(['user','exporter'])->where('user_id',$user['id'])->orderBy('id','DESC');
         $count = $logs->count();
-        if(Input::get('p')!=null)
-            $logs->skip(Input::get('p')*20);
+        if($this->request->get('p')!=null)
+            $logs->skip($this->request->get('p')*20);
         $logs->take(20);
         return view('user.balance.log',['lists'=>$logs->get(),'count'=>$count]);
     }
@@ -216,8 +217,8 @@ class SellController extends Controller
     public function report(Request $request){
         global $user;
         $sells = Sell::with(['transaction'])->where('user_id',$user['id'])->where('mode','pay')->orderBy('create_at','DESC');
-        if(Input::get('first_date') != null) {
-            $first_date = strtotime(Input::get('first_date'));
+        if($this->request->get('first_date') != null) {
+            $first_date = strtotime($this->request->get('first_date'));
             $sells->where('create_at','>',$first_date);
         }
         else {
@@ -228,8 +229,8 @@ class SellController extends Controller
                 $first_date = time();
         }
 
-        if(Input::get('last_date') != null) {
-            $last_date = strtotime(Input::get('last_date'));
+        if($this->request->get('last_date') != null) {
+            $last_date = strtotime($this->request->get('last_date'));
             $sells->where('create_at','<',$last_date);
         }else{
             $last_date = time();

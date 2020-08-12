@@ -1,6 +1,6 @@
 @extends('admin.newlayout.layout',['breadcom'=>['Users','Channel',$edit->title]])
 @section('title')
-       {{{ $edit->title or '' }}}
+       {{{ $edit->title ?? '' }}}
 @endsection
 @section('page')
 
@@ -11,14 +11,14 @@
                 <div class="form-group">
                     <label class="col-md-1 control-label" for="inputDefault">{{{ trans('admin.channel_title') }}}</label>
                     <div class="col-md-11">
-                        <input type="text" name="title" value="{{{ $edit->title or '' }}}" class="form-control" id="inputDefault">
+                        <input type="text" name="title" value="{{{ $edit->title ?? '' }}}" class="form-control" id="inputDefault">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-1 control-label" for="inputDefault">{{{ trans('admin.channel_id') }}}</label>
                     <div class="col-md-11">
-                        <input type="text" name="username" value="{{{ $edit->username or '' }}}" class="form-control" id="inputDefault" disabled>
+                        <input type="text" name="username" value="{{{ $edit->username ?? '' }}}" class="form-control" id="inputDefault" disabled>
                     </div>
                 </div>
 
@@ -29,7 +29,7 @@
                             <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image" >
                                 <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                             </span>
-                            <input type="text" name="image" dir="ltr" value="{{{$edit->image or ''}}}" class="form-control">
+                            <input type="text" name="image" dir="ltr" value="{{{$edit->image ?? ''}}}" class="form-control">
                             <span class="input-group-append click-for-upload cu-p">
                                 <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                             </span>
@@ -44,7 +44,7 @@
                             <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="avatar">
                                 <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                             </span>
-                            <input type="text" name="avatar" dir="ltr" value="{{{$edit->avatar or ''}}}" class="form-control">
+                            <input type="text" name="avatar" dir="ltr" value="{{{$edit->avatar ?? ''}}}" class="form-control">
                             <span class="input-group-append click-for-upload cu-p">
                                 <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                             </span>
@@ -56,11 +56,11 @@
                     <label class="col-md-1 control-label">{{{ trans('admin.documents') }}}</label>
                     <div class="col-md-11">
                         <div class="input-group">
-                            <span class="input-group-prepend cu-p"><a href="{{{$edit->attach or ''}}}" target="_blank">
+                            <span class="input-group-prepend cu-p"><a href="{{{$edit->attach ?? ''}}}" target="_blank">
                                     <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 </a>
                             </span>
-                            <input type="text" name="attach" dir="ltr" value="{{{$edit->attach or ''}}}" class="form-control">
+                            <input type="text" name="attach" dir="ltr" value="{{{$edit->attach ?? ''}}}" class="form-control">
                             <span class="input-group-append click-for-upload cu-p">
                                 <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                             </span>
@@ -70,7 +70,7 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea class="summernote" name="description" required>{{{ $edit->description or '' }}}</textarea>
+                        <textarea class="summernote" name="description" required>{{{ $edit->description ?? '' }}}</textarea>
                     </div>
                 </div>
 

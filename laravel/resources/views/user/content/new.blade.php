@@ -65,13 +65,13 @@
                                         <option value="0">{{{ trans('main.select_category') }}}</option>
                                         @foreach($menus as $menu)
                                             @if($menu->parent_id == 0)
-                                                <optgroup label="{{{ $menu->title or '' }}}">
+                                                <optgroup label="{{{ $menu->title ?? '' }}}">
                                                     @if(count($menu->childs)>0)
                                                     @foreach($menu->childs as $sub)
-                                                        <option value="{{{ $sub->id or '' }}}" >{{{ $sub->title or '' }}}</option>
+                                                        <option value="{{{ $sub->id ?? '' }}}" >{{{ $sub->title ?? '' }}}</option>
                                                     @endforeach
                                                     @else
-                                                        <option value="{{{ $menu->id or '' }}}" >{{{ $menu->title or '' }}}</option>
+                                                        <option value="{{{ $menu->id ?? '' }}}" >{{{ $menu->title ?? '' }}}</option>
                                                     @endif
                                                 </optgroup>
                                             @endif
@@ -81,15 +81,15 @@
                             </div>
                             <div class="h-15"></div>
                             @foreach($menus as $menu)
-                                <div class="col-md-11 col-md-offset-1 filters" id="filter{{{ $menu->id or 0 }}}">
+                                <div class="col-md-11 col-md-offset-1 filters" id="filter{{{ $menu->id ?? 0 }}}">
                                     @foreach($menu->filters as $filter)
                                         <div class="col-md-3 col-xs-12">
-                                            <h5>{{{ $filter->filter or '' }}}</h5>
+                                            <h5>{{{ $filter->filter ?? '' }}}</h5>
                                             <hr>
                                             <ul class="cat-filters-li pamaz">
                                                 <ul class="submenu submenu-s">
                                                     @foreach($filter->tags as $tag)
-                                                        <li class="second-input"><input type="checkbox" class="filter-tags dblock" id="tag{{{ $tag->id or '' }}}" name="tags[]" value="{{{ $tag->id or 0 }}}"><label for="tag{{{ $tag->id or '' }}}"><span></span>{{{ $tag->tag or '' }}}</label></li>
+                                                        <li class="second-input"><input type="checkbox" class="filter-tags dblock" id="tag{{{ $tag->id ?? '' }}}" name="tags[]" value="{{{ $tag->id ?? 0 }}}"><label for="tag{{{ $tag->id ?? '' }}}"><span></span>{{{ $tag->tag ?? '' }}}</label></li>
                                                     @endforeach
                                                 </ul>
                                             </ul>
@@ -143,7 +143,7 @@
                                 <label class="control-label col-md-2">{{{ trans('main.price') }}}</label>
                                 <div class="col-md-10">
                                     <div class="input-group">
-                                        <input type="text" name="price" onkeypress="validate(event)" value="{{{$meta['price'] or ''}}}" class="form-control text-center numtostr" disabled>
+                                        <input type="text" name="price" onkeypress="validate(event)" value="{{{$meta['price'] ?? ''}}}" class="form-control text-center numtostr" disabled>
                                         <span class="input-group-addon click-for-upload img-icon-s">@if(!empty($meta['price'])) {{{ currencySign() }}}{{{ num2str($meta['price']) }}} @endif</span>
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
                                 <label class="control-label col-md-2">{{{ trans('main.postal_price') }}}</label>
                                 <div class="col-md-10">
                                     <div class="input-group">
-                                        <input type="text" name="post_price" onkeypress="validate(event)" value="{{{$meta['post_price'] or ''}}}" class="form-control text-center numtostr" disabled>
+                                        <input type="text" name="post_price" onkeypress="validate(event)" value="{{{$meta['post_price'] ?? ''}}}" class="form-control text-center numtostr" disabled>
                                         <span class="input-group-addon click-for-upload img-icon-s">@if(!empty($meta['post_price'])) {{{ currencySign() }}}{{{ num2str($meta['post_price']) }}} @endif</span>
                                     </div>
                                 </div>

@@ -1,6 +1,6 @@
 @extends('user.layout.layout')
 @section('title')
-    {{{ $setting['site']['site_title'] or '' }}} -
+    {{{ $setting['site']['site_title'] ?? '' }}} -
 {{{ trans('main.user_panel') }}}
 @endsection
 @section('pages')
@@ -33,7 +33,7 @@
 						<span class="noticon mdi mdi-comment-multiple-outline"></span>
 						</div>
                         <p>{{{ trans('main.new_support_ticket') }}}</p>
-                        <div class="alert-box alert-box2">{{{ $alert['ticket'] or 0 }}}</div>
+                        <div class="alert-box alert-box2">{{{ $alert['ticket'] ?? 0 }}}</div>
                     </div>
                 </a>
                 <a href="/user/ticket/comments" class="col-md-3 col-xs-6">
@@ -42,7 +42,7 @@
 						<span class="noticon mdi mdi-comment-processing-outline"></span>
 						</div>
                         <p>{{{ trans('main.new_comment') }}}</p>
-                        <div class="alert-box alert-box3">{{{ $alert['comment'] or 0 }}}</div>
+                        <div class="alert-box alert-box3">{{{ $alert['comment'] ?? 0 }}}</div>
                     </div>
                 </a>
             </div>
@@ -56,9 +56,9 @@
                 <div class="ucp-section-box sbox3 ucp-avatar-box">
                     <div class="body paz">
                         <form method="post" action="/user/profile/avatar">
-                            <img src="{{{ $meta['avatar'] or get_option('default_user_avatar','') }}}" class="img-responsive sbox3" id="avatar-luncher" >
+                            <img src="{{{ $meta['avatar'] ?? get_option('default_user_avatar','') }}}" class="img-responsive sbox3" id="avatar-luncher" >
                             <br>
-                            <input type="hidden" name="avatar" value="{{{ $meta['avatar'] or '' }}}" onclick="openKCFinder($(this));">
+                            <input type="hidden" name="avatar" value="{{{ $meta['avatar'] ?? '' }}}" onclick="openKCFinder($(this));">
                             <div class="form-group">
                                 <a href="/user/profile" class="btn btn-green btn-avatar btn-100-p">{{{ trans('main.edit_profile') }}}</a>
                             </div>
@@ -140,18 +140,18 @@
                             <ul class="ucp-section-box-notification">
                                 @if($notifications != null)
                                     @foreach($notifications as $noti)
-                                        <li data-toggle="modal" data-target="#alertModal{{{ $noti->id or 0 }}}"><span class="mdi mdi-information-outline"></span><a href="javascript:void(0);">{{{ $noti->title or '' }}}</a></li>
-                                        <div class="modal fade" id="alertModal{{{ $noti->id or 0 }}}">
+                                        <li data-toggle="modal" data-target="#alertModal{{{ $noti->id ?? 0 }}}"><span class="mdi mdi-information-outline"></span><a href="javascript:void(0);">{{{ $noti->title ?? '' }}}</a></li>
+                                        <div class="modal fade" id="alertModal{{{ $noti->id ?? 0 }}}">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <button type="button" class="close" data-dismiss="modal"
                                                                 aria-hidden="true">&times;
                                                         </button>
-                                                        <h4 class="modal-title">{!! $noti->title or '' !!}</h4>
+                                                        <h4 class="modal-title">{!! $noti->title ?? '' !!}</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        {!! $noti->msg or '' !!}
+                                                        {!! $noti->msg ?? '' !!}
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-custom" data-dismiss="modal">{{{ trans('main.close') }}}</button>
@@ -171,13 +171,13 @@
                 <div class="ucp-section-box ucp-dasbboard-box-2">
                     <div class="header">{{{ trans('main.financial_stats') }}}</div>
                     <div class="body">
-                        <span class="ucp-section-box-span"><label>{{{ trans('main.today_sale') }}}</label><b class="pull-left"> {{{ $sell_count_today or '0' }}}</b></span>
-                        <span class="ucp-section-box-span"><label>{{{ trans('main.month_sale') }}}</label><b class="pull-left">{{{ $sell_count_month or '0' }}} </b></span>
-                        <span class="ucp-section-box-span"><label>{{{ trans('main.total_sale') }}}</label><b class="pull-left">{{{ $userSellCount or '0' }}} </b></span>
-                        <span class="ucp-section-box-span"><label>{{{ trans('main.total_income') }}}</label><b class="pull-left">{{{ currencySign() }}} {{{ $total_income or '0' }}} </b></span>
-                        <span class="ucp-section-box-span"><label>{{{ trans('main.withdrawable_amount') }}}</label><b class="pull-left">{{{ currencySign() }}} {{{ $user['income'] or '0' }}} </b></span>
-                        <span class="ucp-section-box-span"><label>{{{ trans('main.account_charge') }}}</label><b class="pull-left">{{{ currencySign() }}} {{{ $user['credit'] or '0' }}} </b></span>
-                        <span class="ucp-section-box-span"><label>{{{ trans('main.total_purchase') }}}</label><b class="pull-left">{{{ $userBuyCount or '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.today_sale') }}}</label><b class="pull-left"> {{{ $sell_count_today ?? '0' }}}</b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.month_sale') }}}</label><b class="pull-left">{{{ $sell_count_month ?? '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.total_sale') }}}</label><b class="pull-left">{{{ $userSellCount ?? '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.total_income') }}}</label><b class="pull-left">{{{ currencySign() }}} {{{ $total_income ?? '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.withdrawable_amount') }}}</label><b class="pull-left">{{{ currencySign() }}} {{{ $user['income'] ?? '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.account_charge') }}}</label><b class="pull-left">{{{ currencySign() }}} {{{ $user['credit'] ?? '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.total_purchase') }}}</label><b class="pull-left">{{{ $userBuyCount ?? '0' }}} </b></span>
 
                     </div>
                 </div>
@@ -188,9 +188,9 @@
                     <div class="header">{{{ trans('main.sales_target') }}}</div>
                     <div class="body ptopz">
                         <div id="g6"></div>
-                        <span class="ucp-section-box-span"><label>{{{ trans('main.current_sales_badge') }}}</label><b class="pull-left">{{{ $current_rate['description'] or 'No data' }}}</b></span>
-                        <span class="ucp-section-box-span"><label>{{{ trans('main.your_total_sales') }}}</label><b class="pull-left">{{{ $userSellCount or '0' }}} </b></span>
-                        <span class="ucp-section-box-span"><label>{{{ trans('main.next_badge') }}}</label><b class="pull-left">{{{ $after_rate['description'] or '' }}}</b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.current_sales_badge') }}}</label><b class="pull-left">{{{ $current_rate['description'] ?? 'No data' }}}</b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.your_total_sales') }}}</label><b class="pull-left">{{{ $userSellCount ?? '0' }}} </b></span>
+                        <span class="ucp-section-box-span"><label>{{{ trans('main.next_badge') }}}</label><b class="pull-left">{{{ $after_rate['description'] ?? '' }}}</b></span>
                     </div>
                 </div>
             </div>
@@ -209,7 +209,7 @@
                             <ul class="dashboard-buy-item">
                                 @foreach($buyList as $bl)
                                     @if(isset($bl->content->id))
-                                        <li><img src="{{{ contentMeta($bl->content->id,'thumbnail','') }}}"/><a href="/product/{{{ $bl->content->id or 0 }}}"><span>{{{ $bl->content->title or '' }}}</span><label>{{{ date('d F Y',$bl->create_at) }}}</label></a></li>
+                                        <li><img src="{{{ contentMeta($bl->content->id,'thumbnail','') }}}"/><a href="/product/{{{ $bl->content->id ?? 0 }}}"><span>{{{ $bl->content->title ?? '' }}}</span><label>{{{ date('d F Y',$bl->create_at) }}}</label></a></li>
                                     @endif
                                 @endforeach
                             </ul>
@@ -301,7 +301,7 @@
         document.addEventListener("DOMContentLoaded", function(event) {
             var g6 = new JustGage({
                 id: "g6",
-                value: {{{ $value or 0 }}},
+                value: {{{ $value ?? 0 }}},
                 min: 0,
                 max: {{{ count($sell_rate) }}},
                 hideMinMax: true,

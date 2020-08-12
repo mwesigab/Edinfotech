@@ -26,7 +26,7 @@
                     <div class="col-md-8" >
                         <select name="off_id_content" class="form-control populate" id="type" required>
                             @foreach($contents as $content)
-                                <option value="{{{ $content->id or 0 }}}">{{{ $content->title or '' }}}</option>
+                                <option value="{{{ $content->id ?? 0 }}}">{{{ $content->title ?? '' }}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="col-md-8" >
                         <select name="off_id_category" class="form-control populate" id="type">
                             @foreach($categoreis as $category)
-                                <option value="{{{ $category->id or 0 }}}">{{{ $category->title or '' }}}</option>
+                                <option value="{{{ $category->id ?? 0 }}}">{{{ $category->title ?? '' }}}</option>
                             @endforeach
                         </select>
                     </div>

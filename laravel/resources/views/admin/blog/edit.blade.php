@@ -9,12 +9,12 @@
 
             <form action="/admin/blog/post/store" class="form-horizontal form-bordered" method="post">
 
-                <input type="hidden" name="id" value="{{{ $item->id or '' }}}">
+                <input type="hidden" name="id" value="{{{ $item->id ?? '' }}}">
 
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                     <div class="col-md-10">
-                        <input type="text" value="{{{ $item->title or '' }}}" name="title" class="form-control" required>
+                        <input type="text" value="{{{ $item->title ?? '' }}}" name="title" class="form-control" required>
                     </div>
                 </div>
 
@@ -24,7 +24,7 @@
                     <div class="col-md-10">
                         <select name="category_id" class="form-control select2">
                             @foreach($category as $cat)
-                                <option value="{{{ $cat->id or 0 }}}" @if(!empty($item->category_id) && $item->category_id == $cat->id) {{{ 'selected' }}}  @endif>{{{ $cat->title }}}</option>
+                                <option value="{{{ $cat->id ?? 0 }}}" @if(!empty($item->category_id) && $item->category_id == $cat->id) {{{ 'selected' }}}  @endif>{{{ $cat->title }}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -37,7 +37,7 @@
                             <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image" >
                                 <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                             </span>
-                            <input type="text" name="image" value="{{{ $item->image or '' }}}" dir="ltr" class="form-control">
+                            <input type="text" name="image" value="{{{ $item->image ?? '' }}}" dir="ltr" class="form-control">
                             <span class="input-group-append click-for-upload cu-p">
                                 <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                             </span>
@@ -47,20 +47,20 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea class="summernote" name="pre_content" required>{{{ $item->pre_content or '' }}}</textarea>
+                        <textarea class="summernote" name="pre_content" required>{{{ $item->pre_content ?? '' }}}</textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea class="summernote" name="content" required>{{{ $item->content or '' }}}</textarea>
+                        <textarea class="summernote" name="content" required>{{{ $item->content ?? '' }}}</textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.tags') }}}</label>
                     <div class="col-md-10">
-                        <input type="text" name="tags" value="{{{ $item->tags or '' }}}" data-role="tagsinput" data-tag-class="label label-primary" class="form-control">
+                        <input type="text" name="tags" value="{{{ $item->tags ?? '' }}}" data-role="tagsinput" data-tag-class="label label-primary" class="form-control">
                     </div>
                 </div>
 

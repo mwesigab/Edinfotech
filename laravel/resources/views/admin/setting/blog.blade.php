@@ -32,14 +32,14 @@
                   <div class="form-group">
                      <label class="col-md-3 control-label">{{{ trans('admin.contents_in_each_page') }}}</label>
                      <div class="col-md-3">
-                        <input type="number" class="spinner-input form-control" name="blog_post_count" value="{{{ $_setting['blog_post_count'] or 0 }}}" maxlength="3">
+                        <input type="number" class="spinner-input form-control" name="blog_post_count" value="{{{ $_setting['blog_post_count'] ?? 0 }}}" maxlength="3">
                      </div>
                   </div>
 
                   <div class="form-group">
                      <label class="col-md-3 control-label">{{{ trans('admin.contents_in_homepage') }}}</label>
                      <div class="col-md-3">
-                        <input type="number" class="spinner-input form-control" name="main_page_blog_post_count" value="{{{ $_setting['main_page_blog_post_count'] or 0 }}}" maxlength="3" >
+                        <input type="number" class="spinner-input form-control" name="main_page_blog_post_count" value="{{{ $_setting['main_page_blog_post_count'] ?? 0 }}}" maxlength="3" >
                      </div>
                   </div>
                   <div class="form-group">
@@ -57,14 +57,14 @@
                   <div class="form-group">
                      <label class="col-md-3 control-label">{{{ trans('admin.contents_in_each_page') }}}</label>
                      <div class="col-md-3">
-                           <input type="number" class="spinner-input form-control" name="article_post_count" value="{{{ $_setting['article_post_count'] or 0 }}}" maxlength="3">
+                           <input type="number" class="spinner-input form-control" name="article_post_count" value="{{{ $_setting['article_post_count'] ?? 0 }}}" maxlength="3">
                      </div>
                   </div>
 
                   <div class="form-group">
                      <label class="col-md-3 control-label">{{{ trans('admin.contents_in_homepage') }}}</label>
                      <div class="col-md-3">
-                           <input type="number" class="spinner-input form-control" name="main_page_article_post_count" value="{{{ $_setting['main_page_article_post_count'] or 0 }}}" maxlength="3">
+                           <input type="number" class="spinner-input form-control" name="main_page_article_post_count" value="{{{ $_setting['main_page_article_post_count'] ?? 0 }}}" maxlength="3">
                      </div>
                   </div>
 

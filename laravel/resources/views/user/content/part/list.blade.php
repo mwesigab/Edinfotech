@@ -17,10 +17,10 @@
                         <tbody>
                         @foreach($lists as $item)
                             <tr>
-                                <td>{{{ $item->title or ''}}}</td>
-                                <td>{{{ $item->description or '' }}}</td>
-                                <td class="text-center">{{{ $item->size or 0 }}}{{{ trans('main.mb') }}} </td>
-                                <td class="text-center">{{{ $item->duration or 0 }}}{{{ trans('main.minute') }}} </td>
+                                <td>{{{ $item->title ?? ''}}}</td>
+                                <td>{{{ $item->description ?? '' }}}</td>
+                                <td class="text-center">{{{ $item->size ?? 0 }}}{{{ trans('main.mb') }}} </td>
+                                <td class="text-center">{{{ $item->duration ?? 0 }}}{{{ trans('main.minute') }}} </td>
                                 <td class="text-center" width="150">{{{ date('d F Y | H:i',$item->create_at) }}}</td>
                                 <td class="text-center">
                                     @if($item->mode == 'publish')

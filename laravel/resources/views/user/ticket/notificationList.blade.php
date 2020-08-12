@@ -26,8 +26,8 @@
                         <tbody>
                         @foreach($lists as $item)
                             <tr>
-                                <td class="lh180 cell-ta">{{{ $item->title or '' }}}</td>
-                                <td class="lh180 cell-ta">{!!  $item->msg or '' !!}</td>
+                                <td class="lh180 cell-ta">{{{ $item->title ?? '' }}}</td>
+                                <td class="lh180 cell-ta">{!!  $item->msg ?? '' !!}</td>
                                 <td class="text-center">{{{ date('d F Y H:i',$item->create_at) }}}</td>
                             </tr>
                         @endforeach

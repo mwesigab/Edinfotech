@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{{ trans('admin.print') }}} {{{ $item->title or '' }}}</title>
+    <title>{{{ trans('admin.print') }}} {{{ $item->title ?? '' }}}</title>
     <link rel="stylesheet" href="/assets/stylesheets/view-custom.css">
     <style>
     .main-box{
@@ -52,7 +52,7 @@
         </div>
         <div style="width: 20%;text-align: left;float: left;padding-top: 25px;padding-left:25px;font-size: .8em">
             <div>
-                <span>{{{ trans('admin.document_number') }}}:</span>&nbsp;<label>{{{ $item->id or 0 }}}</label>
+                <span>{{{ trans('admin.document_number') }}}:</span>&nbsp;<label>{{{ $item->id ?? 0 }}}</label>
             </div>
             <div style="margin-top: 10px;">
                 <span>{{{ trans('admin.th_date') }}}:</span>&nbsp;<label>{{{ date('d F Y - H:i') }}}</label>
@@ -68,10 +68,10 @@
             </thead>
             <tbody>
                 <tr>
-                    <th>{{{ $item->user->name or 'Platform Account' }}}</th>
-                    <th>{{{ $item->title or '' }}}</th>
+                    <th>{{{ $item->user->name ?? 'Platform Account' }}}</th>
+                    <th>{{{ $item->title ?? '' }}}</th>
                     <th>@if($item->type == 'add') {{{ trans('admin.addiction') }}} @else {{{ trans('admin.deduction') }}} @endif</th>
-                    <th>{{{ $item->price or 0 }}}</th>
+                    <th>{{{ $item->price ?? 0 }}}</th>
                 </tr>
             </tbody>
         </table>
@@ -79,7 +79,7 @@
             <tbody>
                 <tr>
                     <th style="text-align: right;min-height: 100px;">
-                        {{{ $item->description or 'Description' }}}
+                        {{{ $item->description ?? 'Description' }}}
                     </th>
                 </tr>
             </tbody>
@@ -88,7 +88,7 @@
         <div style="width: 90%;margin: 0 auto 0">
 
             <div style="width: 33%;float: right">
-                <span>{{{ trans('admin.created_by') }}}:</span>&nbsp;<label>{{{ $item->exporter->name or 'Automatic' }}}</label>
+                <span>{{{ trans('admin.created_by') }}}:</span>&nbsp;<label>{{{ $item->exporter->name ?? 'Automatic' }}}</label>
             </div>
             <div style="width: 33%;float: right">
                 <span>{{{ trans('admin.approved_by') }}}:</span>&nbsp;<input type="text" value="{{{ get_option('factor_seconder','') }}}" style="border:none;background: transparent;">

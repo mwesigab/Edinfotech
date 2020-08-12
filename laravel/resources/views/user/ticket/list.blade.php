@@ -20,7 +20,7 @@
                             <label class="control-label" for="inputDefault">{{{ trans('main.department') }}}</label>
                             <select name="category_id" class="form-control font-s" required>
                                 @foreach($category as $cat)
-                                    <option value="{{{ $cat->id or '' }}}">{{{ $cat->title or '' }}}</option>
+                                    <option value="{{{ $cat->id ?? '' }}}">{{{ $cat->title ?? '' }}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -69,7 +69,7 @@
                         <tbody>
                             @foreach($lists as $item)
                                 <tr>
-                                    <td class="cell-ta">{{{ $item->title or '' }}}</td>
+                                    <td class="cell-ta">{{{ $item->title ?? '' }}}</td>
                                     <td class="text-center">
                                         @if($item->mode == 'open')
 

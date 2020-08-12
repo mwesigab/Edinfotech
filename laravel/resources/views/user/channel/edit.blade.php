@@ -9,23 +9,23 @@
                 <div class="ucp-section-box">
                     <div class="header back-red">{{{ trans('main.edit_channel') }}}</div>
                     <div class="body">
-                        <form method="post" action="/user/channel/edit/store/{{{ $edit->id or '' }}}">
+                        <form method="post" action="/user/channel/edit/store/{{{ $edit->id ?? '' }}}">
 
                             <div class="form-group">
                                 <label class="control-label" for="inputDefault">{{{ trans('main.title') }}}</label>
-                                <input type="text" name="title" value="{{{ $edit->title or '' }}}" class="form-control" id="inputDefault" required>
+                                <input type="text" name="title" value="{{{ $edit->title ?? '' }}}" class="form-control" id="inputDefault" required>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label" for="inputDefault">{{{ trans('main.link') }}}</label>
-                                <input type="text" value="{{{ $edit->username or '' }}}" class="form-control" id="inputDefault" disabled="disabled">
+                                <input type="text" value="{{{ $edit->username ?? '' }}}" class="form-control" id="inputDefault" disabled="disabled">
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label">{{{ trans('main.cover') }}}</label>
                                     <div class="input-group">
                                         <span class="input-group-addon view-selected img-icon-s" data-toggle="modal" data-target="#ImageModal" data-whatever="image"><span class="formicon mdi mdi-eye"></span></span>
-                                        <input type="text" name="image" dir="ltr" value="{{{ $edit->image or '' }}}" class="form-control">
+                                        <input type="text" name="image" dir="ltr" value="{{{ $edit->image ?? '' }}}" class="form-control">
                                         <span class="input-group-addon click-for-upload img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                                     </div>
                             </div>
@@ -34,14 +34,14 @@
                                 <label class="control-label">{{{ trans('main.icon') }}}</label>
                                 <div class="input-group">
                                     <span class="input-group-addon view-selected img-icon-s" data-toggle="modal" data-target="#ImageModal" data-whatever="avatar"><span class="formicon mdi mdi-eye"></span></span>
-                                    <input type="text" name="avatar" dir="ltr" value="{{{ $edit->avatar or '' }}}" class="form-control">
+                                    <input type="text" name="avatar" dir="ltr" value="{{{ $edit->avatar ?? '' }}}" class="form-control">
                                     <span class="input-group-addon click-for-upload img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label">{{{ trans('main.description') }}}</label>
-                                <textarea class="form-control" name="description">{!!  $edit->description or '' !!}</textarea>
+                                <textarea class="form-control" name="description">{!!  $edit->description ?? '' !!}</textarea>
                             </div>
 
 
@@ -66,9 +66,9 @@
                             <tbody>
                             @foreach($channels as $channel)
                                 <tr>
-                                    <td class="text-center">{{{ $channel->title or '' }}}</td>
-                                    <td class="text-center"><a href="/chanel/{{{ $channel->username or '' }}}">{{{ $channel->username or '' }}}</a></td>
-                                    <td class="text-center">{{{ $channel->view or '' }}}</td>
+                                    <td class="text-center">{{{ $channel->title ?? '' }}}</td>
+                                    <td class="text-center"><a href="/chanel/{{{ $channel->username ?? '' }}}">{{{ $channel->username ?? '' }}}</a></td>
+                                    <td class="text-center">{{{ $channel->view ?? '' }}}</td>
                                     <td class="text-center">
                                         @if($channel->mode==null || $channel->mode=='pending' || $channel->mode=='draft')
                                             <b class="orange-s">{{{ trans('main.waiting') }}}</b>
@@ -77,9 +77,9 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="/user/channel/video/{{{ $channel->id or '' }}}" title="Add video to channel"><span class="crticon mdi mdi-file-video"></span></a>
-                                        <a href="#" data-href="/user/channel/delete/{{{ $channel->id or '' }}}" data-toggle="modal" data-target="#confirm-delete"><span class="crticon mdi mdi-delete-forever"></span></a>
-                                        <a href="/user/channel/edit/{{{ $channel->id or '' }}}"><span class="crticon mdi mdi-lead-pencil"></span></a>
+                                        <a href="/user/channel/video/{{{ $channel->id ?? '' }}}" title="Add video to channel"><span class="crticon mdi mdi-file-video"></span></a>
+                                        <a href="#" data-href="/user/channel/delete/{{{ $channel->id ?? '' }}}" data-toggle="modal" data-target="#confirm-delete"><span class="crticon mdi mdi-delete-forever"></span></a>
+                                        <a href="/user/channel/edit/{{{ $channel->id ?? '' }}}"><span class="crticon mdi mdi-lead-pencil"></span></a>
                                     </td>
                                 </tr>
                             @endforeach

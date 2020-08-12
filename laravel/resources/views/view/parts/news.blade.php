@@ -10,7 +10,7 @@
                     <div class="body">
                         <ul>
                             @foreach($article_post as $article)
-                                <li><a href="/article/item/{{{ $article->id }}}"><img src="{{{ $article->image or '' }}}" alt=""><span>{{{ $article->title or '' }}}</span><label for="">{{{ date('l d F Y',$article->create_at) }}}</label></a></li>
+                                <li><a href="/article/item/{{{ $article->id }}}"><img src="{{{ $article->image ? $article->image : '' }}}" alt=""><span>{{{ $article->title ? $article->title : '' }}}</span><label for="">{{{ date('l d F Y',$article->create_at) }}}</label></a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -28,7 +28,7 @@
                     <div class="body">
                         <ul>
                             @foreach($blog_post as $post)
-                                <li><a href="/blog/post/{{{ $post->id }}}"><img src="{{{ $post->image or '' }}}" alt=""><span>{{{ $post->title or '' }}}</span><label for="">{{{ date('l d F Y',$post->create_at) }}}</label></a></li>
+                                <li><a href="/blog/post/{{{ $post->id }}}"><img src="{{{ $post->image ? $post->image : '' }}}" alt=""><span>{{{ $post->title ? $post->title : '' }}}</span><label for="">{{{ date('l d F Y',$post->create_at) }}}</label></a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -46,7 +46,7 @@
                             <div class="row">
                                 @foreach($ads as $ad)
                                     @if($ad->position == 'main-article-side')
-                                        <a href="{{{ $ad->url or '#' }}}"><img src="{{{ $ad->image or '' }}}" class="{{{ $ad->size or '' }}}"></a>
+                                        <a href="{{{ $ad->url ? $ad->url : '#' }}}"><img src="{{{ $ad->image ? $ad->image : '' }}}" class="{{{ $ad->size ? $ad->size : '' }}}"></a>
                                     @endif
                                 @endforeach
                                 <div class="h-15"></div>
@@ -74,8 +74,8 @@
                                             <?php $meta = arrayToList($ur->usermetas,'option','value'); ?>
                                             <div class="col-md-3 tab-con">
                                         <a href="/profile/{{{ $ur->id }}}">
-                                            <img src="{{{ $meta['avatar'] or '/assets/images/user.png' }}}">
-                                            <span>{{{ $ur->name or '' }}}</span>
+                                            <img src="{{{ isset($meta['avatar']) ? $meta['avatar'] : '/assets/images/user.png' }}}">
+                                            <span>{{{ $ur->name ? $ur->name : '' }}}</span>
                                         </a>
                                     </div>
                                         @endforeach
@@ -87,8 +87,8 @@
                                             <?php $meta = arrayToList($uc->usermetas,'option','value'); ?>
                                             <div class="col-md-3 tab-con">
                                                 <a href="/profile/{{{ $uc->id }}}">
-                                                    <img src="{{{ $meta['avatar'] or '/assets/images/user.png' }}}">
-                                                    <span>{{{ $uc->name or '' }}}</span>
+                                                    <img src="{{{ isset($meta['avatar']) ? $meta['avatar'] : '/assets/images/user.png' }}}">
+                                                    <span>{{{ $uc->name ? $uc->name : '' }}}</span>
                                                 </a>
                                             </div>
                                         @endforeach
@@ -100,8 +100,8 @@
                                             <?php $meta = arrayToList($up->usermetas,'option','value'); ?>
                                             <div class="col-md-3 tab-con">
                                                 <a href="/profile/{{{ $up->id }}}">
-                                                    <img src="{{{ $meta['avatar'] or '/assets/images/user.png' }}}">
-                                                    <span>{{{ $up->name or '' }}}</span>
+                                                    <img src="{{{ isset($meta['avatar']) ? $meta['avatar'] : '/assets/images/user.png' }}}">
+                                                    <span>{{{ $up->name ? $up->name : '' }}}</span>
                                                 </a>
                                             </div>
                                         @endforeach
@@ -131,8 +131,8 @@
                                         @foreach($channels['new'] as $ur)
                                             <div class="col-md-3 tab-con">
                                                 <a href="/chanel/{{{ $ur->username }}}">
-                                                    <img src="{{{ $ur->avatar or '/assets/images/user.png' }}}">
-                                                    <span>{{{ $ur->title or '' }}}</span>
+                                                    <img src="{{{ $ur->avatar ? $ur->avatar : '/assets/images/user.png' }}}">
+                                                    <span>{{{ $ur->title ? $ur->title : '' }}}</span>
                                                 </a>
                                             </div>
                                         @endforeach
@@ -143,8 +143,8 @@
                                         @foreach($channels['view'] as $ur)
                                             <div class="col-md-3 tab-con">
                                                 <a href="/chanel/{{{ $ur->username }}}">
-                                                    <img src="{{{ $ur->avatar or '/assets/images/user.png' }}}">
-                                                    <span>{{{ $ur->title or '' }}}</span>
+                                                    <img src="{{{ $ur->avatar ? $ur->avatar : '/assets/images/user.png' }}}">
+                                                    <span>{{{ $ur->title ? $ur->title : '' }}}</span>
                                                 </a>
                                             </div>
                                         @endforeach
@@ -155,8 +155,8 @@
                                         @foreach($channels['popular'] as $ur)
                                             <div class="col-md-3 tab-con">
                                                 <a href="/chanel/{{{ $ur->username }}}">
-                                                    <img src="{{{ $ur->avatar or '/assets/images/user.png' }}}">
-                                                    <span>{{{ $ur->title or '' }}}</span>
+                                                    <img src="{{{ $ur->avatar ? $ur->avatar : '/assets/images/user.png' }}}">
+                                                    <span>{{{ $ur->title ? $ur->title : '' }}}</span>
                                                 </a>
                                             </div>
                                         @endforeach

@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{{ trans('main.print') }}} {{{ $title or '' }}}</title>
+    <title>{{{ trans('main.print') }}} {{{ $title ?? '' }}}</title>
     <link rel="stylesheet" href="/assets/stylesheets/vendor/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/stylesheets/vendor/bootstrap/css/bootstrap-3.2.rtl.css">
     <link rel="stylesheet" href="/assets/stylesheets/view-custom.css">
@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-3 col-xs-12 br2">
                 <div class="h-15"></div>
-                <span>{{{ trans('main.invoice_number') }}}:</span>&nbsp;<label>{{{ $item->transaction_id or 0 }}}</label>
+                <span>{{{ trans('main.invoice_number') }}}:</span>&nbsp;<label>{{{ $item->transaction_id ?? 0 }}}</label>
                 <div class="h-10"></div>
                 <span>{{{ trans('main.invoice_date') }}}:</span>&nbsp;<label>{{{ date('d F Y - H:i',$item->create_at) }}}</label>
             </div>
@@ -106,18 +106,18 @@
                     <div class="col-md-8">
                         <div class="h-5"></div>
                         <label>{{{ trans('main.province') }}}:</label>
-                        <span>{{{ $userMeta['state'] or '' }}}</span>
+                        <span>{{{ $userMeta['state'] ?? '' }}}</span>
                     </div>
                     <div class="col-md-4 br1">
                         <div class="h-5"></div>
                         <label>{{{ trans('main.city') }}}:</label>
-                        <span>{{{ $userMeta['city'] or '' }}}</span>
+                        <span>{{{ $userMeta['city'] ?? '' }}}</span>
                     </div>
                 </div>
                 <div>
                     <div class="h-5"></div>
                     <label>{{{ trans('main.address') }}}:</label>
-                    <span>{{{ $userMeta['address'] or '' }}}</span>
+                    <span>{{{ $userMeta['address'] ?? '' }}}</span>
                 </div>
             </div>
             <div class="col-md-4 col-xs-12">
@@ -125,17 +125,17 @@
                     <div class="bb2s brr15">
                         <div class="h-5"></div>
                         <label>{{{ trans('main.email') }}}</label>
-                        <span>{{{ $user['email'] or '' }}}</span>
+                        <span>{{{ $user['email'] ?? '' }}}</span>
                     </div>
                     <div class="bb2s prr15">
                         <div class="h-5"></div>
                         <label>{{{ trans('main.zip_code') }}}:</label>
-                        <span>{{{ $userMeta['postalcode'] or '' }}}</span>
+                        <span>{{{ $userMeta['postalcode'] ?? '' }}}</span>
                     </div>
                     <div class="prr15">
                         <div class="h-5"></div>
                         <label>{{{ trans('main.phone_number') }}}:</label>
-                        <span>{{{ $userMeta['phone'] or '' }}}</span>
+                        <span>{{{ $userMeta['phone'] ?? '' }}}</span>
                     </div>
                 </div>
 
@@ -156,10 +156,10 @@
                 <tbody>
                 <tr>
                     <td>1</td>
-                    <td>{{{ $item->content->title or 'Unknown Product' }}}</td>
+                    <td>{{{ $item->content->title ?? 'Unknown Product' }}}</td>
                     <td>{{{ contentMeta($item->content->id,'price',0) }}}</td>
                     <td>۰</td>
-                    <td>{{{ $item->transaction->price or 0 }}}</td>
+                    <td>{{{ $item->transaction->price ?? 0 }}}</td>
                 </tr>
                 </tbody>
             </table>

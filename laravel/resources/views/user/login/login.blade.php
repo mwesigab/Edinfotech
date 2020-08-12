@@ -1,6 +1,6 @@
 @extends('view.layout.layout')
 @section('title')
-    {{{ $setting['site']['site_title'] or 'Website Title' }}}
+    {{{ $setting['site']['site_title'] ?? 'Website Title' }}}
     {{{ trans('main.user_login') }}}
 @endsection
 @section('page')

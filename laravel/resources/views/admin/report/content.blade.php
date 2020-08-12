@@ -12,7 +12,7 @@
                             <div class="summary">
                                 <h4 class="title">{{{  trans('admin.total_courses') }}}</h4>
                                 <div class="info">
-                                    <strong class="amount">{{{ $contentCount or 0 }}}</strong>
+                                    <strong class="amount">{{{ $contentCount ?? 0 }}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -31,7 +31,7 @@
                             <div class="summary">
                                 <h4 class="title">{{{  trans('admin.total_parts') }}}</h4>
                                 <div class="info">
-                                    <strong class="amount">{{{ $videoCount or 0 }}}</strong>
+                                    <strong class="amount">{{{ $videoCount ?? 0 }}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">

@@ -5,11 +5,11 @@
 @section('page')
     <section class="card">
         <div class="card-body">
-            <form action="/admin/ads/box/edit/store/{{{ $item->id or 0 }}}" class="form-horizontal form-bordered" method="post">
+            <form action="/admin/ads/box/edit/store/{{{ $item->id ?? 0 }}}" class="form-horizontal form-bordered" method="post">
                 <div class="form-group">
                     <label class="col-md-1 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                     <div class="col-md-5">
-                        <input type="text" name="title" value="{{{ $item->title or '' }}}" class="form-control" required>
+                        <input type="text" name="title" value="{{{ $item->title ?? '' }}}" class="form-control" required>
                     </div>
                     <div class="h-20"></div>
                     <label class="col-md-1 control-label" for="inputDefault">{{{ trans('admin.position') }}}</label>
@@ -30,7 +30,7 @@
                             <span class="input-group-prepend view-selected cursor-pointer" data-toggle="modal" data-target="#ImageModal" data-whatever="image">
                                 <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                             </span>
-                            <input type="text" name="image" value="{{{ $item->image or '' }}}" dir="ltr" class="form-control">
+                            <input type="text" name="image" value="{{{ $item->image ?? '' }}}" dir="ltr" class="form-control">
                             <span class="input-group-append click-for-upload cursor-pointer">
                                 <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                             </span>
@@ -50,12 +50,12 @@
                 <div class="form-group">
                     <label class="col-md-1 control-label" for="inputDefault">{{{ trans('admin.link_address') }}}</label>
                     <div class="col-md-5">
-                            <input type="text" value="{{{ $item->url or '' }}}" name="url" dir="ltr" class="form-control text-left">
+                            <input type="text" value="{{{ $item->url ?? '' }}}" name="url" dir="ltr" class="form-control text-left">
                     </div>
                     <div class="h-20"></div>
                     <label class="col-md-1 control-label" for="inputDefault">{{{ trans('admin.sort') }}}</label>
                     <div class="col-md-5">
-                        <input type="number" min="0" max="99" value="{{{ $item->sort or '' }}}" name="sort" dir="ltr" class="form-control text-center">
+                        <input type="number" min="0" max="99" value="{{{ $item->sort ?? '' }}}" name="sort" dir="ltr" class="form-control text-center">
                     </div>
                 </div>
 

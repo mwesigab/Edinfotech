@@ -20,7 +20,7 @@
                         <tr>
                             <td>{{{ $item->title }}}</td>
                             <td class="text-center" width="150">{{{ date('d F Y / H:i',$item->create_at) }}}</td>
-                            <td class="text-center" title="{{{ $item->user->username or 'Automatic' }}}" width="150">{{{ $item->user->name or 'Automatic' }}}</td>
+                            <td class="text-center" title="{{{ $item->user->username ?? 'Automatic' }}}" width="150">{{{ $item->user->name ?? 'Automatic' }}}</td>
                             <td class="text-center" width="150">
                                 @if($item->recipent_type == 'users')
                                     {{{ 'Users' }}}

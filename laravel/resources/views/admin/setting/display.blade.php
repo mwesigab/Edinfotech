@@ -17,7 +17,7 @@
 
                      <div class="form-group">
                         <div class="col-md-12">
-                           <textarea class="form-control text-left h-400" style="height: 400px !important;" dir="ltr" name="main_css" >{!! $_setting['main_css'] or '' !!}</textarea>
+                           <textarea class="form-control text-left h-400" style="height: 400px !important;" dir="ltr" name="main_css" >{!! $_setting['main_css'] ?? '' !!}</textarea>
                         </div>
                      </div>
 
@@ -34,7 +34,7 @@
 
                      <div class="form-group">
                         <div class="col-md-12">
-                           <textarea class="form-control text-left h-400" style="height: 400px !important;" dir="ltr" name="main_js" >{!! $_setting['main_js'] or '' !!}</textarea>
+                           <textarea class="form-control text-left h-400" style="height: 400px !important;" dir="ltr" name="main_js" >{!! $_setting['main_js'] ?? '' !!}</textarea>
                         </div>
                      </div>
 

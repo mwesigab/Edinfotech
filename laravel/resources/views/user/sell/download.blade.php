@@ -31,12 +31,12 @@
                                 @if(isset($item->content->metas))
                                 <?php $contentMeta = arrayToList($item->content->metas,'option','value'); ?>
                                     <tr>
-                                        <td class="text-center" width="20">{{{ $item->id or '' }}}</td>
-                                        <td class="text-left"><a href="/product/{{{ $item->content->id or 0 }}}" class="color-in" target="_blank">{{{ $item->content->title }}}</a></td>
-                                        <td class="text-center"><a href="/profile/{{{ $item->buyer->id or 0 }}}" class="color-in" target="_blank">{{{ $item->buyer->username or '' }}}</a></td>
-                                        <td class="text-center">{{{ $item->transaction->price_content or 0 }}}</td>
-                                        <td class="text-center">{{{ $item->transaction->price or 0 }}}</td>
-                                        <td class="text-center">{{{ $item->transaction->income or 0 }}}</td>
+                                        <td class="text-center" width="20">{{{ $item->id ?? '' }}}</td>
+                                        <td class="text-left"><a href="/product/{{{ $item->content->id ?? 0 }}}" class="color-in" target="_blank">{{{ $item->content->title }}}</a></td>
+                                        <td class="text-center"><a href="/profile/{{{ $item->buyer->id ?? 0 }}}" class="color-in" target="_blank">{{{ $item->buyer->username ?? '' }}}</a></td>
+                                        <td class="text-center">{{{ $item->transaction->price_content ?? 0 }}}</td>
+                                        <td class="text-center">{{{ $item->transaction->price ?? 0 }}}</td>
+                                        <td class="text-center">{{{ $item->transaction->income ?? 0 }}}</td>
                                         @if(isset($item->transaction->price) && $item->transaction->price > 0 && $item->transaction->price_content>0 &&  (100-($item->transaction->price/$item->transaction->price_content)*100)>0)
                                             <td class="text-center">%{{{ 100-(($item->transaction->price/$item->transaction->price_content)*100) }}}</td>
                                         @else
@@ -67,22 +67,22 @@
                                         </td>
                                         <td class="text-center">
                                             @if($item->type == 'post')
-                                                <a class="gray-s" href="#" data-toggle="modal" data-target="#post{{{ $item->id or 0 }}}" title="More info"><span class="crticon mdi mdi-package"></span></a>
+                                                <a class="gray-s" href="#" data-toggle="modal" data-target="#post{{{ $item->id ?? 0 }}}" title="More info"><span class="crticon mdi mdi-package"></span></a>
                                             @else
                                                 #
                                             @endif
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="post{{{ $item->id or 0 }}}">
+                                    <div class="modal fade" id="post{{{ $item->id ?? 0 }}}">
                                     <div class="modal-dialog">
-                                        <form class="form form-horizontal" method="post" action="/user/video/buy/confirm/{{{ $item->id or 0 }}}">
+                                        <form class="form form-horizontal" method="post" action="/user/video/buy/confirm/{{{ $item->id ?? 0 }}}">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                     <h4 class="modal-title">{{{ trans('main.shipping_detail') }}}</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p> {{{ trans('main.tracking_code') }}}: <strong>@if($item->post_code == null || $item->post_code == '') {!! '<b class="red-s">Parcel not sent yet.</b>' !!} @else {{{ $item->post_code or '' }}} @endif</strong></p>
+                                                    <p> {{{ trans('main.tracking_code') }}}: <strong>@if($item->post_code == null || $item->post_code == '') {!! '<b class="red-s">Parcel not sent yet.</b>' !!} @else {{{ $item->post_code ?? '' }}} @endif</strong></p>
                                                     <br>
                                                     <p>  {{{ trans('main.shipping_date') }}} <strong>@if(is_numeric($item->post_code_date)) {{{ date('d F Y | H:i',$item->post_code_date) }}} @endif</strong></p>
                                                     <br>
@@ -90,7 +90,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <span class="pull-right star-rate-text">{{{ trans('main.feedback') }}}</span>&nbsp;
-                                                    <span class="pull-right star-rate" data-score="{{{ $item->rate->rate or 0 }}}" disabled=""></span>
+                                                    <span class="pull-right star-rate" data-score="{{{ $item->rate->rate ?? 0 }}}" disabled=""></span>
                                                     <button type="button" class="btn btn-custom" data-dismiss="modal">{{{ trans('main.close') }}}</button>
                                                 </div>
                                             </div>

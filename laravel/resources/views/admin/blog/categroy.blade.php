@@ -28,7 +28,7 @@
                             @foreach($lists as $list)
                                 <tr>
                                     <td>{{{ $list->title }}}</td>
-                                    <td class="text-center">{{{ $list->posts_count or '0' }}}</td>
+                                    <td class="text-center">{{{ $list->posts_count ?? '0' }}}</td>
                                     <td class="text-center">
                                         <a href="/admin/blog/category/edit/{{{ $list->id }}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                         <a href="#" data-href="/admin/blog/category/delete/{{{ $list->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>

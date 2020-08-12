@@ -22,6 +22,12 @@ use Maatwebsite\Excel\Facades\Excel;
 class userController extends Controller
 {
 
+    protected $request;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
+
     public function login(Request $request){
         if($request->session()->has('Admin') ){
             return redirect('/admin/user/lists');
@@ -31,7 +37,8 @@ class userController extends Controller
     public function dologin(Request $request){
         $username = $request->username;
         $password = $request->password;
-        $admin = User::where('username',$username)->where('admin','1')->orWhere('admin','2')->where('mode','active')->first();
+
+        $admin = User::where('username',$username)->where('admin','1')->orWhere('username',$username)->where('admin',2)->where('mode','active')->first();
         if($admin && $de = decrypt($admin->password) == $password){
             $request->session()->put('Admin',serialize($admin->toArray()));
             $user = User::find($admin->id);
@@ -41,7 +48,7 @@ class userController extends Controller
             if($admin->admin==1){
                 return redirect('/admin/report/user');
             }else if($admin->admin==2){
-                return redirect('/school/students');
+                return redirect('/admin/school/students');
             }
         }else{
             $request->session()->flash('Error','notfonud');
@@ -61,8 +68,8 @@ class userController extends Controller
     ## User Section ##
     public function lists()
     {
-        $fdate = strtotime(Input::get('fsdate'));
-        $ldate = strtotime(Input::get('lsdate'));
+        $fdate = strtotime($this->request->get('fsdate'));
+        $ldate = strtotime($this->request->get('lsdate'));
         $userList = User::with('category')->withCount('contents','sells','buys')->where('admin','0');
 
         if($fdate>12601)
@@ -70,8 +77,8 @@ class userController extends Controller
         if($ldate>12601)
             $userList->where('create_at','<',$ldate);
 
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')){
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')){
                 case 'sella':
                     $userList->orderBy('sells_count');
                     break;

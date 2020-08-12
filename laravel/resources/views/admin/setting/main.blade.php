@@ -21,21 +21,21 @@
                   <div class="form-group">
                      <label class="col-md-3 control-label">{{{ trans('admin.site_name') }}}</label>
                      <div class="col-md-6">
-                        <input type="text" class="form-control" name="site_title" value="{{{ $_setting['site_title'] or ''}}}">
+                        <input type="text" class="form-control" name="site_title" value="{{{ $_setting['site_title'] ?? ''}}}">
                      </div>
                   </div>
 
                   <div class="form-group">
                      <label class="col-md-3 control-label">{{{ trans('admin.site_description') }}}</label>
                      <div class="col-md-6">
-                        <textarea class="form-control" name="site_description">{{{ $_setting['site_description'] or ''}}}</textarea>
+                        <textarea class="form-control" name="site_description">{{{ $_setting['site_description'] ?? ''}}}</textarea>
                      </div>
                   </div>
 
                   <div class="form-group">
                      <label class="col-md-3 control-label">{{{ trans('admin.site_email') }}}</label>
                      <div class="col-md-6">
-                        <input type="text" class="form-control" name="site_email" value="{{{ $_setting['site_email'] or ''}}}">
+                        <input type="text" class="form-control" name="site_email" value="{{{ $_setting['site_email'] ?? ''}}}">
                      </div>
                   </div>
 
@@ -190,7 +190,7 @@
                            <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="site_logo" >
                               <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                            </span>
-                           <input type="text" name="site_logo" dir="ltr" placeholder="Displays on header (55*55px)" value="{{{$_setting['site_logo'] or ''}}}" class="form-control">
+                           <input type="text" name="site_logo" dir="ltr" placeholder="Displays on header (55*55px)" value="{{{$_setting['site_logo'] ?? ''}}}" class="form-control">
                            <span class="input-group-append click-for-upload cu-p" >
                               <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                            </span>
@@ -203,7 +203,7 @@
                      <div class="col-md-6">
                         <div class="input-group">
                            <span class="cu-p input-group-prepend view-selected" data-toggle="modal" data-target="#ImageModal" data-whatever="site_logo_type"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                           <input type="text" name="site_logo_type" dir="ltr" value="{{{$_setting['site_logo_type'] or ''}}}" placeholder="Displays on header ,Hides when scrolling. (200*55px)" class="form-control">
+                           <input type="text" name="site_logo_type" dir="ltr" value="{{{$_setting['site_logo_type'] ?? ''}}}" placeholder="Displays on header ,Hides when scrolling. (200*55px)" class="form-control">
                            <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                         </div>
                      </div>
@@ -214,7 +214,7 @@
                      <div class="col-md-6">
                         <div class="input-group">
                            <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="video_watermark"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                           <input type="text" name="video_watermark" dir="ltr" value="{{{$_setting['video_watermark'] or ''}}}" class="form-control">
+                           <input type="text" name="video_watermark" dir="ltr" value="{{{$_setting['video_watermark'] ?? ''}}}" class="form-control">
                            <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                         </div>
                      </div>
@@ -225,7 +225,7 @@
                      <div class="col-md-6">
                         <div class="input-group">
                            <span class="input-group-prepend cu-p view-selected" data-toggle="modal" data-target="#ImageModal" data-whatever="request_page_icon" ><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                           <input type="text" name="request_page_icon" dir="ltr" placeholder="Displays on requests page header (80*80px)" value="{{{$_setting['request_page_icon'] or ''}}}" class="form-control">
+                           <input type="text" name="request_page_icon" dir="ltr" placeholder="Displays on requests page header (80*80px)" value="{{{$_setting['request_page_icon'] ?? ''}}}" class="form-control">
                            <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                         </div>
                      </div>
@@ -236,7 +236,7 @@
                      <div class="col-md-6">
                         <div class="input-group">
                            <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="upload_page_background"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                           <input type="text" name="upload_page_background" dir="ltr" placeholder="Displays as upload page bacground (1920*1080px)" value="{{{$_setting['upload_page_background'] or ''}}}" class="form-control">
+                           <input type="text" name="upload_page_background" dir="ltr" placeholder="Displays as upload page bacground (1920*1080px)" value="{{{$_setting['upload_page_background'] ?? ''}}}" class="form-control">
                            <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                         </div>
                      </div>
@@ -247,7 +247,7 @@
                      <div class="col-md-6">
                         <div class="input-group">
                            <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="login_page_background"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                           <input type="text" name="login_page_background" dir="ltr" value="{{{$_setting['login_page_background'] or ''}}}" placeholder="Displays as login page bacground (1920*1080px)" class="form-control">
+                           <input type="text" name="login_page_background" dir="ltr" value="{{{$_setting['login_page_background'] ?? ''}}}" placeholder="Displays as login page bacground (1920*1080px)" class="form-control">
                            <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                         </div>
                      </div>
@@ -257,7 +257,7 @@
                      <label class="col-md-3 control-label">{{{ trans('admin.days_graph') }}}</label>
                      <div class="col-md-6">
                         <div class="input-group w-150">
-                           <input type="number" class="spinner-input form-control" name="chart_day_count" value="{{{ $_setting['chart_day_count'] or 0 }}}" maxlength="3">
+                           <input type="number" class="spinner-input form-control" name="chart_day_count" value="{{{ $_setting['chart_day_count'] ?? 0 }}}" maxlength="3">
                         </div>
                      </div>
                   </div>
@@ -342,14 +342,14 @@
                   <div class="form-group">
                      <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.approver') }}}</label>
                      <div class="col-md-6">
-                        <input type="text" class="form-control text-center" placeholder="Displays at the footer of financial balances" dir="ltr" name="factor_seconder" value="{{{ $_setting['factor_seconder'] or '' }}}" />
+                        <input type="text" class="form-control text-center" placeholder="Displays at the footer of financial balances" dir="ltr" name="factor_seconder" value="{{{ $_setting['factor_seconder'] ?? '' }}}" />
                      </div>
                   </div>
 
                   <div class="form-group">
                      <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.financial_manager_name') }}}</label>
                      <div class="col-md-6">
-                        <input type="text" class="form-control text-center" dir="ltr" name="factor_approver" placeholder="Displays at the footer of financial balances" value="{{{ $_setting['factor_approver'] or '' }}}" />
+                        <input type="text" class="form-control text-center" dir="ltr" name="factor_approver" placeholder="Displays at the footer of financial balances" value="{{{ $_setting['factor_approver'] ?? '' }}}" />
                      </div>
                   </div>
 
@@ -358,7 +358,7 @@
                      <div class="col-md-6">
                         <div class="input-group">
                            <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="factor_watermark"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                           <input type="text" name="factor_watermark" dir="ltr" placeholder="Displays on invoce and balance header" value="{{{$_setting['factor_watermark'] or ''}}}" class="form-control">
+                           <input type="text" name="factor_watermark" dir="ltr" placeholder="Displays on invoce and balance header" value="{{{$_setting['factor_watermark'] ?? ''}}}" class="form-control">
                            <span class="input-group-append click-for-upload cu-p" ><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                         </div>
                      </div>
@@ -506,14 +506,14 @@
                   <div class="form-group">
                      <label class="col-md-3 control-label">{{{ trans('admin.open_courses_comm') }}}</label>
                      <div class="col-md-3">
-                           <input type="number" class="spinner-input form-control" name="site_income" value="{{{ $_setting['site_income'] or 0 }}}" maxlength="3">
+                           <input type="number" class="spinner-input form-control" name="site_income" value="{{{ $_setting['site_income'] ?? 0 }}}" maxlength="3">
                      </div>
                   </div>
 
                   <div class="form-group">
                      <label class="col-md-3 control-label">{{{ trans('admin.exclusive_courses_comm') }}}</label>
                      <div class="col-md-3">
-                           <input type="number" class="spinner-input form-control" name="site_income_private" value="{{{ $_setting['site_income_private'] or 0 }}}" maxlength="3">
+                           <input type="number" class="spinner-input form-control" name="site_income_private" value="{{{ $_setting['site_income_private'] ?? 0 }}}" maxlength="3">
                      </div>
                   </div>
 
@@ -559,7 +559,7 @@
                      <div class="col-md-6">
                         <div class="input-group">
                            <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="popup_image"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                           <input type="text" name="popup_image" dir="ltr" value="{{{$_setting['popup_image'] or ''}}}" class="form-control">
+                           <input type="text" name="popup_image" dir="ltr" value="{{{$_setting['popup_image'] ?? ''}}}" class="form-control">
                            <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                         </div>
                      </div>
@@ -568,7 +568,7 @@
                   <div class="form-group">
                      <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.popup_link') }}}</label>
                      <div class="col-md-6">
-                        <input type="text" class="form-control text-center" dir="ltr" name="popup_url" value="{{{ $_setting['popup_url'] or '' }}}" />
+                        <input type="text" class="form-control text-center" dir="ltr" name="popup_url" value="{{{ $_setting['popup_url'] ?? '' }}}" />
                      </div>
                   </div>
 
@@ -601,7 +601,7 @@
                      <label class="col-md-3 control-label">Xml {{{ trans('admin.video_file') }}} Url</label>
                      <div class="col-md-6">
                         <div class="input-group">
-                           <input type="text" placeholder="https://" name="site_videoads_source" dir="ltr" value="{{{$_setting['site_videoads_source'] or ''}}}" class="form-control">
+                           <input type="text" placeholder="https://" name="site_videoads_source" dir="ltr" value="{{{$_setting['site_videoads_source'] ?? ''}}}" class="form-control">
                         </div>
                      </div>
                   </div>
@@ -610,7 +610,7 @@
                      <label class="col-md-3 control-label">{!! trans('admin.text') !!}</label>
                      <div class="col-md-6">
                         <div class="input-group">
-                           <input type="text" name="site_videoads_title" dir="ltr" value="{{{$_setting['site_videoads_title'] or ''}}}" class="form-control">
+                           <input type="text" name="site_videoads_title" dir="ltr" value="{{{$_setting['site_videoads_title'] ?? ''}}}" class="form-control">
                         </div>
                      </div>
                   </div>
@@ -630,7 +630,7 @@
                      <label class="col-md-3 control-label">{{{ trans('admin.minimum_time_to_skip') }}}</label>
                      <div class="col-md-3">
                         <div class="input-group">
-                           <input type="number" class="spinner-input form-control text-center" name="site_videoads_time" value="{{{ $_setting['site_videoads_time'] or 0 }}}" maxlength="3">
+                           <input type="number" class="spinner-input form-control text-center" name="site_videoads_time" value="{{{ $_setting['site_videoads_time'] ?? 0 }}}" maxlength="3">
                            <span class="input-group-append"><label class="input-group-text">Seconds</label></span>
                         </div>
                      </div>
@@ -652,7 +652,7 @@
                      <div class="col-md-6">
                         <div class="input-group">
                            <span class="input-group-prepend cu-p view-selected" data-toggle="modal" data-target="#ImageModal" data-whatever="main_page_slide"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                           <input type="text" name="main_page_slide" dir="ltr" placeholder="Displays as homepage header background (1920*500px)" value="{{{$_setting['main_page_slide'] or ''}}}" class="form-control">
+                           <input type="text" name="main_page_slide" dir="ltr" placeholder="Displays as homepage header background (1920*500px)" value="{{{$_setting['main_page_slide'] ?? ''}}}" class="form-control">
                            <span class="input-group-append  cu-p click-for-upload"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                         </div>
                      </div>
@@ -660,37 +660,37 @@
                   <div class="form-group">
                      <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                      <div class="col-md-6">
-                        <input type="text" class="form-control text-center" name="main_page_slide_title" value="{{{ $_setting['main_page_slide_title'] or '' }}}" />
+                        <input type="text" class="form-control text-center" name="main_page_slide_title" value="{{{ $_setting['main_page_slide_title'] ?? '' }}}" />
                      </div>
                   </div>
                   <div class="form-group">
                      <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.description') }}}</label>
                      <div class="col-md-6">
-                        <textarea rows="5" class="form-control text-center" name="main_page_slide_text">{{{ $_setting['main_page_slide_text'] or '' }}}</textarea>
+                        <textarea rows="5" class="form-control text-center" name="main_page_slide_text">{{{ $_setting['main_page_slide_text'] ?? '' }}}</textarea>
                      </div>
                   </div>
                   <div class="form-group">
                      <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.first_button') }}}</label>
                      <div class="col-md-6">
-                        <input type="text" class="form-control text-center" name="main_page_slide_btn_1_text" value="{{{ $_setting['main_page_slide_btn_1_text'] or '' }}}" />
+                        <input type="text" class="form-control text-center" name="main_page_slide_btn_1_text" value="{{{ $_setting['main_page_slide_btn_1_text'] ?? '' }}}" />
                      </div>
                   </div>
                   <div class="form-group">
                      <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.second_button') }}}</label>
                      <div class="col-md-6">
-                        <input type="text" class="form-control text-center" name="main_page_slide_btn_2_text" value="{{{ $_setting['main_page_slide_btn_2_text'] or '' }}}" />
+                        <input type="text" class="form-control text-center" name="main_page_slide_btn_2_text" value="{{{ $_setting['main_page_slide_btn_2_text'] ?? '' }}}" />
                      </div>
                   </div>
                   <div class="form-group">
                      <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.first_button_link') }}}</label>
                      <div class="col-md-6">
-                        <input type="text" class="form-control text-center" name="main_page_slide_btn_1_url" value="{{{ $_setting['main_page_slide_btn_1_url'] or '' }}}" />
+                        <input type="text" class="form-control text-center" name="main_page_slide_btn_1_url" value="{{{ $_setting['main_page_slide_btn_1_url'] ?? '' }}}" />
                      </div>
                   </div>
                   <div class="form-group">
                      <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.secound_button_link') }}}</label>
                      <div class="col-md-6">
-                        <input type="text" class="form-control text-center" name="main_page_slide_btn_2_url" value="{{{ $_setting['main_page_slide_btn_2_url'] or '' }}}" />
+                        <input type="text" class="form-control text-center" name="main_page_slide_btn_2_url" value="{{{ $_setting['main_page_slide_btn_2_url'] ?? '' }}}" />
                      </div>
                   </div>
                   <div class="form-group">

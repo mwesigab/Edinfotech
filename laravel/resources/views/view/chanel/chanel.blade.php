@@ -3,21 +3,21 @@
     {!! $setting['site']['site_title'].'Channel- '.$chanel->title !!}
 @endsection
 @section('page')
-<div class="container-fluid profile-top-background" style="background: url('{{{ $chanel->image or '' }}}');">
+<div class="container-fluid profile-top-background" style="background: url('{{{ $chanel->image ?? '' }}}');">
     <div class="col-md-3 col-xs-12">
 
     </div>
     <div class="col-md-9 col-xs-12 bottom-section">
             <span>
-                <label class="profile-name">{{{ $chanel->title or '' }}}</label>
+                <label class="profile-name">{{{ $chanel->title ?? '' }}}</label>
             @if($follow == 0)
-                <a class="btn btn-red btn-hover-animate" href="/chanel/follow/{{{ $chanel->user_id or '' }}}"><span class="homeicon mdi mdi-plus"></span> {{{ trans('main.follow') }}}</a>
+                <a class="btn btn-red btn-hover-animate" href="/chanel/follow/{{{ $chanel->user_id ?? '' }}}"><span class="homeicon mdi mdi-plus"></span> {{{ trans('main.follow') }}}</a>
             @else
-                <a class="btn btn-red btn-hover-animate" href="/chanel/unfollow/{{{ $chanel->user_id or '' }}}"><span class="homeicon mdi mdi-close"></span>{{{ trans('main.unfollow') }}}</a>
+                <a class="btn btn-red btn-hover-animate" href="/chanel/unfollow/{{{ $chanel->user_id ?? '' }}}"><span class="homeicon mdi mdi-close"></span>{{{ trans('main.unfollow') }}}</a>
             @endif
-                <label class="buttons"><span class="homeicon mdi mdi-account-heart"></span><p>{{{ $follow or '0' }}} {{{ trans('main.followers') }}}</p></label>
-                <label class="buttons"><span class="homeicon mdi mdi-library-video"></span><p>{{{ $chanel->contents_count or 0 }}} {{{ trans('main.courses') }}}</p></label>
-                <label class="buttons"><span class="homeicon mdi mdi-clock"></span><p class="duration-f">{{{ $duration or '0' }}}&nbsp;{{{ trans('main.minutes_stat') }}}</p></label>
+                <label class="buttons"><span class="homeicon mdi mdi-account-heart"></span><p>{{{ $follow ?? '0' }}} {{{ trans('main.followers') }}}</p></label>
+                <label class="buttons"><span class="homeicon mdi mdi-library-video"></span><p>{{{ $chanel->contents_count ?? 0 }}} {{{ trans('main.courses') }}}</p></label>
+                <label class="buttons"><span class="homeicon mdi mdi-clock"></span><p class="duration-f">{{{ $duration ?? '0' }}}&nbsp;{{{ trans('main.minutes_stat') }}}</p></label>
     </div>
 </div>
 
@@ -27,12 +27,12 @@
             @if($chanel->formal == 'ok')
                 <label title="Formal" class="formal-chanel"><i class="mdi mdi-check-circle"></i></label>
             @endif
-            <img class="sbox3" src="{{{ $chanel->avatar or '' }}}"/>
+            <img class="sbox3" src="{{{ $chanel->avatar ?? '' }}}"/>
             <div class="rate-section raty"></div>
         </div>
         <div class="location-section col-md-10 col-xs-12">
-            <div><b>{!! $chanel->description or '' !!}</b></div>
-            <div><b><a href="<?=url('/').'/'.Request::path();?>" class="uname-f">{{{ $chanel->username or '' }}}</a></b></div>
+            <div><b>{!! $chanel->description ?? '' !!}</b></div>
+            <div><b><a href="<?=url('/').'/'.Request::path();?>" class="uname-f">{{{ $chanel->username ?? '' }}}</a></b></div>
         </div>
     </div>
 </div>
@@ -55,14 +55,14 @@
                             @if($vid->content != null)
                                 @php $meta = arrayToList($vid->content->metas,'option','value'); @endphp
                                 <div class="col-md-3 col-sm-6 col-xs-6 tab-con">
-                                    <a href="/product/{{{ $vid->content->id or '' }}}" title="{{{ $vid->content->title or '' }}}" class="content-box">
-                                        <img src="{{{ $meta['thumbnail'] or '' }}}"/>
+                                    <a href="/product/{{{ $vid->content->id ?? '' }}}" title="{{{ $vid->content->title ?? '' }}}" class="content-box">
+                                        <img src="{{{ $meta['thumbnail'] ?? '' }}}"/>
 										<h3>{!! str_limit($vid->content->title,35,'...') !!}</h3>
                                         <div class="footer">
-                                            <label class="pull-right">{{{ $meta['duration'] or '' }}} {{{ trans('main.min') }}}</label>
+                                            <label class="pull-right">{{{ $meta['duration'] ?? '' }}} {{{ trans('main.min') }}}</label>
 											<span class="boxicon mdi mdi-clock pull-right"></span>
 											<span class="boxicon mdi mdi-wallet pull-left"></span>
-                                            <label class="pull-left">{{{ currencySign() }}}{{{ $meta['price'] or '0' }}}</label>
+                                            <label class="pull-left">{{{ currencySign() }}}{{{ $meta['price'] ?? '0' }}}</label>
                                         </div>
                                     </a>
                                 </div>

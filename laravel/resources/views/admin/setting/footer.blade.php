@@ -21,13 +21,13 @@
                   <div class="form-group">
                      <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                      <div class="col-md-10">
-                        <input type="text" class="form-control text-center" dir="ltr" name="footer_col1_title" value="{{{ $_setting['footer_col1_title'] or '' }}}" />
+                        <input type="text" class="form-control text-center" dir="ltr" name="footer_col1_title" value="{{{ $_setting['footer_col1_title'] ?? '' }}}" />
                      </div>
                   </div>
 
                   <div class="form-group">
                      <div class="col-md-12">
-                        <textarea class="summernote" name="footer_col1_content" >{!! $_setting['footer_col1_content'] or '' !!}</textarea>
+                        <textarea class="summernote" name="footer_col1_content" >{!! $_setting['footer_col1_content'] ?? '' !!}</textarea>
                      </div>
                   </div>
 
@@ -45,13 +45,13 @@
                   <div class="form-group">
                      <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                      <div class="col-md-10">
-                        <input type="text" class="form-control text-center" dir="ltr" name="footer_col2_title" value="{{{ $_setting['footer_col2_title'] or '' }}}" />
+                        <input type="text" class="form-control text-center" dir="ltr" name="footer_col2_title" value="{{{ $_setting['footer_col2_title'] ?? '' }}}" />
                      </div>
                   </div>
 
                   <div class="form-group">
                      <div class="col-md-12">
-                        <textarea class="summernote" name="footer_col2_content" >{!! $_setting['footer_col2_content'] or '' !!}</textarea>
+                        <textarea class="summernote" name="footer_col2_content" >{!! $_setting['footer_col2_content'] ?? '' !!}</textarea>
                      </div>
                   </div>
 
@@ -69,13 +69,13 @@
                   <div class="form-group">
                      <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                      <div class="col-md-10">
-                        <input type="text" class="form-control text-center" dir="ltr" name="footer_col3_title" value="{{{ $_setting['footer_col3_title'] or '' }}}" />
+                        <input type="text" class="form-control text-center" dir="ltr" name="footer_col3_title" value="{{{ $_setting['footer_col3_title'] ?? '' }}}" />
                      </div>
                   </div>
 
                   <div class="form-group">
                      <div class="col-md-12">
-                        <textarea class="summernote" name="footer_col3_content" >{!! $_setting['footer_col3_content'] or '' !!}</textarea>
+                        <textarea class="summernote" name="footer_col3_content" >{!! $_setting['footer_col3_content'] ?? '' !!}</textarea>
                      </div>
                   </div>
 
@@ -93,13 +93,13 @@
                   <div class="form-group">
                      <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                      <div class="col-md-10">
-                        <input type="text" class="form-control text-center" dir="ltr" name="footer_col4_title" value="{{{ $_setting['footer_col4_title'] or '' }}}" />
+                        <input type="text" class="form-control text-center" dir="ltr" name="footer_col4_title" value="{{{ $_setting['footer_col4_title'] ?? '' }}}" />
                      </div>
                   </div>
 
                   <div class="form-group">
                      <div class="col-md-12">
-                        <textarea class="summernote" name="footer_col4_content" >{!! $_setting['footer_col4_content'] or '' !!}</textarea>
+                        <textarea class="summernote" name="footer_col4_content" >{!! $_setting['footer_col4_content'] ?? '' !!}</textarea>
                      </div>
                   </div>
 

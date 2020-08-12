@@ -102,7 +102,7 @@
                      <div class="form-group">
                         <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.not_identity_verified_alert') }}}</label>
                         <div class="col-md-9">
-                           <textarea class="form-control h-400" name="seller_not_apply">{{{ $_setting['seller_not_apply'] or '' }}}</textarea>
+                           <textarea class="form-control h-400" name="seller_not_apply">{{{ $_setting['seller_not_apply'] ?? '' }}}</textarea>
                         </div>
                      </div>
                      <div class="form-group">

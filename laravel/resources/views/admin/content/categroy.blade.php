@@ -33,10 +33,10 @@
                                 <tr>
                                     <td class="text-center"><img src="{{{ $list->image }}}" class="w-24 h-a" /></td>
                                     <td>{{{ $list->title }}}</td>
-                                    <td class="text-center">{{{ $list->class or '' }}}</td>
+                                    <td class="text-center">{{{ $list->class ?? '' }}}</td>
                                     <td class="text-center">{{{ $list->commision }}}</td>
-                                    <td class="text-center"><a href="/admin/content/category/childs/{{{ $list->id or '' }}}">{{{ $list->childs_count or '0' }}}</a></td>
-                                    <td class="text-center"><a href="/admin/content/category/filter/{{{ $list->id or '' }}}">{{{ $list->filters_count or '0' }}}</a></td>
+                                    <td class="text-center"><a href="/admin/content/category/childs/{{{ $list->id ?? '' }}}">{{{ $list->childs_count ?? '0' }}}</a></td>
+                                    <td class="text-center"><a href="/admin/content/category/filter/{{{ $list->id ?? '' }}}">{{{ $list->filters_count ?? '0' }}}</a></td>
                                     <td class="text-center">
                                         <a href="/admin/content/category/edit/{{{ $list->id }}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                         <a href="/admin/content/category/filter/{{{ $list->id }}}" title="Manage Filters"><i class="fa fa-tags" aria-hidden="true"></i></a>
@@ -56,7 +56,7 @@
                                     <select name="parent_id" class="form-control">
                                         <option value="0">{{{ trans('admin.main_category') }}} {{{ trans('admin.select_if') }}}</option>
                                         @foreach($lists as $parent)
-                                            <option value="{{{ $parent->id or '' }}}">{{{ $parent->title or '' }}}</option>
+                                            <option value="{{{ $parent->id ?? '' }}}">{{{ $parent->title ?? '' }}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -161,7 +161,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.extra_commission') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="number" name="commision" min="0" max="100" value="{{{$item->commision or 0}}}" placeholder="%" class="form-control text-center">
+                                    <input type="number" name="commision" min="0" max="100" value="{{{$item->commision ?? 0}}}" placeholder="%" class="form-control text-center">
                                 </div>
                             </div>
 

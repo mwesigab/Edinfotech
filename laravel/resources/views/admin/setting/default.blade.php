@@ -15,7 +15,7 @@
                   <div class="col-md-6">
                      <div class="input-group">
                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="default_user_avatar"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                        <input type="text" placeholder="Displays as default users profile picture" name="default_user_avatar" dir="ltr" value="{{{$_setting['default_user_avatar'] or ''}}}" class="form-control">
+                        <input type="text" placeholder="Displays as default users profile picture" name="default_user_avatar" dir="ltr" value="{{{$_setting['default_user_avatar'] ?? ''}}}" class="form-control">
                         <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                      </div>
                   </div>
@@ -28,7 +28,7 @@
                         <span class="input-group-prepend cu-p view-selected" data-toggle="modal" data-target="#ImageModal" data-whatever="default_user_cover" >
                            <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                         </span>
-                        <input type="text" name="default_user_cover" dir="ltr" placeholder="Displays as user profile header background (1920*200px)" value="{{{$_setting['default_user_cover'] or ''}}}" class="form-control">
+                        <input type="text" name="default_user_cover" dir="ltr" placeholder="Displays as user profile header background (1920*200px)" value="{{{$_setting['default_user_cover'] ?? ''}}}" class="form-control">
                         <span class="input-group-append click-for-upload cu-p">
                            <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                         </span>
@@ -41,7 +41,7 @@
                   <div class="col-md-6">
                      <div class="input-group">
                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="default_chanel_icon"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                        <input type="text" name="default_chanel_icon" dir="ltr" placeholder="Displays as default channel icon" value="{{{$_setting['default_chanel_icon'] or ''}}}" class="form-control">
+                        <input type="text" name="default_chanel_icon" dir="ltr" placeholder="Displays as default channel icon" value="{{{$_setting['default_chanel_icon'] ?? ''}}}" class="form-control">
                         <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                      </div>
                   </div>
@@ -52,7 +52,7 @@
                   <div class="col-md-6">
                      <div class="input-group">
                         <span class="cu-p input-group-prepend view-selected" data-toggle="modal" data-target="#ImageModal" data-whatever="default_chanel_cover"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                        <input type="text" placeholder="Displays as channel header background (1920*200px)" name="default_chanel_cover" dir="ltr" value="{{{$_setting['default_chanel_cover'] or ''}}}" class="form-control">
+                        <input type="text" placeholder="Displays as channel header background (1920*200px)" name="default_chanel_cover" dir="ltr" value="{{{$_setting['default_chanel_cover'] ?? ''}}}" class="form-control">
                         <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                      </div>
                   </div>
@@ -64,7 +64,7 @@
                   <div class="col-md-6">
                      <div class="input-group">
                         <span class="cu-p input-group-prepend view-selected" data-toggle="modal" data-target="#ImageModal" data-whatever="default_chanel_cover"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                        <input type="text" placeholder="Displays as Customer Dashboard Cover (1920*200px)" name="default_customer_dashboard_cover" dir="ltr" value="{{{$_setting['default_customer_dashboard_cover'] or ''}}}" class="form-control">
+                        <input type="text" placeholder="Displays as Customer Dashboard Cover (1920*200px)" name="default_customer_dashboard_cover" dir="ltr" value="{{{$_setting['default_customer_dashboard_cover'] ?? ''}}}" class="form-control">
                         <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                      </div>
                   </div>

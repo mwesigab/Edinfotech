@@ -12,7 +12,7 @@
                             <div class="summary">
                                 <h4 class="title">{{{  trans('admin.total_users') }}}</h4>
                                 <div class="info">
-                                    <strong class="amount">{{{ $userCount or 0 }}}</strong>
+                                    <strong class="amount">{{{ $userCount ?? 0 }}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -31,7 +31,7 @@
                             <div class="summary">
                                 <h4 class="title">{{{  trans('admin.total_employees') }}}</h4>
                                 <div class="info">
-                                    <strong class="amount">{{{ $adminCount or 0 }}}</strong>
+                                    <strong class="amount">{{{ $adminCount ?? 0 }}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -50,7 +50,7 @@
                             <div class="summary">
                                 <h4 class="title">{{{  trans('admin.total_customers') }}}</h4>
                                 <div class="info">
-                                    <strong class="amount">{{{ $buyerCount or 0 }}}</strong>
+                                    <strong class="amount">{{{ $buyerCount ?? 0 }}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -69,7 +69,7 @@
                         <div class="summary">
                             <h4 class="title">{{{  trans('admin.total_sellers') }}}</h4>
                             <div class="info">
-                                <strong class="amount">{{{ $sellerCount or 0 }}}</strong>
+                                <strong class="amount">{{{ $sellerCount ?? 0 }}}</strong>
                             </div>
                         </div>
                         <div class="summary-footer">

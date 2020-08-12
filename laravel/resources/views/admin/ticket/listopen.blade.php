@@ -9,8 +9,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="date" id="fsdate" class="text-center form-control" name="fsdate" value="{!! $_GET['fsdate'] or '' !!}" placeholder="Start Date">
-                            <input type="hidden" id="fdate" name="fdate" value="{!! $_GET['fdate'] or '' !!}">
+                            <input type="date" id="fsdate" class="text-center form-control" name="fsdate" value="{!! $_GET['fsdate'] ?? '' !!}" placeholder="Start Date">
+                            <input type="hidden" id="fdate" name="fdate" value="{!! $_GET['fdate'] ?? '' !!}">
                             <span class="input-group-append fdatebtn" id="fdatebtn">
                                 <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </span>
@@ -18,8 +18,8 @@
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="date" id="lsdate" class="text-center form-control" name="lsdate" value="{!! $_GET['lsdate'] or '' !!}" placeholder="End Date">
-                            <input type="hidden" id="ldate" name="ldate" value="{!! $_GET['ldate'] or '' !!}">
+                            <input type="date" id="lsdate" class="text-center form-control" name="lsdate" value="{!! $_GET['lsdate'] ?? '' !!}" placeholder="End Date">
+                            <input type="hidden" id="ldate" name="ldate" value="{!! $_GET['ldate'] ?? '' !!}">
                             <span class="input-group-addon ldatebtn" id="ldatebtn">
                                 <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </span>
@@ -30,7 +30,7 @@
                             <select name="user" data-plugin-selectTwo class="form-control populate">
                                 <option value="">{{{ trans('admin.all_users') }}}</option>
                                 @foreach($users as $user)
-                                    <option value="{{{ $user->id or 0 }}}" @if(isset($_GET['user']) && $_GET['user']==$user->id) selected @endif>{{{ $user->username or $user->name }}}</option>
+                                    <option value="{{{ $user->id ?? 0 }}}" @if(isset($_GET['user']) && $_GET['user']==$user->id) selected @endif>{{{ $user->username ?? $user->name }}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -66,17 +66,17 @@
                             <td class="text-center">{{{ date('d F Y : H:i',$item->create_at) }}}</td>
                             <td class="text-center">{{{ date('d F Y : H:i',$item->update_at) }}}</td>
                             <td class="text-center">
-                                <a title="{{{ $item->user->name or '' }}}" href="/profile/{{{ $item->user->id or 0 }}}">{{{ $item->user->username or '' }}}</a>
+                                <a title="{{{ $item->user->name ?? '' }}}" href="/profile/{{{ $item->user->id ?? 0 }}}">{{{ $item->user->username ?? '' }}}</a>
                             </td>
                             <td class="text-center">
                                 @if($item->users != null)
                                     @foreach($item->users as $u)
-                                        <a title="{{{ $u->user->name or '' }}}" href="/profile/{{{ $u->user->id or 0 }}}">{{{ $u->user->username or '' }}}</a>
+                                        <a title="{{{ $u->user->name ?? '' }}}" href="/profile/{{{ $u->user->id ?? 0 }}}">{{{ $u->user->username ?? '' }}}</a>
                                         <br>
                                     @endforeach
                                 @endif
                             </td>
-                            <td class="text-center">{{{ $item->category->title or '' }}}</td>
+                            <td class="text-center">{{{ $item->category->title ?? '' }}}</td>
                             <td class="text-center">
                                 @if($item->mode == 'open')
                                     <b class="f-w-b">{{{ trans('admin.pending') }}}</b>

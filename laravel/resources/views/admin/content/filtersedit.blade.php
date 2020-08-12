@@ -23,10 +23,10 @@
                             <tbody>
                             @foreach($lists as $list)
                                 <tr>
-                                    <td>{{{ $list->filter or '' }}}</td>
+                                    <td>{{{ $list->filter ?? '' }}}</td>
                                     <td class="text-center">
-                                        <a href="/admin/content/category/filter/tag/{{{ $list->id or '' }}}" title="Filter Tags"><i class="fa fa-tags" aria-hidden="true"></i></a>
-                                        <a href="/admin/content/category/filter/{{{ $id or '' }}}/edit/{{{ $list->id }}}#edit" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                        <a href="/admin/content/category/filter/tag/{{{ $list->id ?? '' }}}" title="Filter Tags"><i class="fa fa-tags" aria-hidden="true"></i></a>
+                                        <a href="/admin/content/category/filter/{{{ $id ?? '' }}}/edit/{{{ $list->id }}}#edit" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                         <a href="#" data-href="/admin/content/category/filter/delete/{{{ $list->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
@@ -37,11 +37,11 @@
                     <div id="edit" class="tab-pane ">
                         <form method="post" action="/admin/content/category/filter/store/edit" class="form-horizontal form-bordered">
 
-                            <input type="hidden" name="id" value="{{{ $item->id or '' }}}">
+                            <input type="hidden" name="id" value="{{{ $item->id ?? '' }}}">
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="filter" value="{{{ $item->filter or '' }}}" class="form-control" required>
+                                    <input type="text" name="filter" value="{{{ $item->filter ?? '' }}}" class="form-control" required>
                                 </div>
                             </div>
 
@@ -49,7 +49,7 @@
                                 <label class="col-md-3 control-label">{{{ trans('admin.sort') }}}</label>
                                 <div class="col-md-6" data-plugin-spinner data-plugin-options='{ "value":0, "min": 0, "max": 100 }'>
                                     <div class="input-group w-150">
-                                        <input type="number" name="sort" value="{{{ $item->sort or '' }}}" class="spinner-input form-control" maxlength="3" readonly>
+                                        <input type="number" name="sort" value="{{{ $item->sort ?? '' }}}" class="spinner-input form-control" maxlength="3" readonly>
                                         <span type="button"  class="input-group-addon spinner-up cu-p">
                                         <i class="fa fa-angle-up"></i>
                                     </span>
@@ -72,7 +72,7 @@
                     <div id="newitem" class="tab-pane ">
                         <form method="post" action="/admin/content/category/filter/store/new" class="form-horizontal form-bordered">
 
-                            <input type="hidden" name="category_id" value="{{{ $id or '' }}}">
+                            <input type="hidden" name="category_id" value="{{{ $id ?? '' }}}">
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.filter_title') }}}</label>

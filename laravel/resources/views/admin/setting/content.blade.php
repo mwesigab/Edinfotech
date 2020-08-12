@@ -64,14 +64,14 @@
                <div class="form-group">
                   <label class="col-md-5 control-label" for="inputDefault">{{{ trans('admin.slider_time') }}}</label>
                   <div class="col-md-4">
-                     <input type="number" class="form-control text-center" name="main_page_slider_timer" value="{{{ $_setting['main_page_slider_timer'] or '' }}}" placeholder="ms"/>
+                     <input type="number" class="form-control text-center" name="main_page_slider_timer" value="{{{ $_setting['main_page_slider_timer'] ?? '' }}}" placeholder="ms"/>
                   </div>
                </div>
 
                <div class="form-group">
                   <label class="col-md-5 control-label">{{{ trans('admin.items_in_category_page') }}}</label>
                   <div class="col-md-4">
-                     <input type="number" class="text-center form-control" name="category_content_count" value="{{{ $_setting['category_content_count'] or 0 }}}" maxlength="3">
+                     <input type="number" class="text-center form-control" name="category_content_count" value="{{{ $_setting['category_content_count'] ?? 0 }}}" maxlength="3">
                   </div>
                </div>
 

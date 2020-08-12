@@ -4,22 +4,22 @@
 @section('tab')
     <div class="h-20"></div>
     <div class="h-10"></div>
-    <form method="post" action="/user/article/edit/store/{{{ $article->id or 0 }}}" class="form-horizontal">
+    <form method="post" action="/user/article/edit/store/{{{ $article->id ?? 0 }}}" class="form-horizontal">
         <div class="form-group">
             <label class="control-label col-md-1 tab-con">{{{ trans('main.title') }}}</label>
             <div class="col-md-6 tab-con">
-                <input type="text" value="{{{ $article->title or '' }}}" class="form-control" name="title">
+                <input type="text" value="{{{ $article->title ?? '' }}}" class="form-control" name="title">
             </div>
             <label class="control-label col-md-1 tab-con">{{{ trans('main.category') }}}</label>
             <div class="col-md-4 tab-con">
                 <select class="form-control font-s" name="cat_id">
                     @foreach(contentMenu() as $menu)
-                        <optgroup label="{{{ $menu['title'] or '' }}}&nbsp;11{{{ count($menu['submenu']) }}}">
+                        <optgroup label="{{{ $menu['title'] ?? '' }}}&nbsp;11{{{ count($menu['submenu']) }}}">
                             @if(count($menu['submenu']) == 0)
-                                <option value="{{{ $menu['id'] or '' }}}" @if($menu['id'] == $article->cat_id) selected @endif>{{{ $menu['title'] or '' }}}</option>
+                                <option value="{{{ $menu['id'] ?? '' }}}" @if($menu['id'] == $article->cat_id) selected @endif>{{{ $menu['title'] ?? '' }}}</option>
                             @else
                                 @foreach($menu['submenu'] as $sub)
-                                    <option value="{{{ $sub['id'] or '' }}}" @if($sub['id'] == $article->cat_id) selected @endif>{{{ $sub['title'] or '' }}}</option>
+                                    <option value="{{{ $sub['id'] ?? '' }}}" @if($sub['id'] == $article->cat_id) selected @endif>{{{ $sub['title'] ?? '' }}}</option>
                                 @endforeach
                             @endif
                         </optgroup>
@@ -30,13 +30,13 @@
         <div class="form-group">
             <label class="control-label col-md-1 tab-con">{{{ trans('main.article_summary') }}}</label>
             <div class="col-md-11 tab-con">
-                <textarea class="ckeditor" name="pre_text">{{{ $article->pre_text or '' }}}</textarea>
+                <textarea class="ckeditor" name="pre_text">{{{ $article->pre_text ?? '' }}}</textarea>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-md-1 tab-con">{{{ trans('main.description') }}}</label>
             <div class="col-md-11 tab-con">
-                <textarea class="ckeditor" name="text">{{{ $article->text or '' }}}</textarea>
+                <textarea class="ckeditor" name="text">{{{ $article->text ?? '' }}}</textarea>
             </div>
         </div>
         <div class="form-group">
@@ -44,7 +44,7 @@
             <div class="col-md-5 tab-con">
                 <div class="input-group">
                     <span class="input-group-addon view-selected img-icon-s" data-toggle="modal" data-target="#ImageModal" data-whatever="image"><span class="formicon mdi mdi-eye"></span></span>
-                    <input type="text" name="image" value="{{{ $article->image or '' }}}" dir="ltr" class="form-control">
+                    <input type="text" name="image" value="{{{ $article->image ?? '' }}}" dir="ltr" class="form-control">
                     <span class="input-group-addon click-for-upload img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                 </div>
             </div>
@@ -64,7 +64,7 @@
 
 @endsection
 @section('script')
-<script>$('#newarticle').text('{{{ $article->title or '' }}}')</script>
+<script>$('#newarticle').text('{{{ $article->title ?? '' }}}')</script>
 <script type="text/javascript" src="/assets/ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {

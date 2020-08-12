@@ -52,7 +52,7 @@
                         <select name="user_id" data-plugin-selectTwo class="form-control populate" required>
                             <option value="">{{{ trans('admin.business_account') }}}</option>
                             @foreach($users as $user)
-                                <option value="{{{ $user->id or 0 }}}" @if(isset($_GET['user']) && $_GET['user']==$user->id) selected @endif>{{{ $user->name or $user->username }}}</option>
+                                <option value="{{{ $user->id ?? 0 }}}" @if(isset($_GET['user']) && $_GET['user']==$user->id) selected @endif>{{{ $user->name ?? $user->username }}}</option>
                             @endforeach
                         </select>
                     </div>

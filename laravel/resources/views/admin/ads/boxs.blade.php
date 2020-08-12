@@ -72,7 +72,7 @@
                 <tbody>
                     @foreach($lists as $list)
                         <tr>
-                            <th >{{{ $list->title or '' }}}</th>
+                            <th >{{{ $list->title ?? '' }}}</th>
                             <th class="text-center">
                                 <?php
                                 switch($list->position){

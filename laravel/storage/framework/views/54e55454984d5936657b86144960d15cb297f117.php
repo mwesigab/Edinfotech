@@ -1,15 +1,17 @@
-<?php $__env->startSection('title'); ?>
-    <?php echo e(isset($setting['site']['site_title']) ? $setting['site']['site_title'] : ''); ?>
 
-    - <?php echo e(isset($product->title) ? $product->title : ''); ?>
+<?php $__env->startSection('title'); ?>
+    <?php echo e($setting['site']['site_title'] ?? ''); ?>
+
+    - <?php echo e($product->title ?? ''); ?>
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('page'); ?>
+<?php $student = unserialize(session('Student')) ?>
     <div class="container-fluid">
         <div class="row product-header">
             <div class="container">
                 <div class="col-xs-12 col-md-8 tab-con">
-                    <h2><?php echo e(isset($product->title) ? $product->title : ''); ?></h2>
+                    <h2><?php echo e($product->title ?? ''); ?></h2>
                 </div>
                 <div class="col-xs-12 col-md-4 text-left">
                     <div class="raty-product-section">
@@ -35,7 +37,7 @@
                     <div class="col-md-2 col-xs-12 tab-con">
                         <div class="row">
                             <span class="off-btn">
-                                <label>%<?php echo e(isset($product->discount->off) ? $product->discount->off : 0); ?></label>
+                                <label>%<?php echo e($product->discount->off ?? 0); ?></label>
                                 <label><?php echo e(trans('main.discount')); ?></label>
                             </span>
                         </div>
@@ -128,7 +130,7 @@
                     <div class="col-md-2 col-xs-12">
                         <div class="row">
                             <span class="off-btn">
-                                <label>%<?php echo e(isset($product->category->discount->off) ? $product->category->discount->off : 0); ?></label>
+                                <label>%<?php echo e($product->category->discount->off ?? 0); ?></label>
                                 <label><?php echo e(trans('main.discount')); ?></label>
                             </span>
                         </div>
@@ -213,11 +215,11 @@
             <div class="container">
                 <div class="col-md-4 col-xs-12 course_details">
                     <div class="product-details-box">
-                        <span class="proicon mdi mdi-apps"></span><span class="pn-category"><?php echo e(isset($product->category->title) ? $product->category->title : ''); ?></span>
+                        <span class="proicon mdi mdi-apps"></span><span class="pn-category"><?php echo e($product->category->title ?? ''); ?></span>
                     </div>
-                    <?php  $Duration = 0;  ?>
+                    <?php $Duration = 0; ?>
                     <?php $__currentLoopData = $parts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $part): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php  $Duration = $Duration + $part['duration'];  ?>
+                        <?php $Duration = $Duration + $part['duration']; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <div class="product-details-box">
                         <span class="proicon mdi mdi-alarm"></span><span><?php echo e(convertToHoursMins($Duration,'%01d hour %02d min')); ?></span>
@@ -227,18 +229,19 @@
                     </div>
                     <div class="product-details-box">
                         <span class="proicon mdi mdi-database"></span><span>
-                            <?php  $MB = 0;  ?>
+                            <?php $MB = 0; ?>
                             <?php $__currentLoopData = $parts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $part): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php  $MB = $MB + $part['size'];  ?>
+                                <?php $MB = $MB + $part['size']; ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            <?php echo e(isset($MB) ? $MB : '0'); ?>
+                            <?php echo e($MB ?? '0'); ?>
 
                             <?php echo e(trans('main.mb')); ?>
 
                         </span>
                     </div>
+                    <?php if(!$student): ?>
                     <div class="product-details-box">
-						<span class="proicon mdi mdi-headset"></span>
+                        <span class="proicon mdi mdi-headset"></span>
                         <span>
                             <?php if($product->support == 1): ?>
                                 <?php echo e('Vendor supports this course'); ?>
@@ -249,6 +252,7 @@
                             <?php endif; ?>
                         </span>
                     </div>
+                    <?php endif; ?>
                     <div class="product-price-box">
 						<span class="proicon mdi mdi-wallet"></span>
                         <?php if(isset($meta['price']) && $product->price != 0): ?>
@@ -261,8 +265,8 @@
                     <div class="product-buy-selection">
                         <form>
                             <?php if(isset($user) && $product->user_id == $user['id']): ?>
-                                <a class="btn btn-orange product-btn-buy sbox3" id="buy-btn" href="/user/content/edit/<?php echo e(isset($product->id) ? $product->id : 0); ?>"><?php echo e(trans('main.edit_course')); ?></a>
-                                <a class="btn btn-blue product-btn-buy sbox3" id="buy-btn" href="/user/content/part/list/<?php echo e(isset($product->id) ? $product->id : 0); ?>"><?php echo e(trans('main.add_video')); ?></a>
+                                <a class="btn btn-orange product-btn-buy sbox3" id="buy-btn" href="/user/content/edit/<?php echo e($product->id ?? 0); ?>"><?php echo e(trans('main.edit_course')); ?></a>
+                                <a class="btn btn-blue product-btn-buy sbox3" id="buy-btn" href="/user/content/part/list/<?php echo e($product->id ?? 0); ?>"><?php echo e(trans('main.add_video')); ?></a>
                             <?php else: ?>
                             <?php if(!$buy): ?>
                                     <?php if($product->price != 0): ?>
@@ -317,7 +321,7 @@
                                 <div class="radio">
                                     <input type="radio" class="buy-mode" id="mode-1" value="credit" name="buyMode">
                                     &nbsp;
-                                    <label class="radio-label" for="mode-1"><?php echo e(trans('main.account_charge')); ?>&nbsp;<b id="credit-remain-modal">(<?php echo e(currencySign()); ?><?php echo e(isset($user['credit']) ? $user['credit'] : 0); ?>)</b></label>
+                                    <label class="radio-label" for="mode-1"><?php echo e(trans('main.account_charge')); ?>&nbsp;<b id="credit-remain-modal">(<?php echo e(currencySign()); ?><?php echo e($user['credit'] ?? 0); ?>)</b></label>
                                 </div>
                                 <?php if(get_option('gateway_paypal') == 1): ?>
                                     <div class="radio">
@@ -360,7 +364,7 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td class="text-center"><?php echo e(isset($meta['price']) ? $meta['price'] : 0); ?></td>
+                                            <td class="text-center"><?php echo e($meta['price'] ?? 0); ?></td>
                                             <?php if(isset($meta['price']) && $meta['price']>0 && price($product->id,$product->category->id,$meta['price'])>0): ?>
                                                 <td class="text-center"><?php echo e(round((($meta['price']-price($product->id,$product->category->id,$meta['price'])['price'])*100)/$meta['price'])); ?></td>
                                             <?php endif; ?>
@@ -382,7 +386,7 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td class="text-center"><?php echo e(isset($meta['post_price']) ? $meta['post_price'] : 0); ?></td>
+                                            <td class="text-center"><?php echo e($meta['post_price'] ?? 0); ?></td>
                                             <?php if(isset($meta['post_price']) && $meta['post_price']>0): ?>
                                                 <td class="text-center"><?php echo e(round((($meta['post_price']-price($product->id,$product->category->id,$meta['post_price'])['price'])*100)/$meta['post_price'])); ?></td>
                                                 <td class="text-center">۰</td>
@@ -411,17 +415,17 @@
                                             </div>
                                             <label class="control-label col-md-1 tab-con"><?php echo e(trans('main.city')); ?></label>
                                             <div class="col-md-5 tab-con">
-                                                <input type="text" name="city" value="<?php echo e(isset($userMeta['city']) ? $userMeta['city'] : ''); ?>" class="form-control">
+                                                <input type="text" name="city" value="<?php echo e($userMeta['city'] ?? ''); ?>" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-md-1 tab-con"><?php echo e(trans('main.address')); ?></label>
                                             <div class="col-md-5 tab-con">
-                                                <textarea name="address" rows="4" class="form-control"><?php echo e(isset($userMeta['address']) ? $userMeta['address'] : ''); ?></textarea>
+                                                <textarea name="address" rows="4" class="form-control"><?php echo e($userMeta['address'] ?? ''); ?></textarea>
                                             </div>
                                             <label class="control-label col-md-1 tab-con"><?php echo e(trans('main.zip_code')); ?></label>
                                             <div class="col-md-5 tab-con">
-                                                <input type="text" name="postalcode" value="<?php echo e(isset($userMeta['postalcode']) ? $userMeta['postalcode'] : ''); ?>" class="form-control text-center">
+                                                <input type="text" name="postalcode" value="<?php echo e($userMeta['postalcode'] ?? ''); ?>" class="form-control text-center">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -450,9 +454,9 @@
                                 <?php if(isset($user)): ?>
                                     <div id="modal-user-category">
                                         <span><?php echo e(trans('main.you_are_in')); ?></span>
-                                        <b><?php echo e(isset($user['category']['title']) ? $user['category']['title'] : ''); ?></b>
+                                        <b><?php echo e($user['category']['title'] ?? ''); ?></b>
                                         <span><?php echo e(trans('main.group_and')); ?></span>
-                                        <b><?php echo e(isset($user['category']['off']) ? $user['category']['off'] : 0); ?>٪</b>
+                                        <b><?php echo e($user['category']['off'] ?? 0); ?>٪</b>
                                         <span> <?php echo e(trans('main.extra_discount')); ?></span>
                                     </div>
                                 <?php endif; ?>
@@ -461,10 +465,10 @@
                                 <div class="modal-body">
                                     <h6 style="font-weight:bold;">You Can Subscribe..... Select Items</h6>
                                     <div class="h-10"></div>
-                                    <?php if($product->price_3 > 0): ?><a href="/product/subscribe/<?php echo $product->id; ?>/3/credit" p-id="<?php echo $product->id; ?>" s-type="3" class="btn-subscribe btn btn-custom">3 month : <?php echo currencySign(); ?><?php echo isset($product->price_3) ? $product->price_3 : ''; ?></a><?php endif; ?>
-                                    <?php if($product->price_6 > 0): ?><a href="/product/subscribe/<?php echo $product->id; ?>/6/credit" p-id="<?php echo $product->id; ?>" s-type="6" class="btn-subscribe btn btn-custom">6 month : <?php echo currencySign(); ?><?php echo isset($product->price_6) ? $product->price_6 : ''; ?></a><?php endif; ?>
-                                    <?php if($product->price_9 > 0): ?><a href="/product/subscribe/<?php echo $product->id; ?>/9/credit" p-id="<?php echo $product->id; ?>" s-type="9" class="btn-subscribe btn btn-custom">9 month : <?php echo currencySign(); ?><?php echo isset($product->price_9) ? $product->price_9 : ''; ?></a><?php endif; ?>
-                                    <?php if($product->price_12 > 0): ?><a href="/product/subscribe/<?php echo $product->id; ?>/12/credit" p-id="<?php echo $product->id; ?>" s-type="12" class="btn-subscribe btn btn-custom">12 month : <?php echo currencySign(); ?><?php echo isset($product->price_12) ? $product->price_12 : ''; ?></a><?php endif; ?>
+                                    <?php if($product->price_3 > 0): ?><a href="/product/subscribe/<?php echo $product->id; ?>/3/credit" p-id="<?php echo $product->id; ?>" s-type="3" class="btn-subscribe btn btn-custom">3 month : <?php echo currencySign(); ?><?php echo $product->price_3 ?? ''; ?></a><?php endif; ?>
+                                    <?php if($product->price_6 > 0): ?><a href="/product/subscribe/<?php echo $product->id; ?>/6/credit" p-id="<?php echo $product->id; ?>" s-type="6" class="btn-subscribe btn btn-custom">6 month : <?php echo currencySign(); ?><?php echo $product->price_6 ?? ''; ?></a><?php endif; ?>
+                                    <?php if($product->price_9 > 0): ?><a href="/product/subscribe/<?php echo $product->id; ?>/9/credit" p-id="<?php echo $product->id; ?>" s-type="9" class="btn-subscribe btn btn-custom">9 month : <?php echo currencySign(); ?><?php echo $product->price_9 ?? ''; ?></a><?php endif; ?>
+                                    <?php if($product->price_12 > 0): ?><a href="/product/subscribe/<?php echo $product->id; ?>/12/credit" p-id="<?php echo $product->id; ?>" s-type="12" class="btn-subscribe btn btn-custom">12 month : <?php echo currencySign(); ?><?php echo $product->price_12 ?? ''; ?></a><?php endif; ?>
                                 </div>
                             <?php endif; ?>
                             <div class="modal-footer">
@@ -479,7 +483,7 @@
                 </div>
                 <div class="col-md-8 col-xs-12 video-details">
                     <video id="myDiv" controls>
-                        <source src="<?php echo e(isset($partVideo) ? $partVideo : $meta['video']); ?>" type="video/mp4"/>
+                        <source src="<?php echo e($partVideo ?? $meta['video']); ?>" type="video/mp4"/>
                     </video>
                     <div class="video-details-section">
                         <?php if(count($product->favorite)>0): ?>
@@ -496,11 +500,11 @@
                             </a>
                             <a href="javascript:void(0);" class="course-id-s" title="Course Id.">
                                 <span class="playericon mdi mdi-library-video"></span>
-                                vt-<?php echo e(isset($product->id) ? $product->id : 0); ?>
+                                vt-<?php echo e($product->id ?? 0); ?>
 
                             </a>
                             <a class="pull-left views-s" title="Views" href="javascript:void(0)">
-                                <span ><?php echo e(isset($product->view) ? $product->view : '0'); ?></span>
+                                <span ><?php echo e($product->view ?? '0'); ?></span>
                                 <span class="playericon mdi mdi-eye"></span>
                             </a>
                     </div>
@@ -516,22 +520,22 @@
 					<div class="col-md-12">
                     <div class="product-user-box">
                         <?php $userM = arrayToList($product->user->usermetas,'option','value'); ?>
-                        <img class="img-box" src="<?php echo e(isset($userM['avatar']) ? $userM['avatar'] : get_option('default_user_avatar','')); ?>" class="img-responsive"/>
+                        <img class="img-box" src="<?php echo e($userM['avatar'] ?? get_option('default_user_avatar','')); ?>" class="img-responsive"/>
                         	<h3>
-							<a href="/profile/<?php echo e(isset($product->user->id) ? $product->user->id : ''); ?>"><span><?php echo e(isset($product->user->name) ? $product->user->name : ''); ?></span></a>
+							<a href="/profile/<?php echo e($product->user->id ?? ''); ?>"><span><?php echo e($product->user->name ?? ''); ?></span></a>
 							</h3>
                         <div class="user-description-box">
-                            <?php echo e(isset($userM['short_biography']) ? $userM['short_biography'] : ''); ?>
+                            <?php echo e($userM['short_biography'] ?? ''); ?>
 
                         </div>
                         <div class="text-center">
                             <?php $__currentLoopData = getRateById($product->user->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <img class="img-icon img-icon-s" src="<?php echo e(isset($rate['image']) ? $rate['image'] : ''); ?>" title="<?php echo e(isset($rate['description']) ? $rate['description'] : ''); ?> (<?php echo e(isset($rate['title']) ? $rate['title'] : ''); ?>)"/>
+                                <img class="img-icon img-icon-s" src="<?php echo e($rate['image'] ?? ''); ?>" title="<?php echo e($rate['description'] ?? ''); ?> (<?php echo e($rate['title'] ?? ''); ?>)"/>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     </div>
                     <div class="product-user-box-footer">
-                        <a href="/profile/<?php echo e(isset($product->user->id) ? $product->user->id : ''); ?>"><?php echo e(trans('main.vendor_profile')); ?></a>
+                        <a href="/profile/<?php echo e($product->user->id ?? ''); ?>"><?php echo e($student ? 'Head Of Department' : trans('main.vendor_profile')); ?></a>
                     </div>
 					</div>
                     <div class="h-25"></div>
@@ -539,7 +543,7 @@
                         <?php if(isset($ads)): ?>
                             <?php $__currentLoopData = $ads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($ad->position == 'product-page'): ?>
-                                    <a href="<?php echo e(isset($ad->url) ? $ad->url : '#'); ?>"><img src="<?php echo e(isset($ad->image) ? $ad->image : ''); ?>" class="<?php echo e(isset($ad->size) ? $ad->size : ''); ?>" id="ppage-s"></a>
+                                    <a href="<?php echo e($ad->url ?? '#'); ?>"><img src="<?php echo e($ad->image ?? ''); ?>" class="<?php echo e($ad->size ?? ''); ?>" id="ppage-s"></a>
                                 <?php endif; ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php endif; ?>
@@ -560,7 +564,7 @@
                                     <?php $__currentLoopData = $parts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $part): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <li>
                                             <div class="part-links">
-                                                <a href="/product/part/<?php echo e(isset($product->id) ? $product->id : 0); ?>/<?php echo e($part['id']); ?>">
+                                                <a href="/product/part/<?php echo e($product->id ?? 0); ?>/<?php echo e($part['id']); ?>">
                                                     <div class="col-md-1 hidden-xs tab-con">
                                                         <?php if($buy || $part['free'] == 1): ?>
                                                             <span class="playicon mdi mdi-play-circle"></span>
@@ -569,12 +573,12 @@
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class="<?php if($product->download == 1): ?> col-md-4 <?php else: ?> col-md-5 <?php endif; ?> col-xs-10 tab-con">
-                                                        <label><?php echo e(isset($part['title']) ? $part['title'] : ''); ?></label>
+                                                        <label><?php echo e($part['title'] ?? ''); ?></label>
                                                     </div>
                                                 </a>
                                         <div class="col-md-2 tab-con">
-                                            <span class="btn btn-gray btn-description hidden-xs" data-toggle="modal" href="#description-<?php echo e(isset($part['id']) ? $part['id'] : 0); ?>"><?php echo e(trans('main.description')); ?></span>
-                                            <div class="modal fade" id="description-<?php echo e(isset($part['id']) ? $part['id'] : 0); ?>">
+                                            <span class="btn btn-gray btn-description hidden-xs" data-toggle="modal" href="#description-<?php echo e($part['id'] ?? 0); ?>"><?php echo e(trans('main.description')); ?></span>
+                                            <div class="modal fade" id="description-<?php echo e($part['id'] ?? 0); ?>">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -585,7 +589,7 @@
                                                             <h4 class="modal-title"><?php echo e(trans('main.description')); ?></h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <?php echo isset($part['description']) ? $part['description'] : ''; ?>
+                                                            <?php echo $part['description'] ?? ''; ?>
 
                                                         </div>
                                                         <div class="modal-footer">
@@ -596,14 +600,14 @@
                                             </div><!-- /.modal -->
                                         </div>
                                         <div class="col-md-2 text-center hidden-xs tab-con">
-                                            <span><?php echo e(isset($part['size']) ? $part['size'] : '0'); ?> <?php echo e(trans('main.mb')); ?></span>
+                                            <span><?php echo e($part['size'] ?? '0'); ?> <?php echo e(trans('main.mb')); ?></span>
                                         </div>
                                         <div class="col-md-2 hidden-xs tab-con">
-                                            <span><?php echo e(isset($part['duration']) ? $part['duration'] : 0); ?> <?php echo e(trans('main.minute')); ?></span>
+                                            <span><?php echo e($part['duration'] ?? 0); ?> <?php echo e(trans('main.minute')); ?></span>
                                         </div>
                                         <?php if($product->download == 1): ?>
                                             <div class="col-md-1 col-xs-2 tab-con">
-                                                <span class="download-part" data-href="/video/download/<?php echo e(isset($part['id']) ? $part['id'] : '0'); ?>"><span class="mdi mdi-arrow-down-bold"></span></span>
+                                                <span class="download-part" data-href="/video/download/<?php echo e($part['id'] ?? '0'); ?>"><span class="mdi mdi-arrow-down-bold"></span></span>
                                             </div>
                                         <?php endif; ?>
                                         </div>
@@ -617,22 +621,20 @@
                                             <div class="col-md-10 text-left" style="text-align: left;">
                                                 <label><?php echo e(trans('main.documents')); ?></label>
                                             </div>
-                                            <div class="col-md-1 text-center">
-                                                <span class="download-part" data-href="<?php echo e(isset($meta['document']) ? $meta['document'] : ''); ?>"><span class="mdi mdi-arrow-down-bold"></span></span>
-                                            </div>
+                                            
                                         </li>
                                     <?php endif; ?>
                                 </ul>
                             </div>
                             <div class="tab-pane fade" id="tab2">
-                                <span><?php echo isset($product->content) ? $product->content : ''; ?></span>
+                                <span><?php echo $product->content ?? ''; ?></span>
                             </div>
                             <div class="tab-pane fade in tab-body" id="tab3">
                                 <?php $__currentLoopData = $precourse; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php $pmeta = arrayToList($pc->metas,'option','value'); ?>
                                     <div class="col-md-4 col-xs-12 tab-con">
-                                        <a href="/product/<?php echo e(isset($pc->id) ? $pc->id : ''); ?>" title="<?php echo e(isset($pc->title) ? $pc->title : ''); ?>" class="content-box content-box-r">
-											<img src="<?php echo e(isset($pmeta['thumbnail']) ? $pmeta['thumbnail'] : ''); ?>"/>
+                                        <a href="/product/<?php echo e($pc->id ?? ''); ?>" title="<?php echo e($pc->title ?? ''); ?>" class="content-box content-box-r">
+											<img src="<?php echo e($pmeta['thumbnail'] ?? ''); ?>"/>
                                             <h3><?php echo str_limit($pc->title,25,'...'); ?></h3>
                                             <div class="footer">
 												<span class="boxicon mdi mdi-wallet pull-left"></span>
@@ -656,8 +658,8 @@
                                 <?php $__currentLoopData = $related; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rel): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php $rmeta = arrayToList($rel->metas,'option','value'); ?>
                                     <div class="col-md-4 col-xs-12 tab-con">
-                                        <a href="/product/<?php echo e(isset($rel->id) ? $rel->id : ''); ?>" title="<?php echo e(isset($rel->title) ? $rel->title : ''); ?>" class="content-box content-box-r">
-                                            <img src="<?php echo e(isset($rmeta['thumbnail']) ? $rmeta['thumbnail'] : ''); ?>"/>
+                                        <a href="/product/<?php echo e($rel->id ?? ''); ?>" title="<?php echo e($rel->title ?? ''); ?>" class="content-box content-box-r">
+                                            <img src="<?php echo e($rmeta['thumbnail'] ?? ''); ?>"/>
 											<h3><?php echo str_limit($rel->title,25,'...'); ?></h3>
                                             <div class="footer">
 												<span class="boxicon mdi mdi-wallet pull-left"></span>
@@ -672,8 +674,8 @@
                                     <?php if($puc->id != $product->id): ?>
                                     <?php $umeta = arrayToList($puc->metas,'option','value'); ?>
                                     <div class="col-md-4 col-xs-12 tab-con">
-                                        <a href="/product/<?php echo e(isset($puc->id) ? $puc->id : ''); ?>" title="<?php echo e(isset($puc->title) ? $puc->title : ''); ?>" class="content-box content-box-r">
-                                            <img src="<?php echo e(isset($umeta['thumbnail']) ? $umeta['thumbnail'] : ''); ?>"/>
+                                        <a href="/product/<?php echo e($puc->id ?? ''); ?>" title="<?php echo e($puc->title ?? ''); ?>" class="content-box content-box-r">
+                                            <img src="<?php echo e($umeta['thumbnail'] ?? ''); ?>"/>
 											<h3><?php echo str_limit($puc->title,25,'...'); ?></h3>
                                             <div class="footer">
 												<span class="boxicon mdi mdi-wallet pull-left"></span>
@@ -689,10 +691,10 @@
                     <div class="h-20" id="blog-comment-scroll"></div>
                     <div class="user-tabs">
                         <ul class="nav nav-tabs back-green" role="tablist">
-                            <li class="active"><a href="#ctab1" role="tab" data-toggle="tab"><?php echo e(trans('main.comments')); ?>&nbsp;(<?php echo e(isset($product->comments_count) ? $product->comments_count : 0); ?>)</a></li>
+                            <li class="active"><a href="#ctab1" role="tab" data-toggle="tab"><?php echo e(trans('main.comments')); ?>&nbsp;(<?php echo e($product->comments_count ?? 0); ?>)</a></li>
                             <?php if($product->support == 1): ?>
                             <?php if($product->supports->sum('rate')!=null && $product->supports->sum('rate')>0 && $product->supports!=null && count($product->supports)>0): ?>
-                                <li><a href="#ctab2" role="tab" data-toggle="tab">Support &nbsp;(Rating: <?php echo e(isset($product->support_rate) ? $product->support_rate : 0); ?>)</a></li>
+                                <li><a href="#ctab2" role="tab" data-toggle="tab">Support &nbsp;(Rating: <?php echo e($product->support_rate ?? 0); ?>)</a></li>
                             <?php else: ?>
                                 <li><a href="#ctab2" role="tab" data-toggle="tab"><?php echo e(trans('main.support')); ?></a></li>
                             <?php endif; ?>
@@ -701,8 +703,8 @@
                         <!-- TAB CONTENT -->
                         <div class="tab-content">
                             <div class="active tab-pane fade in blog-comment-section body-target-s" id="ctab1">
-                                <?php if(isset($user)): ?>
-                                    <form method="post" action="/product/comment/store/<?php echo e(isset($product->id) ? $product->id : 0); ?>">
+                                <?php if(isset($user) || isset($student)): ?>
+                                    <form method="post" action="/product/comment/store/<?php echo e($product->id ?? 0); ?>">
 
                                     <input type="hidden" name="content_id" value="<?php echo e($product->id); ?>"/>
                                     <input type="hidden" name="parent" value="0" />
@@ -726,21 +728,21 @@
                                         <?php if($comment->parent == 0): ?>
                                             <?php $usermeta = arrayToList($comment->user->usermetas,'option','value'); ?>
                                             <li class="user-metas">
-                                                <img src="<?php echo e(isset($usermeta['avatar']) ? $usermeta['avatar'] : '/assets/images/user.png'); ?>" alt=""/>
-                                                <a href="/profile/<?php echo e(isset($comment->user_id) ? $comment->user_id : ''); ?>"><?php echo e(isset($comment->name) ? $comment->name : ''); ?> <?php if($comment->user->buys_count>0): ?> <b class="green-s">(<?php echo e(trans('main.student')); ?>)</b> <?php elseif($comment->user->contents_count>0): ?> <b class="blue-s">(<?php echo e(trans('main.vendor')); ?>)</b> <?php else: ?>  <b class="gray-s">(<?php echo e(trans('main.user')); ?>)</b> <?php endif; ?></a>
+                                                <img src="<?php echo e($usermeta['avatar'] ?? '/assets/images/user.png'); ?>" alt=""/>
+                                                <a href="/profile/<?php echo e($comment->user_id ?? ''); ?>"><?php echo e($comment->name ?? ''); ?> <?php if($comment->user->buys_count>0): ?> <b class="green-s">(<?php echo e(trans('main.student')); ?>)</b> <?php elseif($comment->user->contents_count>0): ?> <b class="blue-s">(<?php echo e(trans('main.vendor')); ?>)</b> <?php else: ?>  <b class="gray-s">(<?php echo e(trans('main.user')); ?>)</b> <?php endif; ?></a>
                                                 <label class="pull-left"><?php echo e(date('d F Y | H:i',$comment->create_at)); ?></label>
-                                                <span><?php echo isset($comment->comment) ? $comment->comment : ''; ?></span>
-                                                <?php if($buy || (isset($user) && $product->user_id == $user['id'])): ?><span><a href="javascript:void(0);" answer-id="<?php echo e($comment->id); ?>" answer-title="<?php echo e(isset($comment->name) ? $comment->name : ''); ?>" class="pull-left answer-btn"><?php echo e(trans('main.reply')); ?></a> </span><?php endif; ?>
+                                                <span><?php echo $comment->comment ?? ''; ?></span>
+                                                <?php if($buy || (isset($user) && $product->user_id == $user['id'])): ?><span><a href="javascript:void(0);" answer-id="<?php echo e($comment->id); ?>" answer-title="<?php echo e($comment->name ?? ''); ?>" class="pull-left answer-btn"><?php echo e(trans('main.reply')); ?></a> </span><?php endif; ?>
                                             </li>
                                                 <?php if(count($comment->childs)>0): ?>
                                                     <ul class="col-md-11 col-md-offset-1 answer-comment">
                                                         <?php $__currentLoopData = $comment->childs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $child): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <?php $cusermeta = arrayToList($child->user->usermetas,'option','value'); ?>
                                                             <li>
-                                                                <img src="<?php echo e(isset($cusermeta['avatar']) ? $cusermeta['avatar'] : '/assets/images/user.png'); ?>" alt=""/>
-                                                                <a href="/profile/<?php echo e(isset($child->user_id) ? $child->user_id : ''); ?>"><?php echo e(isset($child->name) ? $child->name : ''); ?> <?php if($child->user->buys_count>0): ?> <b class="green-s">(<?php echo e(trans('main.customer')); ?>)</b> <?php elseif($child->user->contents_count>0): ?> <b class="blue-s">(<?php echo e(trans('main.vendor')); ?>)</b> <?php else: ?> <b class="gray-s">(<?php echo e(trans('main.user')); ?>)</b> <?php endif; ?></a>
+                                                                <img src="<?php echo e($cusermeta['avatar'] ?? '/assets/images/user.png'); ?>" alt=""/>
+                                                                <a href="/profile/<?php echo e($child->user_id ?? ''); ?>"><?php echo e($child->name ?? ''); ?> <?php if($child->user->buys_count>0): ?> <b class="green-s">(<?php echo e(trans('main.customer')); ?>)</b> <?php elseif($child->user->contents_count>0): ?> <b class="blue-s">(<?php echo e(trans('main.vendor')); ?>)</b> <?php else: ?> <b class="gray-s">(<?php echo e(trans('main.user')); ?>)</b> <?php endif; ?></a>
                                                                 <label class="pull-left"><?php echo e(date('d F Y | H:i',$child->create_at)); ?></label>
-                                                                <span><?php echo isset($child->comment) ? $child->comment : ''; ?></span>
+                                                                <span><?php echo $child->comment ?? ''; ?></span>
                                                             </li>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </ul>
@@ -768,7 +770,7 @@
                                     <?php elseif(isset($user) && $product->user_id == $user['id']): ?>
                                         <div class="col-xs-12 text-center support-lock">
                                             <span><?php echo e(trans('main.support_address')); ?></span>
-                                            <a href="/user/ticket/support?openid=<?php echo e(isset($product->id) ? $product->id : 0); ?>"><?php echo e(trans('main.panel_support')); ?></a>
+                                            <a href="/user/ticket/support?openid=<?php echo e($product->id ?? 0); ?>"><?php echo e(trans('main.panel_support')); ?></a>
                                             <span><?php echo e(trans('main.support_students')); ?></span>
                                             <br>
                                             <span class="mdi mdi-lock"></span
@@ -786,26 +788,26 @@
                                             <?php if($support->supporter_id != $support->user_id): ?>
                                                 <?php $senderMeta = arrayToList($support->sender->usermetas,'option','value'); ?>
                                                 <li class="user-metas">
-                                                    <img src="<?php echo e(isset($senderMeta['avatar']) ? $senderMeta['avatar'] : '/assets/images/user.png'); ?>" alt=""/>
-                                                    <a href="/profile/<?php echo e(isset($support->user_id) ? $support->user_id : ''); ?>"><?php echo e(isset($support->name) ? $support->name : ''); ?></a>
+                                                    <img src="<?php echo e($senderMeta['avatar'] ?? '/assets/images/user.png'); ?>" alt=""/>
+                                                    <a href="/profile/<?php echo e($support->user_id ?? ''); ?>"><?php echo e($support->name ?? ''); ?></a>
                                                     <label class="pull-left">
                                                         <?php echo e(date('d F Y | H:i',$support->create_at)); ?>
 
                                                     </label>
-                                                    <span><?php echo isset($support->comment) ? $support->comment : ''; ?></span>
+                                                    <span><?php echo $support->comment ?? ''; ?></span>
                                                 </li>
                                             <?php else: ?>
                                                 <?php $senderMeta = arrayToList($support->supporter->usermetas,'option','value'); ?>
                                                 <li class="user-metas">
-                                                    <img src="<?php echo e(isset($senderMeta['avatar']) ? $senderMeta['avatar'] : '/assets/images/user.png'); ?>" alt=""/>
-                                                    <a href="/profile/<?php echo e(isset($support->user_id) ? $support->user_id : ''); ?>"><?php echo e(isset($support->name) ? $support->name : ''); ?></a>
+                                                    <img src="<?php echo e($senderMeta['avatar'] ?? '/assets/images/user.png'); ?>" alt=""/>
+                                                    <a href="/profile/<?php echo e($support->user_id ?? ''); ?>"><?php echo e($support->name ?? ''); ?></a>
                                                     <label class="pull-left text-center">
                                                         <?php echo e(date('d F Y | H:i',$support->create_at)); ?>
 
                                                         <br>
-                                                        <div class="userraty urating" data-score="<?php echo e(isset($support->rate) ? $support->rate : 0); ?>" data-id="<?php echo e(isset($support->id) ? $support->id : 0); ?>"></div>
+                                                        <div class="userraty urating" data-score="<?php echo e($support->rate ?? 0); ?>" data-id="<?php echo e($support->id ?? 0); ?>"></div>
                                                     </label>
-                                                    <span><?php echo isset($support->comment) ? $support->comment : ''; ?></span>
+                                                    <span><?php echo $support->comment ?? ''; ?></span>
                                                 </li>
                                             <?php endif; ?>
                                         <?php endif; ?>
@@ -831,7 +833,7 @@
         $(function () {
             fluidPlayer("myDiv",{
                 layoutControls: {
-                    posterImage: '<?php echo isset($meta['cover']) ? $meta['cover'] : ''; ?>',
+                    posterImage: '<?php echo $meta['cover'] ?? ''; ?>',
                     logo: {
                         imageUrl: '<?php echo get_option('video_watermark',''); ?>', // Default null
                         position: 'top right', // Default 'top left'
@@ -1150,4 +1152,4 @@
     <?php endif; ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('view.layout.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('view.layout.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/view/product/product.blade.php ENDPATH**/ ?>

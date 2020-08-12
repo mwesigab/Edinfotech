@@ -7,10 +7,10 @@
     <section class="card">
         <div class="card-body">
             <form method="post" action="/admin/content/comment/store" class="form-horizontal form-bordered">
-                <input type="hidden" name="id" value="{{{ $item->id or '' }}}">
+                <input type="hidden" name="id" value="{{{ $item->id ?? '' }}}">
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea class="ckeditor" name="comment" required>{{{ $item->comment or '' }}}</textarea>
+                        <textarea class="ckeditor" name="comment" required>{{{ $item->comment ?? '' }}}</textarea>
                     </div>
                 </div>
 

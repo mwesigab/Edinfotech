@@ -100,7 +100,7 @@
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.birthday') }}}</label>
                                 <div class="col-md-6">
                                     <div class="input-group">
-                                        <input type="text" name="birthday" id="birthday" value="{{{ $meta['birthday'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                        <input type="text" name="birthday" id="birthday" value="{{{ $meta['birthday'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                         <span class="input-group-append fdatebtn" id="fdatebtn"><span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span></span>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.biography') }}}</label>
                                 <div class="col-md-6">
-                                    <textarea name="biography" class="form-control" rows="10" id="inputDefault">{{{ $meta['biography'] or '' }}}</textarea>
+                                    <textarea name="biography" class="form-control" rows="10" id="inputDefault">{{{ $meta['biography'] ?? '' }}}</textarea>
                                 </div>
                             </div>
 
@@ -140,7 +140,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="avatar"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                                        <input type="text" name="avatar" dir="ltr" value="{{{$meta['avatar'] or ''}}}" class="form-control">
+                                        <input type="text" name="avatar" dir="ltr" value="{{{$meta['avatar'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                                     </div>
                                 </div>
@@ -151,7 +151,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="profile_image"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                                        <input type="text" name="profile_image" dir="ltr" value="{{{$meta['profile_image'] or ''}}}" class="form-control">
+                                        <input type="text" name="profile_image" dir="ltr" value="{{{$meta['profile_image'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#VideoModal" data-whatever="videography"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                                        <input type="text" name="videography" dir="ltr" value="{{{$meta['videography'] or ''}}}" class="form-control">
+                                        <input type="text" name="videography" dir="ltr" value="{{{$meta['videography'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                                     </div>
                                 </div>
@@ -186,7 +186,7 @@
                                 @if(!empty($getrate))
                                     @foreach($getrate as $rate)
                                         <div class="col-md-1 col-xs-1 text-center">
-                                            <img title="{{{ $rate['description'] or '' }}}" src="{{{ $rate['image'] or '' }}}" class="img-responsive">
+                                            <img title="{{{ $rate['description'] ?? '' }}}" src="{{{ $rate['image'] ?? '' }}}" class="img-responsive">
                                         </div>
                                     @endforeach
                                 @endif
@@ -200,7 +200,7 @@
                                 <div class="col-md-8">
                                     <select name="rate" class="form-control">
                                         @foreach($lists as $list)
-                                            <option value="{{{ $list['id'] or 0 }}}">{{{ $list['description'] or '' }}}</option>
+                                            <option value="{{{ $list['id'] ?? 0 }}}">{{{ $list['description'] ?? '' }}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -216,9 +216,9 @@
                             @if(!empty($mrates))
                                 @foreach($mrates as $mrate)
                                     <div class="col-md-1 text-center col-xs-1">
-                                        <a href="#" data-href="/admin/user/ratesection/delete/{{{ $mrate->id or 0 }}}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times"></i></a>
+                                        <a href="#" data-href="/admin/user/ratesection/delete/{{{ $mrate->id ?? 0 }}}" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times"></i></a>
                                         <br>
-                                        <img src="{{{ $mrate->rate->image or '' }}}" title="{{{ $mrate->rate->description or '' }}}" class="img-responsive m-0-0">
+                                        <img src="{{{ $mrate->rate->image ?? '' }}}" title="{{{ $mrate->rate->description ?? '' }}}" class="img-responsive m-0-0">
                                     </div>
                                 @endforeach
                             @endif
@@ -229,26 +229,26 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.bank_name') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="bank_name" value="{{{ $meta['bank_name'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                    <input type="text" name="bank_name" value="{{{ $meta['bank_name'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.account_number') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="bank_account" value="{{{ $meta['bank_account'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                    <input type="text" name="bank_account" value="{{{ $meta['bank_account'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.creditcard_number') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="bank_card" value="{{{ $meta['bank_card'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                    <input type="text" name="bank_card" value="{{{ $meta['bank_card'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.passport_id') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="melli_code" value="{{{ $meta['melli_code'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                    <input type="text" name="melli_code" value="{{{ $meta['melli_code'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -256,7 +256,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="melli_card"><span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span></span>
-                                        <input type="text" name="melli_card" dir="ltr" value="{{{$meta['melli_card'] or ''}}}" class="form-control">
+                                        <input type="text" name="melli_card" dir="ltr" value="{{{$meta['melli_card'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p"><span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span></span>
                                     </div>
                                 </div>

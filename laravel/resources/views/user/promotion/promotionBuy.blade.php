@@ -10,7 +10,7 @@
                 <div class="col-md-4 tab-con">
                     <select class="form-control font-s" name="plan_id">
                         @foreach($plans as $pl)
-                            <option value="{{{ $pl->id or 0 }}}" @if($plan->id==$pl->id) selected @endif>{{{ $pl->title or '' }}} ( {{{ currencySign() }}}{{{ $pl->price or 0 }}} )</option>
+                            <option value="{{{ $pl->id ?? 0 }}}" @if($plan->id==$pl->id) selected @endif>{{{ $pl->title ?? '' }}} ( {{{ currencySign() }}}{{{ $pl->price ?? 0 }}} )</option>
                         @endforeach
                     </select>
                 </div>
@@ -18,7 +18,7 @@
                 <div class="col-md-4 tab-con">
                     <select class="form-control font-s" name="content_id">
                         @foreach($userContent as $uc)
-                            <option value="{{{ $uc->id or 0 }}}">{{{ $uc->title or '' }}}</option>
+                            <option value="{{{ $uc->id ?? 0 }}}">{{{ $uc->title ?? '' }}}</option>
                         @endforeach
                     </select>
                 </div>

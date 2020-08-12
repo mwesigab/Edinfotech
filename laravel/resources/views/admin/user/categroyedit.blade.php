@@ -10,7 +10,7 @@
                 <a href="#list" data-toggle="tab">{{{ trans('admin.user_groups') }}}</a>
             </li>
             <li>
-                <a href="#newitem" data-toggle="tab">{{{ $edit->title or '' }}} {{{ trans('admin.edit_button') }}}</a>
+                <a href="#newitem" data-toggle="tab">{{{ $edit->title ?? '' }}} {{{ trans('admin.edit_button') }}}</a>
             </li>
         </ul>
         <div class="tab-content">
@@ -30,9 +30,9 @@
                     @foreach($lists as $list)
                        <tr>
                            <td>{{{ $list->title }}}</td>
-                           <td class="text-center" width="80">%{{{ $list->off or 0}}}</td>
-                           <td class="text-center" width="80">%{{{ $list->commision or 0 }}}</td>
-                           <td class="text-center" width="80"><a href="/admin/user/incategory/{{{$list->id}}}">{{{ $list->users_count or 0 }}}</a></td>
+                           <td class="text-center" width="80">%{{{ $list->off ?? 0}}}</td>
+                           <td class="text-center" width="80">%{{{ $list->commision ?? 0 }}}</td>
+                           <td class="text-center" width="80"><a href="/admin/user/incategory/{{{$list->id}}}">{{{ $list->users_count ?? 0 }}}</a></td>
                            <td class="text-center">
                                @if($list->mode == 'publish')
                                    <b class="c-g">{{{ trans('admin.new_user_group_status_enabled') }}}</b>
@@ -50,27 +50,27 @@
             </table>
         </div>
             <div id="newitem" class="tab-pane ">
-                <form method="post" action="/admin/user/category/edit/store/{{{ $edit->id or 0 }}}" class="form-horizontal form-bordered">
+                <form method="post" action="/admin/user/category/edit/store/{{{ $edit->id ?? 0 }}}" class="form-horizontal form-bordered">
 
 
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.new_user_group_title') }}}</label>
                         <div class="col-md-6">
-                            <input type="text" name="title" value="{{{ $edit->title or '' }}}" class="form-control">
+                            <input type="text" name="title" value="{{{ $edit->title ?? '' }}}" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.th_discount') }}}</label>
                         <div class="col-md-6">
-                            <input type="number" name="off" value="{{{ $edit->off or '' }}}" placeholder="%" class="form-control text-center">
+                            <input type="number" name="off" value="{{{ $edit->off ?? '' }}}" placeholder="%" class="form-control text-center">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.th_commission') }}}</label>
                         <div class="col-md-6">
-                            <input type="number" name="commision" value="{{{ $edit->commision or '' }}}" placeholder="%" class="form-control text-center">
+                            <input type="number" name="commision" value="{{{ $edit->commision ?? '' }}}" placeholder="%" class="form-control text-center">
                         </div>
                     </div>
 
@@ -79,7 +79,7 @@
                         <div class="col-md-6">
                             <div class="input-group">
                                 <span class="input-group-addon view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                                <input type="text" name="image" dir="ltr" value="{{{ $edit->image or '' }}}" class="form-control">
+                                <input type="text" name="image" dir="ltr" value="{{{ $edit->image ?? '' }}}" class="form-control">
                                 <span class="input-group-addon click-for-upload cu-p"><i class="fa fa-upload" aria-hidden="true"></i></span>
                             </div>
                         </div>

@@ -14,13 +14,19 @@ use Illuminate\Support\Facades\Input;
 
 class TicketController extends Controller
 {
+    protected $request;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
+
     public function tickets(){
         $tickets = Tickets::with('user','category')->orderBy('id','DESC')->paginate(10);
         return view('admin.ticket.list',['lists'=>$tickets]);
     }
     public function ticketsOpen(){
-        $fdate = strtotime(Input::get('fsdate'));
-        $ldate = strtotime(Input::get('lsdate'));
+        $fdate = strtotime($this->request->get('fsdate'));
+        $ldate = strtotime($this->request->get('lsdate'));
 
         $lists = Tickets::with('user','category')->where('mode','open');
 
@@ -28,16 +34,16 @@ class TicketController extends Controller
             $lists->where('create_at','>',$fdate);
         if($ldate>12601)
             $lists->where('create_at','<',$ldate);
-        if(Input::get('user')!==null)
-            $lists->where('user_id',Input::get('user'));
+        if($this->request->get('user')!==null)
+            $lists->where('user_id',$this->request->get('user'));
 
         $lists = $lists->get();
         $users = User::all();
         return view('admin.ticket.listopen',['lists'=>$lists,'users'=>$users]);
     }
     public function ticketsClose(){
-        $fdate = strtotime(Input::get('fsdate'));
-        $ldate = strtotime(Input::get('lsdate'));
+        $fdate = strtotime($this->request->get('fsdate'));
+        $ldate = strtotime($this->request->get('lsdate'));
 
         $lists = Tickets::with(['user','category','users'=>function($q){
             $q->with('user');
@@ -47,8 +53,8 @@ class TicketController extends Controller
             $lists->where('create_at','>',$fdate);
         if($ldate>12601)
             $lists->where('create_at','<',$ldate);
-        if(Input::get('user')!==null)
-            $lists->where('user_id',Input::get('user'));
+        if($this->request->get('user')!==null)
+            $lists->where('user_id',$this->request->get('user'));
 
         $lists = $lists->get();
         $users = User::all();

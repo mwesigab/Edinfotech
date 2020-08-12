@@ -20,10 +20,10 @@
                 <tbody>
                     @foreach($lists as $list)
                         <tr>
-                            <th class="text-center">{{{ $list->title or '' }}}</th>
-                            <th class="text-center">{{{ $list->description or '' }}}</th>
-                            <th class="text-center number-green" width="100" @if($list->price<1000) style="color:red !important;" @endif dir="ltr">{{{ $list->price or 0 }}}</th>
-                            <th class="text-center number-green" width="100" @if($list->day<30) style="color:red !important;" @endif dir="ltr">{{{ $list->day or 0 }}}</th>
+                            <th class="text-center">{{{ $list->title ?? '' }}}</th>
+                            <th class="text-center">{{{ $list->description ?? '' }}}</th>
+                            <th class="text-center number-green" width="100" @if($list->price<1000) style="color:red !important;" @endif dir="ltr">{{{ $list->price ?? 0 }}}</th>
+                            <th class="text-center number-green" width="100" @if($list->day<30) style="color:red !important;" @endif dir="ltr">{{{ $list->day ?? 0 }}}</th>
                             <th class="text-center">
                                 @if($list->mode == 'publish')
                                     <span class="color-green">{{{ trans('admin.active') }}}</span>

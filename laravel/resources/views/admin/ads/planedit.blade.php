@@ -6,12 +6,12 @@
     <section class="card">
         <div class="card-body">
 
-            <form action="/admin/ads/plan/edit/store/{{{ $plan->id or 0 }}}" class="form-horizontal form-bordered" method="post">
+            <form action="/admin/ads/plan/edit/store/{{{ $plan->id ?? 0 }}}" class="form-horizontal form-bordered" method="post">
 
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                     <div class="col-md-10">
-                        <input type="text" name="title" value="{{{ $plan->title or '' }}}" class="form-control" required>
+                        <input type="text" name="title" value="{{{ $plan->title ?? '' }}}" class="form-control" required>
                     </div>
                 </div>
 
@@ -19,7 +19,7 @@
                     <label class="col-md-2 control-label">{{{ trans('admin.price') }}}</label>
                     <div class="col-md-6">
                         <div class="input-group">
-                            <input type="text" name="price" value="{{{ $plan->price or 0 }}}" class="form-control text-center numtostr">
+                            <input type="text" name="price" value="{{{ $plan->price ?? 0 }}}" class="form-control text-center numtostr">
                             <span class="input-group-append click-for-upload cursor-pointer">
                                 <span class="input-group-text">{{{ trans('admin.cur_dollar') }}}</span>
                             </span>
@@ -29,14 +29,14 @@
                     <label class="col-md-1 control-label">{{{ trans('admin.duration') }}}</label>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="number" value="{{{ $plan->day or 0 }}}" name="day" class="form-control text-center">
+                            <input type="number" value="{{{ $plan->day ?? 0 }}}" name="day" class="form-control text-center">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea class="summernote" name="description" required>{{{ $plan->description or '' }}}</textarea>
+                        <textarea class="summernote" name="description" required>{{{ $plan->description ?? '' }}}</textarea>
                     </div>
                 </div>
 

@@ -705,6 +705,7 @@ return [
     'department_list' => 'Departments',
     'new_sch_department' => 'New Department',
     'student_list' => 'Student List',
+    'student_upload' => 'Upload Students',
     'new_student' => 'New Student',
     'student_name' => 'Student Name',
     'student_gender' => 'Gender',
@@ -715,5 +716,7 @@ return [
     'dept_head_phone' => 'Head Of Department\'s Name',
     'dept_head_email' => 'Head Of Department\'s Email',
     'dept_head_address' => 'Head Of Department\'s Address',
+    'student_password' => 'Password',
+    'student_username' => 'Username',
 
 ];

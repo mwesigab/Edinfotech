@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                                 <div class="col-md-10">
-                                    <input type="text" value="{{{ $item->title or '' }}}" name="title" class="form-control" required>
+                                    <input type="text" value="{{{ $item->title ?? '' }}}" name="title" class="form-control" required>
                                 </div>
                             </div>
 
@@ -60,7 +60,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <textarea class="summernote" name="content" required>{{{ $item->content or '' }}}</textarea>
+                                    <textarea class="summernote" name="content" required>{{{ $item->content ?? '' }}}</textarea>
                                 </div>
                             </div>
 
@@ -128,7 +128,7 @@
                                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="cover">
                                             <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                         </span>
-                                        <input type="text" name="cover" dir="ltr" value="{{{$meta['cover'] or ''}}}" class="form-control">
+                                        <input type="text" name="cover" dir="ltr" value="{{{$meta['cover'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                             <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                         </span>
@@ -143,7 +143,7 @@
                                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="thumbnail">
                                             <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                         </span>
-                                        <input type="text" name="thumbnail" dir="ltr" value="{{{$meta['thumbnail'] or ''}}}" class="form-control">
+                                        <input type="text" name="thumbnail" dir="ltr" value="{{{$meta['thumbnail'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                             <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                         </span>
@@ -158,7 +158,7 @@
                                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#VideoModal" data-whatever="video" >
                                             <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                         </span>
-                                        <input type="text" name="video" dir="ltr" value="{{{$meta['video'] or ''}}}" class="form-control">
+                                        <input type="text" name="video" dir="ltr" value="{{{$meta['video'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                             <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                         </span>
@@ -171,7 +171,7 @@
                                 <label class="col-md-2 control-label">{{{ trans('admin.duration') }}}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="number" min="0" name="duration" value="{{{$meta['duration'] or ''}}}" class="form-control text-center">
+                                        <input type="number" min="0" name="duration" value="{{{$meta['duration'] ?? ''}}}" class="form-control text-center">
                                         <span class="input-group-append click-for-upload cu-p">
                                             <span class="input-group-text">{{{ trans('admin.minutes') }}}</span>
                                         </span>
@@ -184,7 +184,7 @@
                                 <label class="col-md-2 control-label">{{{ trans('admin.price') }}}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" name="price" value="{{{ $meta['price'] or ''}}}" class="form-control text-center" id="product_price" @if($item->price == 0) disabled="disabled" @endif>
+                                        <input type="text" name="price" value="{{{ $meta['price'] ?? ''}}}" class="form-control text-center" id="product_price" @if($item->price == 0) disabled="disabled" @endif>
                                         <span class="input-group-append click-for-upload cu-p" >
                                             <span class="input-group-text">@if(!empty($meta['price'])) {{{ num2str($meta['price']) }}} @endif {{{ trans('admin.cur_dollar') }}}</span>
                                         </span>
@@ -196,7 +196,7 @@
                                 <label class="col-md-2 control-label">{{{ trans('admin.postal_price') }}}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" name="post_price" value="{{{$meta['post_price'] or ''}}}" class="form-control text-center numtostr">
+                                        <input type="text" name="post_price" value="{{{$meta['post_price'] ?? ''}}}" class="form-control text-center numtostr">
                                         <span class="input-group-append click-for-upload cu-p">
                                             <span class="input-group-text">@if(!empty($meta['post_price'])) {{{ num2str($meta['post_price']) }}} @endif {{{ trans('admin.cur_dollar') }}}</span>
                                         </span>
@@ -217,7 +217,7 @@
                                 <div class="col-md-8">
                                     <select name="precourse[]" multiple="multiple" class="form-control selectric">
                                         @foreach($products as $product)
-                                            <option value="{{{ $product->id or 0 }}}" @if(in_array($product->id,$preCourseArray)) selected="selected" @endif>{{{ $product->title or '' }}}</option>
+                                            <option value="{{{ $product->id ?? 0 }}}" @if(in_array($product->id,$preCourseArray)) selected="selected" @endif>{{{ $product->title ?? '' }}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -239,9 +239,9 @@
                                 @foreach($filters as $filter)
                                     <div class="col-md-3 col-xs-12">
                                         <fieldset>
-                                            <legend class="custom-legend" style="font-weight: bold;">{{{ $filter->filter or '' }}}</legend>
+                                            <legend class="custom-legend" style="font-weight: bold;">{{{ $filter->filter ?? '' }}}</legend>
                                             @foreach($filter->tags as $tag)
-                                                &nbsp;&nbsp;&nbsp;<input type="checkbox" value="{{{ $tag->id }}}" name="tags[]" style="position: relative;top: 2px;" {{{ checkedInObject($tag->id,'tag_id',$item->tags) }}}>&nbsp;{{{ $tag->tag or '' }}}<br>
+                                                &nbsp;&nbsp;&nbsp;<input type="checkbox" value="{{{ $tag->id }}}" name="tags[]" style="position: relative;top: 2px;" {{{ checkedInObject($tag->id,'tag_id',$item->tags) }}}>&nbsp;{{{ $tag->tag ?? '' }}}<br>
                                             @endforeach
                                         </fieldset>
                                     </div>
@@ -274,7 +274,7 @@
                             <tbody>
                             @foreach($item->parts as $part)
                                 <tr>
-                                    <td>{{{ $part->title or '' }}}&nbsp;@if($part->free == 1 || $item->price == 0)(Free)@endif</td>
+                                    <td>{{{ $part->title ?? '' }}}&nbsp;@if($part->free == 1 || $item->price == 0)(Free)@endif</td>
                                     <td class="text-center" width="150">{{{ date('d F Y : H:i',$item->create_at) }}}</td>
                                     <td class="text-center" width="50">
                                         @php
@@ -287,8 +287,8 @@
                                             <i class="fa fa-times c-r"></i>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{{ $part->size or '0' }}}</td>
-                                    <td class="text-center">{{{ $part->duration or '0' }}}</td>
+                                    <td class="text-center">{{{ $part->size ?? '0' }}}</td>
+                                    <td class="text-center">{{{ $part->duration ?? '0' }}}</td>
                                     <td class="text-center" width="100">
                                         @if($part->mode == 'publish')
                                             <b class="c-b">{{{ trans('admin.published') }}}</b>
@@ -317,7 +317,7 @@
                                         <label class="col-md-12 control-label">3 Months Subscribe Price</label>
                                         <div class="col-md-12">
                                             <div class="input-group">
-                                                <input type="text" name="price_3" value="{{{ $item->price_3 or ''}}}" class="form-control text-center">
+                                                <input type="text" name="price_3" value="{{{ $item->price_3 ?? ''}}}" class="form-control text-center">
                                                 <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text">{{{ currencySign() }}}</span>
                                 </span>
@@ -327,7 +327,7 @@
                                     <div class="col-md-6">
                                         <label class="col-md-12 control-label">PayPal Product Code</label>
                                         <div class="col-md-12">
-                                            <input type="text" name="subscribe_3" value="{{{ $item->subscribe_3 or ''}}}" class="form-control text-center">
+                                            <input type="text" name="subscribe_3" value="{{{ $item->subscribe_3 ?? ''}}}" class="form-control text-center">
                                         </div>
                                     </div>
                                 </div>
@@ -339,7 +339,7 @@
                                         <label class="col-md-12 control-label">6 Months Subscribe Price</label>
                                         <div class="col-md-12">
                                             <div class="input-group">
-                                                <input type="text" name="price_6" value="{{{ $item->price_6 or ''}}}" class="form-control text-center">
+                                                <input type="text" name="price_6" value="{{{ $item->price_6 ?? ''}}}" class="form-control text-center">
                                                 <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text">{{{ currencySign() }}}</span>
                                 </span>
@@ -349,7 +349,7 @@
                                     <div class="col-md-6">
                                         <label class="col-md-12 control-label">PayPal Product Code</label>
                                         <div class="col-md-12">
-                                            <input type="text" name="subscribe_6" value="{{{ $item->subscribe_6 or ''}}}" class="form-control text-center">
+                                            <input type="text" name="subscribe_6" value="{{{ $item->subscribe_6 ?? ''}}}" class="form-control text-center">
                                         </div>
                                     </div>
                                 </div>
@@ -361,7 +361,7 @@
                                         <label class="col-md-12 control-label">6 Months Subscribe Price</label>
                                         <div class="col-md-12">
                                             <div class="input-group">
-                                                <input type="text" name="price_9" value="{{{ $item->price_9 or ''}}}" class="form-control text-center">
+                                                <input type="text" name="price_9" value="{{{ $item->price_9 ?? ''}}}" class="form-control text-center">
                                                 <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text">{{{ currencySign() }}}</span>
                                 </span>
@@ -371,7 +371,7 @@
                                     <div class="col-md-6">
                                         <label class="col-md-12 control-label">PayPal Product Code</label>
                                         <div class="col-md-12">
-                                            <input type="text" name="subscribe_9" value="{{{ $item->subscribe_9 or ''}}}" class="form-control text-center">
+                                            <input type="text" name="subscribe_9" value="{{{ $item->subscribe_9 ?? ''}}}" class="form-control text-center">
                                         </div>
                                     </div>
                                 </div>
@@ -383,7 +383,7 @@
                                         <label class="col-md-12 control-label">6 Months Subscribe Price</label>
                                         <div class="col-md-12">
                                             <div class="input-group">
-                                                <input type="text" name="price_12" value="{{{ $item->price_12 or ''}}}" class="form-control text-center">
+                                                <input type="text" name="price_12" value="{{{ $item->price_12 ?? ''}}}" class="form-control text-center">
                                                 <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text">{{{ currencySign() }}}</span>
                                 </span>
@@ -393,7 +393,7 @@
                                     <div class="col-md-6">
                                         <label class="col-md-12 control-label">PayPal Product Code</label>
                                         <div class="col-md-12">
-                                            <input type="text" name="subscribe_12" value="{{{ $item->subscribe_12 or ''}}}" class="form-control text-center">
+                                            <input type="text" name="subscribe_12" value="{{{ $item->subscribe_12 ?? ''}}}" class="form-control text-center">
                                         </div>
                                     </div>
                                 </div>

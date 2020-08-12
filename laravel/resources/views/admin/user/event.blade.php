@@ -18,8 +18,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="date" id="fsdate" class="text-center form-control" value="{{{ $_GET['fsdate'] or '' }}}"  name="fsdate" placeholder="Start Date">
-                            <input type="hidden" id="fdate" name="fdate" value="{{{ $_GET['fdate'] or '' }}}">
+                            <input type="date" id="fsdate" class="text-center form-control" value="{{{ $_GET['fsdate'] ?? '' }}}"  name="fsdate" placeholder="Start Date">
+                            <input type="hidden" id="fdate" name="fdate" value="{{{ $_GET['fdate'] ?? '' }}}">
                             <div class="input-group-append">
                                 <span class="input-group-text fdatebtn" id="fdatebtn"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </div>
@@ -27,8 +27,8 @@
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="date" id="lsdate" class="text-center form-control" name="lsdate" value="{{{ $_GET['lsdate'] or '' }}}" placeholder="End Date">
-                            <input type="hidden" id="ldate" name="ldate" value="{{{ $_GET['ldate'] or '' }}}">
+                            <input type="date" id="lsdate" class="text-center form-control" name="lsdate" value="{{{ $_GET['lsdate'] ?? '' }}}" placeholder="End Date">
+                            <input type="hidden" id="ldate" name="ldate" value="{{{ $_GET['ldate'] ?? '' }}}">
                             <div class="input-group-append">
                                 <span class="input-group-text ldatebtn" id="ldatebtn"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </div>
@@ -61,9 +61,9 @@
                     <tbody>
                     @foreach($list as $item)
                         <tr>
-                            <td class="text-center">{!! $item->created_at or '' !!}</td>
-                            <td class="text-center">{!! $item->ip or '' !!}</td>
-                            <td class="text-center">{!! $item->type or '' !!}</td>
+                            <td class="text-center">{!! $item->created_at ?? '' !!}</td>
+                            <td class="text-center">{!! $item->ip ?? '' !!}</td>
+                            <td class="text-center">{!! $item->type ?? '' !!}</td>
                         </tr>
                     @endforeach
                     </tbody>

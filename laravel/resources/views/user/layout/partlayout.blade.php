@@ -6,8 +6,8 @@
     <div class="container">
         <div class="col-md-12 col-xs-12">
             <ul class="nav nav-tabs nav-justified panel-tabs" role="tablist">
-                <li class="@yield('tab1')"><a href="/user/content/part/new/{{{ $id or 0 }}}">{{{ trans('main.new_part') }}}</a></li>
-                <li class="@yield('tab2')"><a href="/user/content/part/list/{{{ $id or 0 }}}">{{{ trans('main.videos_list') }}}</a></li>
+                <li class="@yield('tab1')"><a href="/user/content/part/new/{{{ $id ?? 0 }}}">{{{ trans('main.new_part') }}}</a></li>
+                <li class="@yield('tab2')"><a href="/user/content/part/list/{{{ $id ?? 0 }}}">{{{ trans('main.videos_list') }}}</a></li>
             </ul>
             <div class="tab-content">
                     <div class="active tab-pane fade in" id="tab1">

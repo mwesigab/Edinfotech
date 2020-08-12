@@ -11,14 +11,14 @@
         <div class="col-md-3 col-xs-12 tab-con">
             <div class="top-panel-box-balance sbox3 sbox3-s">
                 <span>{{{ trans('main.account_charge') }}}</span>
-                <label>{{{ currencySign() }}}{{{ $user['credit'] or 0 }}}</label>
+                <label>{{{ currencySign() }}}{{{ $user['credit'] ?? 0 }}}</label>
             </div>
         </div>
         <div class="col-md-3 col-xs-12 tab-con">
             @if($user['vendor'] == 1)
             <div class="top-panel-box-balance sbox3 sbox3-r">
                 <span>{{{ trans('main.withdrawable_amount') }}}</span>
-                <label>{{{ currencySign() }}}{{{ $user['income'] or 0 }}}</label>
+                <label>{{{ currencySign() }}}{{{ $user['income'] ?? 0 }}}</label>
             </div>
             @endif
         </div>

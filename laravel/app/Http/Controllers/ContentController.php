@@ -28,8 +28,8 @@ use App\Models\RequestSuggestion;
 use App\Models\Sell;
 use App\Models\Transaction;
 use App\Models\Usage;
+use App\Models\Usermeta;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules\In;
 use App\Models\User;
@@ -43,7 +43,6 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\PaymentExecution;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
-use SoapClient;
 
 class ContentController extends Controller
 {
@@ -59,13 +58,13 @@ class ContentController extends Controller
 
     ## Main Section ##
     public function main(){
-
-        $new_content = Content::with('metas','user')->where('mode','publish')->limit(10)->orderBy('id','DESC')->get();
-        $popular_content = Content::with('metas','user')->where('mode','publish')->limit(10)->orderBy('view','DESC')->get();
-        $sell_content = Content::with('metas','user')->withCount('sells')->where('mode','publish')->limit(10)->orderBy('sells_count','DESC')->get();
+        $new_content = Content::with('metas','user')->where('mode','publish')->whereNull('school_id')->limit(10)->orderBy('id','DESC')->get();
+        $popular_content = Content::with('metas','user')->where('mode','publish')->whereNull('school_id')->limit(10)->orderBy('view','DESC')->get();
+        $sell_content = Content::with('metas','user')->withCount('sells')->where('mode','publish')->whereNull('school_id')->limit(10)->orderBy('sells_count','DESC')->get();
         $vip_content = ContentVip::with('content.user')->where('mode','publish')->where('first_date','<',time())->where('last_date','>',time())->get();
         ## Get Blog Posts
         $blogPosts = Blog::where('mode','publish')->limit(get_option('main_page_blog_post_count',1))->orderBy('id','DESC')->get();## Get Blog Posts
+
         ## Get Articles
         $articlePosts = Article::where('mode','publish')->limit(get_option('main_page_article_post_count',1))->orderBy('id','DESC')->get();
 
@@ -95,6 +94,7 @@ class ContentController extends Controller
             $q->withCount(['follow']);
         }])->where('mode','active')->limit(4)->get()->sortByDesc('user.followCount');
 
+        //dd($user_Rate->toArray());
         return view('view.main',['sell_content'=>$sell_content,'vip_content'=>$vip_content,'new_content'=>$new_content,'popular_content'=>$popular_content,'blog_post'=>$blogPosts,'user_rate'=>$user_Rate,'user_content'=>$user_content,'user_popular'=>$user_popular,'slider_container'=>$slider_container,'channels'=>$channels,'article_post'=>$articlePosts]);
     }
 
@@ -194,20 +194,21 @@ class ContentController extends Controller
             }
         return $array;
     }
-    public function category($id = null)
+    public function category(Request $request, $id = null)
     {
-        $order = Input::get('order');
-        $price = Input::get('price');
-        $course = Input::get('course');
-        $off = Input::get('off');
-        if(Input::get('filter')!=null) {
-            $filters = array_unique(Input::get('filter'));
+        $user = unserialize(session('Student'));
+        $order = $request->get('order');
+        $price = $request->get('price');
+        $course = $request->get('course');
+        $off = $request->get('off');
+        if($request->get('filter')!=null) {
+            $filters = array_unique($request->get('filter'));
         }else{
             $filters = null;
         }
-        $q = Input::get('q');
-        $post_sell = Input::get('post-sell');
-        $support = Input::get('support');
+        $q = $request->get('q');
+        $post_sell = $request->get('post-sell');
+        $support = $request->get('support');
 
         $Category = ContentCategory::with(array('filters'=>function($q){$q->with('tags');}))->where('class',$id)->first();
         if($Category) {
@@ -244,6 +245,10 @@ class ContentController extends Controller
 
         if(isset($order) && $order == 'new')
             $content->orderBy('id','DESC');
+        if($user)
+            $content->where('school_id',$user['school_id'])->limit(10)->orderBy('id', 'DESC')->get();
+        if(!$user)
+            $content->whereNull('school_id');
 
         ## Set For Course
         switch ($course){
@@ -312,6 +317,7 @@ class ContentController extends Controller
             $content = $this->filters($content,$filters);
         }
 
+        //dd($content[90]['metas']);
         if($id != null)
             return view('view.category.category',['category'=>$Category,'contents'=>$content,'vip'=>$vipContent,'order'=>$order,'pricing'=>$price,'course'=>$course,'off'=>$off,'filters'=>$filters,'mostSell'=>$mostSellContent]);
         else
@@ -320,11 +326,11 @@ class ContentController extends Controller
     ######################
 
     ## Search Section ##
-    public function search()
+    public function search(Request $request)
     {
 
         $search_type_title = trans('admin.search');
-        $q = Input::get('q');
+        $q = $request->get('q');
         if(!isset($_GET['type']) || $_GET['type']=='content_title') {
             $search_type_title = trans('admin.search_title');
             $content = Content::with(['metas', 'sells'])->withCount('parts')->where('mode', 'publish')->where('title', 'LIKE', '%' . $q . '%');
@@ -361,8 +367,8 @@ class ContentController extends Controller
 
         return view('view.search.search',['contents'=>$content,'users'=>$users,'search_title'=>$search_type_title]);
     }
-    public function jsonSearch(){
-        $q = Input::get('q');
+    public function jsonSearch(Request $request){
+        $q = $request->get('q');
         if(strlen($q)<5) {
             $content = ["title"=>" trans('admin.searching') $q..."];
             return $content;
@@ -383,15 +389,15 @@ class ContentController extends Controller
     #################################
 
     ## Request Section ##
-    public function request(){
+    public function request(Request $request){
         global $user;
         $list = Requests::with(['content','category','fans'=>function($q) use($user){
             $q->where('user_id',$user['id']);
         }])->withCount(['fans'])->where('mode','<>','draft')->orderBy('id','DESC');
 
         # Mode Filter
-        if(Input::get('mode')!=null){
-            switch (Input::get('mode')){
+        if($request->get('mode')!=null){
+            switch ($request->get('mode')){
                 case 'all':
                     break;
                 case 'publish':
@@ -406,12 +412,12 @@ class ContentController extends Controller
         }
 
         # Category Filter
-        if(Input::get('cat')!=null)
-            $list->whereIn('category_id',Input::get('cat'));
+        if($request->get('cat')!=null)
+            $list->whereIn('category_id',$request->get('cat'));
 
         # Search Filter
-        if(Input::get('q')!=null)
-            $list->where('title','LIKE','%'.Input::get('q').'%');
+        if($request->get('q')!=null)
+            $list->where('title','LIKE','%'.$request->get('q').'%');
 
         return view('view.request.request',['list'=>$list->get()]);
     }
@@ -480,15 +486,15 @@ class ContentController extends Controller
     }
 
     ## Record Section ##
-    public function record(){
+    public function record(Request $request){
         global $user;
         $list = Record::with(['content','category','fans'=>function($q) use($user){
             $q->where('user_id',$user['id']);
         }])->withCount(['fans'])->where('mode','publish');
 
         # Mode Filter
-        if(Input::get('mode')!=null){
-            switch (Input::get('mode')){
+        if($request->get('mode')!=null){
+            switch ($request->get('mode')){
                 case 'all':
                     break;
                 case 'publish':
@@ -503,12 +509,12 @@ class ContentController extends Controller
         }
 
         # Category Filter
-        if(Input::get('cat')!=null)
-            $list->whereIn('category_id',Input::get('cat'));
+        if($request->get('cat')!=null)
+            $list->whereIn('category_id',$request->get('cat'));
 
         # Search Filter
-        if(Input::get('q')!=null)
-            $list->where('title','LIKE','%'.Input::get('q').'%');
+        if($request->get('q')!=null)
+            $list->where('title','LIKE','%'.$request->get('q').'%');
 
         return view('view.record.record',['list'=>$list->get()]);
     }
@@ -641,7 +647,7 @@ class ContentController extends Controller
 
         $meta = arrayToList($product->metas,'option','value');
         $parts = $product->parts->toArray();
-        $rates = getRate($product->user->toArray());
+        $rates = getRate($product->user ? $product->user->toArray():[]);
 
 
 
@@ -914,9 +920,9 @@ class ContentController extends Controller
     }
 
     ## Article Section
-    public function articleList(){
-        $order = Input::get('order');
-        $cats = Input::get('cat');
+    public function articleList(Request $request){
+        $order = $request->get('order');
+        $cats = $request->get('cat');
 
         $Articles = Article::with(['user','rate'])->withCount('rate')->where('mode','publish');
 

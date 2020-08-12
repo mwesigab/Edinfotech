@@ -24,7 +24,7 @@
                                 <tr>
                                     <td>{{{ $list->tag }}}</td>
                                     <td class="text-center">
-                                        <a href="/admin/content/category/filter/tag/{{{ $id or '' }}}/edit/{{{ $list->id }}}#edit" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                        <a href="/admin/content/category/filter/tag/{{{ $id ?? '' }}}/edit/{{{ $list->id }}}#edit" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                         <a href="#" data-href="/admin/content/category/filter/tag/delete/{{{ $list->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
@@ -35,7 +35,7 @@
                     <div id="newitem" class="tab-pane ">
                         <form method="post" action="/admin/content/category/filter/tag/store/new" class="form-horizontal form-bordered">
 
-                            <input type="hidden" name="filter_id" value="{{{ $id or '' }}}">
+                            <input type="hidden" name="filter_id" value="{{{ $id ?? '' }}}">
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.tag_title') }}}</label>

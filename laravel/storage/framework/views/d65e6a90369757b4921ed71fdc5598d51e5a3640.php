@@ -99,3 +99,4 @@
 </div>
 
 <?php $__env->stopSection(); ?>
+<?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/admin/layout/modals.blade.php ENDPATH**/ ?>
