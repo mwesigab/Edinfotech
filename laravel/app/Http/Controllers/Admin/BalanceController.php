@@ -7,11 +7,16 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Input;
 use App\Models\Transaction;
 
 class BalanceController extends Controller
 {
+    protected $request;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
+    
     public function lists()
     {
         $lists = Balance::with('exporter','user')->orderBy('id','DESC')->get();
@@ -81,23 +86,23 @@ class BalanceController extends Controller
         return back();
     }
     public function withdraw(){
-        $fdate = strtotime(Input::get('fdate'))+12600;
-        $ldate = strtotime(Input::get('ldate'))+12600;
+        $fdate = strtotime($this->request->get('fdate'))+12600;
+        $ldate = strtotime($this->request->get('ldate'))+12600;
         $users = User::with(['usermetas','sells'=>function($q){
             $q->where('mode','pay')->where('type','post')->where('post_confirm',null);
         }]);
-        if(Input::get('fdate')!==null && Input::get('ldate')!==null)
+        if($this->request->get('fdate')!==null && $this->request->get('ldate')!==null)
             $users->where('create_at','>',$fdate)->where('create_at','<',$ldate)->orderBy('id','DESC');
-        elseif(Input::get('fdate')!==null && Input::get('ldate')!==null && Input::get('price')!==null)
+        elseif($this->request->get('fdate')!==null && $this->request->get('ldate')!==null && $this->request->get('price')!==null)
             $users->where('create_at','>',$fdate)->where('create_at','<',$ldate)->orderBy('id','DESC');
-        elseif(Input::get('fdate')==null && Input::get('ldate')==null && Input::get('user_id')!==null)
-            $users->where('income','>=',Input::get('price'))->orderBy('id','DESC');
+        elseif($this->request->get('fdate')==null && $this->request->get('ldate')==null && $this->request->get('user_id')!==null)
+            $users->where('income','>=',$this->request->get('price'))->orderBy('id','DESC');
         else
             $users->orderBy('id','DESC');
 
-        if(Input::get('withdraw') != null)
+        if($this->request->get('withdraw') != null)
         {
-            $users->where('income','>=',Input::get('withdraw'));
+            $users->where('income','>=',$this->request->get('withdraw'));
         }else{
             $users->where('income','>=',get_option('site_withdraw_price',0));
         }
@@ -125,17 +130,17 @@ class BalanceController extends Controller
         return view('admin.balance.withdraw',['users'=>$users,'users_not_apply'=>(object)$users_not_apply, 'users_sell_post'=>(object)$users_sell_post ,'first'=>$first,'last'=>$last,'allsum'=>$allsum]);
     }
     public function withdrawAll(Request $request){
-        $fdate = strtotime(Input::get('fdate'));
-        $ldate = strtotime(Input::get('ldate'));
+        $fdate = strtotime($this->request->get('fdate'));
+        $ldate = strtotime($this->request->get('ldate'));
         $users = User::with(['usermetas','sells'=>function($q){
             $q->where('mode','pay')->where('type','post')->where('post_confirm',null);
         }]);
-        if(Input::get('fdate')!==null && Input::get('ldate')!==null)
+        if($this->request->get('fdate')!==null && $this->request->get('ldate')!==null)
             $users->where('create_at','>',$fdate)->where('create_at','<',$ldate)->where('income','>=',get_option('site_withdraw_price',0))->orderBy('id','DESC');
-        elseif(Input::get('fdate')!==null && Input::get('ldate')!==null && Input::get('price')!==null)
-            $users->where('create_at','>',$fdate)->where('create_at','<',$ldate)->where('income','>=',Input::get('price'))->orderBy('id','DESC');
-        elseif(Input::get('fdate')==null && Input::get('ldate')==null && Input::get('user_id')!==null)
-            $users->where('income','>=',Input::get('price'))->orderBy('id','DESC');
+        elseif($this->request->get('fdate')!==null && $this->request->get('ldate')!==null && $this->request->get('price')!==null)
+            $users->where('create_at','>',$fdate)->where('create_at','<',$ldate)->where('income','>=',$this->request->get('price'))->orderBy('id','DESC');
+        elseif($this->request->get('fdate')==null && $this->request->get('ldate')==null && $this->request->get('user_id')!==null)
+            $users->where('income','>=',$this->request->get('price'))->orderBy('id','DESC');
         else
             $users->where('income','>=',get_option('site_withdraw_price',0))->orderBy('id','DESC');
 
@@ -169,17 +174,17 @@ class BalanceController extends Controller
     }
     public function withdrawExcel()
     {
-        $fdate = strtotime(Input::get('fdate'));
-        $ldate = strtotime(Input::get('ldate'));
+        $fdate = strtotime($this->request->get('fdate'));
+        $ldate = strtotime($this->request->get('ldate'));
         $users = User::with(['usermetas','sells'=>function($q){
             $q->where('mode','pay')->where('type','post')->where('post_confirm','');
         }]);
-        if(Input::get('fdate')!==null && Input::get('ldate')!==null)
+        if($this->request->get('fdate')!==null && $this->request->get('ldate')!==null)
             $users->where('create_at','>',$fdate)->where('create_at','<',$ldate)->where('income','>=',get_option('site_withdraw_price',0))->orderBy('id','DESC');
-        elseif(Input::get('fdate')!==null && Input::get('ldate')!==null && Input::get('price')!==null)
-            $users->where('create_at','>',$fdate)->where('create_at','<',$ldate)->where('income','>=',Input::get('price'))->orderBy('id','DESC');
-        elseif(Input::get('fdate')==null && Input::get('ldate')==null && Input::get('user_id')!==null)
-            $users->where('income','>=',Input::get('price'))->orderBy('id','DESC');
+        elseif($this->request->get('fdate')!==null && $this->request->get('ldate')!==null && $this->request->get('price')!==null)
+            $users->where('create_at','>',$fdate)->where('create_at','<',$ldate)->where('income','>=',$this->request->get('price'))->orderBy('id','DESC');
+        elseif($this->request->get('fdate')==null && $this->request->get('ldate')==null && $this->request->get('user_id')!==null)
+            $users->where('income','>=',$this->request->get('price'))->orderBy('id','DESC');
         else
             $users->where('income','>=',get_option('site_withdraw_price',0))->orderBy('id','DESC');
 
@@ -254,14 +259,14 @@ class BalanceController extends Controller
     }
     public function listsExcel()
     {
-        $fdate = strtotime(Input::get('fdate'))+12600;
-        $ldate = strtotime(Input::get('ldate'))+12600;
-        if(Input::get('fdate')!==null && Input::get('ldate')!==null)
+        $fdate = strtotime($this->request->get('fdate'))+12600;
+        $ldate = strtotime($this->request->get('ldate'))+12600;
+        if($this->request->get('fdate')!==null && $this->request->get('ldate')!==null)
             $lists = Balance::with('exporter','user')->where('create_at','>',$fdate)->where('create_at','<',$ldate)->orderBy('id','DESC')->get();
-        elseif(Input::get('fdate')!==null && Input::get('ldate')!==null && Input::get('user_id')!==null)
-            $lists = Balance::with('exporter','user')->where('create_at','>',$fdate)->where('create_at','<',$ldate)->where('user_id',Input::get('user_id'))->orderBy('id','DESC')->get();
-        elseif(Input::get('fdate')==null && Input::get('ldate')==null && Input::get('user_id')!==null)
-            $lists = Balance::with('exporter','user')->where('user_id',Input::get('user_id'))->orderBy('id','DESC')->get();
+        elseif($this->request->get('fdate')!==null && $this->request->get('ldate')!==null && $this->request->get('user_id')!==null)
+            $lists = Balance::with('exporter','user')->where('create_at','>',$fdate)->where('create_at','<',$ldate)->where('user_id',$this->request->get('user_id'))->orderBy('id','DESC')->get();
+        elseif($this->request->get('fdate')==null && $this->request->get('ldate')==null && $this->request->get('user_id')!==null)
+            $lists = Balance::with('exporter','user')->where('user_id',$this->request->get('user_id'))->orderBy('id','DESC')->get();
         else
             $lists = Balance::with('exporter','user')->orderBy('id','DESC')->get();
         Excel::create(trans('admin.financial_documents'), function($excel) use($lists){
@@ -327,17 +332,17 @@ class BalanceController extends Controller
     }
     public function analyze(){
         $users = User::all();
-        $fdate = strtotime(Input::get('fsdate'));
-        $ldate = strtotime(Input::get('lsdate'));
+        $fdate = strtotime($this->request->get('fsdate'));
+        $ldate = strtotime($this->request->get('lsdate'));
         $lists = Balance::with('exporter','user')->where(function ($q){
             $q->where('user_id','')->orwhere('user_id',0)->orWhere('user_id',null);
         });
-        if(Input::get('fsdate')!==null && Input::get('lsdate')!==null)
+        if($this->request->get('fsdate')!==null && $this->request->get('lsdate')!==null)
             $lists->where('create_at','>',$fdate)->where('create_at','<',$ldate)->orderBy('id','DESC');
-        elseif(Input::get('fsdate')!==null && Input::get('lsdate')!==null && Input::get('user_id')!==null)
-            $lists->where('create_at','>',$fdate)->where('create_at','<',$ldate)->where('user_id',Input::get('user_id'))->orderBy('id','DESC');
-        elseif(Input::get('fsdate')==null && Input::get('lsdate')==null && Input::get('user_id')!==null)
-            $lists->where('user_id',Input::get('user_id'))->orderBy('id','DESC');
+        elseif($this->request->get('fsdate')!==null && $this->request->get('lsdate')!==null && $this->request->get('user_id')!==null)
+            $lists->where('create_at','>',$fdate)->where('create_at','<',$ldate)->where('user_id',$this->request->get('user_id'))->orderBy('id','DESC');
+        elseif($this->request->get('fsdate')==null && $this->request->get('lsdate')==null && $this->request->get('user_id')!==null)
+            $lists->where('user_id',$this->request->get('user_id'))->orderBy('id','DESC');
         else
             $lists->orderBy('id','DESC');
 

@@ -34,7 +34,7 @@
                                 <label class="control-label">{{{ trans('main.icon') }}}</label>
                                 <div class="input-group">
                                     <span class="input-group-addon view-selected img-icon-s" data-toggle="modal" data-target="#ImageModal" data-whatever="avatar" ><span class="formicon mdi mdi-eye"></span></span>
-                                    <input type="text" name="avatar" dir="ltr" value="{{{ $edit->avatar or '' }}}" class="form-control">
+                                    <input type="text" name="avatar" dir="ltr" value="{{{ $edit->avatar ?? '' }}}" class="form-control">
                                     <span class="input-group-addon click-for-upload img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                                 </div>
                             </div>
@@ -79,10 +79,10 @@
                             <tbody>
                             @foreach($channels as $channel)
                                 <tr>
-                                    <td class="text-center">{{{ $channel->title or '' }}}</td>
-                                    <td class="text-center"><a href="/chanel/{{{ $channel->username or '' }}}">{{{ $channel->username or '' }}}</a></td>
-                                    <td class="text-center">{{{ $channel->view or '' }}}</td>
-                                    <td class="text-center">{{{ $channel->contents_count or '' }}}</td>
+                                    <td class="text-center">{{{ $channel->title ?? '' }}}</td>
+                                    <td class="text-center"><a href="/chanel/{{{ $channel->username ?? '' }}}">{{{ $channel->username ?? '' }}}</a></td>
+                                    <td class="text-center">{{{ $channel->view ?? '' }}}</td>
+                                    <td class="text-center">{{{ $channel->contents_count ?? '' }}}</td>
                                     <td class="text-center">
                                     @if($channel->mode==null Or $channel->mode=='pending')
                                         <b class="blue-s">{{{ trans('main.waiting') }}}</b>
@@ -91,10 +91,10 @@
                                     @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="/user/channel/request/{{{ $channel->id or '' }}}" title="Request channel verification"><span class="crticon mdi mdi-check-decagram"></span></a>
-                                        <a href="/user/channel/video/{{{ $channel->id or '' }}}" title="Add video to channel"><span class="crticon mdi mdi-file-video"></span></a>
-                                        <a href="#" data-href="/user/channel/delete/{{{ $channel->id or '' }}}" data-toggle="modal" data-target="#confirm-delete" title="Delete channel"><span class="crticon mdi mdi-delete-forever"></span></a>
-                                        <a href="/user/channel/edit/{{{ $channel->id or '' }}}"><span class="crticon mdi mdi-lead-pencil"></span></a>
+                                        <a href="/user/channel/request/{{{ $channel->id ?? '' }}}" title="Request channel verification"><span class="crticon mdi mdi-check-decagram"></span></a>
+                                        <a href="/user/channel/video/{{{ $channel->id ?? '' }}}" title="Add video to channel"><span class="crticon mdi mdi-file-video"></span></a>
+                                        <a href="#" data-href="/user/channel/delete/{{{ $channel->id ?? '' }}}" data-toggle="modal" data-target="#confirm-delete" title="Delete channel"><span class="crticon mdi mdi-delete-forever"></span></a>
+                                        <a href="/user/channel/edit/{{{ $channel->id ?? '' }}}"><span class="crticon mdi mdi-lead-pencil"></span></a>
                                     </td>
                                 </tr>
                             @endforeach

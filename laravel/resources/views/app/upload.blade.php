@@ -23,7 +23,7 @@
 </head>
 <body dir="rtl">
     <input type="hidden" id="user_id" value="{{{ $user->id }}}">
-    <input type="hidden" id="content_id" value="{{{ $edit->id or '' }}}">
+    <input type="hidden" id="content_id" value="{{{ $edit->id ?? '' }}}">
     <div class="steps step-1 steps-active">
         <div class="sbox2 step-header">{{{ trans('main.basic_information') }}}</div>
         <div class="step-body">
@@ -45,11 +45,11 @@
                 <div class="h-10"></div>
                 <div class="form-group">
                     <label>{{{ trans('main.title') }}}</label>
-                    <input type="text" name="title" id="step-1-title" placeholder="30 - 60 Characters" class="form-control" value="{{{ $edit->title or '' }}}">
+                    <input type="text" name="title" id="step-1-title" placeholder="30 - 60 Characters" class="form-control" value="{{{ $edit->title ?? '' }}}">
                 </div>
                 <div class="form-group">
                     <label>{{{ trans('main.description') }}}</label>
-                    <textarea type="text" name="content" id="step-1-description" rows="10" class="form-control">{!! $edit->content or '' !!}</textarea>
+                    <textarea type="text" name="content" id="step-1-description" rows="10" class="form-control">{!! $edit->content ?? '' !!}</textarea>
                 </div>
                 <div class="form-group text-left">
                 <input type="button" class="btn btn-app" id="btn-step-1-next" value="Next Step">
@@ -63,7 +63,7 @@
             <div class="step-body">
                 <div class="form-group">
                     <label>{{{ trans('main.tags') }}}</label>
-                    <textarea class="form-control" name="tag" id="step-2-tag" data-role="tagsinput" rows="10" placeholder="Press enter between tags">{!! $edit->tag or '' !!}</textarea>
+                    <textarea class="form-control" name="tag" id="step-2-tag" data-role="tagsinput" rows="10" placeholder="Press enter between tags">{!! $edit->tag ?? '' !!}</textarea>
                 </div>
                 <div class="form-group">
                     <label>{{{ trans('main.category') }}}</label>
@@ -110,7 +110,7 @@
                     <label>{{{ trans('main.prerequisites') }}}</label>
                     <select name="precourse[]" class="form-control chosen-select" multiple>
                         @foreach($contents as $content)
-                            <option value="{{{ $content->id or '' }}}">{{{ $content->title or '' }}}</option>
+                            <option value="{{{ $content->id ?? '' }}}">{{{ $content->title ?? '' }}}</option>
                         @endforeach
                     </select>
                 </div>

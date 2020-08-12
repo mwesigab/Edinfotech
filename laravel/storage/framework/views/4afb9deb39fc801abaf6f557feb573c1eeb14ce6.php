@@ -1,5 +1,5 @@
 <?php $__env->startSection('title'); ?>
-    <?php echo e(isset($setting['site']['site_title']) ? $setting['site']['site_title'] : 'Website Title'); ?>
+    <?php echo e($setting['site']['site_title'] ?? 'Website Title'); ?>
 
     <?php echo e(trans('main.user_login')); ?>
 
@@ -136,4 +136,4 @@
     </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('view.layout.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('view.layout.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/user/login/login.blade.php ENDPATH**/ ?>

@@ -20,12 +20,12 @@
                     <form method="post" action="/admin/user/rate/store" class="form-horizontal form-bordered">
 
                         <input type="hidden" name="mode" value="day">
-                        <input type="hidden" name="edit" value="{{{$item->id or ''}}}">
+                        <input type="hidden" name="edit" value="{{{$item->id ?? ''}}}">
 
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_title') }}}</label>
                             <div class="col-md-6">
-                                <input type="text" name="description" value="{{{$item->description or ''}}}" class="form-control" required>
+                                <input type="text" name="description" value="{{{$item->description ?? ''}}}" class="form-control" required>
                             </div>
                         </div>
 
@@ -36,7 +36,7 @@
                                     <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image">
                                         <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     </span>
-                                    <input type="text" name="image" dir="ltr" value="{{{$item->image or ''}}}" class="form-control">
+                                    <input type="text" name="image" dir="ltr" value="{{{$item->image ?? ''}}}" class="form-control">
                                     <span class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                     </span>
@@ -48,7 +48,7 @@
                             <label class="col-md-3 control-label">{{{ trans('admin.gift_charge') }}}</label>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <input type="text" name="price" value="{{{$item->gift or ''}}}" class="form-control text-center numtostr">
+                                    <input type="text" name="price" value="{{{$item->gift ?? ''}}}" class="form-control text-center numtostr">
                                     <div class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text">@if(!empty($item->gift)) {{{ num2str($item->gift) }}} @endif {{{ trans('admin.cur_dollar') }}}</span>
                                     </div>
@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_commission') }}}</label>
                             <div class="col-md-6">
-                                <input type="number" name="commision" value="{{{$item->commision or 0}}}" placeholder="%" class="form-control text-center">
+                                <input type="number" name="commision" value="{{{$item->commision ?? 0}}}" placeholder="%" class="form-control text-center">
                             </div>
                         </div>
 
@@ -70,11 +70,11 @@
                                     <span class="input-group-prepend">
                                         <span class="input-group-text">{{{ trans('admin.from') }}}</span>
                                     </span>
-                                    <input type="number" class="form-control" value="{{{$item->start or ''}}}" name="start" required>
+                                    <input type="number" class="form-control" value="{{{$item->start ?? ''}}}" name="start" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.to') }}}</span>
                                     </span>
-                                    <input type="number" class="form-control" value="{{{$item->end or ''}}}" name="end" required>
+                                    <input type="number" class="form-control" value="{{{$item->end ?? ''}}}" name="end" required>
                                     <div class="input-group-append">
                                         <div class="input-group-text">{{{ trans('admin.days') }}}</div>
                                     </div>
@@ -108,8 +108,8 @@
                                     <td class="text-center"><img src="{{{ $list->image }}}" width="24" /></td>
                                     <td>{{{ $list->description }}}</td>
                                     <td class="text-center">{{{ str_replace(',',' to ',$list->value) }}}</td>
-                                    <td class="text-center">{{{ $list->gift or 0 }}}</td>
-                                    <td class="text-center">{{{ $list->commision or 0 }}}</td>
+                                    <td class="text-center">{{{ $list->gift ?? 0 }}}</td>
+                                    <td class="text-center">{{{ $list->commision ?? 0 }}}</td>
                                     <td class="text-center">
                                         <a href="/admin/user/rate/edit/{{{ $list->id }}}/day#day" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                         <a href="#" data-href="/admin/user/rate/delete/{{{ $list->id }}}/day" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -124,12 +124,12 @@
                     <form method="post" action="/admin/user/rate/store" class="form-horizontal form-bordered">
 
                         <input type="hidden" name="mode" value="videocount">
-                        <input type="hidden" name="edit" value="{{{$item->id or ''}}}">
+                        <input type="hidden" name="edit" value="{{{$item->id ?? ''}}}">
 
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_title') }}}</label>
                             <div class="col-md-6">
-                                <input type="text" name="description" value="{{{$item->description or ''}}}" class="form-control" required>
+                                <input type="text" name="description" value="{{{$item->description ?? ''}}}" class="form-control" required>
                             </div>
                         </div>
 
@@ -140,7 +140,7 @@
                                     <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image">
                                         <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     </span>
-                                    <input type="text" name="image" dir="ltr" value="{{{$item->image or ''}}}" class="form-control">
+                                    <input type="text" name="image" dir="ltr" value="{{{$item->image ?? ''}}}" class="form-control">
                                     <span class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                     </span>
@@ -152,7 +152,7 @@
                             <label class="col-md-3 control-label">{{{ trans('admin.gift_charge') }}}</label>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <input type="text" name="price" value="{{{$item->gift or ''}}}" class="form-control text-center numtostr">
+                                    <input type="text" name="price" value="{{{$item->gift ?? ''}}}" class="form-control text-center numtostr">
                                     <span class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text">@if(!empty($item->gift)) {{{ num2str($item->gift) }}} @endif {{{ trans('admin.cur_dollar') }}}</span>
                                     </span>
@@ -163,7 +163,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_commission') }}}</label>
                             <div class="col-md-6">
-                                <input type="number" name="commision" value="{{{$item->commision or 0}}}" placeholder="%" class="form-control text-center">
+                                <input type="number" name="commision" value="{{{$item->commision ?? 0}}}" placeholder="%" class="form-control text-center">
                             </div>
                         </div>
 
@@ -174,11 +174,11 @@
 														<span class="input-group-prepend">
                                                             <span class="input-group-text">{{{ trans('admin.from') }}}</span>
 														</span>
-                                    <input type="number" class="form-control" value="{{{$item->start or ''}}}" name="start" required>
+                                    <input type="number" class="form-control" value="{{{$item->start ?? ''}}}" name="start" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.to') }}}</span>
                                     </span>
-                                    <input type="number" class="form-control" value="{{{$item->end or ''}}}" name="end" required>
+                                    <input type="number" class="form-control" value="{{{$item->end ?? ''}}}" name="end" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.courses') }}}</span>
                                     </span>
@@ -211,8 +211,8 @@
                                 <td class="text-center"><img src="{{{ $list->image }}}" width="24" /></td>
                                 <td>{{{ $list->description }}}</td>
                                 <td class="text-center">{{{ str_replace(',',' to ',$list->value) }}}</td>
-                                <td class="text-center">{{{ $list->gift or 0 }}}</td>
-                                <td class="text-center">{{{ $list->commision or 0 }}}</td>
+                                <td class="text-center">{{{ $list->gift ?? 0 }}}</td>
+                                <td class="text-center">{{{ $list->commision ?? 0 }}}</td>
                                 <td class="text-center">
                                     <a href="/admin/user/rate/edit/{{{ $list->id }}}/videocount#videocount" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     <a href="#" data-href="/admin/user/rate/delete/{{{ $list->id }}}/videocount" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -226,12 +226,12 @@
                     <form method="post" action="/admin/user/rate/store" class="form-horizontal form-bordered">
 
                         <input type="hidden" name="mode" value="sellcount">
-                        <input type="hidden" name="edit" value="{{{$item->id or ''}}}">
+                        <input type="hidden" name="edit" value="{{{$item->id ?? ''}}}">
 
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_title') }}}</label>
                             <div class="col-md-6">
-                                <input type="text" name="description" value="{{{$item->description or ''}}}" class="form-control" required>
+                                <input type="text" name="description" value="{{{$item->description ?? ''}}}" class="form-control" required>
                             </div>
                         </div>
 
@@ -242,7 +242,7 @@
                                     <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image" >
                                         <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     </span>
-                                    <input type="text" name="image" dir="ltr" value="{{{$item->image or ''}}}" class="form-control">
+                                    <input type="text" name="image" dir="ltr" value="{{{$item->image ?? ''}}}" class="form-control">
                                     <span class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                     </span>
@@ -254,7 +254,7 @@
                             <label class="col-md-3 control-label">{{{ trans('admin.gift_charge') }}}</label>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <input type="text" name="price" value="{{{$item->gift or ''}}}" class="form-control text-center numtostr">
+                                    <input type="text" name="price" value="{{{$item->gift ?? ''}}}" class="form-control text-center numtostr">
                                     <div class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text">@if(!empty($item->gift)) {{{ num2str($item->gift) }}} @endif {{{ trans('admin.cur_dollar') }}}</span>
                                     </div>
@@ -265,7 +265,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_commission') }}}</label>
                             <div class="col-md-6">
-                                <input type="number" name="commision" value="{{{$item->commision or 0}}}" placeholder="%" class="form-control text-center">
+                                <input type="number" name="commision" value="{{{$item->commision ?? 0}}}" placeholder="%" class="form-control text-center">
                             </div>
                         </div>
 
@@ -276,11 +276,11 @@
 														<span class="input-group-prepend">
                                                             <span class="input-group-text">{{{ trans('admin.from') }}}</span>
 														</span>
-                                    <input type="number" class="form-control" value="{{{$item->start or ''}}}" name="start" required>
+                                    <input type="number" class="form-control" value="{{{$item->start ?? ''}}}" name="start" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.to') }}}</span>
                                     </span>
-                                    <input type="number" class="form-control" value="{{{$item->end or ''}}}" name="end" required>
+                                    <input type="number" class="form-control" value="{{{$item->end ?? ''}}}" name="end" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.sales') }}}</span>
                                     </span>
@@ -313,8 +313,8 @@
                                 <td class="text-center"><img src="{{{ $list->image }}}" width="24" /></td>
                                 <td>{{{ $list->description }}}</td>
                                 <td class="text-center">{{{ str_replace(',',' to ',$list->value) }}}</td>
-                                <td class="text-center">{{{ $list->gift or 0 }}}</td>
-                                <td class="text-center">{{{ $list->commision or 0 }}}</td>
+                                <td class="text-center">{{{ $list->gift ?? 0 }}}</td>
+                                <td class="text-center">{{{ $list->commision ?? 0 }}}</td>
                                 <td class="text-center">
                                     <a href="/admin/user/rate/edit/{{{ $list->id }}}/sellcount#sellcount" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     <a href="#" data-href="/admin/user/rate/delete/{{{ $list->id }}}/sellcount" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -328,12 +328,12 @@
                     <form method="post" action="/admin/user/rate/store" class="form-horizontal form-bordered">
 
                         <input type="hidden" name="mode" value="buycount">
-                        <input type="hidden" name="edit" value="{{{$item->id or ''}}}">
+                        <input type="hidden" name="edit" value="{{{$item->id ?? ''}}}">
 
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_title') }}}</label>
                             <div class="col-md-6">
-                                <input type="text" name="description" value="{{{$item->description or ''}}}" class="form-control" required>
+                                <input type="text" name="description" value="{{{$item->description ?? ''}}}" class="form-control" required>
                             </div>
                         </div>
 
@@ -344,7 +344,7 @@
                                     <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image">
                                         <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     </span>
-                                    <input type="text" name="image" dir="ltr" value="{{{$item->image or ''}}}" class="form-control">
+                                    <input type="text" name="image" dir="ltr" value="{{{$item->image ?? ''}}}" class="form-control">
                                     <span class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                     </span>
@@ -356,7 +356,7 @@
                             <label class="col-md-3 control-label">{{{ trans('admin.gift_charge') }}}</label>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <input type="text" name="price" value="{{{$item->gift or ''}}}" class="form-control text-center numtostr">
+                                    <input type="text" name="price" value="{{{$item->gift ?? ''}}}" class="form-control text-center numtostr">
                                     <div class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text">@if(!empty($item->gift)) {{{ num2str($item->gift) }}} @endif {{{ trans('admin.cur_dollar') }}}</span>
                                     </div>
@@ -367,7 +367,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_commission') }}}</label>
                             <div class="col-md-6">
-                                <input type="number" name="commision" value="{{{$item->commision or 0}}}" placeholder="%" class="form-control text-center">
+                                <input type="number" name="commision" value="{{{$item->commision ?? 0}}}" placeholder="%" class="form-control text-center">
                             </div>
                         </div>
 
@@ -378,11 +378,11 @@
 														<span class="input-group-prepend">
                                                             <span class="input-group-text">{{{ trans('admin.from') }}}</span>
 														</span>
-                                    <input type="number" class="form-control" value="{{{$item->start or ''}}}" name="start" required>
+                                    <input type="number" class="form-control" value="{{{$item->start ?? ''}}}" name="start" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.to') }}}</span>
                                     </span>
-                                    <input type="number" class="form-control" value="{{{$item->end or ''}}}" name="end" required>
+                                    <input type="number" class="form-control" value="{{{$item->end ?? ''}}}" name="end" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.purchases') }}}</span>
                                     </span>
@@ -415,8 +415,8 @@
                                 <td class="text-center"><img src="{{{ $list->image }}}" width="24" /></td>
                                 <td>{{{ $list->description }}}</td>
                                 <td class="text-center">{{{ str_replace(',',' to ',$list->value) }}}</td>
-                                <td class="text-center">{{{ $list->gift or 0 }}}</td>
-                                <td class="text-center">{{{ $list->commision or 0 }}}</td>
+                                <td class="text-center">{{{ $list->gift ?? 0 }}}</td>
+                                <td class="text-center">{{{ $list->commision ?? 0 }}}</td>
                                 <td class="text-center">
                                     <a href="/admin/user/rate/edit/{{{ $list->id }}}/buycount#buycount" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     <a href="#" data-href="/admin/user/rate/delete/{{{ $list->id }}}/buycount" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -430,12 +430,12 @@
                     <form method="post" action="/admin/user/rate/store" class="form-horizontal form-bordered">
 
                         <input type="hidden" name="mode" value="supportrate">
-                        <input type="hidden" name="edit" value="{{{$item->id or ''}}}">
+                        <input type="hidden" name="edit" value="{{{$item->id ?? ''}}}">
 
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_title') }}}</label>
                             <div class="col-md-6">
-                                <input type="text" name="description" value="{{{$item->description or ''}}}" class="form-control" required>
+                                <input type="text" name="description" value="{{{$item->description ?? ''}}}" class="form-control" required>
                             </div>
                         </div>
 
@@ -446,7 +446,7 @@
                                     <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image">
                                         <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     </span>
-                                    <input type="text" name="image" dir="ltr" value="{{{$item->image or ''}}}" class="form-control">
+                                    <input type="text" name="image" dir="ltr" value="{{{$item->image ?? ''}}}" class="form-control">
                                     <span class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                     </span>
@@ -458,7 +458,7 @@
                             <label class="col-md-3 control-label">{{{ trans('admin.gift_charge') }}}</label>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <input type="text" name="price" value="{{{$item->gift or ''}}}" class="form-control text-center numtostr">
+                                    <input type="text" name="price" value="{{{$item->gift ?? ''}}}" class="form-control text-center numtostr">
                                     <div class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text">@if(!empty($item->gift)) {{{ num2str($item->gift) }}} @endif {{{ trans('admin.cur_dollar') }}}</span>
                                     </div>
@@ -469,7 +469,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_commission') }}}</label>
                             <div class="col-md-6">
-                                <input type="number" name="commision" value="{{{$item->commision or 0}}}" placeholder="%" class="form-control text-center">
+                                <input type="number" name="commision" value="{{{$item->commision ?? 0}}}" placeholder="%" class="form-control text-center">
                             </div>
                         </div>
 
@@ -480,11 +480,11 @@
 														<span class="input-group-prepend">
                                                             <span class="input-group-text">{{{ trans('admin.from') }}}</span>
 														</span>
-                                    <input type="number" class="form-control" value="{{{$item->start or ''}}}" name="start" required>
+                                    <input type="number" class="form-control" value="{{{$item->start ?? ''}}}" name="start" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.to') }}}</span>
                                     </span>
-                                    <input type="number" class="form-control" value="{{{$item->end or ''}}}" name="end" required>
+                                    <input type="number" class="form-control" value="{{{$item->end ?? ''}}}" name="end" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.stars') }}}</span>
                                     </span>
@@ -517,8 +517,8 @@
                                 <td class="text-center"><img src="{{{ $list->image }}}" width="24" /></td>
                                 <td>{{{ $list->description }}}</td>
                                 <td class="text-center">{{{ str_replace(',',' to ',$list->value) }}}</td>
-                                <td class="text-center">{{{ $list->gift or 0 }}}</td>
-                                <td class="text-center">{{{ $list->commision or 0 }}}</td>
+                                <td class="text-center">{{{ $list->gift ?? 0 }}}</td>
+                                <td class="text-center">{{{ $list->commision ?? 0 }}}</td>
                                 <td class="text-center">
                                     <a href="/admin/user/rate/edit/{{{ $list->id }}}/supportrate#supportrate" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     <a href="#" data-href="/admin/user/rate/delete/{{{ $list->id }}}/supportrate" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -532,12 +532,12 @@
                     <form method="post" action="/admin/user/rate/store" class="form-horizontal form-bordered">
 
                         <input type="hidden" name="mode" value="productrate">
-                        <input type="hidden" name="edit" value="{{{$item->id or ''}}}">
+                        <input type="hidden" name="edit" value="{{{$item->id ?? ''}}}">
 
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_title') }}}</label>
                             <div class="col-md-6">
-                                <input type="text" name="description" value="{{{$item->description or ''}}}" class="form-control" required>
+                                <input type="text" name="description" value="{{{$item->description ?? ''}}}" class="form-control" required>
                             </div>
                         </div>
 
@@ -548,7 +548,7 @@
                                     <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image">
                                         <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     </span>
-                                    <input type="text" name="image" dir="ltr" value="{{{$item->image or ''}}}" class="form-control">
+                                    <input type="text" name="image" dir="ltr" value="{{{$item->image ?? ''}}}" class="form-control">
                                     <span class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                     </span>
@@ -560,7 +560,7 @@
                             <label class="col-md-3 control-label">{{{ trans('admin.gift_charge') }}}</label>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <input type="text" name="price" value="{{{$item->gift or ''}}}" class="form-control text-center numtostr">
+                                    <input type="text" name="price" value="{{{$item->gift ?? ''}}}" class="form-control text-center numtostr">
                                     <div class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text">@if(!empty($item->gift)) {{{ num2str($item->gift) }}} @endif {{{ trans('admin.cur_dollar') }}}</span>
                                     </div>
@@ -571,7 +571,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_commission') }}}</label>
                             <div class="col-md-6">
-                                <input type="number" name="commision" value="{{{$item->commision or 0}}}" placeholder="%" class="form-control text-center">
+                                <input type="number" name="commision" value="{{{$item->commision ?? 0}}}" placeholder="%" class="form-control text-center">
                             </div>
                         </div>
 
@@ -582,11 +582,11 @@
 														<span class="input-group-prepend">
                                                             <span class="input-group-text">{{{ trans('admin.from') }}}</span>
 														</span>
-                                    <input type="number" class="form-control" value="{{{$item->start or ''}}}" name="start" required>
+                                    <input type="number" class="form-control" value="{{{$item->start ?? ''}}}" name="start" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.to') }}}</span>
                                     </span>
-                                    <input type="number" class="form-control" value="{{{$item->end or ''}}}" name="end" required>
+                                    <input type="number" class="form-control" value="{{{$item->end ?? ''}}}" name="end" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.stars') }}}</span>
                                     </span>
@@ -619,8 +619,8 @@
                                 <td class="text-center"><img src="{{{ $list->image }}}" width="24" /></td>
                                 <td>{{{ $list->description }}}</td>
                                 <td class="text-center">{{{ str_replace(',',' to ',$list->value) }}}</td>
-                                <td class="text-center">{{{ $list->gift or 0 }}}</td>
-                                <td class="text-center">{{{ $list->commision or 0 }}}</td>
+                                <td class="text-center">{{{ $list->gift ?? 0 }}}</td>
+                                <td class="text-center">{{{ $list->commision ?? 0 }}}</td>
                                 <td class="text-center">
                                     <a href="/admin/user/rate/edit/{{{ $list->id }}}/productrate#productrate" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     <a href="#" data-href="/admin/user/rate/delete/{{{ $list->id }}}/productrate" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -634,12 +634,12 @@
                     <form method="post" action="/admin/user/rate/store" class="form-horizontal form-bordered">
 
                         <input type="hidden" name="mode" value="postrate">
-                        <input type="hidden" name="edit" value="{{{$item->id or ''}}}">
+                        <input type="hidden" name="edit" value="{{{$item->id ?? ''}}}">
 
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_title') }}}</label>
                             <div class="col-md-6">
-                                <input type="text" name="description" value="{{{$item->description or ''}}}" class="form-control" required>
+                                <input type="text" name="description" value="{{{$item->description ?? ''}}}" class="form-control" required>
                             </div>
                         </div>
 
@@ -650,7 +650,7 @@
                                     <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="image">
                                         <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                     </span>
-                                    <input type="text" name="image" dir="ltr" value="{{{$item->image or ''}}}" class="form-control">
+                                    <input type="text" name="image" dir="ltr" value="{{{$item->image ?? ''}}}" class="form-control">
                                     <span class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                     </span>
@@ -662,7 +662,7 @@
                             <label class="col-md-3 control-label">{{{ trans('admin.gift_charge') }}}</label>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <input type="text" name="price" value="{{{$item->gift or ''}}}" class="form-control text-center numtostr">
+                                    <input type="text" name="price" value="{{{$item->gift ?? ''}}}" class="form-control text-center numtostr">
                                     <div class="input-group-append click-for-upload cu-p">
                                         <span class="input-group-text">@if(!empty($item->gift)) {{{ num2str($item->gift) }}} @endif {{{ trans('admin.cur_dollar') }}}</span>
                                     </div>
@@ -673,7 +673,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.badge_commission') }}}</label>
                             <div class="col-md-6">
-                                <input type="number" name="commision" value="{{{$item->commision or 0}}}" placeholder="%" class="form-control text-center">
+                                <input type="number" name="commision" value="{{{$item->commision ?? 0}}}" placeholder="%" class="form-control text-center">
                             </div>
                         </div>
 
@@ -684,11 +684,11 @@
 														<span class="input-group-prepend">
                                                             <span class="input-group-text">{{{ trans('admin.from') }}}</span>
 														</span>
-                                    <input type="number" class="form-control" value="{{{$item->start or ''}}}" name="start" required>
+                                    <input type="number" class="form-control" value="{{{$item->start ?? ''}}}" name="start" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.to') }}}</span>
                                     </span>
-                                    <input type="number" class="form-control" value="{{{$item->end or ''}}}" name="end" required>
+                                    <input type="number" class="form-control" value="{{{$item->end ?? ''}}}" name="end" required>
                                     <span class="input-group-append">
                                         <span class="input-group-text">{{{ trans('admin.stars') }}}</span>
                                     </span>
@@ -721,8 +721,8 @@
                                 <td class="text-center"><img src="{{{ $list->image }}}" width="24" /></td>
                                 <td>{{{ $list->description }}}</td>
                                 <td class="text-center">{{{ str_replace(',',' to ',$list->value) }}}</td>
-                                <td class="text-center">{{{ $list->gift or 0 }}}</td>
-                                <td class="text-center">{{{ $list->commision or 0 }}}</td>
+                                <td class="text-center">{{{ $list->gift ?? 0 }}}</td>
+                                <td class="text-center">{{{ $list->commision ?? 0 }}}</td>
                                 <td class="text-center">
                                     <a href="/admin/user/rate/edit/{{{ $list->id }}}/postrate#postrate" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     <a href="#" data-href="/admin/user/rate/delete/{{{ $list->id }}}/postrate" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>

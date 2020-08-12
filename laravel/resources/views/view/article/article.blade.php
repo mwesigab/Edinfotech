@@ -1,7 +1,7 @@
 @extends('view.layout.layout')
 @section('title')
-    {{{ $setting['site']['site_title'] or '' }}}
-    - {{{ $post->title or '' }}}
+    {{{ $setting['site']['site_title'] ?? '' }}}
+    - {{{ $post->title ?? '' }}}
 @endsection
 
 @section('page')
@@ -11,37 +11,37 @@
             <div class="blog-section">
                     <div class="col-xs-12 row blog-post-box blog-post-box-s">
                         <div class="col-md-4 col-xs-12">
-                            <img src="{{{ $post->image or '' }}}" class="img-responsive">
+                            <img src="{{{ $post->image ?? '' }}}" class="img-responsive">
                             <span class="date-section">{{{ date('d F Y',$post->create_at) }}}</span>
                             <span class="date-section date-section-s">
-                                <img src="{{{ $post->category->image or '' }}}" class="img-responsive pull-left">
-                                <a href="/category/{{{ $post->category->class or '' }}}" class="pull-left a-link-s">{{{ $post->category->title or '' }}}</a>
+                                <img src="{{{ $post->category->image ?? '' }}}" class="img-responsive pull-left">
+                                <a href="/category/{{{ $post->category->class ?? '' }}}" class="pull-left a-link-s">{{{ $post->category->title ?? '' }}}</a>
                             </span>
                             <div class="product-user-box">
                                 <?php $userMeta = arrayToList($post->user->usermetas,'option','value'); ?>
-                                <img class="img-box" src="{{{ $userMeta['avatar'] or get_option('default_user_avatar','') }}}" class="img-responsive"/>
-                                <span>{{{ $post->user->name or '' }}}</span>
+                                <img class="img-box" src="{{{ $userMeta['avatar'] ?? get_option('default_user_avatar','') }}}" class="img-responsive"/>
+                                <span>{{{ $post->user->name ?? '' }}}</span>
                                 <div class="user-description-box">
-                                    {{{ $userMeta['short_biography'] or '' }}}
+                                    {{{ $userMeta['short_biography'] ?? '' }}}
                                 </div>
                                 <div class="text-center">
                                     @foreach($rates as $rate)
-                                        <img class="img-icon img-icon-s" src="{{{ $rate['image'] or '' }}}" title="{{{ $rate['description'] or '' }}}"/>
+                                        <img class="img-icon img-icon-s" src="{{{ $rate['image'] ?? '' }}}" title="{{{ $rate['description'] ?? '' }}}"/>
                                     @endforeach
                                 </div>
                                     <div class="h-10"></div>
 								<div class="product-user-box-footer">
-                                <a href="/profile/{{{ $post->user->id or '' }}}">{{{ trans('main.user_profile') }}}</a>
+                                <a href="/profile/{{{ $post->user->id ?? '' }}}">{{{ trans('main.user_profile') }}}</a>
                             </div>
                             </div>
 
                         </div>
                         <div class="col-md-8 col-xs-12 text-section">
-                            <h1 class="text-section-s1">{{{ $post->title or '' }}}</h1>
+                            <h1 class="text-section-s1">{{{ $post->title ?? '' }}}</h1>
                             <br>
-                            {!!   $post->pre_text or '' !!}
+                            {!!   $post->pre_text ?? '' !!}
                             <hr>
-                            {!!   $post->text or '' !!}
+                            {!!   $post->text ?? '' !!}
                             <br>
                         </div>
                     </div>
@@ -62,8 +62,8 @@
                             @foreach($relContent as $new)
                                 <?php $meta = arrayToList($new->metas,'option','value'); ?>
                                 <div class="col-md-3 col-sm-6 col-xs-12 tab-con">
-                                    <a href="/product/{{{ $new->id or '' }}}" title="{{{ $new->title or '' }}}" class="content-box">
-                                        <img src="{{{ $meta['thumbnail'] or '' }}}"/>
+                                    <a href="/product/{{{ $new->id ?? '' }}}" title="{{{ $new->title ?? '' }}}" class="content-box">
+                                        <img src="{{{ $meta['thumbnail'] ?? '' }}}"/>
 										<h3>{!! str_limit($new->title,35,'...') !!}</h3>
                                         <div class="footer">
                                             <label class="pull-right">@if(isset($meta['duration'])){{{ convertToHoursMins($meta['duration']) }}}@else {{{ trans('main.not_defined') }}} @endif </label>
@@ -79,8 +79,8 @@
                             @foreach($userContent as $new)
                                 <?php $meta = arrayToList($new->metas,'option','value'); ?>
                                 <div class="col-md-3 col-sm-6 col-xs-12 tab-con">
-                                    <a href="/product/{{{ $new->id or '' }}}" title="{{{ $new->title or '' }}}" class="content-box">
-                                        <img src="{{{ $meta['thumbnail'] or '' }}}"/>
+                                    <a href="/product/{{{ $new->id ?? '' }}}" title="{{{ $new->title ?? '' }}}" class="content-box">
+                                        <img src="{{{ $meta['thumbnail'] ?? '' }}}"/>
 										<h3>{!! str_limit($new->title,35,'...') !!}</h3>
                                         <div class="footer">
                                             <label class="pull-right">@if(isset($meta['duration'])){{{ convertToHoursMins($meta['duration']) }}}@else {{{ trans('main.not_defined') }}} @endif </label>

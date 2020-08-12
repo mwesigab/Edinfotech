@@ -31,9 +31,9 @@
                         @foreach($lists as $list)
                             <tr>
                                 <td>{{{ $list->title }}}</td>
-                                <td class="text-center" width="80">%{{{ $list->off or 0 }}}</td>
-                                <td class="text-center" width="80">%{{{ $list->commision or 0 }}}</td>
-                                <td class="text-center" width="80"><a href="/admin/user/incategory/{{{$list->id}}}">{{{ $list->users_count or 0 }}}</a></td>
+                                <td class="text-center" width="80">%{{{ $list->off ?? 0 }}}</td>
+                                <td class="text-center" width="80">%{{{ $list->commision ?? 0 }}}</td>
+                                <td class="text-center" width="80"><a href="/admin/user/incategory/{{{$list->id}}}">{{{ $list->users_count ?? 0 }}}</a></td>
                                 <td class="text-center">
                                     @if($list->mode == 'publish')
                                         <b class="c-g">{{{ trans('admin.new_user_group_status_enabled') }}}</b>

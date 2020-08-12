@@ -11,7 +11,7 @@
                 <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
             </div>
 
-            <h2 class="panel-title">{{{ trans('admin.th_edit') }}} {{{ $item->title or '' }}}</h2>
+            <h2 class="panel-title">{{{ trans('admin.th_edit') }}} {{{ $item->title ?? '' }}}</h2>
         </header>
         <div class="panel-body">
 
@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <label class="col-md-1 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                     <div class="col-md-11">
-                        <input type="text" value="{{{ $item->title or '' }}}" name="title" class="form-control" required>
+                        <input type="text" value="{{{ $item->title ?? '' }}}" name="title" class="form-control" required>
                     </div>
                 </div>
 
@@ -71,11 +71,11 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea class="ckeditor" name="msg" required>{{{ $item->msg or '' }}}</textarea>
+                        <textarea class="ckeditor" name="msg" required>{{{ $item->msg ?? '' }}}</textarea>
                     </div>
                 </div>
 
-                <input type="hidden" name="id" value="{{{ $item->id or '' }}}">
+                <input type="hidden" name="id" value="{{{ $item->id ?? '' }}}">
 
                 <div class="form-group">
                     <div class="col-md-12">

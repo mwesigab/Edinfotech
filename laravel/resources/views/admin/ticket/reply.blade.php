@@ -5,14 +5,14 @@
 @section('page')
     <div class="card">
         <div class="card-body">
-            <a href="/admin/ticket/user/{{{ $ticket->id or 0 }}}" class="btn btn-primary">{{{ trans('admin.add_user_conversation') }}}</a>
+            <a href="/admin/ticket/user/{{{ $ticket->id ?? 0 }}}" class="btn btn-primary">{{{ trans('admin.add_user_conversation') }}}</a>
             &nbsp;&nbsp;
             <span>{{{ trans('admin.ticket_created_by') }}} </span>
-            <span><a href="/profile/{{{ $ticket->user->id or '' }}}" target="_blank">{{{ $ticket->user->username or '' }}}</a></span>
+            <span><a href="/profile/{{{ $ticket->user->id ?? '' }}}" target="_blank">{{{ $ticket->user->username ?? '' }}}</a></span>
             <span> {{{ trans('admin.and_this_users_invited') }}} </span>
             <span>
                 @foreach($ticket->users as $tUser)
-                    &nbsp;<a href="/profile/{{{ $tUser->user->id or 0 }}}" target="_blank">{{{ $tUser->user->username or '' }}}</a>&nbsp;
+                    &nbsp;<a href="/profile/{{{ $tUser->user->id ?? 0 }}}" target="_blank">{{{ $tUser->user->username ?? '' }}}</a>&nbsp;
                 @endforeach
             </span>
         </div>
@@ -27,16 +27,16 @@
         @endif
             <div class="card-header-action" style="float: right;position: relative;right: 10px;">
                 @if($msg->attach != null && $msg->attach != '')
-                    <a href="{!! $msg->attach or '' !!}" target="_blank" class="panel-action custom-reply"><i class="fa fa-paperclip" style="color: gray"></i></a>
+                    <a href="{!! $msg->attach ?? '' !!}" target="_blank" class="panel-action custom-reply"><i class="fa fa-paperclip" style="color: gray"></i></a>
                 @endif
                 <a href="#" class="panel-action panel-action-toggle" data-panel-toggle></a>
                 <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
             </div>
 
             @if($msg->mode == 'user')
-                <h4 class="card-title">{{{ trans('admin.user') }}} - {{{ $msg->user->name or '' }}}</h4>
+                <h4 class="card-title">{{{ trans('admin.user') }}} - {{{ $msg->user->name ?? '' }}}</h4>
             @else
-                <h4 class="card-title" style="color: #fafafa"> {{{ trans('admin.support_staff') }}} - {{{ $msg->user->name or '' }}}</h4>
+                <h4 class="card-title" style="color: #fafafa"> {{{ trans('admin.support_staff') }}} - {{{ $msg->user->name ?? '' }}}</h4>
             @endif
         </header>
         <div class="card-body">
@@ -60,13 +60,13 @@
 
         </header>
         <div class="card-body">
-            <form action="/admin/ticket/reply/store/{{{ $ticket->id or '' }}}" class="form-horizontal form-bordered" method="post">
+            <form action="/admin/ticket/reply/store/{{{ $ticket->id ?? '' }}}" class="form-horizontal form-bordered" method="post">
 
-                <input type="hidden" name="id" value="{{{ $item->id or '' }}}">
+                <input type="hidden" name="id" value="{{{ $item->id ?? '' }}}">
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <textarea class="summernote" name="msg" required>{{{ $item->msg or '' }}}</textarea>
+                        <textarea class="summernote" name="msg" required>{{{ $item->msg ?? '' }}}</textarea>
                     </div>
                 </div>
 
@@ -85,9 +85,9 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         @if($ticket->mode == 'open')
-                            <a class="btn btn-danger pull-right" href="/admin/ticket/close/{{{ $ticket->id or 0 }}}" >{{{ trans('admin.close_ticket') }}}</a>
+                            <a class="btn btn-danger pull-right" href="/admin/ticket/close/{{{ $ticket->id ?? 0 }}}" >{{{ trans('admin.close_ticket') }}}</a>
                         @else
-                            <a class="btn btn-success pull-right" href="/admin/ticket/open/{{{ $ticket->id or 0 }}}" >{{{ trans('admin.open_ticket') }}}</a>
+                            <a class="btn btn-success pull-right" href="/admin/ticket/open/{{{ $ticket->id ?? 0 }}}" >{{{ trans('admin.open_ticket') }}}</a>
                         @endif
                         <button class="btn btn-primary pull-left" type="submit">{{{ trans('admin.send') }}}</button>
                     </div>

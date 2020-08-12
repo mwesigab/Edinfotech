@@ -8,12 +8,12 @@
             <div id="day" class="tab-pane active">
                 <form method="post" action="/admin/setting/social/store" class="form-horizontal form-bordered">
 
-                    <input type="hidden" name="id" value="{{{$item->id or ''}}}">
+                    <input type="hidden" name="id" value="{{{$item->id ?? ''}}}">
 
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                         <div class="col-md-8">
-                            <input type="text" name="title" value="{{{$item->title or ''}}}" class="form-control" required>
+                            <input type="text" name="title" value="{{{$item->title ?? ''}}}" class="form-control" required>
                         </div>
                     </div>
 
@@ -24,7 +24,7 @@
                                 <span class="input-group-prepend cu-p view-selected" data-toggle="modal" data-target="#icon" data-whatever="image">
                                     <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 </span>
-                                <input type="text" name="icon" dir="ltr" value="{{{$item->icon or ''}}}" class="form-control">
+                                <input type="text" name="icon" dir="ltr" value="{{{$item->icon ?? ''}}}" class="form-control">
                                 <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                 </span>
@@ -35,7 +35,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">{{{ trans('admin.link_address') }}}</label>
                         <div class="col-md-8">
-                            <input type="text" name="link" value="{{{$item->link or ''}}}" class="form-control text-left">
+                            <input type="text" name="link" value="{{{$item->link ?? ''}}}" class="form-control text-left">
                         </div>
                     </div>
 
@@ -43,7 +43,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.sort') }}}</label>
                         <div class="col-md-2">
-                            <input type="number" name="sort" value="{{{$item->sort or ''}}}" class="form-control text-center">
+                            <input type="number" name="sort" value="{{{$item->sort ?? ''}}}" class="form-control text-center">
                         </div>
                         <div class="h-20"></div>
                         <div class="col-md-6">
@@ -65,9 +65,9 @@
                 <tbody>
                     @foreach($lists as $list)
                        <tr>
-                           <td class="text-center"><img src="{{{ $list->icon or '' }}}" width="24" /></td>
-                           <td>{{{ $list->title or '' }}}</td>
-                           <td class="text-center"><a href="{{{ $list->link or 0 }}}" target="_blank">{{{ trans('admin.view') }}}</a></td>
+                           <td class="text-center"><img src="{{{ $list->icon ?? '' }}}" width="24" /></td>
+                           <td>{{{ $list->title ?? '' }}}</td>
+                           <td class="text-center"><a href="{{{ $list->link ?? 0 }}}" target="_blank">{{{ trans('admin.view') }}}</a></td>
                            <td class="text-center">
                                <a href="/admin/setting/social/edit/{{{ $list->id }}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                <a href="#" data-href="/admin/setting/social/delete/{{{ $list->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>

@@ -37,14 +37,14 @@
                 @foreach($ticket->messages as $msg)
                     @if($msg->mode == 'user')
                         <div class="ucp-section-box">
-                            <div class="header back-blue">{{{ trans('main.user') }}}-{{{ $msg->user->name or '' }}}
+                            <div class="header back-blue">{{{ trans('main.user') }}}-{{{ $msg->user->name ?? '' }}}
                             <span class="pull-left">{{{ date('d F y h:i',$msg->create_at) }}}</span>
                             </div>
                             <div class="body pos-rel">
-                                {!! $msg->msg or '' !!}
+                                {!! $msg->msg ?? '' !!}
                                 @if($msg->attach != null && $msg->attach != '')
                                     <br>
-                                    <a href="{!! $msg->attach or '' !!}" target="_blank" class="pull-left attach-s"><span class="crticon mdi mdi-paperclip"></span>&nbsp;Attachment</a>
+                                    <a href="{!! $msg->attach ?? '' !!}" target="_blank" class="pull-left attach-s"><span class="crticon mdi mdi-paperclip"></span>&nbsp;Attachment</a>
                                 @endif
                             </div>
                         </div>
@@ -54,10 +54,10 @@
                                 <span class="pull-left">{{{ date('d F y h:i',$msg->create_at) }}}</span>
                             </div>
                             <div class="body pos-rel">
-                                {!! $msg->msg or '' !!}
+                                {!! $msg->msg ?? '' !!}
                                 @if($msg->attach != null && $msg->attach != '')
                                     <br>
-                                    <a href="{!! $msg->attach or '' !!}" target="_blank" class="pull-left attach-s"><span class="crticon mdi mdi-paperclip"></span>&nbsp;Attachment</a>
+                                    <a href="{!! $msg->attach ?? '' !!}" target="_blank" class="pull-left attach-s"><span class="crticon mdi mdi-paperclip"></span>&nbsp;Attachment</a>
                                 @endif
                             </div>
                         </div>

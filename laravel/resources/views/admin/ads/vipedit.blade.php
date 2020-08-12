@@ -15,7 +15,7 @@
         </header>
         <div class="card-body">
 
-            <form action="/admin/ads/vip/edit/store/{{{ $vip->id or '' }}}" class="form-horizontal form-bordered" method="post">
+            <form action="/admin/ads/vip/edit/store/{{{ $vip->id ?? '' }}}" class="form-horizontal form-bordered" method="post">
 
 
                 <div class="form-group">
@@ -23,7 +23,7 @@
                     <div class="col-md-4" >
                         <select name="content_id" data-plugin-selectTwo class="form-control populate" id="type">
                             @foreach($contents as $content)
-                                <option value="{{{ $content->id or 0 }}}" @if($vip->content_id == $content->id) selected @endif>{{{ $content->title or '' }}}</option>
+                                <option value="{{{ $content->id ?? 0 }}}" @if($vip->content_id == $content->id) selected @endif>{{{ $content->title ?? '' }}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -68,7 +68,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.short_description') }}}</label>
                     <div class="col-md-10">
-                        <textarea class="form-control" rows="8" name="description">{{{ $vip->description or '' }}}</textarea>
+                        <textarea class="form-control" rows="8" name="description">{{{ $vip->description ?? '' }}}</textarea>
                     </div>
                 </div>
 
@@ -101,7 +101,7 @@
                         <td class="text-center" width="80">{{{ date('d F Y',$item->first_date) }}}</td>
                         <td class="text-center" width="80">{{{ date('d F Y',$item->last_date) }}}</td>
                         <td class="text-center" width="50">
-                            <a target="_blank" href="/product/{{{ $item->content->id or 0 }}}">{{{ $item->content->title or '' }}}</a>
+                            <a target="_blank" href="/product/{{{ $item->content->id ?? 0 }}}">{{{ $item->content->title ?? '' }}}</a>
                         </td>
                         <td class="text-center">
                             @if($item->type == 'slide' || $item->type == null)

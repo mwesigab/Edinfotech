@@ -15,7 +15,7 @@
                     <div class="col-md-4" >
                         <select name="content_id" data-plugin-selectTwo class="form-control populate" id="type">
                             @foreach($contents as $content)
-                                <option value="{{{ $content->id or 0 }}}">{{{ $content->title or '' }}}</option>
+                                <option value="{{{ $content->id ?? 0 }}}">{{{ $content->title ?? '' }}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -96,7 +96,7 @@
                         <td class="text-center" width="80">{{{ date('d F Y',$item->first_date) }}}</td>
                         <td class="text-center" width="80">{{{ date('d F Y',$item->last_date) }}}</td>
                         <td class="text-center" width="50">
-                            <a target="_blank" href="/product/{{{ $item->content->id or 0 }}}">{{{ $item->content->title or 'Item not found.' }}}</a>
+                            <a target="_blank" href="/product/{{{ $item->content->id ?? 0 }}}">{{{ $item->content->title ?? 'Item not found.' }}}</a>
                         </td>
                         <td class="text-center">
                             @if($item->type == 'slide' || $item->type == null)

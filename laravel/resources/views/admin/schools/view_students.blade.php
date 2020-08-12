@@ -39,7 +39,7 @@ Students List
                     <th class="text-center">{{{ $student->username }}}</th>
                     <th class="text-center">{{{ $student->password }}}</th>
                     <th class="text-center">{{{ $student->created_at }}}</th>
-                    <th class="text-center"><a href="/admin/content/user/{{{ $student->id }}}">{{{ $student->contents_count or
+                    <th class="text-center"><a href="/admin/content/user/{{{ $student->id }}}">{{{ $student->contents_count ??
                             0 }}}</a></th>
                     <th class="text-center">
                         @if($student->status == 'Active')

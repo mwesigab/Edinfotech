@@ -35,3 +35,4 @@
         <?php endif; ?>
     </ul>
 <?php endif; ?>
+<?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/pagination/default.blade.php ENDPATH**/ ?>

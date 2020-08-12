@@ -15,7 +15,7 @@
                                 <label class="control-label">{{{ trans('main.select_channel') }}}</label>
                                 <select name="channel_id" class="form-control font-s">
                                     @foreach($channels as $channel)
-                                        <option value="{{{ $channel->id or 0 }}}" @if(isset($id) && $channel->id == $id) selected @endif>{{{ $channel->title or '' }}}</option>
+                                        <option value="{{{ $channel->id ?? 0 }}}" @if(isset($id) && $channel->id == $id) selected @endif>{{{ $channel->title ?? '' }}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -54,9 +54,9 @@
                             <tbody>
                             @foreach($requests as $channel)
                                 <tr>
-                                    <td class="text-right text-justify">{{{ $channel->title or '' }}}</td>
-                                    <td class="text-center" width="150">{{{ $channel->channel->title or '' }}}</td>
-                                    <td class="text-center"><a href="{{{ $channel->attach or '#' }}}" target="_blank">{{{ trans('main.view') }}}</a></td>
+                                    <td class="text-right text-justify">{{{ $channel->title ?? '' }}}</td>
+                                    <td class="text-center" width="150">{{{ $channel->channel->title ?? '' }}}</td>
+                                    <td class="text-center"><a href="{{{ $channel->attach ?? '#' }}}" target="_blank">{{{ trans('main.view') }}}</a></td>
                                     <td class="text-center">
                                     @if($channel->mode==null Or $channel->mode=='pending' || $channel->mode=='draft')
                                         <b class="orange-s">{{{ trans('main.waiting') }}}</b>

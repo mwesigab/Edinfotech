@@ -7,13 +7,18 @@ use App\Models\Sell;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
 
 class SellController extends Controller
 {
+    protected $request;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
+    
     public function lists(){
-        $fdate = strtotime(Input::get('fsdate'));
-        $ldate = strtotime(Input::get('lsdate'));
+        $fdate = strtotime($this->request->get('fsdate'));
+        $ldate = strtotime($this->request->get('lsdate'));
 
         $lists = Sell::with('user','buyer','content','transaction')->orderBy('id','DESC');
 
@@ -21,14 +26,14 @@ class SellController extends Controller
             $lists->where('create_at','>',$fdate);
         if($ldate>12601)
             $lists->where('create_at','<',$ldate);
-        if(Input::get('user')!==null)
-            $lists->where('user_id',Input::get('user'));
-        if(Input::get('buyer')!==null)
-            $lists->where('buyer_id',Input::get('buyer'));
-        if(Input::get('content')!==null)
-            $lists->where('content_id',Input::get('content'));
-        if(Input::get('type')!==null) {
-            switch (Input::get('type')) {
+        if($this->request->get('user')!==null)
+            $lists->where('user_id',$this->request->get('user'));
+        if($this->request->get('buyer')!==null)
+            $lists->where('buyer_id',$this->request->get('buyer'));
+        if($this->request->get('content')!==null)
+            $lists->where('content_id',$this->request->get('content'));
+        if($this->request->get('type')!==null) {
+            switch ($this->request->get('type')) {
                 case 'download':
                     $lists->where('type', 'download');
                     break;

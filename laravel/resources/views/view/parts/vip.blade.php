@@ -13,13 +13,13 @@
                         @if(isset($popular->metas))
                             <?php $meta = arrayToList($popular->metas,'option','value'); ?>
                             <div class="owl-car-s" dir="rtl">
-                                <a href="/product/{{{ $popular->id or '' }}}" title="{{{ $popular->title or '' }}}" class="content-box">
+                                <a href="/product/{{{ $popular ? $popular->id : '' }}}" title="{{{ $popular ? $popular->title : '' }}}" class="content-box">
 
                                     <span></span>
-                                    <img src="{{{ $meta['thumbnail'] or '' }}}"/>
+                                    <img src="{{{ isset($meta['thumbnail']) ? $meta['thumbnail'] : '' }}}"/>
 									<h3>{!! str_limit($popular->title,30,'...') !!}</h3>
                                     <div class="footer">
-                                        <span class="avatar" title="{{{ $popular->user->name or '' }}}" onclick="window.location.href = '/profile/{{{ $popular->user->id or 0 }}}'"><img src="{{{ get_user_meta($popular->user_id,'avatar',get_option('default_user_avatar','')) }}}"></span>
+                                        <span class="avatar" title="{{{ $popular->user ? $popular->user->name : '' }}}" onclick="window.location.href = '/profile/{{{ $popular->user ? $popular->user->id : 0 }}}'"><img src="{{{ get_user_meta($popular->user_id,'avatar',get_option('default_user_avatar','')) }}}"></span>
                                         <label class="pull-right content-clock">@if(isset($meta['duration'])){{{ convertToHoursMins($meta['duration']) }}}@else {{{ trans('main.not_defined') }}} @endif </label>
 										<span class="boxicon mdi mdi-clock pull-right"></span>
 										<span class="boxicon mdi mdi-wallet pull-left"></span>

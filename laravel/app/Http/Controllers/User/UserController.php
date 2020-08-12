@@ -200,10 +200,10 @@ class UserController extends Controller
         $newUser = User::create($newUser);
 
         ## Send Suitable Email For New User ##
-        /*if(get_option('user_register_mode') == 'deactive')
+        if(get_option('user_register_mode') == 'deactive')
             sendMail(['template' => get_option('user_register_active_email'), 'recipent' => [$newUser->email]]);
         else
-            sendMail(['template'=>get_option('user_register_wellcome_email'),'recipent'=>[$newUser->email]]);*/
+            sendMail(['template'=>get_option('user_register_wellcome_email'),'recipent'=>[$newUser->email]]);
 
         if(get_option('user_register_mode') == 'active')
             return redirect()->back()->with('msg',trans('main.thanks_reg'));

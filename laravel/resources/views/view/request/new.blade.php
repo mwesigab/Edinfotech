@@ -42,14 +42,14 @@
                                     <select class="form-control fos-11" name="category_id">
                                     @foreach($setting['category'] as $mainCategory)
                                         @if(count($mainCategory->childs)>0)
-                                            <optgroup label="{{{$mainCategory->title or ''}}}">
+                                            <optgroup label="{{{$mainCategory->title ?? ''}}}">
                                                     @foreach($mainCategory->childs as $child)
-                                                        <option value="{{{ $child->id or '' }}}">{{{ $child->title or '' }}}</option>
+                                                        <option value="{{{ $child->id ?? '' }}}">{{{ $child->title ?? '' }}}</option>
                                                     @endforeach
                                             </optgroup>
                                         @else
-                                            <optgroup label="{{{$mainCategory->title or ''}}}">
-                                                <option value="{{{$mainCategory->id or '0'}}}">{{{$mainCategory->title or ''}}}</option>
+                                            <optgroup label="{{{$mainCategory->title ?? ''}}}">
+                                                <option value="{{{$mainCategory->id ?? '0'}}}">{{{$mainCategory->title ?? ''}}}</option>
                                             </optgroup>
                                         @endif
                                     @endforeach

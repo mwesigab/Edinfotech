@@ -9,14 +9,14 @@
                     <label class="control-label col-md-1 tab-con">{{{ trans('main.start_date') }}}</label>
                     <div class="col-md-3 tab-con">
                         <div class="input-group">
-                            <input type="date" name="first_date" class="form-control text-center" id="first_date" value="{{{ $first_date or ''}}}" required>
+                            <input type="date" name="first_date" class="form-control text-center" id="first_date" value="{{{ $first_date ?? ''}}}" required>
                             <span class="input-group-addon first_date_btn" id="first_date_btn"><span class="formicon mdi mdi-calendar-month"></span></span>
                         </div>
                     </div>
                     <label class="control-label col-md-1 tab-con">{{{ trans('main.end_date') }}}</label>
                     <div class="col-md-3 tab-con">
                         <div class="input-group">
-                            <input type="date" name="last_date" id="last_date" value="{!! $last_date or '' !!}" class="form-control text-center" required>
+                            <input type="date" name="last_date" id="last_date" value="{!! $last_date ?? '' !!}" class="form-control text-center" required>
                             <span class="input-group-addon last_date_btn" id="last_date_btn"><span class="formicon mdi mdi-calendar-month"></span></span>
                         </div>
                     </div>
@@ -33,12 +33,12 @@
                 <span>{{{ trans('main.until') }}}</span>
                 <strong>{{{ $last_date }}}</strong>
                 <span>{{{ trans('main.total_sold') }}}</span>
-                <strong>{{{ $sellcount or 0 }}}</strong>
+                <strong>{{{ $sellcount ?? 0 }}}</strong>
                 <span>{{{ trans('main.and_total_amount') }}}</span>
-                <strong>{{{ $prices or 0 }}}</strong>
+                <strong>{{{ $prices ?? 0 }}}</strong>
                 <span>{{{ trans('main.and_your_income') }}}</span>
                 <span>{{{ currencySign() }}}</span>
-                <strong>{{{ $income or 0 }}}</strong>
+                <strong>{{{ $income ?? 0 }}}</strong>
             </div>
             <div class="h-20"></div>
 			<div class="report-chart course_details">

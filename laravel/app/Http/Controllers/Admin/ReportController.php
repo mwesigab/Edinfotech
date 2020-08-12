@@ -10,10 +10,16 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Support\Facades\Input;
 
 class ReportController extends Controller
 {
+
+    protected $request;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
+    
     public function user()
     {
         $userCount = User::where('admin','0')->count();
@@ -43,9 +49,9 @@ class ReportController extends Controller
         return view('admin.report.balance',['dayRegister'=>$dayRegister,'transactionRegister'=>$transactionRegistr,'sellCount'=>$sellCount,'transactionCount'=>$transactionCount,'allIncome'=>$allIncome,'userIncome'=>$userIncome,'siteIncome'=>$siteIncome]);
     }
     public function transaction(){
-        $fdate = strtotime(Input::get('fsdate'));
-        $ldate = strtotime(Input::get('lsdate'));
-        if(Input::get('fsdate')!==null && Input::get('lsdate')!==null)
+        $fdate = strtotime($this->request->get('fsdate'));
+        $ldate = strtotime($this->request->get('lsdate'));
+        if($this->request->get('fsdate')!==null && $this->request->get('lsdate')!==null)
             $lists = Transaction::where('create_at','>',$fdate)->where('create_at','<',$ldate)->with('user','buyer','content')->orderBy('id','DESC')->get();
         else
             $lists = Transaction::with('user','buyer','content')->orderBy('id','DESC')->get();

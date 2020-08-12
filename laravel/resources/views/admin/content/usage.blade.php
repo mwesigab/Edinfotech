@@ -19,7 +19,7 @@
                     @foreach($list as $index=>$item)
                         <tr>
                             <td class="text-center">{!! ($index + 1) !!}</td>
-                            <td>{!! $item->user->username or '' !!}</td>
+                            <td>{!! $item->user->username ?? '' !!}</td>
                             <td class="text-center" width="150">{!! $item->total * 5 !!} Min</td>
                         </tr>
                     @endforeach

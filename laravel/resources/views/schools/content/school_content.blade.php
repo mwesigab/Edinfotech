@@ -32,16 +32,16 @@
         <tbody>
         @foreach($lists as $item)
         <tr>
-            <td class="text-center" width="50">VT-{{{ $item->id or 0 }}}</td>
+            <td class="text-center" width="50">VT-{{{ $item->id ?? 0 }}}</td>
             @if($item->mode == 'publish')
-            <td><a href="/product/{{{ $item->id or 0 }}}" target="_blank">{{{ $item->title }}}</a></td>
+            <td><a href="/product/{{{ $item->id ?? 0 }}}" target="_blank">{{{ $item->title }}}</a></td>
             @else
             <td>{{{ $item->title }}}</td>
             @endif
             <td class="text-center" width="150">{{{ date('d F Y | H:i',$item->create_at) }}}</td>
-            <td class="text-center">{{{ $item->sells_count or '0' }}}</td>
-            <td class="text-center">{{{ $item->partsactive_count or '0' }}}</td>
-            <td class="text-center"><a href="/category/{{{ $item->category->class or '' }}}">{{{ $item->category->title or '' }}}</a></td>
+            <td class="text-center">{{{ $item->sells_count ?? '0' }}}</td>
+            <td class="text-center">{{{ $item->partsactive_count ?? '0' }}}</td>
+            <td class="text-center"><a href="/category/{{{ $item->category->class ?? '' }}}">{{{ $item->category->title ?? '' }}}</a></td>
             <td class="text-center">
                 @if($item->mode == 'publish')
                 <b class="green-s">{{{ trans('main.published') }}}</b>

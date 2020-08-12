@@ -28,11 +28,11 @@
                             <th class="text-center"><a target="_blank" href="/profile/{{{ $user->id }}}">{{{ $user->username }}}</a></th>
                             <th class="text-center">{{{ $user->name }}}</th>
                             <th class="text-center">{{{ date('d F Y : H:i',$user->create_at) }}}</th>
-                            <th class="text-center number-green" width="100" @if($user->income<0) style="color:red !important;" @endif dir="ltr">{{{ $user->income or 0 }}}</th>
-                            <th class="text-center number-green" width="100" @if($user->credit<0) style="color:red !important;" @endif dir="ltr">{{{ $user->credit or 0 }}}</th>
-                            <th class="text-center"><a href="/admin/content/user/{{{ $user->id }}}">{{{ $user->contents_count or 0 }}}</a></th>
-                            <th class="text-center"><a href="/admin/buysell/list/?buyer={{{ $user->id }}}">{{{ $user->buys_count or 0 }}}</a></th>
-                            <th class="text-center"><a href="/admin/buysell/list/?user={{{ $user->id }}}">{{{ $user->sells_count or 0 }}}</a></th>
+                            <th class="text-center number-green" width="100" @if($user->income<0) style="color:red !important;" @endif dir="ltr">{{{ $user->income ?? 0 }}}</th>
+                            <th class="text-center number-green" width="100" @if($user->credit<0) style="color:red !important;" @endif dir="ltr">{{{ $user->credit ?? 0 }}}</th>
+                            <th class="text-center"><a href="/admin/content/user/{{{ $user->id }}}">{{{ $user->contents_count ?? 0 }}}</a></th>
+                            <th class="text-center"><a href="/admin/buysell/list/?buyer={{{ $user->id }}}">{{{ $user->buys_count ?? 0 }}}</a></th>
+                            <th class="text-center"><a href="/admin/buysell/list/?user={{{ $user->id }}}">{{{ $user->sells_count ?? 0 }}}</a></th>
                             @if(!empty($user->category->id))
                                 <th class="text-center"><a href="/admin/user/incategory/{{{$user->category->id}}}">{{{$user->category->title}}}</a></th>
                             @else

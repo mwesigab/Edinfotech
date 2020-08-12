@@ -31,7 +31,7 @@
                             @foreach($lists as $list)
                                 <tr>
                                     <td>{{{ $list->title }}}</td>
-                                    <td class="text-center">{{{ $list->tickets_count or '0' }}}</td>
+                                    <td class="text-center">{{{ $list->tickets_count ?? '0' }}}</td>
                                     <td class="text-center">
                                         <a href="/admin/ticket/category/edit/{{{ $list->id }}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                         <a href="#" data-href="/admin/ticket/category/delete/{{{ $list->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -64,12 +64,12 @@
                     <div id="edititem" class="tab-pane active">
                         <form method="post" action="/admin/ticket/category/store" class="form-horizontal form-bordered">
 
-                            <input type="hidden" name="edit" value="{{{ $item->id or '' }}}">
+                            <input type="hidden" name="edit" value="{{{ $item->id ?? '' }}}">
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text"  name="title" value="{{{ $item->title or '' }}}" class="form-control">
+                                    <input type="text"  name="title" value="{{{ $item->title ?? '' }}}" class="form-control">
                                 </div>
                             </div>
 

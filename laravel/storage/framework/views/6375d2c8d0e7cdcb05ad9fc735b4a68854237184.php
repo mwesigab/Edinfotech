@@ -9,3 +9,4 @@
         </div>
     </div>
 </div>
+<?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/view/parts/slider.blade.php ENDPATH**/ ?>

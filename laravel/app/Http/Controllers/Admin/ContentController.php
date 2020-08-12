@@ -14,26 +14,29 @@ use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
 use App\Models\ContentCategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Input;
 use kcfinder\session;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
 {
+    protected $request;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
 
     public function lists()
     {
         $admin = unserialize(session('Admin'));
         $head_dept = Department::where('dept_head_email',$admin['email'])->get()->toArray();
 
-        $fdate = strtotime(Input::get('fdate'))+12600;
-        $ldate = strtotime(Input::get('ldate'))+12600;
+        $fdate = strtotime($this->request->get('fdate'))+12600;
+        $ldate = strtotime($this->request->get('ldate'))+12600;
 
         $users = User::all();
         $category = ContentCategory::get();
@@ -52,18 +55,18 @@ class ContentController extends Controller
             $lists->where('create_at','>',$fdate);
         if($ldate>12601)
             $lists->where('create_at','<',$ldate);
-        if(Input::get('user')!==null)
-            $lists->where('user_id',Input::get('user'));
-        if(Input::get('cat')!==null)
-            $lists->where('category_id',Input::get('cat'));
-        if(Input::get('id')!==null)
-            $lists->where('id',Input::get('id'));
-        if(Input::get('title')!==null)
-            $lists->where('title', 'like', '%'.Input::get('title').'%');
+        if($this->request->get('user')!==null)
+            $lists->where('user_id',$this->request->get('user'));
+        if($this->request->get('cat')!==null)
+            $lists->where('category_id',$this->request->get('cat'));
+        if($this->request->get('id')!==null)
+            $lists->where('id',$this->request->get('id'));
+        if($this->request->get('title')!==null)
+            $lists->where('title', 'like', '%'.$this->request->get('title').'%');
 
 
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')){
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')){
                 case 'sella':
                     $lists->orderBy('sells_count');
                     break;
@@ -86,8 +89,8 @@ class ContentController extends Controller
             $lists->orderBy('id','DESC');
 
 
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')) {
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')) {
                 case 'priced':
                     $lists = $lists->sortByDesc(function ($item) {
                     return $item->metas->where('option', 'price')->pluck('value');
@@ -117,8 +120,8 @@ class ContentController extends Controller
     }
     public function waitingList()
     {
-        $fdate = strtotime(Input::get('fdate'))+12600;
-        $ldate = strtotime(Input::get('ldate'))+12600;
+        $fdate = strtotime($this->request->get('fdate'))+12600;
+        $ldate = strtotime($this->request->get('ldate'))+12600;
 
         $users = User::all();
         $category = ContentCategory::all();
@@ -134,20 +137,20 @@ class ContentController extends Controller
             $lists->where('create_at','>',$fdate);
         if($ldate>12601)
             $lists->where('create_at','<',$ldate);
-        if(Input::get('user')!==null)
-            $lists->where('user_id',Input::get('user'));
-        if(Input::get('cat')!==null)
+        if($this->request->get('user')!==null)
+            $lists->where('user_id',$this->request->get('user'));
+        if($this->request->get('cat')!==null)
             $lists->whereHas('categories',function ($qu){
-                $qu->where('category_id',Input::get('cat'));
+                $qu->where('category_id',$this->request->get('cat'));
             });
-        if(Input::get('id')!==null)
-            $lists->where('id',Input::get('id'));
-        if(Input::get('title')!==null)
-            $lists->where('title', 'like', '%'.Input::get('title').'%');
+        if($this->request->get('id')!==null)
+            $lists->where('id',$this->request->get('id'));
+        if($this->request->get('title')!==null)
+            $lists->where('title', 'like', '%'.$this->request->get('title').'%');
 
 
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')){
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')){
                 case 'sella':
                     $lists->orderBy('sells_count');
                     break;
@@ -171,8 +174,8 @@ class ContentController extends Controller
 
         $lists = $lists->paginate(15);
 
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')) {
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')) {
                 case 'priced':
                     $lists = $lists->sortByDesc(function ($item) {
                     return $item->metas->where('option', 'price')->pluck('value');
@@ -200,8 +203,8 @@ class ContentController extends Controller
     }
     public function draftList()
     {
-        $fdate = strtotime(Input::get('fdate'))+12600;
-        $ldate = strtotime(Input::get('ldate'))+12600;
+        $fdate = strtotime($this->request->get('fdate'))+12600;
+        $ldate = strtotime($this->request->get('ldate'))+12600;
 
         $users = User::all();
         $category = ContentCategory::all();
@@ -215,20 +218,20 @@ class ContentController extends Controller
             $lists->where('create_at','>',$fdate);
         if($ldate>12601)
             $lists->where('create_at','<',$ldate);
-        if(Input::get('user')!==null)
-            $lists->where('user_id',Input::get('user'));
-        if(Input::get('cat')!==null)
+        if($this->request->get('user')!==null)
+            $lists->where('user_id',$this->request->get('user'));
+        if($this->request->get('cat')!==null)
             $lists->whereHas('categories',function ($qu){
-                $qu->where('category_id',Input::get('cat'));
+                $qu->where('category_id',$this->request->get('cat'));
             });
-        if(Input::get('id')!==null)
-            $lists->where('id',Input::get('id'));
-        if(Input::get('title')!==null)
-            $lists->where('title', 'like', '%'.Input::get('title').'%');
+        if($this->request->get('id')!==null)
+            $lists->where('id',$this->request->get('id'));
+        if($this->request->get('title')!==null)
+            $lists->where('title', 'like', '%'.$this->request->get('title').'%');
 
 
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')){
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')){
                 case 'sella':
                     $lists->orderBy('sells_count');
                     break;
@@ -252,8 +255,8 @@ class ContentController extends Controller
 
         $lists = $lists->paginate(15);
 
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')) {
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')) {
                 case 'priced':
                     $lists = $lists->sortByDesc(function ($item) {
                     return $item->metas->where('option', 'price')->pluck('value');
@@ -281,8 +284,8 @@ class ContentController extends Controller
     }
     public function userContent($id)
     {
-        $fdate = strtotime(Input::get('fdate'))+12600;
-        $ldate = strtotime(Input::get('ldate'))+12600;
+        $fdate = strtotime($this->request->get('fdate'))+12600;
+        $ldate = strtotime($this->request->get('ldate'))+12600;
 
         $users = User::all();
         $category = ContentCategory::all();
@@ -296,20 +299,20 @@ class ContentController extends Controller
             $lists->where('create_at','>',$fdate);
         if($ldate>12601)
             $lists->where('create_at','<',$ldate);
-        if(Input::get('user')!==null)
-            $lists->where('user_id',Input::get('user'));
-        if(Input::get('cat')!==null)
+        if($this->request->get('user')!==null)
+            $lists->where('user_id',$this->request->get('user'));
+        if($this->request->get('cat')!==null)
             $lists->whereHas('categories',function ($qu){
-                $qu->where('category_id',Input::get('cat'));
+                $qu->where('category_id',$this->request->get('cat'));
             });
-        if(Input::get('id')!==null)
-            $lists->where('id',Input::get('id'));
-        if(Input::get('title')!==null)
-            $lists->where('title', 'like', '%'.Input::get('title').'%');
+        if($this->request->get('id')!==null)
+            $lists->where('id',$this->request->get('id'));
+        if($this->request->get('title')!==null)
+            $lists->where('title', 'like', '%'.$this->request->get('title').'%');
 
 
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')){
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')){
                 case 'sella':
                     $lists->orderBy('sells_count');
                     break;
@@ -333,8 +336,8 @@ class ContentController extends Controller
 
         $lists = $lists->get();
 
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')) {
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')) {
                 case 'priced':
                     $lists = $lists->sortByDesc(function ($item) {
                     return $item->metas->where('option', 'price')->pluck('value');
@@ -420,8 +423,8 @@ class ContentController extends Controller
         }
     }
     public function excel(){
-        $fdate = strtotime(Input::get('fdate'))+12600;
-        $ldate = strtotime(Input::get('ldate'))+12600;
+        $fdate = strtotime($this->request->get('fdate'))+12600;
+        $ldate = strtotime($this->request->get('ldate'))+12600;
         $lists = Content::with(['category','user','metas'=>function($qm){
             $qm->get()->pluck('option','value');
         },'transactions'=>function($q){
@@ -431,16 +434,16 @@ class ContentController extends Controller
             $lists->where('create_at','>',$fdate);
         if($ldate>12601)
             $lists->where('create_at','<',$ldate);
-        if(Input::get('user')!==null)
-            $lists->where('user_id',Input::get('user'));
-        if(Input::get('cat')!==null)
-            $lists->where('category_id',Input::get('cat'));
-        if(Input::get('id')!==null)
-            $lists->where('id',Input::get('id'));
-        if(Input::get('title')!==null)
-            $lists->where('title', 'like', '%'.Input::get('title').'%');
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')){
+        if($this->request->get('user')!==null)
+            $lists->where('user_id',$this->request->get('user'));
+        if($this->request->get('cat')!==null)
+            $lists->where('category_id',$this->request->get('cat'));
+        if($this->request->get('id')!==null)
+            $lists->where('id',$this->request->get('id'));
+        if($this->request->get('title')!==null)
+            $lists->where('title', 'like', '%'.$this->request->get('title').'%');
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')){
                 case 'sella':
                     $lists->orderBy('sells_count');
                     break;
@@ -462,8 +465,8 @@ class ContentController extends Controller
         else
             $lists->orderBy('id','DESC');
         $lists = $lists->get();
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')) {
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')) {
                 case 'priced':
                     $lists = $lists->sortByDesc(function ($item) {
                         return $item->metas->where('option', 'price')->pluck('value');

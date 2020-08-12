@@ -14,12 +14,12 @@
             <div class="col-md-4 tab-con">
                 <select class="form-control font-s" name="cat_id">
                     @foreach(contentMenu() as $menu)
-                        <optgroup label="{{{ $menu['title'] or '' }}}">
+                        <optgroup label="{{{ $menu['title'] ?? '' }}}">
                             @if(count($menu['submenu']) == 0)
-                                <option value="{{{ $menu['id'] or '' }}}">{{{ $menu['title'] or '' }}}</option>
+                                <option value="{{{ $menu['id'] ?? '' }}}">{{{ $menu['title'] ?? '' }}}</option>
                             @else
                                 @foreach($menu['submenu'] as $sub)
-                                    <option value="{{{ $sub['id'] or '' }}}" >{{{ $sub['title'] or '' }}}</option>
+                                    <option value="{{{ $sub['id'] ?? '' }}}" >{{{ $sub['title'] ?? '' }}}</option>
                                 @endforeach
                             @endif
                         </optgroup>

@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label class="col-md-1 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                     <div class="col-md-11">
-                        <input type="text" name="title" value="{{{ $_GET['title'] or '' }}}" class="form-control" required>
+                        <input type="text" name="title" value="{{{ $_GET['title'] ?? '' }}}" class="form-control" required>
                     </div>
                 </div>
 
@@ -20,7 +20,7 @@
                     <div class="col-md-11">
                         <select name="category_id" class="form-control select2">
                             @foreach($category as $cat)
-                                <option value="{{{ $cat->id or 0 }}}">{{{ $cat->title or '' }}}</option>
+                                <option value="{{{ $cat->id ?? 0 }}}">{{{ $cat->title ?? '' }}}</option>
                             @endforeach
                         </select>
                     </div>

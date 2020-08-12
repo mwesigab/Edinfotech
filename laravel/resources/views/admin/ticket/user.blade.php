@@ -12,14 +12,14 @@
         </header>
         <div class="panel-body">
             <form method="post" action="/admin/ticket/user/store">
-                <input type="hidden" name="ticket_id" value="{{{ $ticket->id or 0 }}}">
+                <input type="hidden" name="ticket_id" value="{{{ $ticket->id ?? 0 }}}">
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <select name="user_id" data-plugin-selectTwo class="form-control populate">
                             <option value="">{{{ trans('admin.all_users') }}}</option>
                             @foreach($userss as $user)
-                                <option value="{{{ $user->id or 0 }}}" @if(isset($_GET['user']) && $_GET['user']==$user->id) selected @endif>{{{ $user->username or $user->name }}}</option>
+                                <option value="{{{ $user->id ?? 0 }}}" @if(isset($_GET['user']) && $_GET['user']==$user->id) selected @endif>{{{ $user->username ?? $user->name }}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -33,7 +33,7 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <a href="/admin/ticket/reply/{{{ $ticket->id or 0 }}}" class="text-center btn btn-success w-100">{{{ trans('admin.go_to_ticket') }}}</a>
+                        <a href="/admin/ticket/reply/{{{ $ticket->id ?? 0 }}}" class="text-center btn btn-success w-100">{{{ trans('admin.go_to_ticket') }}}</a>
                     </div>
                 </div>
             </form>
@@ -46,7 +46,7 @@
                 <a href="#" class="panel-action panel-action-dismiss" data-panel-dismiss></a>
             </div>
 
-            <h2 class="panel-title">{{{ trans('admin.users_list') }}} {{{ $ticket->title or '' }}}</h2>
+            <h2 class="panel-title">{{{ trans('admin.users_list') }}} {{{ $ticket->title ?? '' }}}</h2>
         </header>
         <div class="panel-body">
             <table class="table table-bordered table-striped mb-none" id="datatable-details">
@@ -60,8 +60,8 @@
                 <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <td><a href="/profile/{{{ $user->user->id }}}" title="{{{ $user->user->name or '' }}}">{{{ $user->user->username or '' }}}</a></td>
-                            <td class="text-center">{{{ $user->user->name or '' }}}</td>
+                            <td><a href="/profile/{{{ $user->user->id }}}" title="{{{ $user->user->name ?? '' }}}">{{{ $user->user->username ?? '' }}}</a></td>
+                            <td class="text-center">{{{ $user->user->name ?? '' }}}</td>
                             <td class="text-center" width="50">
                                 <a href="#" data-href="/admin/ticket/user/delete/{{{ $user->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </td>

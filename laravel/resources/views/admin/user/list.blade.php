@@ -18,8 +18,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="date" id="fsdate" class="text-center form-control" value="{{{ $_GET['fsdate'] or '' }}}"  name="fsdate" placeholder="Start Date">
-                            <input type="hidden" id="fdate" name="fdate" value="{{{ $_GET['fdate'] or '' }}}">
+                            <input type="date" id="fsdate" class="text-center form-control" value="{{{ $_GET['fsdate'] ?? '' }}}"  name="fsdate" placeholder="Start Date">
+                            <input type="hidden" id="fdate" name="fdate" value="{{{ $_GET['fdate'] ?? '' }}}">
                             <div class="input-group-append">
                                 <span class="input-group-text fdatebtn" id="fdatebtn"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </div>
@@ -27,8 +27,8 @@
                     </div>
                     <div class="col-md-3">
                         <div class="input-group">
-                            <input type="date" id="lsdate" class="text-center form-control" name="lsdate" value="{{{ $_GET['lsdate'] or '' }}}" placeholder="End Date">
-                            <input type="hidden" id="ldate" name="ldate" value="{{{ $_GET['ldate'] or '' }}}">
+                            <input type="date" id="lsdate" class="text-center form-control" name="lsdate" value="{{{ $_GET['lsdate'] ?? '' }}}" placeholder="End Date">
+                            <input type="hidden" id="ldate" name="ldate" value="{{{ $_GET['ldate'] ?? '' }}}">
                             <div class="input-group-append">
                                 <span class="input-group-text ldatebtn" id="ldatebtn"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                             </div>
@@ -92,9 +92,9 @@
                             <th class="text-center">{{{ date('d F Y / H:i',$user->create_at) }}}</th>
                             <th class="text-center number-green" width="100" @if($user->income<0) style="color:red !important;" @endif dir="ltr">{{{ number_format($user->income) }}}</th>
                             <th class="text-center number-green" width="100" @if($user->credit<0) style="color:red !important;" @endif dir="ltr">{{{ number_format($user->credit) }}}</th>
-                            <th class="text-center"><a href="/admin/content/user/{{{ $user->id }}}">{{{ $user->contents_count or 0 }}}</a></th>
-                            <th class="text-center"><a href="/admin/buysell/list/?buyer={{{ $user->id }}}">{{{ $user->buys_count or 0 }}}</a></th>
-                            <th class="text-center"><a href="/admin/buysell/list/?user={{{ $user->id }}}">{{{ $user->sells_count or 0 }}}</a></th>
+                            <th class="text-center"><a href="/admin/content/user/{{{ $user->id }}}">{{{ $user->contents_count ?? 0 }}}</a></th>
+                            <th class="text-center"><a href="/admin/buysell/list/?buyer={{{ $user->id }}}">{{{ $user->buys_count ?? 0 }}}</a></th>
+                            <th class="text-center"><a href="/admin/buysell/list/?user={{{ $user->id }}}">{{{ $user->sells_count ?? 0 }}}</a></th>
                             @if(!empty($user->category->id))
                                 <th class="text-center"><a href="/admin/user/incategory/{{{$user->category->id}}}">{{{$user->category->title}}}</a></th>
                             @else

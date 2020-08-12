@@ -11,7 +11,7 @@
                 <div class="body">
                     <form action="/user/content/part/store" method="post">
 
-                        <input type="hidden" name="content_id" value="{{{ $id or '' }}}">
+                        <input type="hidden" name="content_id" value="{{{ $id ?? '' }}}">
 
                         <div class="form-group">
                             <label class="control-label" for="inputDefault">{{{ trans('main.title') }}}</label>

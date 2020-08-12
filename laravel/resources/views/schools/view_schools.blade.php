@@ -40,12 +40,12 @@ Schools List
                     <th class="text-center number-green" width="100" @if($school->credit<0) style="color:red !important;"
                         @endif dir="ltr">{{{ number_format($school->credit) }}}
                     </th>
-                    <th class="text-center"><a href="/admin/content/user/{{{ $school->id }}}">{{{ $school->contents_count or
+                    <th class="text-center"><a href="/admin/content/user/{{{ $school->id }}}">{{{ $school->contents_count ??
                             0 }}}</a></th>
                     <th class="text-center"><a href="/admin/buysell/list/?buyer={{{ $school->id }}}">{{{ $school->buys_count
-                            or 0 }}}</a></th>
+                            ?? 0 }}}</a></th>
                     <th class="text-center"><a href="/admin/buysell/list/?user={{{ $school->id }}}">{{{ $school->sells_count
-                            or 0 }}}</a></th>
+                            ?? 0 }}}</a></th>
                     <th class="text-center">
                         @if($school->status == 'Active')
                         <span class="c-g">{{{ trans('admin.active') }}}</span>

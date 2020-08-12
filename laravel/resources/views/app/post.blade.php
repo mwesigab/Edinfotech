@@ -34,10 +34,10 @@
 </head>
 <body>
 <div class="container-fluid">
-    <img src="{{{ $post->image or '' }}}" style="max-width: 100%;height: auto;margin: 10px auto 10px">
+    <img src="{{{ $post->image ?? '' }}}" style="max-width: 100%;height: auto;margin: 10px auto 10px">
     <div class="text-section">
-        {!!  $post->content or '' !!}
-        {!!  $post->text or '' !!}
+        {!!  $post->content ?? '' !!}
+        {!!  $post->text ?? '' !!}
         <br>
     </div>
 </div>

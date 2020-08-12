@@ -37,18 +37,18 @@
 
             <form action="/admin/notification/template/edit" class="form-horizontal form-bordered" method="post">
 
-                <input type="hidden" name="id" value="{{{$item->id or ''}}}">
+                <input type="hidden" name="id" value="{{{$item->id ?? ''}}}">
                 <div class="form-group">
                     <label class="col-md-1 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                     <div class="col-md-11">
-                        <input type="text" name="title" class="form-control" value="{{{ $item->title or '' }}}" required>
+                        <input type="text" name="title" class="form-control" value="{{{ $item->title ?? '' }}}" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-12">
                         <textarea class="summernote" name="template" required>
-                                {{{ $item->template or '' }}}
+                                {{{ $item->template ?? '' }}}
                         </textarea>
                     </div>
                 </div>

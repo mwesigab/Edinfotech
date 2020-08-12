@@ -24,7 +24,7 @@ Schools List
                     <th class="text-center">{{{ trans('admin.purchases') }}}</th>
                     <th class="text-center">{{{ trans('admin.sales') }}}</th>
                     <th class="text-center">{{{ trans('admin.th_status') }}}</th>
-                    <th class="text-center">{{{ trans('admin.th_controls') }}}</th>
+                    <!--<th class="text-center">{{{ trans('admin.th_controls') }}}</th>-->
                 </tr>
                 </thead>
                 <tbody>
@@ -39,12 +39,12 @@ Schools List
                     <th class="text-center number-green" width="100" @if($school->credit<0) style="color:red !important;"
                         @endif dir="ltr">{{{ number_format($school->credit) }}}
                     </th>
-                    <th class="text-center"><a href="/admin/content/user/{{{ $school->id }}}">{{{ $school->contents_count or
+                    <th class="text-center"><a href="/admin/content/user/{{{ $school->id }}}">{{{ $school->contents_count ??
                             0 }}}</a></th>
                     <th class="text-center"><a href="/admin/buysell/list/?buyer={{{ $school->id }}}">{{{ $school->buys_count
-                            or 0 }}}</a></th>
+                            ?? 0 }}}</a></th>
                     <th class="text-center"><a href="/admin/buysell/list/?user={{{ $school->id }}}">{{{ $school->sells_count
-                            or 0 }}}</a></th>
+                            ?? 0 }}}</a></th>
                     <th class="text-center">
                         @if($school->status == 'Active')
                         <span class="c-g">{{{ trans('admin.active') }}}</span>
@@ -54,14 +54,14 @@ Schools List
                         <span class="c-r">{{{ trans('admin.banned') }}}</span>
                         @endif
                     </th>
-                    <th class="text-center">
+                    <!--<th class="text-center">
                         <a href="/admin/user/item/{{{ $school->id }}}" title="Edit"><i class="fa fa-edit"
                                                                                        aria-hidden="true"></i></a>
                         <a href="/admin/user/userlogin/{{{ $school->id }}}" title="Login as user" target="_blank"><i
                                 class="fa fa-user" aria-hidden="true"></i></a>
                         <a href="#" data-href="/admin/user/delete/{{{ $school->id }}}" title="Delete" data-toggle="modal"
                            data-target="#confirm-delete" class="c-r"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    </th>
+                    </th>-->
                 </tr>
                 @endforeach
                 </tbody>

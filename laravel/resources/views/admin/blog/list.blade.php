@@ -23,9 +23,9 @@
                         <tr>
                             <td>{{{ $item->title }}}</td>
                             <td class="text-center" width="150">{{{ date('d F Y : H:i',$item->create_at) }}}</td>
-                            <td class="text-center" title="{{{ $item->user->username or '' }}}">{{{ $item->user->name or '' }}}</td>
-                            <td class="text-center">{{{ count($item->comments) or '0' }}}</td>
-                            <td class="text-center">{{{ $item->category->title or '' }}}</td>
+                            <td class="text-center" title="{{{ $item->user->username ?? '' }}}">{{{ $item->user->name ?? '' }}}</td>
+                            <td class="text-center">{{{ count($item->comments) ?? '0' }}}</td>
+                            <td class="text-center">{{{ $item->category->title ?? '' }}}</td>
                             <td class="text-center">
                                 @if($item->mode == 'publish')
                                     <i class="fa fa-check c-g" aria-hidden="true" title="Publish" ></i>

@@ -8,21 +8,21 @@
                 <div class="link"><h2>{{{ trans('main.new_request') }}}</h2><i class="mdi mdi-chevron-down"></i></div>
                 <ul class="submenu" @if(isset($request->id)) style="display: block;" @endif>
                     <div class="h-10"></div>
-                    <form method="post" @if(isset($request->id)) action="/user/video/request/edit/store/{{{ $request->id or 0 }}}" @else action="/user/video/request/store" @endif class="form form-horizontal">
+                    <form method="post" @if(isset($request->id)) action="/user/video/request/edit/store/{{{ $request->id ?? 0 }}}" @else action="/user/video/request/store" @endif class="form form-horizontal">
 
                         <div class="h-10"></div>
                         <div class="form-group">
                             <label class="control-label col-md-1 tab-con">{{{ trans('main.title') }}}</label>
                             <div class="col-md-5 tab-con">
-                                <input type="text" name="title" value="{{{ $request->title or '' }}}" class="form-control">
+                                <input type="text" name="title" value="{{{ $request->title ?? '' }}}" class="form-control">
                             </div>
                             <label class="control-label col-md-1 tab-con">{{{ trans('main.category') }}}</label>
                             <div class="col-md-5 tab-con">
                                 <select name="category_id" class="form-control font-s">
                                     @foreach(selectMenu() as $menu)
-                                        <optgroup label="{{{ $menu['title'] or '' }}}">
+                                        <optgroup label="{{{ $menu['title'] ?? '' }}}">
                                             @foreach($menu['submenu'] as $sub)
-                                                <option value="{{{ $sub['id'] or '' }}}" @if(isset($request->category_id) && $request->category_id == $sub['id']) selected @endif>{{{ $sub['title'] or '' }}}</option>
+                                                <option value="{{{ $sub['id'] ?? '' }}}" @if(isset($request->category_id) && $request->category_id == $sub['id']) selected @endif>{{{ $sub['title'] ?? '' }}}</option>
                                             @endforeach
                                         </optgroup>
                                     @endforeach
@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-1 tab-con">{{{ trans('main.description') }}}</label>
                             <div class="col-md-5 tab-con">
-                                <textarea class="form-control" name="description">{{{ $request->description or '' }}}</textarea>
+                                <textarea class="form-control" name="description">{{{ $request->description ?? '' }}}</textarea>
                             </div>
                             <label class="control-label col-md-1 tab-con"></label>
                             <div class="col-md-5 tab-con">
@@ -62,10 +62,10 @@
                             @foreach($lists as $item)
                                 @if($item->user_id == $user['id'] && $item->mode == 'publish')
                                 <tr class="text-center">
-                                    <td class="cell-ta">{{{ $item->title or '' }}}</td>
-                                    <td class="text-center"><span class="img-icon-s" data-toggle="modal" data-target="#description{{{ $item->id or 0 }}}">{{{ trans('main.view') }}}</span></td>
+                                    <td class="cell-ta">{{{ $item->title ?? '' }}}</td>
+                                    <td class="text-center"><span class="img-icon-s" data-toggle="modal" data-target="#description{{{ $item->id ?? 0 }}}">{{{ trans('main.view') }}}</span></td>
 
-                                    <div id="description{{{ $item->id or 0 }}}" class="modal fade" role="dialog">
+                                    <div id="description{{{ $item->id ?? 0 }}}" class="modal fade" role="dialog">
                                         <div class="modal-dialog">
 
                                             <!-- Modal content-->
@@ -75,7 +75,7 @@
                                                     <h4 class="modal-title">{{{ trans('main.description') }}}</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>{{{ $item->description or 'No description' }}}</p>
+                                                    <p>{{{ $item->description ?? 'No description' }}}</p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-custom" data-dismiss="modal">{{{ trans('main.close') }}}</button>
@@ -85,9 +85,9 @@
                                         </div>
                                     </div>
 
-                                    <td class="text-center">{{{ $item->fans_count or '' }}}</td>
-                                    <td class="text-center">{!!  $item->content->title or '<b class="img-icon-s orange-s" data-toggle="modal" data-target="#suggestion'.$item->id.'">Not selected</b>' !!}</td>
-                                    <td class="text-center">{{{ $item->category->title or '' }}}</td>
+                                    <td class="text-center">{{{ $item->fans_count ?? '' }}}</td>
+                                    <td class="text-center">{!!  $item->content->title ?? '<b class="img-icon-s orange-s" data-toggle="modal" data-target="#suggestion'.$item->id.'">Not selected</b>' !!}</td>
+                                    <td class="text-center">{{{ $item->category->title ?? '' }}}</td>
                                     <td class="text-center">{{{ date('d F Y H:i',$item->create_at)  }}}</td>
                                 </tr>
                                 @endif
@@ -131,10 +131,10 @@
                             @foreach($lists as $item)
                                 @if($item->requester_id == $user['id'])
                                 <tr class="text-center">
-                                    <td class="cell-ta">{{{ $item->title or '' }}}</td>
-                                    <td class="text-center"><span data-toggle="modal" class="img-icon-s" data-target="#description{{{ $item->id or 0 }}}">{{{ trans('main.view') }}}</span></td>
+                                    <td class="cell-ta">{{{ $item->title ?? '' }}}</td>
+                                    <td class="text-center"><span data-toggle="modal" class="img-icon-s" data-target="#description{{{ $item->id ?? 0 }}}">{{{ trans('main.view') }}}</span></td>
 
-                                    <div id="description{{{ $item->id or 0 }}}" class="modal fade" role="dialog">
+                                    <div id="description{{{ $item->id ?? 0 }}}" class="modal fade" role="dialog">
                                         <div class="modal-dialog">
 
                                             <!-- Modal content-->
@@ -144,7 +144,7 @@
                                                     <h4 class="modal-title">{{{ trans('main.description') }}}</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>{{{ $item->description or 'No description' }}}</p>
+                                                    <p>{{{ $item->description ?? 'No description' }}}</p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-custom" data-dismiss="modal">{{{ trans('main.close') }}}</button>
@@ -153,19 +153,19 @@
 
                                         </div>
                                     </div>
-                                    <td class="text-center">{{{ $item->fans_count or '' }}}</td>
-                                    <td class="text-center"><a href="/product/{{{ $item->content->id or 0 }}}" class="gray-s">{{{ $item->content->title or 'Not selected' }}}</a></td>
-                                    <td class="text-center">{{{ $item->category->title or '' }}}</td>
+                                    <td class="text-center">{{{ $item->fans_count ?? '' }}}</td>
+                                    <td class="text-center"><a href="/product/{{{ $item->content->id ?? 0 }}}" class="gray-s">{{{ $item->content->title ?? 'Not selected' }}}</a></td>
+                                    <td class="text-center">{{{ $item->category->title ?? '' }}}</td>
                                     <td class="text-center">{{{ date('d F Y H:i',$item->create_at)  }}}</td>
                                     <td class="text-center">
                                         @if($item->content_id == '')
-                                            <b class="img-icon-s green-s" data-toggle="modal" data-target="#suggestion{{{ $item->id or 0 }}}">  <span class="badge">{{{ $item->suggestions_count or 0 }}}</span>  {{{ trans('main.view') }}} </b>
+                                            <b class="img-icon-s green-s" data-toggle="modal" data-target="#suggestion{{{ $item->id ?? 0 }}}">  <span class="badge">{{{ $item->suggestions_count ?? 0 }}}</span>  {{{ trans('main.view') }}} </b>
                                         @else
                                             <b class="blue-s">{{{ trans('main.selected') }}}</b>
                                         @endif
                                     </td>
 
-                                    <div id="suggestion{{{ $item->id or 0 }}}" class="modal fade" role="dialog">
+                                    <div id="suggestion{{{ $item->id ?? 0 }}}" class="modal fade" role="dialog">
                                         <div class="modal-dialog">
 
                                             <!-- Modal content-->
@@ -176,12 +176,12 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     @foreach($item->suggestions as $suggest)
-                                                        <p><input type="radio" class="contentSuggest cont-sug" name="suggest{{{ $item->id or 0 }}}" data-id="{{{ $item->id or 0 }}}" data="{{{ $suggest->content->id or 0 }}}"><a href="/product/{{{ $suggest->content->id or 0 }}}" target="_blank" class="suggest-modal-item">{{{ $suggest->content->title or '' }}}</a><span> {{{ trans('main.responded_by') }}} </span><a href="/profile/{{{ $suggest->user->id }}}" class="suggest-modal-item" target="_blank">{{{ $suggest->user->name or $suggest->user->username }}}</a> </p>
+                                                        <p><input type="radio" class="contentSuggest cont-sug" name="suggest{{{ $item->id ?? 0 }}}" data-id="{{{ $item->id ?? 0 }}}" data="{{{ $suggest->content->id ?? 0 }}}"><a href="/product/{{{ $suggest->content->id ?? 0 }}}" target="_blank" class="suggest-modal-item">{{{ $suggest->content->title ?? '' }}}</a><span> {{{ trans('main.responded_by') }}} </span><a href="/profile/{{{ $suggest->user->id }}}" class="suggest-modal-item" target="_blank">{{{ $suggest->user->name ?? $suggest->user->username }}}</a> </p>
                                                     @endforeach
                                                 </div>
                                                 <div class="modal-footer">
                                                     <form action="/user/video/request/admit" method="post">
-                                                        <input type="hidden" name="request_id" value="{{{ $item->id or 0 }}}">
+                                                        <input type="hidden" name="request_id" value="{{{ $item->id ?? 0 }}}">
                                                         <input type="hidden" name="content_id" id="contentid{{{ $item->id }}}">
                                                         <button type="button" class="btn btn-custom" data-dismiss="modal">{{{ trans('main.close') }}}</button>
                                                         <button type="submit" class="btn btn-custom pull-right" id="btnsubmit{{{ $item->id }}}" disabled="disabled">{{{ trans('main.accept_this_respond') }}}</button>
@@ -204,8 +204,8 @@
                                     </td>
                                     <td>
                                         @if($item->content_id == '')
-                                            <a class="gray-s" href="/user/video/request/edit/{{{ $item->id or 0 }}}" title="Edit"><span class="crticon mdi mdi-lead-pencil"></span></a>
-                                            <a class="gray-s" href="/user/video/request/delete/{{{ $item->id or 0 }}}" onclick="return confirm('Are you sure to delete item?');" title="Delete"><span class="crticon mdi mdi-delete-forever"></span></a>
+                                            <a class="gray-s" href="/user/video/request/edit/{{{ $item->id ?? 0 }}}" title="Edit"><span class="crticon mdi mdi-lead-pencil"></span></a>
+                                            <a class="gray-s" href="/user/video/request/delete/{{{ $item->id ?? 0 }}}" onclick="return confirm('Are you sure to delete item?');" title="Delete"><span class="crticon mdi mdi-delete-forever"></span></a>
                                         @endif
                                     </td>
                                 </tr>

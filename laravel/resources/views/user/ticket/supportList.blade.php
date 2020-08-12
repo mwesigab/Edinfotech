@@ -16,7 +16,7 @@
                 <ul id="accordion" class="accordion off-filters-li">
                     @foreach($supports as $content)
                         <li @if(isset($_GET['openid']) && $content->id == $_GET['openid']) class="open" @endif>
-                            <div class="link"><h2>{{{ $content->title or '' }}} ({{{ count($content->supports->groupBy('sender_id')) }}})</h2><i class="mdi mdi-chevron-down"></i></div>
+                            <div class="link"><h2>{{{ $content->title ?? '' }}} ({{{ count($content->supports->groupBy('sender_id')) }}})</h2><i class="mdi mdi-chevron-down"></i></div>
                             <ul class="submenu" @if(isset($_GET['openid']) && $content->id == $_GET['openid']) style="display: block;" @endif>
                                 <div class="table-responsive">
                                 <table class="table ucp-table" id="suport-table">
@@ -31,7 +31,7 @@
                                     @if($content->supports->count()>0)
                                         @foreach(listByKey($content->supports->toArray(),'sender_id') as $support)
                                             <tr>
-                                            <td>{{{ $support[0]['sender']['name'] or $support[0]['sender']['username'] }}}</td>
+                                            <td>{{{ $support[0]['sender']['name'] ?? $support[0]['sender']['username'] }}}</td>
                                             @if(isset($support['child']) && count($support['child'])>0)
                                                 @if(end($support['child'])['user_id'] != $user['id'])
                                                     <td class="text-center">{{{ trans('main.waiting_reply') }}}</td>
@@ -48,7 +48,7 @@
                                             @endif
                                             <td class="text-center">{{{ date('d F Y | H:i',$support[0]['create_at']) }}}</td>
                                             <td class="text-center">
-                                                <a href="javascript:void(0)" class="replyBtn" data-toggle="modal" data-target="#answerBox" sender-id="{{{ $support[0]['sender']['id'] or 0 }}}" content-id="{{{ $content->id or 0 }}}" title="View/Reply"><i class="fa fa-comment" aria-hidden="true"></i></a>
+                                                <a href="javascript:void(0)" class="replyBtn" data-toggle="modal" data-target="#answerBox" sender-id="{{{ $support[0]['sender']['id'] ?? 0 }}}" content-id="{{{ $content->id ?? 0 }}}" title="View/Reply"><i class="fa fa-comment" aria-hidden="true"></i></a>
                                             </td>
                                             </tr>
                                         @endforeach

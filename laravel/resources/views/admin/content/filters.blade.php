@@ -24,10 +24,10 @@
                             @foreach($lists as $list)
                                 <tr>
                                     <td>{{{ $list->filter }}}</td>
-                                    <td class="text-center">{{{ $list->tags_count or 0 }}}</td>
+                                    <td class="text-center">{{{ $list->tags_count ?? 0 }}}</td>
                                     <td class="text-center">
-                                        <a href="/admin/content/category/filter/tag/{{{ $list->id or '' }}}" title="Filter Tags"><i class="fa fa-tags" aria-hidden="true"></i></a>
-                                        <a href="/admin/content/category/filter/{{{ $id or '' }}}/edit/{{{ $list->id }}}#edit" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                        <a href="/admin/content/category/filter/tag/{{{ $list->id ?? '' }}}" title="Filter Tags"><i class="fa fa-tags" aria-hidden="true"></i></a>
+                                        <a href="/admin/content/category/filter/{{{ $id ?? '' }}}/edit/{{{ $list->id }}}#edit" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                         <a href="#" data-href="/admin/content/category/filter/delete/{{{ $list->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
@@ -38,7 +38,7 @@
                     <div id="newitem" class="tab-pane ">
                         <form method="post" action="/admin/content/category/filter/store/new" class="form-horizontal form-bordered">
 
-                            <input type="hidden" name="category_id" value="{{{ $id or '' }}}">
+                            <input type="hidden" name="category_id" value="{{{ $id ?? '' }}}">
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.filter_title') }}}</label>

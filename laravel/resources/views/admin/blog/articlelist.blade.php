@@ -22,8 +22,8 @@
                         <tr>
                             <td>{{{ $item->title }}}</td>
                             <td class="text-center" width="150">{{{ date('d F Y / H:i',$item->create_at) }}}</td>
-                            <td class="text-center" title="{{{ $item->user->username or '' }}}">{{{ $item->user->name or '' }}}</td>
-                            <td class="text-center">{{{ $item->category->title or '' }}}</td>
+                            <td class="text-center" title="{{{ $item->user->username ?? '' }}}">{{{ $item->user->name ?? '' }}}</td>
+                            <td class="text-center">{{{ $item->category->title ?? '' }}}</td>
                             <td class="text-center">
                                 @if($item->mode == 'publish')
                                     <b class="c-g">{{{ trans('admin.published') }}}</b>

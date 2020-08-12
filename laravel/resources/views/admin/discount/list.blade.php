@@ -33,9 +33,9 @@
                             </td>
                             <td class="text-center" width="150">
                                 @if($item->type == 'gift')
-                                    {{{ $item->off or '' }}} {{{ trans('admin.cur_dollar') }}}
+                                    {{{ $item->off ?? '' }}} {{{ trans('admin.cur_dollar') }}}
                                 @elseif($item->type == 'off')
-                                    {{{ $item->off or '' }}} %
+                                    {{{ $item->off ?? '' }}} %
                                 @endif
                             </td>
                             <td class="text-center" width="50">

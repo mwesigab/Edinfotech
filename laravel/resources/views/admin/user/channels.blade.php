@@ -21,9 +21,9 @@
                 <tbody>
                     @foreach($channels as $channel)
                         <tr>
-                            <td>{{{ $channel->title or '' }}}</td>
-                            <td class="text-center"><a href="/chanel/{{{ $channel->username or '' }}}" target="_blank">{{{ $channel->username or '' }}}</a></td>
-                            <td class="text-center" title="{{{ $channel->user->username or '' }}}"><a href="/profile/{{{ $channel->user->id or '' }}}" target="_blank">{{{ $channel->user->username or '' }}}</a></td>
+                            <td>{{{ $channel->title ?? '' }}}</td>
+                            <td class="text-center"><a href="/chanel/{{{ $channel->username ?? '' }}}" target="_blank">{{{ $channel->username ?? '' }}}</a></td>
+                            <td class="text-center" title="{{{ $channel->user->username ?? '' }}}"><a href="/profile/{{{ $channel->user->id ?? '' }}}" target="_blank">{{{ $channel->user->username ?? '' }}}</a></td>
                             <td class="text-center">
                                 @if($channel->formal == 'ok')
                                     <b class="c-g">{{{ trans('admin.verified') }}}</b>
@@ -31,7 +31,7 @@
                                     <b class="c-r">{{{ trans('admin.not_verified') }}}</b>
                                 @endif
                             </td>
-                            <td class="text-center" width="50">{{{ $channel->contents_count or 0 }}}</td>
+                            <td class="text-center" width="50">{{{ $channel->contents_count ?? 0 }}}</td>
                             <td class="text-center">
                                 @if($channel->mode == 'active')
                                     <span class="c-g">{{{ trans('admin.active') }}}</span>
@@ -39,7 +39,7 @@
                                     <span class="c-r">{{{ trans('admin.disabled') }}}</span>
                                 @endif
                             </td>
-                            <td class="text-center">{{{ $channel->view or '0' }}}</td>
+                            <td class="text-center">{{{ $channel->view ?? '0' }}}</td>
                             <td class="text-center">
                                 <a href="/admin/channel/item/{{{ $channel->id }}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                 <a href="#" data-href="/admin/channel/delete/{{{ $channel->id }}}" title="Delete" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-times" aria-hidden="true"></i></a>

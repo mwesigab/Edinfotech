@@ -24,11 +24,11 @@
 
             <form action="/admin/email/template/edit" class="form-horizontal form-bordered" method="post">
 
-                <input type="hidden" name="id" value="{{{$item->id or ''}}}">
+                <input type="hidden" name="id" value="{{{$item->id ?? ''}}}">
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="inputDefault">{!! trans('admin.th_title') !!}</label>
                     <div class="col-md-11">
-                        <input type="text" name="title" class="form-control" value="{{{ $item->title or '' }}}" required>
+                        <input type="text" name="title" class="form-control" value="{{{ $item->title ?? '' }}}" required>
                     </div>
                 </div>
 

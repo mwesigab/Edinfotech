@@ -35,16 +35,16 @@
                             </td>
                             <td class="text-center">
                                 @if($item->type == 'content')
-                                    <a href="/admin/content/edit/{{{ $item->content->id or 0 }}}">{{{ $item->content->title or '' }}}</a>
+                                    <a href="/admin/content/edit/{{{ $item->content->id ?? 0 }}}">{{{ $item->content->title ?? '' }}}</a>
                                 @elseif($item->type == 'category')
-                                    <a href="/admin/content/category/edit/{{{ $item->category->id or 0 }}}">{{{ $item->category->title or '' }}}</a>
+                                    <a href="/admin/content/category/edit/{{{ $item->category->id ?? 0 }}}">{{{ $item->category->title ?? '' }}}</a>
                                 @elseif($item->type == 'all')
                                     {{{ 'All Courses' }}}
                                 @endif
                             </td>
-                            <td class="text-center">{{{ $item->content->user->name or 'User Group' }}}</td>
+                            <td class="text-center">{{{ $item->content->user->name ?? 'User Group' }}}</td>
                             <td class="text-center" width="50">
-                                    {{{ $item->off or '' }}} %
+                                    {{{ $item->off ?? '' }}} %
                             </td>
                             <td class="text-center" width="50">
                                 @if($item->mode == 'publish')

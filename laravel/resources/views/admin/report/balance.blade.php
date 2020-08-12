@@ -48,7 +48,7 @@
                             <div class="summary">
                                 <h4 class="title">{{{  trans('admin.sales_amount') }}}</h4>
                                 <div class="info">
-                                    <strong class="amount">{{{ $allIncome or 0 }}}</strong>
+                                    <strong class="amount">{{{ $allIncome ?? 0 }}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -68,7 +68,7 @@
                             <div class="summary">
                                 <h4 class="title">{{{  trans('admin.total_sales') }}}</h4>
                                 <div class="info">
-                                    <strong class="amount">{{{ $sellCount or 0 }}}</strong>
+                                    <strong class="amount">{{{ $sellCount ?? 0 }}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">
@@ -87,7 +87,7 @@
                             <div class="summary">
                                 <h4 class="title">{{{  trans('admin.total_transactions') }}}</h4>
                                 <div class="info">
-                                    <strong class="amount">{{{ $transactionCount or 0 }}}</strong>
+                                    <strong class="amount">{{{ $transactionCount ?? 0 }}}</strong>
                                 </div>
                             </div>
                             <div class="summary-footer">

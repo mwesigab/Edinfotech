@@ -6,7 +6,7 @@
 @section('page')
     <section class="card">
         <div class="card-body">
-            {!! $item->comment or '' !!}
+            {!! $item->comment ?? '' !!}
         </div>
     </section>
     <section class="card">
@@ -17,9 +17,9 @@
 
             <form method="post" action="/admin/blog/comment/reply/store" class="form-horizontal form-bordered">
 
-                <input type="hidden" name="parent" value="{{{ $item->id or '' }}}">
+                <input type="hidden" name="parent" value="{{{ $item->id ?? '' }}}">
 
-                <input type="hidden" name="post_id" value="{{{ $item->post_id or '' }}}">
+                <input type="hidden" name="post_id" value="{{{ $item->post_id ?? '' }}}">
 
                 <div class="form-group">
                     <div class="col-md-12">

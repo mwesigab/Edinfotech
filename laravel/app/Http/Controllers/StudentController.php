@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\StudentsImport;
 use App\Models\Content;
 use App\Models\Department;
 use App\Models\School;
@@ -9,6 +10,7 @@ use App\Models\Student;
 use App\Models\Usermeta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -76,6 +78,18 @@ class StudentController extends Controller
             $students = Student::all()->where('status','Active');
         }
         return view('admin.schools.view_students', array('students' => $students));
+    }
+
+    public function students_upload(){
+        $admin = unserialize(session('Admin'));
+        if ($admin['admin'] == 2) {
+            $school_admin = Department::where('dept_head_email', $admin['email'])->get()->toArray();
+            $school_admin_info = School::where('id', $school_admin[0]['school_id'])->get();
+            $schools = $school_admin_info;
+        }else{
+            $schools = School::all();
+        }
+        return view('admin.schools.upload_form', array('schools' => $schools));
     }
 
     public function student_login_form()
@@ -163,5 +177,49 @@ class StudentController extends Controller
     {
         Student::where('id', $id)->update(['status' => 'deleted']);
         return back();
+    }
+
+    public function students_import(Request $request)
+    {
+        $array = Excel::toArray(new StudentsImport, $request->file('student_excel'), null, \Maatwebsite\Excel\Excel::XLSX);
+        array_splice($array[0],0,1);
+
+        $new_array = $array[0];
+        $password = "student";
+        $school_id = $request->school_id;
+
+        foreach ($new_array as $arr){
+            $firstName = $arr[0];
+            $lastName = $arr[1];
+            $startNumber = 1000000000;
+
+            $lastRec = Student::orderBy('created_at', 'desc')->first();
+
+            if ($lastRec) {
+                $lastUsername = $lastRec->username;
+                $startNumber = substr($lastUsername, 2);
+                $userName = $lastName[0] . $firstName[0] . ($startNumber + 1);
+            } else {
+                $userName = $lastName[0] . $firstName[0] . ($startNumber + 1);
+            }
+
+            $studentName = $lastName . " " . $firstName;
+            $newStudent = [
+                'student_name' => $studentName,
+                'gender' => $arr[2],
+                'class' => $arr[3],
+                'stream' => $arr[4],
+                'school_id' => $school_id,
+                'status' => "Active",
+                'login_count' => 0,
+                'first_time_login' => true,
+                'username' => $userName,
+                'password' => $password,
+                'mode' => 'Active',
+            ];
+            Student::create($newStudent);
+        }
+
+        return redirect('/admin/school/students');
     }
 }

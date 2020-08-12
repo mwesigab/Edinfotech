@@ -38,9 +38,9 @@
                             <th class="text-center">{{{ date('d F Y / H:i',$user->create_at) }}}</th>
                             <th class="text-center number-green" width="100" @if($user->income<0) style="color:red !important;" @endif dir="ltr">{{{ number_format($user->income) }}}</th>
                             <th class="text-center number-green" width="100" @if($user->credit<0) style="color:red !important;" @endif dir="ltr">{{{ number_format($user->credit) }}}</th>
-                            <th class="text-center"><a href="/admin/content/user/{{{ $user->id }}}">{{{ $user->contents_count or 0 }}}</a></th>
-                            <th class="text-center"><a href="/admin/buysell/list/?buyer={{{ $user->id }}}">{{{ $user->buys_count or 0 }}}</a></th>
-                            <th class="text-center"><a href="/admin/buysell/list/?user={{{ $user->id }}}">{{{ $user->sells_count or 0 }}}</a></th>
+                            <th class="text-center"><a href="/admin/content/user/{{{ $user->id }}}">{{{ $user->contents_count ?? 0 }}}</a></th>
+                            <th class="text-center"><a href="/admin/buysell/list/?buyer={{{ $user->id }}}">{{{ $user->buys_count ?? 0 }}}</a></th>
+                            <th class="text-center"><a href="/admin/buysell/list/?user={{{ $user->id }}}">{{{ $user->sells_count ?? 0 }}}</a></th>
                             @if(!empty($user->category->id))
                                 <th class="text-center"><a href="/admin/user/incategory/{{{$user->category->id}}}">{{{$user->category->title}}}</a></th>
                             @else

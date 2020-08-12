@@ -41,9 +41,9 @@
                             <ul>
                                 @foreach($alert['ticket'] as $ticky)
                                     <li>
-                                        <a href="/admin/ticket/reply/{{{ $ticky->id or 0 }}}" class="clearfix">
-                                            <span class="title">{{{ $ticky->user->name or '' }}}</span>
-                                            <span class="message">{{{ $ticky->title or '' }}}</span>
+                                        <a href="/admin/ticket/reply/{{{ $ticky->id ?? 0 }}}" class="clearfix">
+                                            <span class="title">{{{ $ticky->user->name ?? '' }}}</span>
+                                            <span class="message">{{{ $ticky->title ?? '' }}}</span>
                                         </a>
                                     </li>
                                 @endforeach
@@ -73,9 +73,9 @@
                             <ul>
                                 @foreach($alert['notification'] as $notify)
                                     <li>
-                                        <a href="/admin/notification/edit/{{{ $notify->id or 0 }}}" class="clearfix">
-                                            <span class="title">{{{ $notify->user->name or '' }}}</span>
-                                            <span class="message">{{{ $notify->title or '' }}}</span>
+                                        <a href="/admin/notification/edit/{{{ $notify->id ?? 0 }}}" class="clearfix">
+                                            <span class="title">{{{ $notify->user->name ?? '' }}}</span>
+                                            <span class="message">{{{ $notify->title ?? '' }}}</span>
                                         </a>
                                     </li>
                                 @endforeach

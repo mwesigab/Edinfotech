@@ -12,10 +12,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Tickets;
 use App\Models\TicketsCategory;
 use App\Models\Content;
-use Illuminate\Support\Facades\Input;
 
 class TicketController extends Controller
 {
+
+    protected $request;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
+
     public function lists(){
         global $user;
         $ticket_invite = TicketsUser::where('user_id',$user['id'])->pluck('ticket_id');
@@ -103,8 +109,8 @@ class TicketController extends Controller
         $userContent = Content::where('user_id',$user['id'])->where('mode','publish')->pluck('id')->toArray();
         $comments = ContentComment::with(['user','content'])->whereIn('content_id',$userContent)->Where('mode','publish')->orderBy('id','DESC');
         $count = $comments->count();
-        if(Input::get('p')!=null)
-            $comments->skip(Input::get('p')*20);
+        if($this->request->get('p')!=null)
+            $comments->skip($this->request->get('p')*20);
 
         $comments->take(20);
         return view('user.ticket.commentList',['lists'=>$comments->get(),'count'=>$count]);
@@ -120,8 +126,8 @@ class TicketController extends Controller
             ->orderBy('id','DESC');
 
         $count = $notifications->count();
-        if(Input::get('p')!=null)
-            $notifications->skip(Input::get('p')*20);
+        if($this->request->get('p')!=null)
+            $notifications->skip($this->request->get('p')*20);
 
         $notifications->take(20);
 

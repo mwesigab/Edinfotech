@@ -52,7 +52,7 @@
             <ul class="navbar-nav navbar-right">
                 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                         <img alt="image" src="/assets/admin/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                        <div class="d-sm-none d-lg-inline-block">Hi, <?php echo isset($Admin['username']) ? $Admin['username'] : ''; ?></div></a>
+                        <div class="d-sm-none d-lg-inline-block">Hi, <?php echo $Admin['username'] ?? ''; ?></div></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="/admin/profile" class="dropdown-item has-icon">
                             <i class="fas fa-user"></i> <?php echo trans('admin.profile'); ?>
@@ -171,12 +171,13 @@
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-eye"></i> <span><?php echo e(trans('admin.schools')); ?></span></a>
                         <ul class="dropdown-menu">
                             <?php if($admin['admin']==1): ?>
-                            <li><a class="nav-link" href="/admin/schools"><?php echo e(trans('admin.school_list')); ?></a></li>
-                            <li><a class="nav-link" href="/admin/school_form"><?php echo e(trans('admin.new_school')); ?></a></li>
+                            <li><a class="nav-link" href="/admin/school/list"><?php echo e(trans('admin.school_list')); ?></a></li>
+                            <li><a class="nav-link" href="/admin/school/form"><?php echo e(trans('admin.new_school')); ?></a></li>
                             <li><a class="nav-link" href="/admin/school/departments"><?php echo e(trans('admin.department_list')); ?></a></li>
                             <li><a class="nav-link" href="/admin/school/department_form"><?php echo e(trans('admin.new_sch_department')); ?></a></li>
                             <?php endif; ?>
                             <li><a class="nav-link" href="/admin/school/students"><?php echo e(trans('admin.student_list')); ?></a></li>
+                            <li><a class="nav-link" href="/admin/school/students_upload"><?php echo e(trans('admin.student_upload')); ?></a></li>
                             <li><a class="nav-link" href="/admin/school/student_form"><?php echo e(trans('admin.new_student')); ?></a></li>
                         </ul>
                     </li><?php endif; ?>
@@ -258,7 +259,7 @@
                     <?php if(isset($breadcom) && count($breadcom)): ?>
                         <div class="section-header-breadcrumb">
                             <?php $__currentLoopData = $breadcom; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bread): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="breadcrumb-item"><?php echo isset($bread) ? $bread : ''; ?></div>
+                                <div class="breadcrumb-item"><?php echo $bread ?? ''; ?></div>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     <?php endif; ?>
@@ -268,7 +269,7 @@
                 </div>
             </div>
         </div>
-        <?php echo $__env->make('admin.newlayout.modals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->make('admin.newlayout.modals', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <?php echo $__env->yieldContent('modals'); ?>
     </div>
 </div>
@@ -325,3 +326,4 @@
 <?php echo $__env->yieldContent('script'); ?>
 </body>
 </html>
+<?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/admin/newlayout/layout.blade.php ENDPATH**/ ?>

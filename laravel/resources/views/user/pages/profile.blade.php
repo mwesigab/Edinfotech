@@ -14,11 +14,11 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.realname') }}}</label>
                                         <div class="col-md-4 tab-con">
-                                            <input type="text" name="name" value="{{{ $user['name'] or '' }}}" class="form-control">
+                                            <input type="text" name="name" value="{{{ $user['name'] ?? '' }}}" class="form-control">
                                         </div>
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.email') }}}</label>
                                         <div class="col-md-4 tab-con">
-                                            <input type="text" value="{{{ $user['email'] or '' }}}"  class="form-control text-left disabled" disabled>
+                                            <input type="text" value="{{{ $user['email'] ?? '' }}}"  class="form-control text-left disabled" disabled>
                                         </div>
                                         <div class="col-md-2">
                                             <input type="submit" value="Save" class="btn btn-orange pull-left">
@@ -37,40 +37,40 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.biography') }}}</label>
                                         <div class="col-md-5 tab-con">
-                                            <textarea name="biography" rows="5" class="form-control res-vertical">{{{ $meta['biography'] or '' }}}</textarea>
+                                            <textarea name="biography" rows="5" class="form-control res-vertical">{{{ $meta['biography'] ?? '' }}}</textarea>
                                         </div>
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.short_biography') }}}</label>
                                         <div class="col-md-5 tab-con">
-                                            <textarea name="short_biography" maxlength="400" rows="5" class="form-control res-vertical">{{{ $meta['short_biography'] or '' }}}</textarea>
+                                            <textarea name="short_biography" maxlength="400" rows="5" class="form-control res-vertical">{{{ $meta['short_biography'] ?? '' }}}</textarea>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.province') }}}</label>
                                         <div class="col-md-5 tab-con">
-                                            <input type="text" class="form-control" name="state" value="{!! $meta['state'] or '' !!}">
+                                            <input type="text" class="form-control" name="state" value="{!! $meta['state'] ?? '' !!}">
                                         </div>
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.city') }}}</label>
                                         <div class="col-md-5 tab-con">
-                                            <input type="text" name="city" value="{{{ $meta['city'] or '' }}}" class="form-control">
+                                            <input type="text" name="city" value="{{{ $meta['city'] ?? '' }}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.birthday') }}}</label>
                                         <div class="col-md-5 tab-con">
-                                            <input type="text" name="birthday" value="{{{ $meta['birthday'] or '' }}}" class="form-control">
+                                            <input type="text" name="birthday" value="{{{ $meta['birthday'] ?? '' }}}" class="form-control">
                                         </div>
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.age') }}}</label>
                                         <div class="col-md-5 tab-con">
-                                            <input type="text" name="old" value="{{{ $meta['old'] or '' }}}" class="form-control">
+                                            <input type="text" name="old" value="{{{ $meta['old'] ?? '' }}}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.phone_number') }}}</label>
                                         <div class="col-md-5 tab-con">
-                                            <input type="text" name="phone" value="{{{ $meta['phone'] or '' }}}" class="form-control">
+                                            <input type="text" name="phone" value="{{{ $meta['phone'] ?? '' }}}" class="form-control">
                                         </div>
                                         <div class="col-md-6 tab-con">
                                             <input type="submit" class="btn btn-orange pull-left" value="Save">
@@ -93,23 +93,23 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.bank_name') }}}</label>
                                         <div class="col-md-5 tab-con">
-                                            <input type="text" name="bank_name" value="{{{ $meta['bank_name'] or '' }}}" class="form-control" @if(isset($userMeta['seller_apply']) && $userMeta['seller_apply']==1) disabled @endif>
+                                            <input type="text" name="bank_name" value="{{{ $meta['bank_name'] ?? '' }}}" class="form-control" @if(isset($userMeta['seller_apply']) && $userMeta['seller_apply']==1) disabled @endif>
                                         </div>
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.account_number') }}}</label>
                                         <div class="col-md-5 tab-con">
-                                            <input type="text" placeholder="Number Only" name="bank_account" value="{{{ $meta['bank_account'] or '' }}}" class="form-control text-center" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" @if(isset($userMeta['seller_apply']) && $userMeta['seller_apply']==1) disabled @endif>
+                                            <input type="text" placeholder="Number Only" name="bank_account" value="{{{ $meta['bank_account'] ?? '' }}}" class="form-control text-center" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" @if(isset($userMeta['seller_apply']) && $userMeta['seller_apply']==1) disabled @endif>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                             <label class="control-label col-md-1 tab-con">{{{ trans('main.creditcard') }}}</label>
                                             <div class="col-md-5 tab-con">
-                                                <input type="text" name="bank_card" class="form-control text-center" dir="ltr" value="{{{ $meta['bank_card'] or '' }}}" @if(isset($userMeta['seller_apply']) && $userMeta['seller_apply']==1) disabled @endif>
+                                                <input type="text" name="bank_card" class="form-control text-center" dir="ltr" value="{{{ $meta['bank_card'] ?? '' }}}" @if(isset($userMeta['seller_apply']) && $userMeta['seller_apply']==1) disabled @endif>
                                             </div>
                                             <label class="control-label col-md-1 tab-con">{{{ trans('main.identity_scan') }}}</label>
                                             <div class="col-md-5 tab-con">
                                                 <div class="input-group">
                                                     <span class="input-group-addon view-selected img-icon-s" data-toggle="modal" data-target="#ImageModal" data-whatever="melli_card"><span class="formicon mdi mdi-eye"></span></span>
-                                                    <input type="text" name="melli_card" class="form-control" value="{{{ $meta['melli_card'] or '' }}}" @if(isset($userMeta['seller_apply']) && $userMeta['seller_apply']==1) disabled @endif>
+                                                    <input type="text" name="melli_card" class="form-control" value="{{{ $meta['melli_card'] ?? '' }}}" @if(isset($userMeta['seller_apply']) && $userMeta['seller_apply']==1) disabled @endif>
                                                     <span class="input-group-addon click-for-upload img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                                                 </div>
                                             </div>
@@ -117,7 +117,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.passport_id') }}}</label>
                                         <div class="col-md-5 tab-con">
-                                            <input type="text" name="melli_code" class="form-control text-center" dir="ltr" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" value="{{{ $meta['melli_code'] or '' }}}" @if(isset($userMeta['seller_apply']) && $userMeta['seller_apply']==1) disabled @endif>
+                                            <input type="text" name="melli_code" class="form-control text-center" dir="ltr" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')" value="{{{ $meta['melli_code'] ?? '' }}}" @if(isset($userMeta['seller_apply']) && $userMeta['seller_apply']==1) disabled @endif>
                                         </div>
                                         @if(!isset($userMeta['seller_apply']) || $userMeta['seller_apply']!=1)
                                             <div class="col-md-6">
@@ -139,7 +139,7 @@
                                         <div class="col-md-4 tab-con">
                                             <div class="input-group">
                                                 <span class="input-group-addon view-selected img-icon-s" data-toggle="modal" data-target="#ImageModal" data-whatever="avatar"><span class="formicon mdi mdi-eye"></span></span>
-                                                <input type="text" name="avatar" class="form-control" value="{{{ $meta['avatar'] or '' }}}">
+                                                <input type="text" name="avatar" class="form-control" value="{{{ $meta['avatar'] ?? '' }}}">
                                                 <span class="input-group-addon click-for-upload img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                                             </div>
                                         </div>
@@ -147,7 +147,7 @@
                                         <div class="col-md-4 tab-con">
                                             <div class="input-group">
                                                 <span class="input-group-addon view-selected img-icon-s" data-toggle="modal" data-target="#ImageModal" data-whatever="profile_image"><span class="formicon mdi mdi-eye"></span></span>
-                                                <input type="text" name="profile_image" class="form-control" value="{{{ $meta['profile_image'] or '' }}}">
+                                                <input type="text" name="profile_image" class="form-control" value="{{{ $meta['profile_image'] ?? '' }}}">
                                                 <span class="input-group-addon click-for-upload img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                                             </div>
                                         </div>
@@ -190,21 +190,21 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.province') }}}</label>
                                         <div class="col-md-3 tab-con">
-                                            <input type="text" class="form-control" name="state" value="{!! $meta['state'] or '' !!}">
+                                            <input type="text" class="form-control" name="state" value="{!! $meta['state'] ?? '' !!}">
                                         </div>
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.city') }}}</label>
                                         <div class="col-md-3 tab-con">
-                                            <input type="text" name="city" value="{{{ $meta['city'] or '' }}}" class="form-control">
+                                            <input type="text" name="city" value="{{{ $meta['city'] ?? '' }}}" class="form-control">
                                         </div>
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.zip_code') }}}</label>
                                         <div class="col-md-3 tab-con">
-                                            <input type="text" name="postalcode" value="{{{ $meta['postalcode'] or '' }}}" class="form-control text-center">
+                                            <input type="text" name="postalcode" value="{{{ $meta['postalcode'] ?? '' }}}" class="form-control text-center">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-1 tab-con">{{{ trans('main.address') }}}</label>
                                         <div class="col-md-7 tab-con">
-                                            <textarea name="address" rows="4" class="form-control">{{{ $meta['address'] or '' }}}</textarea>
+                                            <textarea name="address" rows="4" class="form-control">{{{ $meta['address'] ?? '' }}}</textarea>
                                         </div>
                                         <div class="col-md-4">
                                             <input type="submit" class="btn btn-custom pull-left" value="Save">

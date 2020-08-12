@@ -9,11 +9,11 @@
 
             <form action="/admin/discount/store" class="form-horizontal form-bordered" method="post">
 
-                <input type="hidden" name="id" value="{{{ $item->id or '' }}}">
+                <input type="hidden" name="id" value="{{{ $item->id ?? '' }}}">
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                     <div class="col-md-8">
-                        <input type="text" name="title" value="{{{ $item->title or '' }}}" class="form-control" required>
+                        <input type="text" name="title" value="{{{ $item->title ?? '' }}}" class="form-control" required>
                     </div>
                 </div>
 
@@ -30,14 +30,14 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.amount') }}}</label>
                     <div class="col-md-8">
-                        <input type="number" name="off" value="{{{ $item->off or '0' }}}" class="form-control text-center" placeholder="Percent for Discount cards | Fixed amount for Giftcards" required>
+                        <input type="number" name="off" value="{{{ $item->off ?? '0' }}}" class="form-control text-center" placeholder="Percent for Discount cards | Fixed amount for Giftcards" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.gift_code') }}}</label>
                     <div class="col-md-8">
-                        <input type="text" name="code" value="{{{ $item->code or '' }}}" class="form-control text-center" required>
+                        <input type="text" name="code" value="{{{ $item->code ?? '' }}}" class="form-control text-center" required>
                     </div>
                 </div>
 

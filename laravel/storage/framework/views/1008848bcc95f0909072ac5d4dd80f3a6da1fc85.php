@@ -24,7 +24,7 @@
         <ul>
             <?php if(!empty($socials)): ?>
                 <?php $__currentLoopData = $socials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $social): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <li><a href="<?php echo e(isset($social->link) ? $social->link : ''); ?>" target="_blank" title="<?php echo e(isset($social->title) ? $social->title : ''); ?>"><img src="<?php echo e(isset($social->icon) ? $social->icon : ''); ?>"/></a></li>
+                    <li><a href="<?php echo e($social->link ?? ''); ?>" target="_blank" title="<?php echo e($social->title ?? ''); ?>"><img src="<?php echo e($social->icon ?? ''); ?>"/></a></li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <?php endif; ?>
         </ul>
@@ -105,7 +105,7 @@
             $('#site_popup').modal();
         })
     </script>
-    <?php  session(['popup'=>1])  ?>
+    <?php session(['popup'=>1]) ?>
 <?php endif; ?>
 <?php echo $__env->yieldContent('script'); ?>
 <?php if(session('msg') != null): ?>
@@ -128,3 +128,4 @@
 
 </body>
 </html>
+<?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/view/layout/footer.blade.php ENDPATH**/ ?>

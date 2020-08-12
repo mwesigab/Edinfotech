@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
+
 function returnCaptibiliy($array){
 
     if(!$array) return;

@@ -7,7 +7,7 @@
     <section class="card">
         <div class="card-body">
 
-            <form action="/admin/discount/content/edit/store/{{{ $discount->id or 0 }}}" class="form-horizontal form-bordered" method="post">
+            <form action="/admin/discount/content/edit/store/{{{ $discount->id ?? 0 }}}" class="form-horizontal form-bordered" method="post">
 
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.type') }}}</label>
@@ -26,7 +26,7 @@
                     <div class="col-md-8" >
                         <select name="off_id_content" class="form-control populate" id="type">
                             @foreach($contents as $content)
-                                <option value="{{{ $content->id or 0 }}}" @if($discount->off_id==$content->id) selected @endif >{{{ $content->title or '' }}}</option>
+                                <option value="{{{ $content->id ?? 0 }}}" @if($discount->off_id==$content->id) selected @endif >{{{ $content->title ?? '' }}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="col-md-8" >
                         <select name="off_id_category" class="form-control populate" id="type">
                             @foreach($categoreis as $category)
-                                <option value="{{{ $category->id or 0 }}}" @if($discount->off_id==$category->id) selected @endif>{{{ $category->title or '' }}}</option>
+                                <option value="{{{ $category->id ?? 0 }}}" @if($discount->off_id==$category->id) selected @endif>{{{ $category->title ?? '' }}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -77,7 +77,7 @@
                         <div class="col-md-4">
                             <label class="col-md-5 control-label" for="inputDefault">{{{ trans('admin.amount') }}}</label>
                             <div class="col-md-12">
-                                <input type="number" min="0" max="99" name="off" value="{{{ $discount->off or 0 }}}" class="form-control text-center" placeholder="Percent only (Eg: 20 for 20%)" required>
+                                <input type="number" min="0" max="99" name="off" value="{{{ $discount->off ?? 0 }}}" class="form-control text-center" placeholder="Percent only (Eg: 20 for 20%)" required>
                             </div>
                         </div>
                         <div class="col-md-4">

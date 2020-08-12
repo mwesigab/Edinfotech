@@ -10,7 +10,7 @@
                     <div class="body">
                         <ul>
                             <?php $__currentLoopData = $article_post; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $article): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li><a href="/article/item/<?php echo e($article->id); ?>"><img src="<?php echo e(isset($article->image) ? $article->image : ''); ?>" alt=""><span><?php echo e(isset($article->title) ? $article->title : ''); ?></span><label for=""><?php echo e(date('l d F Y',$article->create_at)); ?></label></a></li>
+                                <li><a href="/article/item/<?php echo e($article->id); ?>"><img src="<?php echo e($article->image ? $article->image : ''); ?>" alt=""><span><?php echo e($article->title ? $article->title : ''); ?></span><label for=""><?php echo e(date('l d F Y',$article->create_at)); ?></label></a></li>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
@@ -28,7 +28,7 @@
                     <div class="body">
                         <ul>
                             <?php $__currentLoopData = $blog_post; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li><a href="/blog/post/<?php echo e($post->id); ?>"><img src="<?php echo e(isset($post->image) ? $post->image : ''); ?>" alt=""><span><?php echo e(isset($post->title) ? $post->title : ''); ?></span><label for=""><?php echo e(date('l d F Y',$post->create_at)); ?></label></a></li>
+                                <li><a href="/blog/post/<?php echo e($post->id); ?>"><img src="<?php echo e($post->image ? $post->image : ''); ?>" alt=""><span><?php echo e($post->title ? $post->title : ''); ?></span><label for=""><?php echo e(date('l d F Y',$post->create_at)); ?></label></a></li>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                     </div>
@@ -46,7 +46,7 @@
                             <div class="row">
                                 <?php $__currentLoopData = $ads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <?php if($ad->position == 'main-article-side'): ?>
-                                        <a href="<?php echo e(isset($ad->url) ? $ad->url : '#'); ?>"><img src="<?php echo e(isset($ad->image) ? $ad->image : ''); ?>" class="<?php echo e(isset($ad->size) ? $ad->size : ''); ?>"></a>
+                                        <a href="<?php echo e($ad->url ? $ad->url : '#'); ?>"><img src="<?php echo e($ad->image ? $ad->image : ''); ?>" class="<?php echo e($ad->size ? $ad->size : ''); ?>"></a>
                                     <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 <div class="h-15"></div>
@@ -75,7 +75,7 @@
                                             <div class="col-md-3 tab-con">
                                         <a href="/profile/<?php echo e($ur->id); ?>">
                                             <img src="<?php echo e(isset($meta['avatar']) ? $meta['avatar'] : '/assets/images/user.png'); ?>">
-                                            <span><?php echo e(isset($ur->name) ? $ur->name : ''); ?></span>
+                                            <span><?php echo e($ur->name ? $ur->name : ''); ?></span>
                                         </a>
                                     </div>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -88,7 +88,7 @@
                                             <div class="col-md-3 tab-con">
                                                 <a href="/profile/<?php echo e($uc->id); ?>">
                                                     <img src="<?php echo e(isset($meta['avatar']) ? $meta['avatar'] : '/assets/images/user.png'); ?>">
-                                                    <span><?php echo e(isset($uc->name) ? $uc->name : ''); ?></span>
+                                                    <span><?php echo e($uc->name ? $uc->name : ''); ?></span>
                                                 </a>
                                             </div>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -101,7 +101,7 @@
                                             <div class="col-md-3 tab-con">
                                                 <a href="/profile/<?php echo e($up->id); ?>">
                                                     <img src="<?php echo e(isset($meta['avatar']) ? $meta['avatar'] : '/assets/images/user.png'); ?>">
-                                                    <span><?php echo e(isset($up->name) ? $up->name : ''); ?></span>
+                                                    <span><?php echo e($up->name ? $up->name : ''); ?></span>
                                                 </a>
                                             </div>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -131,8 +131,8 @@
                                         <?php $__currentLoopData = $channels['new']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ur): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col-md-3 tab-con">
                                                 <a href="/chanel/<?php echo e($ur->username); ?>">
-                                                    <img src="<?php echo e(isset($ur->avatar) ? $ur->avatar : '/assets/images/user.png'); ?>">
-                                                    <span><?php echo e(isset($ur->title) ? $ur->title : ''); ?></span>
+                                                    <img src="<?php echo e($ur->avatar ? $ur->avatar : '/assets/images/user.png'); ?>">
+                                                    <span><?php echo e($ur->title ? $ur->title : ''); ?></span>
                                                 </a>
                                             </div>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -143,8 +143,8 @@
                                         <?php $__currentLoopData = $channels['view']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ur): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col-md-3 tab-con">
                                                 <a href="/chanel/<?php echo e($ur->username); ?>">
-                                                    <img src="<?php echo e(isset($ur->avatar) ? $ur->avatar : '/assets/images/user.png'); ?>">
-                                                    <span><?php echo e(isset($ur->title) ? $ur->title : ''); ?></span>
+                                                    <img src="<?php echo e($ur->avatar ? $ur->avatar : '/assets/images/user.png'); ?>">
+                                                    <span><?php echo e($ur->title ? $ur->title : ''); ?></span>
                                                 </a>
                                             </div>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -155,8 +155,8 @@
                                         <?php $__currentLoopData = $channels['popular']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ur): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="col-md-3 tab-con">
                                                 <a href="/chanel/<?php echo e($ur->username); ?>">
-                                                    <img src="<?php echo e(isset($ur->avatar) ? $ur->avatar : '/assets/images/user.png'); ?>">
-                                                    <span><?php echo e(isset($ur->title) ? $ur->title : ''); ?></span>
+                                                    <img src="<?php echo e($ur->avatar ? $ur->avatar : '/assets/images/user.png'); ?>">
+                                                    <span><?php echo e($ur->title ? $ur->title : ''); ?></span>
                                                 </a>
                                             </div>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -172,3 +172,4 @@
         </div>
     </div>
 </div>
+<?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/view/parts/news.blade.php ENDPATH**/ ?>

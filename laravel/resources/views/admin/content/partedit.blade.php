@@ -16,10 +16,10 @@
                 <a href="#parts" class="nav-link" data-toggle="tab">{{{ trans('admin.parts') }}}</a>
             </li>
             <li class="nav-item">
-                <a href="#part" class="nav-link" data-toggle="tab">{{{ $part->title or '' }}}</a>
+                <a href="#part" class="nav-link" data-toggle="tab">{{{ $part->title ?? '' }}}</a>
             </li>
             <li class="nav-item">
-                <a href="#convert" class="nav-link" data-toggle="tab">{{{ trans('admin.convert_shot') }}}  {{{ $part->title or '' }}}</a>
+                <a href="#convert" class="nav-link" data-toggle="tab">{{{ trans('admin.convert_shot') }}}  {{{ $part->title ?? '' }}}</a>
             </li>
         </ul>
         <div class="card">
@@ -31,7 +31,7 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                                 <div class="col-md-10">
-                                    <input type="text" value="{{{ $item->title or '' }}}" name="title" class="form-control" required>
+                                    <input type="text" value="{{{ $item->title ?? '' }}}" name="title" class="form-control" required>
                                 </div>
                             </div>
 
@@ -59,7 +59,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <textarea class="summernote" name="content" required>{{{ $item->content or '' }}}</textarea>
+                                    <textarea class="summernote" name="content" required>{{{ $item->content ?? '' }}}</textarea>
                                 </div>
                             </div>
 
@@ -117,7 +117,7 @@
                                 <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="cover">
                                     <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 </span>
-                                        <input type="text" name="cover" dir="ltr" value="{{{$meta['cover'] or ''}}}" class="form-control">
+                                        <input type="text" name="cover" dir="ltr" value="{{{$meta['cover'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                 </span>
@@ -132,7 +132,7 @@
                                 <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="thumbnail">
                                     <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 </span>
-                                        <input type="text" name="thumbnail" dir="ltr" value="{{{$meta['thumbnail'] or ''}}}" class="form-control">
+                                        <input type="text" name="thumbnail" dir="ltr" value="{{{$meta['thumbnail'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                 </span>
@@ -147,7 +147,7 @@
                                 <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#VideoModal" data-whatever="video">
                                     <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 </span>
-                                        <input type="text" name="video" dir="ltr" value="{{{$meta['video'] or ''}}}" class="form-control">
+                                        <input type="text" name="video" dir="ltr" value="{{{$meta['video'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                 </span>
@@ -160,7 +160,7 @@
                                 <label class="col-md-2 control-label">{{{ trans('admin.duration') }}}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="number" min="0" name="duration" value="{{{$meta['duration'] or ''}}}" class="form-control text-center">
+                                        <input type="number" min="0" name="duration" value="{{{$meta['duration'] ?? ''}}}" class="form-control text-center">
                                         <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text">{{{ trans('admin.minutes') }}}</span>
                                 </span>
@@ -173,7 +173,7 @@
                                 <label class="col-md-2 control-label">{{{ trans('admin.price') }}}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" name="price" value="{{{$meta['price'] or ''}}}" class="form-control text-center numtostr">
+                                        <input type="text" name="price" value="{{{$meta['price'] ?? ''}}}" class="form-control text-center numtostr">
                                         <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text">{{{ currencySign() }}}</span>
                                 </span>
@@ -185,7 +185,7 @@
                                 <label class="col-md-2 control-label">{{{ trans('admin.postal_price') }}}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" name="post_price" value="{{{$meta['post_price'] or ''}}}" class="form-control text-center numtostr">
+                                        <input type="text" name="post_price" value="{{{$meta['post_price'] ?? ''}}}" class="form-control text-center numtostr">
                                         <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text">{{{ currencySign() }}}</span>
                                 </span>
@@ -204,7 +204,7 @@
                                 <div class="col-md-8">
                                     <select name="precourse[]" multiple="multiple" class="form-control selectric">
                                         @foreach($products as $product)
-                                            <option value="{{{ $product->id or 0 }}}" @if(in_array($product->id,$preCourseArray)) selected="selected" @endif>{{{ $product->title or '' }}}</option>
+                                            <option value="{{{ $product->id ?? 0 }}}" @if(in_array($product->id,$preCourseArray)) selected="selected" @endif>{{{ $product->title ?? '' }}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -235,7 +235,7 @@
                             <tbody>
                             @foreach($item->parts as $parts)
                                 <tr>
-                                    <td>{{{ $parts->title or '' }}}&nbsp;@if($parts->free == 1 || $item->price == 0)({{{ trans('admin.free') }}})@endif</td>
+                                    <td>{{{ $parts->title ?? '' }}}&nbsp;@if($parts->free == 1 || $item->price == 0)({{{ trans('admin.free') }}})@endif</td>
                                     <td class="text-center" width="150">{{{ date('d F Y : H:i',$parts->create_at) }}}</td>
                                     <td class="text-center" width="100">
                                         @php
@@ -248,8 +248,8 @@
                                             <i class="fa fa-times c-r"></i>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{{ $parts->size or '0' }}}</td>
-                                    <td class="text-center">{{{ $parts->duration or '0' }}}</td>
+                                    <td class="text-center">{{{ $parts->size ?? '0' }}}</td>
+                                    <td class="text-center">{{{ $parts->duration ?? '0' }}}</td>
                                     <td class="text-center" width="100">
                                         @if($parts->mode == 'publish')
                                             <b class="c-b">{{{ trans('admin.published') }}}</b>
@@ -276,13 +276,13 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="inputDefault">{{{ trans('admin.th_title') }}}</label>
                                 <div class="col-md-10">
-                                    <input type="text" value="{{{ $part->title or '' }}}" name="title" class="form-control" required>
+                                    <input type="text" value="{{{ $part->title ?? '' }}}" name="title" class="form-control" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <textarea class="summernote" name="description">{{{ $part->description or '' }}}</textarea>
+                                    <textarea class="summernote" name="description">{{{ $part->description ?? '' }}}</textarea>
                                 </div>
                             </div>
 
@@ -290,7 +290,7 @@
                                 <label class="col-md-2 control-label">{{{ trans('admin.volume') }}}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="number" min="0" name="size" value="{{{$part->size or ''}}}" class="form-control text-center">
+                                        <input type="number" min="0" name="size" value="{{{$part->size ?? ''}}}" class="form-control text-center">
                                         <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text">MB</span>
                                 </span>
@@ -303,7 +303,7 @@
                                 <label class="col-md-2 control-label">{{{ trans('admin.duration') }}}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="number" min="0" name="duration" value="{{{$part->duration or ''}}}" class="form-control text-center">
+                                        <input type="number" min="0" name="duration" value="{{{$part->duration ?? ''}}}" class="form-control text-center">
                                         <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text">{{{ trans('admin.minute') }}}</span>
                                 </span>
@@ -318,7 +318,7 @@
                                 <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="upload_screen" >
                                     <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 </span>
-                                        <input type="text" name="upload_screen" dir="ltr" value="{{{ $part->upload_screen or ''}}}" class="form-control">
+                                        <input type="text" name="upload_screen" dir="ltr" value="{{{ $part->upload_screen ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                 </span>
@@ -333,7 +333,7 @@
                                 <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="upload_image">
                                     <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 </span>
-                                        <input type="text" name="upload_image" dir="ltr" value="{{{ $part->upload_image or ''}}}" class="form-control">
+                                        <input type="text" name="upload_image" dir="ltr" value="{{{ $part->upload_image ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                 </span>
@@ -348,7 +348,7 @@
                                 <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#VideoModal" data-whatever="upload_video">
                                     <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                 </span>
-                                        <input type="text" name="upload_video" dir="ltr" value="{{{ $part->upload_video or ''}}}" class="form-control">
+                                        <input type="text" name="upload_video" dir="ltr" value="{{{ $part->upload_video ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                     <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                 </span>
@@ -407,9 +407,9 @@
                         </div>
 
                         <form method="post" action="/admin/video/screenshot" class="form-horizontal form-bordered">
-                            <input type="hidden" name="upload_video" dir="ltr" value="{{{ $part->upload_video or ''}}}">
-                            <input type="hidden" name="id" dir="ltr" value="{{{ $part->id or ''}}}">
-                            <input type="hidden" name="content_id" dir="ltr" value="{{{ $part->content_id or ''}}}">
+                            <input type="hidden" name="upload_video" dir="ltr" value="{{{ $part->upload_video ?? ''}}}">
+                            <input type="hidden" name="id" dir="ltr" value="{{{ $part->id ?? ''}}}">
+                            <input type="hidden" name="content_id" dir="ltr" value="{{{ $part->content_id ?? ''}}}">
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label">{{{ trans('admin.second_screenshot') }}}</label>

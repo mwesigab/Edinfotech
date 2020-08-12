@@ -705,6 +705,7 @@ return [
     'department_list' => 'Departments',
     'new_sch_department' => 'New Department',
     'student_list' => 'Student List',
+    'student_upload' => 'Upload Students',
     'new_student' => 'New Student',
     'student_name' => 'Student Name',
     'student_gender' => 'Gender',

@@ -1,7 +1,7 @@
 @extends('view.layout.layout')
 @section('title')
-    {{{ $setting['site']['site_title'] or '' }}}
-    - {{{ $post->title or '' }}}
+    {{{ $setting['site']['site_title'] ?? '' }}}
+    - {{{ $post->title ?? '' }}}
 @endsection
 
 @section('page')
@@ -11,14 +11,14 @@
             <div class="blog-section">
                     <div class="col-xs-12 row blog-post-box blog-post-box-s">
                         <div class="col-md-3 col-xs-12">
-                            <img src="{{{ $post->image or '' }}}" class="img-responsive">
+                            <img src="{{{ $post->image ?? '' }}}" class="img-responsive">
                             <span class="date-section">{{{ date('d F Y',$post->create_at) }}}</span>
-                            <span class="date-section"><a href="/blog/category/{{{ $post->category->id or '' }}}">{{{ $post->category->title or '' }}}</a></span>
+                            <span class="date-section"><a href="/blog/category/{{{ $post->category->id ?? '' }}}">{{{ $post->category->title ?? '' }}}</a></span>
                         </div>
                         <div class="col-md-9 col-xs-12 text-section">
-                            {!!   $post->pre_content or '' !!}
+                            {!!   $post->pre_content ?? '' !!}
                             <hr>
-                            {!!   $post->content or '' !!}
+                            {!!   $post->content ?? '' !!}
                             <br>
                             <span>{{{ trans('main.tags') }}} :</span>
                             @foreach(explode(',',$post->tags) as $tag)
@@ -44,17 +44,17 @@
                                     <ul class="comment-box">
                                         @foreach($post->comments as $comment)
                                             <li>
-                                                <a href="/profile/{{{ $comment->user_id or '' }}}">{{{ $comment->name or '' }}}</a>
+                                                <a href="/profile/{{{ $comment->user_id ?? '' }}}">{{{ $comment->name ?? '' }}}</a>
                                                 <label>{{{ date('d F Y | H:i',$comment->create_at) }}}</label>
-                                                <span>{!! $comment->comment or '' !!}</span>
-                                                <span><a href="javascript:void(0);" answer-id="{{{ $comment->id }}}" answer-title="{{{ $comment->name or '' }}}" class="pull-left answer-btn">{{{ trans('main.reply') }}}</a> </span>
+                                                <span>{!! $comment->comment ?? '' !!}</span>
+                                                <span><a href="javascript:void(0);" answer-id="{{{ $comment->id }}}" answer-title="{{{ $comment->name ?? '' }}}" class="pull-left answer-btn">{{{ trans('main.reply') }}}</a> </span>
                                                 @if(count($comment->childs)>0)
                                                     <ul class="col-md-11 col-md-offset-1 answer-comment">
                                                         @foreach($comment->childs as $child)
                                                             <li>
-                                                                <a href="/profile/{{{ $child->user_id or '' }}}">{{{ $child->name or '' }}}</a>
+                                                                <a href="/profile/{{{ $child->user_id ?? '' }}}">{{{ $child->name ?? '' }}}</a>
                                                                 <label>{{{ date('d F Y | H:i',$child->create_at) }}}</label>
-                                                                <span>{!! $child->comment or '' !!}</span>
+                                                                <span>{!! $child->comment ?? '' !!}</span>
                                                             </li>
                                                         @endforeach
                                                     </ul>

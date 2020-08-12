@@ -52,7 +52,7 @@
             <ul class="navbar-nav navbar-right">
                 <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                         <img alt="image" src="/assets/admin/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                        <div class="d-sm-none d-lg-inline-block">Hi, {!! $Admin['username'] or '' !!}</div></a>
+                        <div class="d-sm-none d-lg-inline-block">Hi, {!! $Admin['username'] ?? '' !!}</div></a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="/admin/profile" class="dropdown-item has-icon">
                             <i class="fas fa-user"></i> {!! trans('admin.profile') !!}
@@ -168,12 +168,13 @@
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-eye"></i> <span>{{{  trans('admin.schools') }}}</span></a>
                         <ul class="dropdown-menu">
                             @if($admin['admin']==1)
-                            <li><a class="nav-link" href="/admin/schools">{{{  trans('admin.school_list') }}}</a></li>
-                            <li><a class="nav-link" href="/admin/school_form">{{{  trans('admin.new_school') }}}</a></li>
+                            <li><a class="nav-link" href="/admin/school/list">{{{  trans('admin.school_list') }}}</a></li>
+                            <li><a class="nav-link" href="/admin/school/form">{{{  trans('admin.new_school') }}}</a></li>
                             <li><a class="nav-link" href="/admin/school/departments">{{{  trans('admin.department_list') }}}</a></li>
                             <li><a class="nav-link" href="/admin/school/department_form">{{{  trans('admin.new_sch_department') }}}</a></li>
                             @endif
                             <li><a class="nav-link" href="/admin/school/students">{{{  trans('admin.student_list') }}}</a></li>
+                            <li><a class="nav-link" href="/admin/school/students_upload">{{{  trans('admin.student_upload') }}}</a></li>
                             <li><a class="nav-link" href="/admin/school/student_form">{{{  trans('admin.new_student') }}}</a></li>
                         </ul>
                     </li>@endif
@@ -255,7 +256,7 @@
                     @if(isset($breadcom) && count($breadcom))
                         <div class="section-header-breadcrumb">
                             @foreach($breadcom as $bread)
-                                <div class="breadcrumb-item">{!! $bread or '' !!}</div>
+                                <div class="breadcrumb-item">{!! $bread ?? '' !!}</div>
                             @endforeach
                         </div>
                     @endif

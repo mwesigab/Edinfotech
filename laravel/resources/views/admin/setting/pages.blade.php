@@ -22,7 +22,7 @@
 
                   <div class="form-group">
                      <div class="col-md-12">
-                        <textarea class="summernote" name="pages_terms" >{!! $_setting['pages_terms'] or '' !!}</textarea>
+                        <textarea class="summernote" name="pages_terms" >{!! $_setting['pages_terms'] ?? '' !!}</textarea>
                      </div>
                   </div>
 
@@ -40,7 +40,7 @@
 
                   <div class="form-group">
                      <div class="col-md-12">
-                        <textarea class="summernote" name="pages_contact" >{!! $_setting['pages_contact'] or '' !!}</textarea>
+                        <textarea class="summernote" name="pages_contact" >{!! $_setting['pages_contact'] ?? '' !!}</textarea>
                      </div>
                   </div>
 
@@ -58,7 +58,7 @@
 
                   <div class="form-group">
                      <div class="col-md-12">
-                        <textarea class="summernote" name="pages_about" >{!! $_setting['pages_about'] or '' !!}</textarea>
+                        <textarea class="summernote" name="pages_about" >{!! $_setting['pages_about'] ?? '' !!}</textarea>
                      </div>
                   </div>
 
@@ -76,7 +76,7 @@
 
                   <div class="form-group">
                      <div class="col-md-12">
-                        <textarea class="summernote" name="pages_help">{!! $_setting['pages_help'] or '' !!}</textarea>
+                        <textarea class="summernote" name="pages_help">{!! $_setting['pages_help'] ?? '' !!}</textarea>
                      </div>
                   </div>
 
@@ -94,7 +94,7 @@
 
                   <div class="form-group">
                      <div class="col-md-12">
-                        <textarea class="summernote" name="pages_content_update">{!! $_setting['pages_content_update'] or '' !!}</textarea>
+                        <textarea class="summernote" name="pages_content_update">{!! $_setting['pages_content_update'] ?? '' !!}</textarea>
                      </div>
                   </div>
 
@@ -112,7 +112,7 @@
 
                   <div class="form-group">
                      <div class="col-md-12">
-                        <textarea class="summernote" name="pages_content_delete">{!! $_setting['pages_content_delete'] or '' !!}</textarea>
+                        <textarea class="summernote" name="pages_content_delete">{!! $_setting['pages_content_delete'] ?? '' !!}</textarea>
                      </div>
                   </div>
 

@@ -34,10 +34,10 @@
                                 <tr>
                                     <td class="text-center"><img src="{{{ $list->image }}}" class="w-24 h-a" /></td>
                                     <td>{{{ $list->title }}}</td>
-                                    <td class="text-center">{{{ $list->class or '' }}}</td>
+                                    <td class="text-center">{{{ $list->class ?? '' }}}</td>
                                     <td class="text-center">{{{ $list->commision }}}</td>
-                                    <td class="text-center">{{{ $list->contents_count or '0' }}}</td>
-                                    <td class="text-center">{{{ $list->filters_count or '0' }}}</td>
+                                    <td class="text-center">{{{ $list->contents_count ?? '0' }}}</td>
+                                    <td class="text-center">{{{ $list->filters_count ?? '0' }}}</td>
                                     <td class="text-center">
                                         <a href="/admin/content/category/edit/{{{ $list->id }}}" title="Edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                         <a href="/admin/content/category/filter/{{{ $list->id }}}" title="Filters"><i class="fa fa-tags" aria-hidden="true"></i></a>
@@ -55,7 +55,7 @@
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.parrent_category') }}}</label>
                                 <div class="col-md-6">
                                     <select name="parent_id" class="form-control">
-                                        <option value="{{{ $item->id or 0 }}}">{{{ $item->title or '' }}}</option>
+                                        <option value="{{{ $item->id ?? 0 }}}">{{{ $item->title ?? '' }}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="icon" ><i class="fa fa-eye" aria-hidden="true"></i></span>
-                                        <input type="text" name="icon" value="{{{ $item->icon or '' }}}" dir="ltr" class="form-control">
+                                        <input type="text" name="icon" value="{{{ $item->icon ?? '' }}}" dir="ltr" class="form-control">
                                         <span class="input-group-addon click-for-upload cu-p"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="background" ><i class="fa fa-eye" aria-hidden="true"></i></span>
-                                        <input type="text" name="background" value="{{{ $item->background or '' }}}" dir="ltr" class="form-control">
+                                        <input type="text" name="background" value="{{{ $item->background ?? '' }}}" dir="ltr" class="form-control">
                                         <span class="input-group-addon click-for-upload cu-p"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
                                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="background">
                                             <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                         </span>
-                                        <input type="text" name="app_icon" value="{!! $item->app_icon or '' !!}" dir="ltr" placeholder="App icon (36 x 36) png only" class="form-control">
+                                        <input type="text" name="app_icon" value="{!! $item->app_icon ?? '' !!}" dir="ltr" placeholder="App icon (36 x 36) png only" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                             <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                         </span>
@@ -125,7 +125,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.color_code') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text" name="color" value="{{{ $item->color or '' }}}" class="form-control text-center">
+                                    <input type="text" name="color" value="{{{ $item->color ?? '' }}}" class="form-control text-center">
                                 </div>
                             </div>
 
@@ -134,7 +134,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="req_icon"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                                        <input type="text" name="req_icon" value="{{{ $item->req_icon or '' }}}" dir="ltr" class="form-control">
+                                        <input type="text" name="req_icon" value="{{{ $item->req_icon ?? '' }}}" dir="ltr" class="form-control">
                                         <span class="input-group-addon click-for-upload cu-p"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
@@ -143,7 +143,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.th_commission') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="number" name="commision" min="0" max="100" value="{{{$item->commision or 0}}}" placeholder="%" class="form-control text-center">
+                                    <input type="number" name="commision" min="0" max="100" value="{{{$item->commision ?? 0}}}" placeholder="%" class="form-control text-center">
                                 </div>
                             </div>
 

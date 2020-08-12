@@ -182,7 +182,7 @@ return [
         Anand\LaravelPaytmWallet\PaytmWalletServiceProvider::class,
         //Riazxrazor\Payumoney\PayumoneyServiceProvider::class,
         //Unicodeveloper\Paystack\PaystackServiceProvider::class
-        KingFlamez\Rave\RaveServiceProvider::class
+        KingFlamez\Rave\RaveServiceProvider::class,
     ],
 
     /*

@@ -31,17 +31,17 @@
                                 <td class="text-center">{{{ date('d F Y : H:i',$item->create_at) }}}</td>
                             @endif
                             <td class="text-center">
-                                <a title="{{{ $item->user->name or '' }}}" href="/profile/{{{ $item->user->id or 0 }}}">{{{ $item->user->username or '' }}}</a>
+                                <a title="{{{ $item->user->name ?? '' }}}" href="/profile/{{{ $item->user->id ?? 0 }}}">{{{ $item->user->username ?? '' }}}</a>
                             </td>
                             <td class="text-center">
                                 @if($item->users != null)
                                     @foreach($item->users as $u)
-                                        <a title="{{{ $u->user->name or '' }}}" href="/profile/{{{ $u->user->id or 0 }}}">{{{ $u->user->username or '' }}}</a>
+                                        <a title="{{{ $u->user->name ?? '' }}}" href="/profile/{{{ $u->user->id ?? 0 }}}">{{{ $u->user->username ?? '' }}}</a>
                                         <br>
                                     @endforeach
                                 @endif
                             </td>
-                            <td class="text-center">{{{ $item->category->title or '' }}}</td>
+                            <td class="text-center">{{{ $item->category->title ?? '' }}}</td>
                             <td class="text-center">
                                 @if($item->mode == 'open')
                                     <b class="f-w-b">{{{ trans('admin.waiting') }}}</b>

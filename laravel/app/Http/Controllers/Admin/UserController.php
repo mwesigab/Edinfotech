@@ -22,6 +22,12 @@ use Maatwebsite\Excel\Facades\Excel;
 class userController extends Controller
 {
 
+    protected $request;
+
+    public function __construct(Request $request) {
+        $this->request = $request;
+    }
+
     public function login(Request $request){
         if($request->session()->has('Admin') ){
             return redirect('/admin/user/lists');
@@ -62,8 +68,8 @@ class userController extends Controller
     ## User Section ##
     public function lists()
     {
-        $fdate = strtotime(Input::get('fsdate'));
-        $ldate = strtotime(Input::get('lsdate'));
+        $fdate = strtotime($this->request->get('fsdate'));
+        $ldate = strtotime($this->request->get('lsdate'));
         $userList = User::with('category')->withCount('contents','sells','buys')->where('admin','0');
 
         if($fdate>12601)
@@ -71,8 +77,8 @@ class userController extends Controller
         if($ldate>12601)
             $userList->where('create_at','<',$ldate);
 
-        if(Input::get('order')!=null) {
-            switch (Input::get('order')){
+        if($this->request->get('order')!=null) {
+            switch ($this->request->get('order')){
                 case 'sella':
                     $userList->orderBy('sells_count');
                     break;

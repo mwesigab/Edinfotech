@@ -33,9 +33,9 @@
                                 <tbody>
                                     @foreach($list as $item)
                                     <tr>
-                                        <td class="text-center">{{{ $item->plan->title or '' }}}</td>
-                                        <td class="text-center">{{{ $item->description or '' }}}</td>
-                                        <td class="text-center"><a class="gray-s" href="/product/{{{ $item->content->id or 0 }}}">{{{ $item->content->title or '' }}}</a> </td>
+                                        <td class="text-center">{{{ $item->plan->title ?? '' }}}</td>
+                                        <td class="text-center">{{{ $item->description ?? '' }}}</td>
+                                        <td class="text-center"><a class="gray-s" href="/product/{{{ $item->content->id ?? 0 }}}">{{{ $item->content->title ?? '' }}}</a> </td>
                                         <td class="text-center">
                                             @if($item->mode == 'publish')
                                                 <b class="blue-s">{{{ trans('main.active') }}}</b>
@@ -61,11 +61,11 @@
                         <div class="row">
                             @foreach($plans as $plan)
                                 <div class="col-md-3 col-xs-12 plan-box tab-con">
-                                    <div class="price-section">{{{ $plan->title or '' }}}</div>
-                                    <div class="plan-box-section plan-box-section-s">{{{ currencySign() }}}{{{ $plan->price or 0 }}}</div>
-                                    <div class="plan-box-section plan-box-section-r">{{{ $plan->day or '0' }}} {{{ trans('main.days') }}}</div>
-                                    <div class="plan-box-section plan-box-section-e">{{{ $plan->description or 'No Description' }}}</div>
-                                    <div class="plan-box-section"><a href="/user/video/promotion/buy/{{{ $plan->id or 0 }}}" class="btn btn-custom">{{{ trans('main.purchase_plan') }}}</a></div>
+                                    <div class="price-section">{{{ $plan->title ?? '' }}}</div>
+                                    <div class="plan-box-section plan-box-section-s">{{{ currencySign() }}}{{{ $plan->price ?? 0 }}}</div>
+                                    <div class="plan-box-section plan-box-section-r">{{{ $plan->day ?? '0' }}} {{{ trans('main.days') }}}</div>
+                                    <div class="plan-box-section plan-box-section-e">{{{ $plan->description ?? 'No Description' }}}</div>
+                                    <div class="plan-box-section"><a href="/user/video/promotion/buy/{{{ $plan->id ?? 0 }}}" class="btn btn-custom">{{{ trans('main.purchase_plan') }}}</a></div>
                                 </div>
                             @endforeach
                         </div>

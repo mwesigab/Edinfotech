@@ -5,7 +5,7 @@
     <div class="h-30" id="scrollId"></div>
     <div class="container-fluid">
         <input type="hidden" value="1" id="current_step">
-        <input type="hidden" value="{{{ $item->id or 0 }}}" id="edit_id">
+        <input type="hidden" value="{{{ $item->id ?? 0 }}}" id="edit_id">
         <div class="container n-padding-xs current-s">
             <div class="h-30"></div>
             <div class="multi-steps">
@@ -42,13 +42,13 @@
                             <div class="form-group">
                                 <label class="control-label col-md-2 tab-con" for="inputDefault">{{{ trans('main.course_title') }}}</label>
                                 <div class="col-md-10 tab-con">
-                                    <input type="text" name="title" placeholder="Course Title..." class="form-control" value="{{{ $item->title or '' }}}" required>
+                                    <input type="text" name="title" placeholder="Course Title..." class="form-control" value="{{{ $item->title ?? '' }}}" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2 tab-con" for="inputDefault">{{{ trans('main.description') }}}</label>
                                 <div class="col-md-10 tab-con">
-                                    <textarea class="form-control editor-te editor-te-h" placeholder="You can import HTML..." name="content" required>{!! $item->content or '' !!}</textarea>
+                                    <textarea class="form-control editor-te editor-te-h" placeholder="You can import HTML..." name="content" required>{!! $item->content ?? '' !!}</textarea>
                                 </div>
                             </div>
                         </form>
@@ -63,7 +63,7 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label tab-con" for="inputDefault">{{{ trans('main.tags') }}}</label>
                                 <div class="col-md-10 tab-con">
-                                    <input type="text" data-role="tagsinput" placeholder="Press enter to save tag." name="tag" value="{{{ $item->tag or ''}}}" class="form-control text-center">
+                                    <input type="text" data-role="tagsinput" placeholder="Press enter to save tag." name="tag" value="{{{ $item->tag ?? ''}}}" class="form-control text-center">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -73,13 +73,13 @@
                                         <option value="0">{{{ trans('main.select_category') }}}</option>
                                         @foreach($menus as $menu)
                                             @if($menu->parent_id == 0)
-                                                <optgroup label="{{{ $menu->title or '' }}}">
+                                                <optgroup label="{{{ $menu->title ?? '' }}}">
                                                     @if(count($menu->childs)>0)
                                                         @foreach($menu->childs as $sub)
-                                                            <option value="{{{ $sub->id or '' }}}" @if($sub->id == $item->category_id) selected @endif>{{{ $sub->title or '' }}}</option>
+                                                            <option value="{{{ $sub->id ?? '' }}}" @if($sub->id == $item->category_id) selected @endif>{{{ $sub->title ?? '' }}}</option>
                                                         @endforeach
                                                     @else
-                                                        <option value="{{{ $menu->id or '' }}}" @if($menu->id == $item->category_id) selected @endif>{{{ $menu->title or '' }}}</option>
+                                                        <option value="{{{ $menu->id ?? '' }}}" @if($menu->id == $item->category_id) selected @endif>{{{ $menu->title ?? '' }}}</option>
                                                     @endif
                                                 </optgroup>
                                             @endif
@@ -91,15 +91,15 @@
                             <div class="alert alert-success"><p>{{{ trans('main.filters_header') }}}</p></div>
                             <div class="h-15"></div>
                             @foreach($menus as $menu)
-                                <div class="col-md-11 col-md-offset-1 tab-con filters dnone" @if($menu->id != $item->category_id) class="dnone" @endif id="filter{{{ $menu->id or 0 }}}">
+                                <div class="col-md-11 col-md-offset-1 tab-con filters dnone" @if($menu->id != $item->category_id) class="dnone" @endif id="filter{{{ $menu->id ?? 0 }}}">
                                     @foreach($menu->filters as $filter)
                                         <div class="col-md-3 col-xs-12 tab-con">
-                                            <h5>{{{ $filter->filter or '' }}}</h5>
+                                            <h5>{{{ $filter->filter ?? '' }}}</h5>
                                             <hr>
                                             <ul class="cat-filters-li pamaz">
                                                 <ul class="submenu submenu-s">
                                                     @foreach($filter->tags as $tag)
-                                                        <li class="second-input"><input type="checkbox" class="filter-tags dblock" id="tag{{{ $tag->id or '' }}}"  name="filters[]" value="{{{ $tag->id or 0 }}}" @if(isset($item->filters) && in_array($tag->id,$item->filters->pluck('id')->toArray())) checked @endif><label for="tag{{{ $tag->id or '' }}}"><span></span>{{{ $tag->tag or '' }}}</label></li>
+                                                        <li class="second-input"><input type="checkbox" class="filter-tags dblock" id="tag{{{ $tag->id ?? '' }}}"  name="filters[]" value="{{{ $tag->id ?? 0 }}}" @if(isset($item->filters) && in_array($tag->id,$item->filters->pluck('id')->toArray())) checked @endif><label for="tag{{{ $tag->id ?? '' }}}"><span></span>{{{ $tag->tag ?? '' }}}</label></li>
                                                     @endforeach
                                                 </ul>
                                             </ul>
@@ -154,7 +154,7 @@
                                 <label class="control-label col-md-4 tab-con">{{{ trans('main.price') }}}</label>
                                 <div class="col-md-8 tab-con">
                                     <div class="input-group">
-                                        <input type="number" name="price" onkeypress="validate(event)" value="{{{$meta['price'] or ''}}}" class="form-control text-center numtostr" @if($item->price === 0) disabled @endif>
+                                        <input type="number" name="price" onkeypress="validate(event)" value="{{{$meta['price'] ?? ''}}}" class="form-control text-center numtostr" @if($item->price === 0) disabled @endif>
                                         <span class="input-group-addon click-for-upload img-icon-s">{{{ currencySign() }}}</span>
                                     </div>
                                 </div>
@@ -163,7 +163,7 @@
                                 <label class="control-label col-md-4 tab-con">{{{ trans('main.postal_price') }}}</label>
                                 <div class="col-md-8 tab-con">
                                     <div class="input-group">
-                                        <input type="number" name="post_price" onkeypress="validate(event)" value="{{{$meta['post_price'] or ''}}}" class="form-control text-center numtostr" @if($item->post != 1) disabled @endif>
+                                        <input type="number" name="post_price" onkeypress="validate(event)" value="{{{$meta['post_price'] ?? ''}}}" class="form-control text-center numtostr" @if($item->post != 1) disabled @endif>
                                         <span class="input-group-addon click-for-upload img-icon-s">{{{ currencySign() }}}</span>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                                 <label class="control-label col-md-4 tab-con">3 Months Subscribe Price</label>
                                 <div class="col-md-8 tab-con">
                                     <div class="input-group">
-                                        <input type="number" name="price_3" onkeypress="validate(event)" value="{{{ $item->price_3 or ''}}}" class="form-control text-center">
+                                        <input type="number" name="price_3" onkeypress="validate(event)" value="{{{ $item->price_3 ?? ''}}}" class="form-control text-center">
                                         <span class="input-group-addon click-for-upload img-icon-s">{{{ currencySign() }}}</span>
                                     </div>
                                 </div>
@@ -183,7 +183,7 @@
                                 <label class="control-label col-md-4 tab-con">6 Months Subscribe Price</label>
                                 <div class="col-md-8 tab-con">
                                     <div class="input-group">
-                                        <input type="number" name="price_6" onkeypress="validate(event)" value="{{{ $item->price_6 or ''}}}" class="form-control text-center">
+                                        <input type="number" name="price_6" onkeypress="validate(event)" value="{{{ $item->price_6 ?? ''}}}" class="form-control text-center">
                                         <span class="input-group-addon click-for-upload img-icon-s">{{{ currencySign() }}}</span>
                                     </div>
                                 </div>
@@ -192,7 +192,7 @@
                                 <label class="control-label col-md-4 tab-con">9 Months Subscribe Price</label>
                                 <div class="col-md-8 tab-con">
                                     <div class="input-group">
-                                        <input type="number" name="price_9" onkeypress="validate(event)" value="{{{ $item->price_9 or ''}}}" class="form-control text-center">
+                                        <input type="number" name="price_9" onkeypress="validate(event)" value="{{{ $item->price_9 ?? ''}}}" class="form-control text-center">
                                         <span class="input-group-addon click-for-upload img-icon-s">{{{ currencySign() }}}</span>
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@
                                 <label class="control-label col-md-4 tab-con">12 Months Subscribe Price</label>
                                 <div class="col-md-8 tab-con">
                                     <div class="input-group">
-                                        <input type="number" name="price_12" onkeypress="validate(event)" value="{{{ $item->price_12 or ''}}}" class="form-control text-center">
+                                        <input type="number" name="price_12" onkeypress="validate(event)" value="{{{ $item->price_12 ?? ''}}}" class="form-control text-center">
                                         <span class="input-group-addon click-for-upload img-icon-s">{{{ currencySign() }}}</span>
                                     </div>
                                 </div>
@@ -221,11 +221,11 @@
                                     </div>
                                     <div class="modal-body no-absolute-content">
                                         <form method="post" id="step-3-form-precourse">
-                                            <input type="hidden" name="precourse" id="precourse" value="{{{ $meta['precourse'] or '' }}}">
+                                            <input type="hidden" name="precourse" id="precourse" value="{{{ $meta['precourse'] ?? '' }}}">
                                         </form>
                                         <ul class="pre-course-title-container">
                                             @foreach($preCourse as $prec)
-                                                <li>{{{ $prec->title or '' }}}&nbsp;(VT-{{{ $prec->id or 0 }}})<i class="fa fa-times delete-course" cid="{{{ $prec->id or 0 }}}"></i></li>
+                                                <li>{{{ $prec->title ?? '' }}}&nbsp;(VT-{{{ $prec->id ?? 0 }}})<i class="fa fa-times delete-course" cid="{{{ $prec->id ?? 0 }}}"></i></li>
                                             @endforeach
                                         </ul>
                                         <input type="text" class="form-control provider-json-pre-course" placeholder="Type 3 characters to load courses list.">
@@ -244,7 +244,7 @@
                                 <div class="col-md-10 tab-con">
                                     <div class="input-group">
                                         <span class="input-group-addon view-selected img-icon-s" data-toggle="modal" data-target="#ImageModal" data-whatever="cover" "><span class="formicon mdi mdi-eye"></span></span>
-                                        <input type="text" name="cover" placeholder="Prefered :410*730px" dir="ltr" value="{{{$meta['cover'] or ''}}}" class="form-control">
+                                        <input type="text" name="cover" placeholder="Prefered :410*730px" dir="ltr" value="{{{$meta['cover'] ?? ''}}}" class="form-control">
                                         <span class="input-group-addon click-for-upload img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                                     </div>
                                 </div>
@@ -255,7 +255,7 @@
                                 <div class="col-md-10 tab-con">
                                     <div class="input-group">
                                         <span class="input-group-addon view-selected img-icon-s" data-toggle="modal" data-target="#ImageModal" data-whatever="thumbnail"><span class="formicon mdi mdi-eye"></span></span>
-                                        <input type="text" name="thumbnail" placeholder="Prefered :155*263px" dir="ltr" value="{{{$meta['thumbnail'] or ''}}}" class="form-control">
+                                        <input type="text" name="thumbnail" placeholder="Prefered :155*263px" dir="ltr" value="{{{$meta['thumbnail'] ?? ''}}}" class="form-control">
                                         <span class="input-group-addon click-for-upload img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                                     </div>
                                 </div>
@@ -266,7 +266,7 @@
                                 <div class="col-md-10 tab-con">
                                     <div class="input-group">
                                         <span class="input-group-addon view-selected img-icon-s" data-toggle="modal" data-target="#VideoModal" data-whatever="video"><span class="formicon mdi mdi-eye"></span></span>
-                                        <input type="text" name="video" placeholder="Prefered :1-3 mins"  dir="ltr" value="{{{$meta['video'] or ''}}}" class="form-control">
+                                        <input type="text" name="video" placeholder="Prefered :1-3 mins"  dir="ltr" value="{{{$meta['video'] ?? ''}}}" class="form-control">
                                         <span class="input-group-addon click-for-upload img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                                     </div>
                                 </div>
@@ -276,7 +276,7 @@
                                 <div class="col-md-10 tab-con">
                                     <div class="input-group document-input">
                                         <span class="input-group-addon view-selected img-icon-s" onclick="window.open($('#document-addon').val(),'_balnk');"><span class="formicon mdi mdi-eye"></span></span>
-                                        <input type="text" name="document" id="document-addon" dir="ltr" value="{{{$meta['document'] or ''}}}" class="form-control">
+                                        <input type="text" name="document" id="document-addon" dir="ltr" value="{{{$meta['document'] ?? ''}}}" class="form-control">
                                         <span class="input-group-addon click-for-upload document-input-icon img-icon-s"><span class="formicon mdi mdi-arrow-up-thick"></span></span>
                                     </div>
                                 </div>
@@ -294,7 +294,7 @@
                                         <input type="hidden" id="part-edit-id">
                                         <form action="/user/content/part/edit/store/" id="step-5-form-edit-part" method="post" class="form-horizontal">
 
-                                            <input type="hidden" name="content_id" value="{{{ $item->id or '' }}}">
+                                            <input type="hidden" name="content_id" value="{{{ $item->id ?? '' }}}">
 
                                             <div class="form-group">
 
@@ -366,7 +366,7 @@
                                         <div class="h-15"></div>
                                         <form action="/user/content/part/store" id="step-5-form-new-part" method="post" class="form-horizontal">
 
-                                            <input type="hidden" name="content_id" value="{{{ $item->id or '' }}}">
+                                            <input type="hidden" name="content_id" value="{{{ $item->id ?? '' }}}">
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-2 tab-con">{{{ trans('main.video_file') }}}</label>

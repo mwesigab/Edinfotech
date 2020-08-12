@@ -1,6 +1,6 @@
 @extends('view.layout.layout')
 @section('title')
-{{{ get_option('site_title','') }}} - {{{ $category->title or 'Categories' }}}
+{{{ get_option('site_title','') }}} - {{{ $category->title ?? 'Categories' }}}
 @endsection
 @section('page')
 
@@ -16,7 +16,7 @@
                 <div class="box box-s">
                     <div class="container-2">
                         <form>
-                            <input type="search" id="search" name="q" value="{{{ $_GET['q'] or '' }}}" placeholder=" {{{ $category->title or 'Search in all categories' }}}" />
+                            <input type="search" id="search" name="q" value="{{{ $_GET['q'] ?? '' }}}" placeholder=" {{{ $category->title ?? 'Search in all categories' }}}" />
                             <span class="icon"><i class="homeicon mdi mdi-magnify"></i></span>
                         </form>
                     </div>
@@ -107,17 +107,17 @@
                         <?php $vipIds[] = $content->content->id; ?>
                         <?php $meta = arrayToList($content->content->metas,'option','value'); ?>
                         <div class="col-md-3 col-sm-6 col-xs-12 pagi-content vip-content tab-con">
-                            <a href="/product/{{{ $content->content->id or '' }}}" title="{{{ $content->content->title or '' }}}" class="content-box pagi-content-box">
+                            <a href="/product/{{{ $content->content->id ?? '' }}}" title="{{{ $content->content->title ?? '' }}}" class="content-box pagi-content-box">
 
                                 <div class="img-container">
-                                    <img src="{{{ $meta['thumbnail'] or '' }}}"/>
+                                    <img src="{{{ $meta['thumbnail'] ?? '' }}}"/>
                                     <span class="off-badge vip-badge">
                                                     <label class="text-center">{{{ trans('main.vip_badge') }}}</label>
                                                 </span>
                                 </div>
                                 <h3>{!! str_limit($content->content->title,30,'...') !!}</h3>
                                 <div class="footer">
-                                    <span class="avatar" title="{{{ $content->user->name or '' }}}" onclick="window.location.href = '/profile/{{{ $content->user->id or 0 }}}'"><img src="{{{ get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar','')) }}}"></span>
+                                    <span class="avatar" title="{{{ $content->user->name ?? '' }}}" onclick="window.location.href = '/profile/{{{ $content->user->id ?? 0 }}}'"><img src="{{{ get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar','')) }}}"></span>
                                     @if(isset($metas['duration']))
                                     <label class="pull-right content-clock">{{{ convertToHoursMins($meta['duration']) }}}</label>
                                     <span class="boxicon mdi mdi-clock pull-right"></span>
@@ -139,19 +139,19 @@
                         @foreach($contents as $content)
                         @if(!in_array($content['id'],$vipIds))
                         <div class="col-md-3 col-sm-6 col-xs-12 pagi-content tab-con">
-                            <a href="/product/{{{ $content['id'] or '' }}}" title="{{{ $content['title'] or '' }}}" class="content-box pagi-content-box">
+                            <a href="/product/{{{ $content['id'] ?? '' }}}" title="{{{ $content['title'] ?? '' }}}" class="content-box pagi-content-box">
 
                                 <div class="img-container">
-                                    <img src="{{{ $content['metas']['thumbnail'] or '' }}}"/>
+                                    <img src="{{{ $content['metas']['thumbnail'] ?? '' }}}"/>
                                     @if($content['discount'] != null)
                                     <span class="off-badge">
-                                            <label class="text-center">%{{{ $content['discount']['off'] or 0 }}}<br><span>{{{ trans('main.discount') }}}</span></label>
+                                            <label class="text-center">%{{{ $content['discount']['off'] ?? 0 }}}<br><span>{{{ trans('main.discount') }}}</span></label>
                                         </span>
                                     @endif
                                 </div>
                                 <h3>{!! str_limit($content['title'],30,'...') !!}</h3>
                                 <div class="footer">
-                                    <span class="avatar" title="{{{ $content['user']['name'] or '' }}}" onclick="window.location.href = '/profile/{{{ $content['user']['id'] or 0 }}}'"><img src="{{{ get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar','')) }}}"></span>
+                                    <span class="avatar" title="{{{ $content['user']['name'] ?? '' }}}" onclick="window.location.href = '/profile/{{{ $content['user']['id'] ?? 0 }}}'"><img src="{{{ get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar','')) }}}"></span>
                                     @if(isset($content['metas']['duration']))
                                     <label class="pull-right content-clock">{{{ convertToHoursMins($content['metas']['duration']) }}}</label>
                                     <span class="boxicon mdi mdi-clock pull-right"></span>
@@ -173,7 +173,7 @@
                         @if(isset($ads))
                         @foreach($ads as $ad)
                         @if($ad->position == 'category-pagination-bottom')
-                        <a href="{{{ $ad->url or '#' }}}"><img src="{{{ $ad->image or '' }}}" class="{{{ $ad->size or '' }}}" id="cat-side"></a>
+                        <a href="{{{ $ad->url ?? '#' }}}"><img src="{{{ $ad->image ?? '' }}}" class="{{{ $ad->size ?? '' }}}" id="cat-side"></a>
                         @endif
                         @endforeach
                         @endif
@@ -188,15 +188,15 @@
 @section('script')
 <script>
     $(function() {
-        pagination('.body-target',@if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] or 6 }}} @endif,0);
+        pagination('.body-target',@if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] ?? 6 }}} @endif,0);
         $('.pagi').pagination({
             items: {!! count($contents) !!},
-        itemsOnPage: @if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] or 6 }}} @endif,
+        itemsOnPage: @if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] ?? 6 }}} @endif,
         cssStyle: 'light-theme',
             prevText: 'Pre.',
             nextText:'Next',
             onPageClick:function(pageNumber, event) {
-            pagination('.body-target',@if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] or 6 }}} @endif,pageNumber-1);
+            pagination('.body-target',@if(isset($setting['site']['category_content_count'])) {{{ $setting['site']['category_content_count'] ?? 6 }}} @endif,pageNumber-1);
         }
     });
     });

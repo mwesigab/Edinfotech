@@ -24,7 +24,7 @@
         <ul>
             @if(!empty($socials))
                 @foreach($socials as $social)
-                    <li><a href="{{{ $social->link or '' }}}" target="_blank" title="{{{ $social->title or '' }}}"><img src="{{{ $social->icon or '' }}}"/></a></li>
+                    <li><a href="{{{ $social->link ?? '' }}}" target="_blank" title="{{{ $social->title ?? '' }}}"><img src="{{{ $social->icon ?? '' }}}"/></a></li>
                 @endforeach
             @endif
         </ul>

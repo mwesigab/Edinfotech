@@ -36,4 +36,4 @@
 <script src="/assets/404/js/bootstrap.min.js"></script>
 <script src="/assets/404/js/index.js"></script>
 </body>
-</html>
+</html><?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/errors/404.blade.php ENDPATH**/ ?>

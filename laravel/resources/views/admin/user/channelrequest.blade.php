@@ -23,8 +23,8 @@
                         <tr>
                             <td>{{{ $item->title }}}</td>
                             <td class="text-center" width="150">{{{ date('d F Y / H:i',$item->create_at) }}}</td>
-                            <td class="text-center" title="{{{ $item->user->username or '' }}}">{{{ $item->user->name or '' }}}</td>
-                            <td class="text-center" title="{{{ $item->channel->title or '' }}}">{{{ $item->channel->title or '' }}}</td>
+                            <td class="text-center" title="{{{ $item->user->username ?? '' }}}">{{{ $item->user->name ?? '' }}}</td>
+                            <td class="text-center" title="{{{ $item->channel->title ?? '' }}}">{{{ $item->channel->title ?? '' }}}</td>
                             <td class="text-center" >@if(isset($item->attach)) {!! '<a target="_blank" href="'.$item->attach.'">Download</a>' !!} @else No data @endif</td>
                             <td class="text-center">
                                 @if($item->mode == 'publish')

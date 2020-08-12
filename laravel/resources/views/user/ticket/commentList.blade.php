@@ -25,9 +25,9 @@
                         <tbody>
                         @foreach($lists as $item)
                             <tr>
-                                <td class="lh180 cell-ta">{{{ $item->comment or '' }}}</td>
-                                <td class="text-center"><a href="/product/{{{ $item->content->id or 0 }}}">{{{ $item->content->title or 'Removed' }}}</a></td>
-                                <td class="text-center"><a href="/profile/{{{ $item->user->id or 0 }}}">{{{ $item->name or $item->user->username }}}</a> </td>
+                                <td class="lh180 cell-ta">{{{ $item->comment ?? '' }}}</td>
+                                <td class="text-center"><a href="/product/{{{ $item->content->id ?? 0 }}}">{{{ $item->content->title ?? 'Removed' }}}</a></td>
+                                <td class="text-center"><a href="/profile/{{{ $item->user->id ?? 0 }}}">{{{ $item->name ?? $item->user->username }}}</a> </td>
                             </tr>
                         @endforeach
                         </tbody>

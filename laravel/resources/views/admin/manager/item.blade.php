@@ -84,7 +84,7 @@
                                         <span class="input-group-prepend view-selected cu-p" data-toggle="modal" data-target="#ImageModal" data-whatever="avatar">
                                             <span class="input-group-text"><i class="fa fa-eye" aria-hidden="true"></i></span>
                                         </span>
-                                        <input type="text" name="avatar" dir="ltr" value="{{{$meta['avatar'] or ''}}}" class="form-control">
+                                        <input type="text" name="avatar" dir="ltr" value="{{{$meta['avatar'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                             <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                         </span>
@@ -96,7 +96,7 @@
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.birthday') }}}</label>
                                 <div class="col-md-6">
                                     <div class="input-group">
-                                        <input type="date" name="birthday" id="birthday" value="{{{ $meta['birthday'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                        <input type="date" name="birthday" id="birthday" value="{{{ $meta['birthday'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                         <span class="input-group-append fdatebtn" id="fdatebtn">
                                             <span class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                                         </span>
@@ -107,21 +107,21 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.bank_name') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text"  name="bank_name" value="{{{ $meta['bank_name'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                    <input type="text"  name="bank_name" value="{{{ $meta['bank_name'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.account_number') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text"  name="bank_account" value="{{{ $meta['bank_account'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                    <input type="text"  name="bank_account" value="{{{ $meta['bank_account'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.creditcard_number') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text"  name="bank_card" value="{{{ $meta['bank_card'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                    <input type="text"  name="bank_card" value="{{{ $meta['bank_card'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                 </div>
                             </div>
 
@@ -140,28 +140,28 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.passport_id') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text"  name="meli_code" value="{{{ $meta['meli_code'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                    <input type="text"  name="meli_code" value="{{{ $meta['meli_code'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.mobile_number') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text"  name="mobile" value="{{{ $meta['mobile'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                    <input type="text"  name="mobile" value="{{{ $meta['mobile'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.Telephone') }}}</label>
                                 <div class="col-md-6">
-                                    <input type="text"  name="phone" value="{{{ $meta['phone'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                    <input type="text"  name="phone" value="{{{ $meta['phone'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label" for="inputDefault">{{{ trans('admin.address') }}}</label>
                                 <div class="col-md-9">
-                                    <input type="text"  name="address" value="{{{ $meta['address'] or '' }}}" class="form-control text-center" id="inputDefault">
+                                    <input type="text"  name="address" value="{{{ $meta['address'] ?? '' }}}" class="form-control text-center" id="inputDefault">
                                 </div>
                             </div>
 
@@ -279,9 +279,9 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-prepend view-selected cu-p">
-                                            <span class="input-group-text"><a href="{{{$meta['upload_certificate'] or ''}}}" class="fa fa-download" aria-hidden="true"></a></span>
+                                            <span class="input-group-text"><a href="{{{$meta['upload_certificate'] ?? ''}}}" class="fa fa-download" aria-hidden="true"></a></span>
                                         </span>
-                                        <input type="text" name="upload_certificate" dir="ltr" value="{{{$meta['upload_certificate'] or ''}}}" class="form-control">
+                                        <input type="text" name="upload_certificate" dir="ltr" value="{{{$meta['upload_certificate'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                             <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                         </span>
@@ -294,9 +294,9 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-prepend view-selected cu-p">
-                                            <span class="input-group-text"><a href="{{{$meta['upload_deal'] or ''}}}" class="fa fa-download" aria-hidden="true"></a></span>
+                                            <span class="input-group-text"><a href="{{{$meta['upload_deal'] ?? ''}}}" class="fa fa-download" aria-hidden="true"></a></span>
                                         </span>
-                                        <input type="text" name="upload_deal" dir="ltr" value="{{{$meta['upload_deal'] or ''}}}" class="form-control">
+                                        <input type="text" name="upload_deal" dir="ltr" value="{{{$meta['upload_deal'] ?? ''}}}" class="form-control">
                                         <span class="input-group-append click-for-upload cu-p">
                                             <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                         </span>
@@ -309,9 +309,9 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-prepend view-selected cu-p">
-                                            <span class="input-group-text"><a href="{{{$meta['upload_payroll'] or ''}}}" class="fa fa-download" aria-hidden="true"></a></span>
+                                            <span class="input-group-text"><a href="{{{$meta['upload_payroll'] ?? ''}}}" class="fa fa-download" aria-hidden="true"></a></span>
                                         </span>
-                                        <input type="text" name="upload_payroll" dir="ltr" value="{{{$meta['upload_payroll'] or ''}}}" class="form-control">
+                                        <input type="text" name="upload_payroll" dir="ltr" value="{{{$meta['upload_payroll'] ?? ''}}}" class="form-control">
                                         <span class="input-group-addon click-for-upload cu-p">
                                             <span class="input-group-text"><i class="fa fa-upload" aria-hidden="true"></i></span>
                                         </span>

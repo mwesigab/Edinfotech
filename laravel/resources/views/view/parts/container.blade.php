@@ -5,7 +5,7 @@
             @if(isset($ads))
                 @foreach($ads as $ad)
                     @if($ad->position == 'main-slider-side')
-                        <a href="{{{ $ad->url or '#' }}}"><img src="{{{ $ad->image or '' }}}" class="{{{ $ad->size or '' }}}"></a>
+                        <a href="{{{ $ad ? $ad->url : '#' }}}"><img src="{{{ $ad ? $ad->image : '' }}}" class="{{{ $ad ? $ad->size : '' }}}"></a>
                     @endif
                 @endforeach
             @endif
@@ -15,20 +15,20 @@
                 @foreach($slider_container as $slide)
                     @if(isset($slide->content->metas))
                         <?php $slide_meta = arrayToList($slide->content->metas,'option','value'); ?>
-                        <div class="parts-container-slide" id="slide{{{ $slide->content->id or 0 }}}">
+                        <div class="parts-container-slide" id="slide{{{ $slide->content ? $slide->content->id : 0 }}}">
                         <div class="header">
                             <span>{{{ trans('main.featured') }}}</span>
-                            <h2><a href="/product/{{{ $slide->content->id or 0 }}}">{{{ $slide->content->title or '' }}}</a></h2>
+                            <h2><a href="/product/{{{ $slide->content ? $slide->content->id : 0 }}}">{{{ $slide->content ? $slide->content->title : '' }}}</a></h2>
                         </div>
                         <div class="body-container">
                             <div class="row">
                                 <div class="col-md-7">
-                                    <img src="{{{ $slide_meta['cover'] or '' }}}" class="img-responsive img-main-container img-con-r">
+                                    <img src="{{{ isset($slide_meta['cover']) ? $slide_meta['cover'] : '' }}}" class="img-responsive img-main-container img-con-r">
                                 </div>
                                 <div class="col-md-5 img-con-s">
                                     <div class="item-container">
                                         <div class="col-md-10 text-item">
-                                            <span>{{{ $slide->description or '' }}}</span>
+                                            <span>{{{ $slide ? $slide->description : '' }}}</span>
                                         </div>
                                         <div class="col-md-2">
                                             <span class="homeicon mdi mdi-comment"></span>
@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="item-container">
                                         <div class="col-md-10 timer-item">
-                                            <label>{{{ $slide_meta['duration'] or 0 }}} {{{ trans('main.min') }}}</label>
+                                            <label>{{{ isset($slide_meta['duration']) ? $slide_meta['duration'] : 0 }}} {{{ trans('main.min') }}}</label>
                                         </div>
                                         <div class="col-md-2 ">
                                             <span class="homeicon mdi mdi-alarm"></span>
@@ -45,7 +45,7 @@
                                     <div class="item-container">
                                         <div class="col-md-10 price-item">
                                             @if(isset($slide_meta['price']) && $slide_meta['price']>0)
-                                                <label>{{{currencySign()}}}{{{ $slide_meta['price'] or 0 }}}</label>
+                                                <label>{{{currencySign()}}} {{{ isset($slide_meta['price']) ? $slide_meta['price'] : 0 }}}</label>
                                             @else
                                                 <label>{{{ trans('main.free_item') }}}</label>
                                             @endif
@@ -56,14 +56,14 @@
                                     </div>
                                     <div class="item-container">
                                         <div class="col-md-10 price-item profile-item">
-                                            <label><a href="/profile/{{{ $slide->content->user->id or 0 }}}" class="profile-s">{{{ $slide->content->user->name or '' }}}</a></label>
+                                            <label><a href="/profile/{{{ $slide->content->user ? $slide->content->user->id : 0 }}}" class="profile-s">{{{ $slide->content->user ? $slide->content->user->name : '' }}}</a></label>
                                         </div>
                                         <div class="col-md-2">
                                             <span class="homeicon mdi mdi-teach"></span>
                                         </div>
                                     </div>
                                     <div>
-                                        <a href="/product/{{{ $slide->content->id or 0 }}}" class="btn btn-container-more btn-container-more-s">{{{ trans('main.view_product') }}}</a>
+                                        <a href="/product/{{{ $slide->content ? $slide->content->id : 0 }}}" class="btn btn-container-more btn-container-more-s">{{{ trans('main.view_product') }}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                     <ul class="container-bullet">
                         @if(!empty($slider_container))
                             @foreach($slider_container as $index=>$slide)
-                                <li data-target="slide{{{ $slide->content->id or 0 }}}" @if($index == 0) class="active" @endif></li>
+                                <li data-target="slide{{{ $slide->content ? $slide->content->id : 0 }}}" @if($index == 0) class="active" @endif></li>
                             @endforeach
                         @endif
                     </ul>

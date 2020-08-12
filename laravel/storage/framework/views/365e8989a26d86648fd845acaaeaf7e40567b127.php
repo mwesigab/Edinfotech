@@ -1,15 +1,16 @@
+
 <?php $__env->startSection('title'); ?>
-    <?php echo e(get_option('site_title','')); ?> - <?php echo e(isset($category->title) ? $category->title : 'Categories'); ?>
+    <?php echo e(get_option('site_title','')); ?> - <?php echo e($category->title ?? 'Categories'); ?>
 
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('page'); ?>
 
     <div class="container-fluid">
-        <div class="row cat-search-section" style="background: url('<?php echo e(isset($category->background) ? $category->background : ''); ?>');">
+        <div class="row cat-search-section" style="background: url('<?php echo e($category->background ?? ''); ?>');">
             <div class="container">
                 <div class="col-md-6 col-sm-6 col-xs-12 tab-con cat-icon-container">
-                    <span><img src="<?php echo e(isset($category->icon) ? $category->icon : ''); ?>" class="category-icon" /> </span>
-                    <span><span><?php echo e(isset($category->title) ? $category->title : ''); ?></span></span>
+                    <span><img src="<?php echo e($category->icon ?? ''); ?>" class="category-icon" /> </span>
+                    <span><span><?php echo e($category->title ?? ''); ?></span></span>
                 </div>
                 <div class="col-md-2 tab-con">
                     <div class="h-10"></div>
@@ -18,7 +19,7 @@
                     <div class="box box-s">
                         <div class="container-2">
                             <form>
-                            <input type="search" id="search" name="q" value="<?php echo e(isset($_GET['q']) ? $_GET['q'] : ''); ?>" placeholder="Search in  <?php echo e(isset($category->title) ? $category->title : 'Search in all categories'); ?>" />
+                            <input type="search" id="search" name="q" value="<?php echo e($_GET['q'] ?? ''); ?>" placeholder="Search in  <?php echo e($category->title ?? 'Search in all categories'); ?>" />
                             <span class="icon"><i class="homeicon mdi mdi-magnify"></i></span>
                             </form>
                         </div>
@@ -111,13 +112,13 @@
                     <div class="body">
                         <ul id="accordion" class="cat-filters-li accordion">
                             <?php $__currentLoopData = $category->filters; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $filter): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li id="filter<?php echo e(isset($filter->id) ? $filter->id : 0); ?>">
-                                    <div class="link"><?php echo e(isset($filter->filter) ? $filter->filter : ''); ?><i class="mdi mdi-chevron-down"></i></div>
+                                <li id="filter<?php echo e($filter->id ?? 0); ?>">
+                                    <div class="link"><?php echo e($filter->filter ?? ''); ?><i class="mdi mdi-chevron-down"></i></div>
                                     <?php if(count($filter->tags)>0): ?>
                                         <ul class="submenu">
                                             <?php $__currentLoopData = $filter->tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <li><input type="checkbox" id="filter<?php echo e(isset($tag->id) ? $tag->id : ''); ?>" name="filters" value="<?php echo e(isset($tag->id) ? $tag->id : ''); ?>" <?php if(!is_null($filters) && in_array($tag->id,$filters)): ?> checked <?php endif; ?>/><label for="filter<?php echo e(isset($tag->id) ? $tag->id : ''); ?>"><span></span><?php echo e(isset($tag->tag) ? $tag->tag : ''); ?></label></li>
-                                                <?php if(!is_null($filters) && in_array($tag->id,$filters)): ?> <script>$(document).ready(function(){$('#filter<?php echo e(isset($filter->id) ? $filter->id : 0); ?>').addClass('open');$('#filter<?php echo e(isset($filter->id) ? $filter->id : 0); ?> .submenu').css('display','block');});</script> <?php endif; ?>
+                                                <li><input type="checkbox" id="filter<?php echo e($tag->id ?? ''); ?>" name="filters" value="<?php echo e($tag->id ?? ''); ?>" <?php if(!is_null($filters) && in_array($tag->id,$filters)): ?> checked <?php endif; ?>/><label for="filter<?php echo e($tag->id ?? ''); ?>"><span></span><?php echo e($tag->tag ?? ''); ?></label></li>
+                                                <?php if(!is_null($filters) && in_array($tag->id,$filters)): ?> <script>$(document).ready(function(){$('#filter<?php echo e($filter->id ?? 0); ?>').addClass('open');$('#filter<?php echo e($filter->id ?? 0); ?> .submenu').css('display','block');});</script> <?php endif; ?>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </ul>
                                     <?php endif; ?>
@@ -133,7 +134,7 @@
                         <?php if(isset($ads)): ?>
                             <?php $__currentLoopData = $ads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($ad->position == 'category-side'): ?>
-                                    <a href="<?php echo e(isset($ad->url) ? $ad->url : '#'); ?>"><img src="<?php echo e(isset($ad->image) ? $ad->image : ''); ?>" class="<?php echo e(isset($ad->size) ? $ad->size : ''); ?>" id="cat-side"></a>
+                                    <a href="<?php echo e($ad->url ?? '#'); ?>"><img src="<?php echo e($ad->image ?? ''); ?>" class="<?php echo e($ad->size ?? ''); ?>" id="cat-side"></a>
                                 <?php endif; ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php endif; ?>
@@ -149,16 +150,16 @@
                                     <?php $vipIds[] = $content->content->id; ?>
                                     <?php $meta = arrayToList($content->content->metas,'option','value'); ?>
                                     <div class="col-md-4 col-sm-6 col-xs-12 pagi-content vip-content tab-con">
-                                        <a href="/product/<?php echo e(isset($content->content->id) ? $content->content->id : ''); ?>" title="<?php echo e(isset($content->content->title) ? $content->content->title : ''); ?>" class="content-box pagi-content-box">
+                                        <a href="/product/<?php echo e($content->content->id ?? ''); ?>" title="<?php echo e($content->content->title ?? ''); ?>" class="content-box pagi-content-box">
                                             <div class="img-container">
-                                                <img src="<?php echo e(isset($meta['thumbnail']) ? $meta['thumbnail'] : ''); ?>"/>
+                                                <img src="<?php echo e($meta['thumbnail'] ?? ''); ?>"/>
                                                 <span class="off-badge vip-badge">
                                                     <label class="text-center"><?php echo e(trans('main.vip_badge')); ?></label>
                                                 </span>
                                             </div>
 											<h3><?php echo str_limit($content->content->title,35,'...'); ?></h3>
                                             <div class="footer">
-                                                <span class="avatar" title="<?php echo e(isset($content->user->name) ? $content->user->name : ''); ?>" onclick="window.location.href = '/profile/<?php echo e(isset($content->user->id) ? $content->user->id : 0); ?>'"><img src="<?php echo e(get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar',''))); ?>"></span>
+                                                <span class="avatar" title="<?php echo e($content->user->name ?? ''); ?>" onclick="window.location.href = '/profile/<?php echo e($content->user->id ?? 0); ?>'"><img src="<?php echo e(get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar',''))); ?>"></span>
                                                 <?php if(isset($metas['duration'])): ?>
                                                     <label class="pull-right content-clock"><?php echo e(convertToHoursMins($meta['duration'])); ?></label>
 													<span class="boxicon mdi mdi-clock pull-right"></span>
@@ -180,19 +181,19 @@
                         <?php $__currentLoopData = $contents; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $content): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php if(!in_array($content['id'],$vipIds)): ?>
                                 <div class="col-md-4 col-sm-6 col-xs-12 pagi-content tab-con">
-                            <a href="/product/<?php echo e(isset($content['id']) ? $content['id'] : ''); ?>" title="<?php echo e(isset($content['title']) ? $content['title'] : ''); ?>" class="content-box pagi-content-box">
+                            <a href="/product/<?php echo e($content['id'] ?? ''); ?>" title="<?php echo e($content['title'] ?? ''); ?>" class="content-box pagi-content-box">
                                 
                                 <div class="img-container">
-                                    <img src="<?php echo e(isset($content['metas']['thumbnail']) ? $content['metas']['thumbnail'] : ''); ?>"/>
+                                    <img src="<?php echo e($content['metas']['thumbnail'] ?? ''); ?>"/>
                                     <?php if($content['discount'] != null): ?>
                                         <span class="off-badge">
-                                            <label class="text-center">%<?php echo e(isset($content['discount']['off']) ? $content['discount']['off'] : 0); ?><br><span><?php echo e(trans('main.discount')); ?></span></label>
+                                            <label class="text-center">%<?php echo e($content['discount']['off'] ?? 0); ?><br><span><?php echo e(trans('main.discount')); ?></span></label>
                                         </span>
                                     <?php endif; ?>
                                 </div>
 								<h3><?php echo str_limit($content['title'],35,'...'); ?></h3>
                                 <div class="footer">
-                                    <span class="avatar" title="<?php echo e(isset($content['user']['name']) ? $content['user']['name'] : ''); ?>" onclick="window.location.href = '/profile/<?php echo e(isset($content['user']['id']) ? $content['user']['id'] : 0); ?>'"><img src="<?php echo e(get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar',''))); ?>"></span>
+                                    <span class="avatar" title="<?php echo e($content['user']['name'] ?? ''); ?>" onclick="window.location.href = '/profile/<?php echo e($content['user']['id'] ?? 0); ?>'"><img src="<?php echo e(get_user_meta($content['user_id'],'avatar',get_option('default_user_avatar',''))); ?>"></span>
                                     <?php if(isset($content['metas']['duration'])): ?>
                                         <label class="pull-right content-clock"><?php echo e(convertToHoursMins($content['metas']['duration'])); ?></label>
 										<span class="boxicon mdi mdi-clock pull-right"></span>
@@ -214,7 +215,7 @@
                         <?php if(isset($ads)): ?>
                             <?php $__currentLoopData = $ads; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if($ad->position == 'category-pagination-bottom'): ?>
-                                    <a href="<?php echo e(isset($ad->url) ? $ad->url : '#'); ?>"><img src="<?php echo e(isset($ad->image) ? $ad->image : ''); ?>" class="<?php echo e(isset($ad->size) ? $ad->size : ''); ?>" id="cat-side"></a>
+                                    <a href="<?php echo e($ad->url ?? '#'); ?>"><img src="<?php echo e($ad->image ?? ''); ?>" class="<?php echo e($ad->size ?? ''); ?>" id="cat-side"></a>
                                 <?php endif; ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php endif; ?>
@@ -229,19 +230,20 @@
 <?php $__env->startSection('script'); ?>
     <script>
         $(function() {
-            pagination('.body-target',<?php if(isset($setting['site']['category_content_count'])): ?> <?php echo e(isset($setting['site']['category_content_count']) ? $setting['site']['category_content_count'] : 6); ?> <?php endif; ?>,0);
+            pagination('.body-target',<?php if(isset($setting['site']['category_content_count'])): ?> <?php echo e($setting['site']['category_content_count'] ?? 6); ?> <?php endif; ?>,0);
             $('.pagi').pagination({
                 items: <?php echo count($contents); ?>,
-                itemsOnPage: <?php if(isset($setting['site']['category_content_count'])): ?> <?php echo e(isset($setting['site']['category_content_count']) ? $setting['site']['category_content_count'] : 6); ?> <?php endif; ?>,
+                itemsOnPage: <?php if(isset($setting['site']['category_content_count'])): ?> <?php echo e($setting['site']['category_content_count'] ?? 6); ?> <?php endif; ?>,
                 cssStyle: 'light-theme',
                 prevText: 'Pre.',
             	nextText:'Next',
                 onPageClick:function(pageNumber, event) {
-                    pagination('.body-target',<?php if(isset($setting['site']['category_content_count'])): ?> <?php echo e(isset($setting['site']['category_content_count']) ? $setting['site']['category_content_count'] : 6); ?> <?php endif; ?>,pageNumber-1);
+                    pagination('.body-target',<?php if(isset($setting['site']['category_content_count'])): ?> <?php echo e($setting['site']['category_content_count'] ?? 6); ?> <?php endif; ?>,pageNumber-1);
                 }
             });
         });
     </script>
     <script type="application/javascript" src="/assets/javascripts/category-page-custom.js"></script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('view.layout.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<?php echo $__env->make('view.layout.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\PRACTICE SESSIONS\PHP\Edtech\laravel\resources\views/view/category/category.blade.php ENDPATH**/ ?>

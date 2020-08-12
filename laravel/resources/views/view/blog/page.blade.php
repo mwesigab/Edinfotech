@@ -1,6 +1,6 @@
 @extends('view.layout.layout')
 @section('title')
-    {{{ $setting['site']['site_title'] or '' }}}
+    {{{ $setting['site']['site_title'] ?? '' }}}
 @endsection
 @section('page')
     <div class="container-fluid">

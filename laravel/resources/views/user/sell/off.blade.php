@@ -10,21 +10,21 @@
                 <div class="link"><h2>{{{ trans('main.new_discount') }}}</h2><i class="mdi mdi-chevron-down"></i></div>
                 <ul class="submenu" @if(isset($discount->id)) style="display: block;" @endif>
                     <div class="h-10"></div>
-                    <form method="post" @if(isset($discount->id)) action="/user/video/off/edit/store/{{{ $discount->id or 0 }}}" @else action="/user/video/off/store" @endif class="form form-horizontal">
+                    <form method="post" @if(isset($discount->id)) action="/user/video/off/edit/store/{{{ $discount->id ?? 0 }}}" @else action="/user/video/off/store" @endif class="form form-horizontal">
                         <div class="form-group">
                             <label class="control-label col-md-1 tab-con">{{{ trans('main.course') }}}</label>
                             <div class="col-md-3 tab-con">
                                 <select name="off_id" class="form-control font-s">
                                     @foreach($userContent as $uc)
                                         @if(contentMeta($uc->id,'price',0)>0)
-                                            <option value="{{{ $uc->id or 0 }}}" @if(isset($discount->off_id) && $discount->off_id == $uc->id) selected @endif>{{{ $uc->title or '' }}}</option>
+                                            <option value="{{{ $uc->id ?? 0 }}}" @if(isset($discount->off_id) && $discount->off_id == $uc->id) selected @endif>{{{ $uc->title ?? '' }}}</option>
                                         @endif
                                     @endforeach
                                 </select>
                             </div>
                             <label class="control-label col-md-1 tab-con">{{{ trans('main.amount') }}}</label>
                             <div class="col-md-3 tab-con">
-                                <input type="number" name="off" value="{{{ $discount->off or '' }}}" class="form-control text-center" min="1" max="99" placeholder="Percent (eg. 20 for 20%)" required>
+                                <input type="number" name="off" value="{{{ $discount->off ?? '' }}}" class="form-control text-center" min="1" max="99" placeholder="Percent (eg. 20 for 20%)" required>
                             </div>
                             <label class="control-label col-md-1 tab-con"></label>
                             <div class="col-md-3 tab-con">
@@ -79,10 +79,10 @@
                             <tbody>
                             @foreach($discounts as $item)
                                 <tr class="text-center">
-                                    <td class="cell-ta">{{{ $item->content->title or '' }}}</td>
+                                    <td class="cell-ta">{{{ $item->content->title ?? '' }}}</td>
                                     <td>{{{ date('d F Y',$item->first_date) }}}</td>
                                     <td>{{{ date('d F Y',$item->last_date) }}}</td>
-                                    <td>%{{{ $item->off or 0 }}}</td>
+                                    <td>%{{{ $item->off ?? 0 }}}</td>
                                     <td>
                                         @if($item->mode == "publish")
                                             <b class="green-s">{{{ trans('main.active') }}}</b>
@@ -91,8 +91,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a class="gray-s" href="/user/video/off/edit/{{{ $item->id or 0 }}}" title="Edit"><span class="crticon mdi mdi-lead-pencil"></span></a>
-                                        <a class="gray-s" href="/user/video/off/delete/{{{ $item->id or 0 }}}" onclick="return confirm('Are you sure to delete item?');" title="Delete"><span class="crticon mdi mdi-delete-forever"></span></a>
+                                        <a class="gray-s" href="/user/video/off/edit/{{{ $item->id ?? 0 }}}" title="Edit"><span class="crticon mdi mdi-lead-pencil"></span></a>
+                                        <a class="gray-s" href="/user/video/off/delete/{{{ $item->id ?? 0 }}}" onclick="return confirm('Are you sure to delete item?');" title="Delete"><span class="crticon mdi mdi-delete-forever"></span></a>
                                     </td>
                                 </tr>
                             @endforeach
