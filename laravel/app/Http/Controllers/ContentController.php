@@ -1171,4 +1171,8 @@ class ContentController extends Controller
         return $New;
     }
 
+    public function about_page(){
+        return view("view.about.about");
+    }
+
 }

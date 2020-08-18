@@ -638,6 +638,8 @@ Route::group(['middleware' => 'notification'], function () {
         Route::get('tag/{key}', 'ContentController@blogTags');
     });
 
+    Route::get('about','ContentController@about_page');
+
     Route::group(['prefix' => 'school'], function () {
         Route::post('/add_school', 'SchoolController@add_school');
         Route::post('/add_department', 'DepartmentController@add_department');
