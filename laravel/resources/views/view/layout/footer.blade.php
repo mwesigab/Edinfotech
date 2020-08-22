@@ -6,11 +6,16 @@
         </div>
         <div class="col-md-3 col-xs-12 tab-con">
             <h4>{{{ get_option('footer_col2_title') }}}</h4>
-            <p>{!! get_option('footer_col2_content') !!}</p>
+            <p><ul class="list-pages">
+                <a href="#about-us"><li><h5>About Us</h5></li></a>
+                <a href="#contact-us"><li><h5>Contact Us</h5></li></a>
+                <a href="/user?redirect={{ Request::path() }}"><li><h5>Login</h5></li></a>
+                <a href="/user?redirect={{ Request::path() }}"><li><h5>Sign Up</h5></li></a>
+            </ul></p>
         </div>
         <div class="col-md-3 col-xs-6 tab-con">
             <h4>{{{ get_option('footer_col3_title') }}}</h4>
-            <p>{!! get_option('footer_col3_content') !!}</p>
+            <p><img id="payment" src="/assets/images/flutterwave.png" alt="Payment Platform Logo"></p>
         </div>
         <div class="col-md-3 col-xs-6 ab-con">
             <h4>{{{ get_option('footer_col4_title') }}}</h4>
@@ -31,7 +36,7 @@
     </div>
     <div class="col-md-9 col-xs-12">
         <span class="copyright">
-            {{{ trans('main.copyright') }}}
+            Copyright 2020&#169;{{{ trans('main.copyright') }}}
         </span>
     </div>
 </div>

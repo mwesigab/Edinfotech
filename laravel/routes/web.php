@@ -621,7 +621,8 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::group(['middleware' => 'notification'], function () {
 
-    Route::get('/', 'ContentController@main');
+    //Route::get('/', 'ContentController@main');
+    Route::get('/', 'ContentController@home_page');
     Route::get('category/{id}', 'ContentController@category');
     Route::get('category', 'ContentController@category');
     Route::get('search', 'ContentController@search');
@@ -637,6 +638,8 @@ Route::group(['middleware' => 'notification'], function () {
         Route::post('post/comment/store', 'ContentController@blogPostCommentStore');
         Route::get('tag/{key}', 'ContentController@blogTags');
     });
+
+    Route::get('about','ContentController@about_page');
 
     Route::group(['prefix' => 'school'], function () {
         Route::post('/add_school', 'SchoolController@add_school');

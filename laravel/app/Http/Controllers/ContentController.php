@@ -94,8 +94,11 @@ class ContentController extends Controller
             $q->withCount(['follow']);
         }])->where('mode','active')->limit(4)->get()->sortByDesc('user.followCount');
 
-        //dd($user_Rate->toArray());
         return view('view.main',['sell_content'=>$sell_content,'vip_content'=>$vip_content,'new_content'=>$new_content,'popular_content'=>$popular_content,'blog_post'=>$blogPosts,'user_rate'=>$user_Rate,'user_content'=>$user_content,'user_popular'=>$user_popular,'slider_container'=>$slider_container,'channels'=>$channels,'article_post'=>$articlePosts]);
+    }
+
+    public function home_page(){
+        return view('welcome');
     }
 
 
@@ -1169,6 +1172,10 @@ class ContentController extends Controller
             'updated_at_sh' => time()
         ]);
         return $New;
+    }
+
+    public function about_page(){
+        return view("view.about.about");
     }
 
 }
