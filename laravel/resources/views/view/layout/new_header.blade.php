@@ -18,7 +18,11 @@
     <link rel="stylesheet" href="/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css"/>
     <link rel="stylesheet" href="/assets/vendor/jquery-te/jquery-te-1.4.0.css"/>
     <link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css"/>
-    <link href="/assets/stylesheets/style.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Cardo:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:300,700,900,500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/assets/stylesheets/style.css"/>
+    <link href="/assets/pe-icons/css/pe-icon-7-stroke.css" rel="stylesheet">
     @if(get_option('site_rtl','0') == 1)
     <link rel="stylesheet" href="/assets/stylesheets/view-custom-rtl.css"/>
     @else
@@ -54,8 +58,8 @@
                 <div class="row search-box">
                     <form action="/search">
                         <input type="text" name="q" class="col-md-11 provider-json" placeholder="Search..."/>
-                        <button type="submit" name="search" class="pull-left col-md-1"><span
-                                    class="homeicon mdi mdi-magnify"></span></button>
+                        <button type="submit" name="search" class="pull-left col-md-1">
+                            <span class="homeicon mdi mdi-magnify"></span></button>
                     </form>
                 </div>
             </div>
@@ -63,7 +67,7 @@
                 <div class="row">
                     @if(isset($user) && isset($user['vendor']) && $user['vendor'] == 1)
                     <a href="/user/content/new" class="header-upload-button pulse"><span
-                                class="headericon mdi mdi-arrow-up-bold"></span>{{{ trans('main.upload_course') }}}</a>
+                            class="headericon mdi mdi-arrow-up-bold"></span>{{{ trans('main.upload_course') }}}</a>
                     @endif
                     @if(isset($user))
                     <a href="/user" class="header-login-in-button">
@@ -87,12 +91,12 @@
                             <div class="overlap-profile-viewer">
                                 @if(isset($user) && isset($user['vendor']) && $user['vendor'] == 1)
                                 <a href="/user/dashboard"><img
-                                            src="{{{ $userMeta['avatar'] ?? '/assets/images/user.png' }}}"
-                                            class="dash-s"></a>
+                                        src="{{{ $userMeta['avatar'] ?? '/assets/images/user.png' }}}"
+                                        class="dash-s"></a>
                                 @else
                                 <a href="/user/content"><img
-                                            src="{{{ $userMeta['avatar'] ?? '/assets/images/user.png' }}}"
-                                            class="dash-s"></a>
+                                        src="{{{ $userMeta['avatar'] ?? '/assets/images/user.png' }}}"
+                                        class="dash-s"></a>
                                 @endif
                                 @if(isset($user) && isset($user['vendor']) && $user['vendor'] == 1)
                                 <div class="overlap-profile-viewer-info">
@@ -110,7 +114,7 @@
                             </div>
                             <ul>
                                 <li><a href="/profile/{{{ $user['id'] ?? 0 }}}"><span
-                                                class="headericon mdi mdi-account"></span>
+                                            class="headericon mdi mdi-account"></span>
                                         <p>{{{ trans('main.profile') }}}</p></a></li>
                                 <li><a href="/user/ticket"><span class="headericon mdi mdi-headset"></span>
                                         <p>{{{ trans('main.support') }}}</p></a></li>
@@ -145,12 +149,12 @@
                             <div class="overlap-profile-viewer">
                                 @if(isset($student) && isset($student['vendor']) && $student['vendor'] == 1)
                                 <a href="/user/dashboard"><img
-                                            src="{{{ $userMeta['avatar'] ?? '/assets/images/user.png' }}}"
-                                            class="dash-s"></a>
+                                        src="{{{ $userMeta['avatar'] ?? '/assets/images/user.png' }}}"
+                                        class="dash-s"></a>
                                 @else
                                 <a href="/user/content"><img
-                                            src="{{{ $userMeta['avatar'] ?? '/assets/images/user.png' }}}"
-                                            class="dash-s"></a>
+                                        src="{{{ $userMeta['avatar'] ?? '/assets/images/user.png' }}}"
+                                        class="dash-s"></a>
                                 @endif
                                 @if(isset($student) && isset($student['vendor']) && $student['vendor'] == 1)
                                 <div class="overlap-profile-viewer-info">
@@ -168,7 +172,7 @@
                             </div>
                             <ul>
                                 <li><a href="/school/student/profile/{{{ $student['id'] ?? 0 }}}"><span
-                                                class="headericon mdi mdi-account"></span>
+                                            class="headericon mdi mdi-account"></span>
                                         <p>{{{ trans('main.profile') }}}</p></a></li>
                                 <li><a href="/school/student/ticket"><span class="headericon mdi mdi-headset"></span>
                                         <p>{{{ trans('main.support') }}}</p></a></li>
@@ -180,8 +184,7 @@
                         </div>
                     </a>
                     @else
-                    <!--<a href="/user?redirect={{ Request::path() }}" class="header-login-button"><span class="headericon mdi mdi-account"></span>{{{ trans('main.login_signup') }}}</a>-->
-                    <div class="dropdown">
+                    <div class="dropdown" style="float:right;">
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{{
                             trans('main.login_signup') }}}
                             <span class="caret"></span></button>
@@ -202,92 +205,6 @@
         </div>
     </div>
     <div class="row sep"></div>
-    <div class="hidden-xs" id="header-menu-section">
-        <div class="row">
-            <div class="menu-header">
-
-                <div class="col-md-1 text-center tab-con">
-                    <a href="/"><img src="{{{ get_option('site_logo') }}}" class="menu-logo"/></a>
-                </div>
-                <div class="col-md-10 col-xs-12 tab-con">
-                    <ul id="accordion" class="cat-filters-li accordion accordion-s">
-                        @foreach($setting['category'] as $mainCategory)
-                        @if(count($mainCategory->childs)>0)
-                        <li class="has-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color ?? '' }}}'"
-                            onmouseleave="this.style.borderColor='transparent'"><a href="javascript:void(0);"><img
-                                        src="{{{$mainCategory->image ?? ''}}}"/>{{{$mainCategory->title ?? ''}}}</a>
-                            <ul>
-                                @foreach($mainCategory->childs as $child)
-                                <li onmouseover="this.style.borderColor='{{{ $child->color ?? '' }}}'"
-                                    onmouseleave="this.style.borderColor='transparent'"><a
-                                            href="/category/{{{ $child->class }}}"><img
-                                                src="{{{ $child->image ?? '' }}}"/>{{{ $child->title ?? '' }}}</a></li>
-                                @endforeach
-                            </ul>
-                        </li>
-                        @else
-                        <li class="no-child" onmouseover="this.style.borderColor='{{{ $mainCategory->color ?? '' }}}'"
-                            onmouseleave="this.style.borderColor='transparent'"><a
-                                    href="/category/{{{ $mainCategory->class }}}"><img
-                                        src="{{{$mainCategory->image ?? ''}}}"/>{{{$mainCategory->title ?? ''}}}</a>
-                        </li>
-                        @endif
-                        @endforeach
-                    </ul>
-                </div>
-
-            </div>
-            <div class="sep-green"></div>
-            <div class="menu-header menu-header-child">
-
-                <div class="col-md-10 col-xs-12 col-md-offset-1">
-                    <ul>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="hidden-md hidden-lg hidden-sm mobile-menu">
-        <div class="row h-20"></div>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#"><b>{{{ trans('main.category') }}}</b></a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        @foreach($setting['category'] as $mainCategory)
-                        @if(count($mainCategory->childs)>0)
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">{{{$mainCategory->title ?? ''}}}<span
-                                        class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                @foreach($mainCategory->childs as $child)
-                                <li><a href="/category/{{{ $child->class }}}">{{{ $child->title ?? '' }}}</a></li>
-                                @endforeach
-                            </ul>
-                        </li>
-                        @else
-                        <li><a href="/category/{{{ $mainCategory->class }}}">{{{$mainCategory->title ?? ''}}}</a></li>
-                        @endif
-                        @endforeach
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
-    </div>
 </div>
 
 

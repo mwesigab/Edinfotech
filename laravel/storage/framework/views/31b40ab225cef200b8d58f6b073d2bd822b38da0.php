@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css"/>
     <link rel="stylesheet" href="/assets/vendor/jquery-te/jquery-te-1.4.0.css"/>
     <link rel="stylesheet" href="/assets/stylesheets/vendor/mdi/css/materialdesignicons.min.css"/>
+    <link href="/assets/stylesheets/style.css" rel="stylesheet">
     <?php if(get_option('site_rtl','0') == 1): ?>
     <link rel="stylesheet" href="/assets/stylesheets/view-custom-rtl.css"/>
     <?php else: ?>

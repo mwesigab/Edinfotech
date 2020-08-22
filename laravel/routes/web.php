@@ -621,7 +621,8 @@ Route::group(['prefix' => 'user'], function () {
 
 Route::group(['middleware' => 'notification'], function () {
 
-    Route::get('/', 'ContentController@main');
+    //Route::get('/', 'ContentController@main');
+    Route::get('/', 'ContentController@home_page');
     Route::get('category/{id}', 'ContentController@category');
     Route::get('category', 'ContentController@category');
     Route::get('search', 'ContentController@search');
