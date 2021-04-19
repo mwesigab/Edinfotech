@@ -1,2 +1,2 @@
 # Edinfotech
-Educational platform for users and vendor to upload content
+This is Udemy like web application that enables tutors to upload and conduct online classes with their students. 
